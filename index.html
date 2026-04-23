@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ActivityWeb – Studio Digital | Sites web pour artisans</title>
+  <meta name="description" content="Votre site professionnel en 7 jours. Sites one-page pour plombiers, électriciens, sociétés de nettoyage. À partir de 169€." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0D1B4B;
+      --navy-light: #162260;
+      --gold: #C9A84C;
+      --gold-light: #DEC06A;
+      --cream: #F5ECD7;
+      --white: #FFFFFF;
+      --gray: #8892A4;
+      --bg-dark: #080F2A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5vw;
+      background: rgba(8, 15, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      transition: all .3s;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-text .brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+
+    .logo-text .sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background .2s, transform .2s;
+    }
+
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 7rem 5vw 5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 80% at 10% 80%, rgba(13,27,75,0.8) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 760px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(245,236,215,0.75);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all .25s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      text-decoration: none;
+      border-radius: 3px;
+      border: 1px solid rgba(245,236,215,0.3);
+      transition: all .25s;
+    }
+
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-stat-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s ease 0.4s both;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .hero-stat span {
+      font-size: 0.8rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── PROBLEM ─── */
+    #problem {
+      padding: 7rem 5vw;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #problem::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .problem-list li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.2rem 1.4rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+    }
+
+    .problem-list li .icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .problem-list li strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .problem-list li p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .solution-box {
+      background: linear-gradient(135deg, rgba(201,168,76,0.1) 0%, rgba(201,168,76,0.04) 100%);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 8px;
+      padding: 2.5rem;
+    }
+
+    .solution-box h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .solution-box p {
+      font-size: 0.95rem;
+      color: rgba(245,236,215,0.8);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .solution-steps {
+      list-style: none;
+      counter-reset: steps;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .solution-steps li {
+      counter-increment: steps;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .solution-steps li::before {
+      content: counter(steps);
+      width: 28px; height: 28px;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── OFFER ─── */
+    #offer {
+      padding: 7rem 5vw;
+      background: var(--bg-dark);
+    }
+
+    .offer-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .offer-header p {
+      color: var(--gray);
+      max-width: 520px;
+      margin: 1rem auto 0;
+      line-height: 1.7;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: transform .3s, border-color .3s;
+      position: relative;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.3);
+    }
+
+    .pricing-card.featured {
+      background: linear-gradient(160deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.04) 100%);
+      border-color: var(--gold);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.9rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .card-price {
+      margin-bottom: 1.5rem;
+    }
+
+    .card-price .amount {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .card-price .period {
+      font-size: 0.78rem;
+      color: var(--gray);
+      margin-left: 4px;
+    }
+
+    .card-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-features li {
+      font-size: 0.85rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      color: rgba(245,236,215,0.85);
+    }
+
+    .card-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .card-cta {
+      display: block;
+      text-align: center;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.8rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all .2s;
+    }
+
+    .card-cta:hover, .pricing-card.featured .card-cta {
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+
+    /* ─── PROCESS ─── */
+    #process {
+      padding: 7rem 5vw;
+      background: var(--navy);
+    }
+
+    .process-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .steps-row {
+      display: flex;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: calc(16.66% + 16px);
+      right: calc(16.66% + 16px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), rgba(201,168,76,0.3), var(--gold));
+    }
+
+    .step {
+      flex: 1;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .step-num {
+      width: 64px; height: 64px;
+      background: var(--navy);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin: 0 auto 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      padding: 7rem 5vw;
+      background: var(--bg-dark);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-info h2 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .contact-info p {
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .contact-channels {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .channel {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: rgba(245,236,215,0.8);
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      transition: all .2s;
+    }
+
+    .channel:hover {
+      border-color: var(--gold);
+      color: var(--white);
+    }
+
+    .channel-icon {
+      width: 36px; height: 36px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .channel-icon.wa { background: rgba(37,211,102,0.15); }
+    .channel-icon.mail { background: rgba(201,168,76,0.15); }
+
+    .contact-form {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 2.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white);
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.85rem 1rem;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color .2s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-group select option { background: var(--navy); }
+
+    .form-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .problem-grid,
+      .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
+
+      .steps-row {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .steps-row::before { display: none; }
+
+      nav .nav-cta { display: none; }
+
+      h1 { font-size: 2.8rem; }
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect width="80" height="80" rx="8" fill="#0D1B4B"/>
+        <!-- A gold -->
+        <text x="6" y="62" font-family="Arial Black, sans-serif" font-size="58" font-weight="900" fill="#C9A84C">A</text>
+        <!-- W cream, offset -->
+        <text x="26" y="62" font-family="Arial Black, sans-serif" font-size="58" font-weight="900" fill="#F5ECD7">W</text>
+      </svg>
+      <div class="logo-text">
+        <span class="brand">ActivityWeb</span>
+        <span class="sub">Studio Digital</span>
+      </div>
+    </a>
+    <a href="#contact" class="nav-cta">Demander un devis</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Studio Digital · Belgique francophone</div>
+      <h1>Votre site web<br/>qui <em>ramène</em><br/>des clients</h1>
+      <p class="hero-sub">
+        En 7 jours, on crée votre site professionnel one-page — pensé pour les artisans, plombiers, électriciens et sociétés de services. Visible sur Google, rapide, sans jargon.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Je veux mon site →</a>
+        <a href="#offer" class="btn-outline">Voir les formules</a>
+      </div>
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <strong>7 j</strong>
+          <span>Livraison garantie</span>
+        </div>
+        <div class="hero-stat">
+          <strong>169€</strong>
+          <span>Formule de départ</span>
+        </div>
+        <div class="hero-stat">
+          <strong>97%</strong>
+          <span>Clients satisfaits</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="reveal">
+      <div class="section-label">Le constat</div>
+      <div class="section-title">Vos clients cherchent<br/>sur Google. Êtes-vous là ?</div>
+    </div>
+    <div class="problem-grid reveal">
+      <ul class="problem-list">
+        <li>
+          <span class="icon">🔍</span>
+          <div>
+            <strong>87% des clients cherchent en ligne</strong>
+            <p>Avant d'appeler un artisan, la plupart tapent sur Google. Sans site, vous n'existez pas.</p>
+          </div>
+        </li>
+        <li>
+          <span class="icon">📉</span>
+          <div>
+            <strong>Le bouche-à-oreille ne suffit plus</strong>
+            <p>C'est un bon début mais ça plafonne. Un site tourne 24h/24 et capte de nouveaux prospects en continu.</p>
+          </div>
+        </li>
+        <li>
+          <span class="icon">💸</span>
+          <div>
+            <strong>Vos concurrents y sont déjà</strong>
+            <p>Chaque semaine sans site, ce sont des appels qui vont ailleurs. Le coût de l'inaction est réel.</p>
+          </div>
+        </li>
+        <li>
+          <span class="icon">⏰</span>
+          <div>
+            <strong>Pas le temps de s'en occuper</strong>
+            <p>Normal — vous avez un métier. C'est exactement pour ça qu'ActivityWeb existe.</p>
+          </div>
+        </li>
+      </ul>
+      <div class="solution-box">
+        <h3>La solution ActivityWeb</h3>
+        <p>Un site one-page professionnel, optimisé pour votre secteur, livré en 7 jours. Vous fournissez les infos, on fait tout le reste.</p>
+        <ul class="solution-steps">
+          <li>Appel de cadrage (30 min)</li>
+          <li>Création & design sur mesure</li>
+          <li>Mise en ligne sur votre domaine</li>
+          <li>Livraison + prise en main</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section id="offer">
+    <div class="offer-header reveal">
+      <div class="section-label">Les formules</div>
+      <div class="section-title">Simple. Transparent. Sans surprise.</div>
+      <p>Choisissez ce dont vous avez besoin aujourd'hui. Vous pouvez évoluer à tout moment.</p>
+    </div>
+    <div class="pricing-grid reveal">
+
+      <!-- Essentiel -->
+      <div class="pricing-card">
+        <div class="card-icon">🛠️</div>
+        <div class="card-name">Essentiel</div>
+        <div class="card-desc">Votre présence pro sur le web. Idéal pour démarrer.</div>
+        <div class="card-price">
+          <span class="amount">169€</span>
+          <span class="period">unique</span>
+        </div>
+        <ul class="card-features">
+          <li>Site one-page professionnel</li>
+          <li>Design sur mesure (votre secteur)</li>
+          <li>Formulaire de contact</li>
+          <li>Optimisé mobile & rapide</li>
+          <li>Mise en ligne sur votre domaine</li>
+          <li>Livré en 7 jours</li>
+        </ul>
+        <a href="#contact" class="card-cta">Démarrer</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card featured">
+        <div class="card-badge">⭐ Le plus populaire</div>
+        <div class="card-icon">🚀</div>
+        <div class="card-name">Pro</div>
+        <div class="card-desc">Le site + les outils pour convertir et fidéliser.</div>
+        <div class="card-price">
+          <span class="amount">349€</span>
+          <span class="period">unique</span>
+        </div>
+        <ul class="card-features">
+          <li>Tout de la formule Essentiel</li>
+          <li>Lead magnet (guide PDF offert)</li>
+          <li>Outil de devis en ligne</li>
+          <li>Formulaire de contact avancé</li>
+          <li>1 mois de maintenance inclus</li>
+          <li>Rapport de mise en ligne</li>
+        </ul>
+        <a href="#contact" class="card-cta">Je choisis Pro</a>
+      </div>
+
+      <!-- Maintenance -->
+      <div class="pricing-card">
+        <div class="card-icon">🔧</div>
+        <div class="card-name">Maintenance</div>
+        <div class="card-desc">Votre site toujours à jour, sans vous en soucier.</div>
+        <div class="card-price">
+          <span class="amount">29€</span>
+          <span class="period">/ mois</span>
+        </div>
+        <ul class="card-features">
+          <li>Mises à jour de contenu (2/mois)</li>
+          <li>Surveillance & sécurité</li>
+          <li>Newsletter mensuelle (1/mois)</li>
+          <li>Support prioritaire</li>
+          <li>Rapport mensuel de performance</li>
+          <li>Sans engagement</li>
+        </ul>
+        <a href="#contact" class="card-cta">Ajouter</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="process-header reveal">
+      <div class="section-label">Comment ça marche</div>
+      <div class="section-title">En ligne en 7 jours.<br/>Vraiment.</div>
+    </div>
+    <div class="steps-row reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>On se parle</h4>
+        <p>30 min pour comprendre votre activité, vos clients cibles et vos objectifs.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>On crée</h4>
+        <p>Design, textes, structure. Vous validez avant mise en ligne.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>On livre</h4>
+        <p>Votre site est en ligne sur votre domaine. Vous recevez les accès.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <div class="section-label">Contact</div>
+        <h2>Parlons de <em>votre</em> projet</h2>
+        <p>Remplissez le formulaire ou contactez-moi directement. Réponse sous 24h.</p>
+        <div class="contact-channels">
+          <a href="https://wa.me/32XXXXXXXXX" class="channel" target="_blank">
+            <div class="channel-icon wa">💬</div>
+            <div>
+              <strong style="display:block;font-size:.88rem;">WhatsApp</strong>
+              <span style="font-size:.78rem;color:var(--gray);">Réponse rapide</span>
+            </div>
+          </a>
+          <a href="mailto:contact@activityweb.be" class="channel">
+            <div class="channel-icon mail">✉️</div>
+            <div>
+              <strong style="display:block;font-size:.88rem;">contact@activityweb.be</strong>
+              <span style="font-size:.78rem;color:var(--gray);">Réponse sous 24h</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-group">
+          <label>Votre nom</label>
+          <input type="text" placeholder="Jean Dupont" />
+        </div>
+        <div class="form-group">
+          <label>Votre activité</label>
+          <select>
+            <option value="">Choisissez votre secteur…</option>
+            <option>Plomberie</option>
+            <option>Électricité</option>
+            <option>Nettoyage</option>
+            <option>Peinture / Décoration</option>
+            <option>Menuiserie / Charpente</option>
+            <option>Toiture / Couverture</option>
+            <option>Jardin / Espaces verts</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Email ou téléphone</label>
+          <input type="text" placeholder="jean@exemple.be ou +32 4XX…" />
+        </div>
+        <div class="form-group">
+          <label>Votre projet en 2 mots</label>
+          <textarea placeholder="Ex : je suis plombier à Liège, je veux un site simple pour attirer plus de clients locaux…"></textarea>
+        </div>
+        <button class="form-submit">Envoyer ma demande →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 ActivityWeb – Studio Digital · BCE 0558.805.548</p>
+    <a href="mailto:contact@activityweb.be">contact@activityweb.be</a>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav scroll style
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 50
+        ? 'rgba(201,168,76,0.3)'
+        : 'rgba(201,168,76,0.15)';
+    });
+  </script>
+</body>
+</html>
