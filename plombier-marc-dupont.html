@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marc Dupont – Plombier Chauffagiste | Liège</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f38;
+    --navy-mid: #1a3254;
+    --navy-light: #243d66;
+    --orange: #e8682a;
+    --orange-light: #f5844d;
+    --cream: #f9f5f0;
+    --text: #1a1a2e;
+    --muted: #6b7a99;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: var(--navy);
+    padding: 0 5%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.3);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    letter-spacing: 0.01em;
+  }
+
+  .nav-logo span { color: var(--orange); }
+
+  .nav-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--orange);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-phone:hover { background: var(--orange-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -150px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,104,42,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(232,104,42,0.07) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-content { max-width: 700px; position: relative; z-index: 1; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(232,104,42,0.15);
+    border: 1px solid rgba(232,104,42,0.3);
+    color: var(--orange-light);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-badge::before { content: '●'; font-size: 0.6rem; }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--orange);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 44px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--orange);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+
+  /* SECTION STYLES */
+  section { padding: 80px 5%; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 52px;
+  }
+
+  /* SERVICES */
+  .services { background: var(--white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 32px 28px;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* GARANTIES */
+  .garanties { background: var(--navy); }
+  .garanties h2 { color: white; }
+  .garanties .section-sub { color: rgba(255,255,255,0.5); }
+
+  .garanties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+  }
+
+  .garantie-item {
+    text-align: center;
+    padding: 32px 20px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .garantie-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .garantie-item h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .garantie-item p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  /* ZONE */
+  .zone { background: var(--cream); }
+
+  .zone-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+  }
+
+  .zone-tag {
+    background: var(--navy);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .zone-tag.main {
+    background: var(--orange);
+  }
+
+  /* CONTACT */
+  .contact { background: var(--white); }
+
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .contact-wrapper { grid-template-columns: 1fr; }
+    .hero-stats { gap: 28px; flex-wrap: wrap; }
+  }
+
+  .contact-info h2 { margin-bottom: 8px; }
+  .contact-info .section-sub { margin-bottom: 32px; }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-item strong {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .contact-item span {
+    font-size: 1.05rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  form { display: flex; flex-direction: column; gap: 16px; }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    background: var(--cream);
+    color: var(--text);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--orange);
+  }
+
+  textarea { resize: vertical; min-height: 120px; }
+
+  form .btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px 5%;
+    font-size: 0.85rem;
+  }
+
+  footer strong { color: rgba(255,255,255,0.85); }
+
+  /* ANIM */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.7s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: none; }
+  }
+
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Marc <span>Dupont</span></div>
+  <a href="tel:+3204123456" class="nav-phone">📞 04 123 45 67</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Disponible 7j/7 · Urgences comprises</div>
+    <h1 class="fade-in">Plombier-Chauffagiste<br><em>à votre service</em><br>sur Liège</h1>
+    <p class="hero-sub fade-in delay-1">Dépannage rapide, installation de chaudières, sanitaires. Devis gratuit sous 24h. Plus de 15 ans d'expérience.</p>
+    <div class="hero-ctas fade-in delay-2">
+      <a href="tel:+3204123456" class="btn-primary">📞 Appeler maintenant</a>
+      <a href="#contact" class="btn-ghost">Devis gratuit →</a>
+    </div>
+    <div class="hero-stats fade-in delay-3">
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Ans d'exp.</div>
+      </div>
+      <div>
+        <div class="stat-num">800+</div>
+        <div class="stat-label">Clients</div>
+      </div>
+      <div>
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">Note Google</div>
+      </div>
+      <div>
+        <div class="stat-num">2h</div>
+        <div class="stat-label">Délai urgence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="section-tag">Ce que je fais</div>
+  <h2>Mes prestations</h2>
+  <p class="section-sub">Tous travaux de plomberie et chauffage pour particuliers et professionnels.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>Dépannage urgent</h3>
+      <p>Fuite, rupture de canalisation, chasse d'eau HS. J'interviens rapidement, même le week-end.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔥</div>
+      <h3>Chaudière & chauffage</h3>
+      <p>Installation, remplacement et entretien de chaudières gaz, mazout et pompes à chaleur.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛁</div>
+      <h3>Salle de bain</h3>
+      <p>Rénovation complète, pose de douche à l'italienne, remplacement de baignoire et sanitaires.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💧</div>
+      <h3>Sanitaires & robinetterie</h3>
+      <p>Remplacement de robinets, mitigeurs thermostatiques, chauffe-eau et ballons.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Nouvelles constructions</h3>
+      <p>Installation complète plomberie et chauffage pour projets neufs, en coordination avec les autres corps de métier.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌿</div>
+      <h3>Énergie & économies</h3>
+      <p>Audit de vos installations, vannes thermostatiques, isolation des conduites pour réduire votre facture.</p>
+    </div>
+  </div>
+</section>
+
+<section class="garanties">
+  <div class="section-tag">Pourquoi moi</div>
+  <h2>Mes garanties</h2>
+  <p class="section-sub">Pas de mauvaises surprises. Je m'engage sur la qualité et la transparence.</p>
+
+  <div class="garanties-grid">
+    <div class="garantie-item">
+      <div class="garantie-num">100%</div>
+      <h4>Devis gratuit</h4>
+      <p>Estimation claire et détaillée avant tout travail</p>
+    </div>
+    <div class="garantie-item">
+      <div class="garantie-num">2h</div>
+      <h4>Urgences</h4>
+      <p>Intervention sur Liège et sa proche périphérie</p>
+    </div>
+    <div class="garantie-item">
+      <div class="garantie-num">2 ans</div>
+      <h4>Garantie travaux</h4>
+      <p>Sur toutes mes interventions, pièces incluses</p>
+    </div>
+    <div class="garantie-item">
+      <div class="garantie-num">7j/7</div>
+      <h4>Disponible</h4>
+      <p>Du lundi au dimanche, urgences comprises</p>
+    </div>
+  </div>
+</section>
+
+<section class="zone">
+  <div class="section-tag">Déplacements</div>
+  <h2>Zone d'intervention</h2>
+  <p class="section-sub">J'interviens principalement sur Liège et les communes voisines.</p>
+
+  <div class="zone-tags">
+    <span class="zone-tag main">Liège (centre)</span>
+    <span class="zone-tag">Seraing</span>
+    <span class="zone-tag">Herstal</span>
+    <span class="zone-tag">Ans</span>
+    <span class="zone-tag">Grâce-Hollogne</span>
+    <span class="zone-tag">Oupeye</span>
+    <span class="zone-tag">Flémalle</span>
+    <span class="zone-tag">Awans</span>
+    <span class="zone-tag">Saint-Nicolas</span>
+    <span class="zone-tag">Juprelle</span>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <div class="section-tag">Me contacter</div>
+      <h2>Parlons de votre projet</h2>
+      <p class="section-sub">Devis gratuit sous 24h. Pour les urgences, appelez directement.</p>
+
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <strong>Téléphone</strong>
+          <span>04 123 45 67</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <strong>Email</strong>
+          <span>marc.dupont@plomberie.be</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <strong>Basé à</strong>
+          <span>Liège, Belgique</span>
+        </div>
+      </div>
+    </div>
+
+    <form onsubmit="return false;">
+      <input type="text" placeholder="Votre nom" />
+      <input type="tel" placeholder="Votre téléphone" />
+      <select>
+        <option value="">Type d'intervention…</option>
+        <option>Urgence / dépannage</option>
+        <option>Chaudière / chauffage</option>
+        <option>Salle de bain</option>
+        <option>Sanitaires</option>
+        <option>Construction neuve</option>
+        <option>Autre</option>
+      </select>
+      <textarea placeholder="Décrivez votre problème ou projet…"></textarea>
+      <button type="submit" class="btn-primary">Envoyer ma demande →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <strong>Marc Dupont – Plombier Chauffagiste</strong> · BCE 0000.000.000 · Liège<br>
+  <span style="margin-top:6px;display:inline-block;">Site réalisé par <strong style="color:var(--orange-light)">ActivityWeb</strong></span>
+</footer>
+
+</body>
+</html>
