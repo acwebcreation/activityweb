@@ -465,15 +465,56 @@
     </div>
 
     <div class="field">
-      <label>Formule souhaitée</label>
-      <div class="chips">
-        <input type="radio" name="formule" id="f-essentiel" value="Essentiel – 189€" class="chip-input" checked>
-        <label for="f-essentiel" class="chip-label">🛠️ Essentiel – 189€</label>
-        <input type="radio" name="formule" id="f-pro" value="Pro – 349€" class="chip-input">
-        <label for="f-pro" class="chip-label">🚀 Pro – 349€</label>
-        <input type="radio" name="formule" id="f-maint" value="Maintenance – 29€/mois" class="chip-input">
-        <label for="f-maint" class="chip-label">🔧 + Maintenance – 29€/mois</label>
+      <label>Votre site <span>(choisissez une formule)</span></label>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;">
+
+        <label for="f-essentiel" id="card-essentiel" style="display:flex;align-items:center;gap:14px;background:white;border:2px solid rgba(0,0,0,0.1);border-radius:8px;padding:16px 18px;cursor:pointer;transition:all 0.15s;" onclick="selectSite('essentiel')">
+          <input type="radio" name="formule_site" id="f-essentiel" value="essentiel" style="width:18px;height:18px;accent-color:#e8682a;flex-shrink:0;" checked>
+          <div style="flex:1;">
+            <div style="font-weight:600;font-size:0.95rem;color:#0f1f38;">🛠️ Essentiel</div>
+            <div style="font-size:0.82rem;color:#6b7a99;margin-top:2px;">Site one-page · Design sur mesure · Formulaire de contact · Livré en 7j · 3 retouches</div>
+          </div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:#e8682a;white-space:nowrap;">189€</div>
+        </label>
+
+        <label for="f-pro" id="card-pro" style="display:flex;align-items:center;gap:14px;background:white;border:2px solid rgba(0,0,0,0.1);border-radius:8px;padding:16px 18px;cursor:pointer;transition:all 0.15s;position:relative;" onclick="selectSite('pro')">
+          <div style="position:absolute;top:-10px;left:16px;background:#e8682a;color:white;font-size:0.68rem;font-weight:700;padding:2px 10px;border-radius:10px;">⭐ Le plus populaire</div>
+          <input type="radio" name="formule_site" id="f-pro" value="pro" style="width:18px;height:18px;accent-color:#e8682a;flex-shrink:0;">
+          <div style="flex:1;">
+            <div style="font-weight:600;font-size:0.95rem;color:#0f1f38;">🚀 Pro</div>
+            <div style="font-size:0.82rem;color:#6b7a99;margin-top:2px;">Tout Essentiel + lead magnet PDF · devis en ligne · 1 mois maintenance offert</div>
+          </div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:#e8682a;white-space:nowrap;">349€</div>
+        </label>
+
       </div>
+    </div>
+
+    <!-- MAINTENANCE ADD-ON -->
+    <div class="field" style="margin-top:8px;">
+      <label>Ajouter la maintenance ? <span>(optionnel)</span></label>
+
+      <label for="f-maint-toggle" id="card-maint" style="display:flex;align-items:center;gap:14px;background:white;border:2px solid rgba(0,0,0,0.1);border-radius:8px;padding:16px 18px;cursor:pointer;transition:all 0.15s;" onclick="toggleMaint()">
+        <input type="checkbox" id="f-maint-toggle" style="width:18px;height:18px;accent-color:#e8682a;flex-shrink:0;" onchange="updateTotal()">
+        <div style="flex:1;">
+          <div style="font-weight:600;font-size:0.95rem;color:#0f1f38;">🔧 Maintenance annuelle</div>
+          <div style="font-size:0.82rem;color:#6b7a99;margin-top:2px;">2 mises à jour/mois · 2 modifications/mois · support prioritaire · surveillance</div>
+          <div style="font-size:0.78rem;color:#2d8a4e;margin-top:4px;font-weight:600;">💡 290€/an = 2 mois offerts (vs 29€ × 12 = 348€)</div>
+        </div>
+        <div style="text-align:right;white-space:nowrap;">
+          <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:#e8682a;">290€</div>
+          <div style="font-size:0.72rem;color:#6b7a99;">/ an</div>
+        </div>
+      </label>
+    </div>
+
+    <!-- TOTAL DYNAMIQUE -->
+    <div id="total-box" style="background:#0f1f38;border-radius:8px;padding:16px 20px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:600;">Total à régler</div>
+        <div id="total-detail" style="font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:3px;">Essentiel</div>
+      </div>
+      <div style="font-family:'DM Serif Display',serif;font-size:2rem;color:#e8682a;" id="total-amount">189€</div>
     </div>
 
     <div class="btn-row">
@@ -728,11 +769,51 @@
   let currentStep = 1;
   const TOTAL_STEPS = 5;
 
+  // ── STRIPE : 5 liens à remplir dans Stripe Dashboard ──
+  // Créer 5 Payment Links dans Stripe (one-time) :
   const STRIPE_LINKS = {
-    'Essentiel – 189€': 'STRIPE_LINK_ESSENTIEL_ICI',
-    'Pro – 349€': 'STRIPE_LINK_PRO_ICI',
-    'Maintenance – 29€/mois': 'STRIPE_LINK_MAINTENANCE_ICI'
+    'essentiel':             'STRIPE_LINK_ESSENTIEL_189_ICI',
+    'pro':                   'STRIPE_LINK_PRO_349_ICI',
+    'essentiel+maintenance': 'STRIPE_LINK_ESSENTIEL_MAINT_479_ICI',
+    'pro+maintenance':       'STRIPE_LINK_PRO_MAINT_639_ICI',
+    'maintenance':           'STRIPE_LINK_MAINT_290_ICI',
   };
+
+  const PRIX = { essentiel: 189, pro: 349, maintenance: 290 };
+
+  // ── SÉLECTION FORMULE ──────────────────
+  function selectSite(which) {
+    document.getElementById('f-essentiel').checked = (which === 'essentiel');
+    document.getElementById('f-pro').checked = (which === 'pro');
+    const cardE = document.getElementById('card-essentiel');
+    const cardP = document.getElementById('card-pro');
+    cardE.style.borderColor = which === 'essentiel' ? '#e8682a' : 'rgba(0,0,0,0.1)';
+    cardP.style.borderColor = which === 'pro'       ? '#e8682a' : 'rgba(0,0,0,0.1)';
+    updateTotal();
+  }
+
+  function toggleMaint() {
+    const cb = document.getElementById('f-maint-toggle');
+    const card = document.getElementById('card-maint');
+    card.style.borderColor = cb.checked ? '#e8682a' : 'rgba(0,0,0,0.1)';
+    updateTotal();
+  }
+
+  function updateTotal() {
+    const site = document.getElementById('f-pro').checked ? 'pro' : 'essentiel';
+    const hasMaint = document.getElementById('f-maint-toggle').checked;
+    const total = PRIX[site] + (hasMaint ? PRIX.maintenance : 0);
+
+    const labelSite = site === 'pro' ? 'Pro 349€' : 'Essentiel 189€';
+    const labelMaint = hasMaint ? ' + Maintenance 290€/an' : '';
+    document.getElementById('total-detail').textContent = labelSite + labelMaint;
+    document.getElementById('total-amount').textContent = total + '€';
+  }
+
+  // Init état visuel
+  document.addEventListener('DOMContentLoaded', () => {
+    selectSite('essentiel');
+  });
 
   // ── NAVIGATION ────────────────────────
   function goTo(step) {
@@ -815,7 +896,12 @@
     const secteur = getChecked('secteur');
     const secteurAutre = val('f-secteur-autre');
     const secteurFinal = (secteur === 'Autre' && secteurAutre) ? secteurAutre : secteur;
-    const formule = getChecked('formule');
+    const site = document.getElementById('f-pro').checked ? 'Pro' : 'Essentiel';
+    const hasMaint = document.getElementById('f-maint-toggle').checked;
+    const prixSite = site === 'Pro' ? 349 : 189;
+    const totalPrix = prixSite + (hasMaint ? 290 : 0);
+    const formuleLabel = site + (hasMaint ? ' + Maintenance annuelle' : '');
+    const prixLabel = totalPrix + '€' + (hasMaint ? ` (${prixSite}€ site + 290€/an maintenance)` : ' unique');
 
     const colorPrimary = val('f-color-primary') || getColorName('primary');
     const colorAccent = val('f-color-accent') || getColorName('accent');
@@ -842,9 +928,6 @@
 
     const now = new Date().toLocaleDateString('fr-BE', { day:'2-digit', month:'long', year:'numeric' });
 
-    const priceMap = { 'Essentiel – 189€':'189€', 'Pro – 349€':'349€', 'Maintenance – 29€/mois':'29€/mois' };
-    const priceDisplay = priceMap[formule] || '—';
-
     document.getElementById('cdc-output').innerHTML = `
       <div class="cdc-header">
         <div class="cdc-logo">AW</div>
@@ -856,8 +939,8 @@
 
       <div class="cdc-section">
         <div class="cdc-section-title">Formule & contact</div>
-        <div class="cdc-row"><div class="cdc-key">Formule</div><div class="cdc-val"><strong>${escHtml(formule)}</strong></div></div>
-        <div class="cdc-row"><div class="cdc-key">Montant</div><div class="cdc-val"><strong>${priceDisplay}</strong></div></div>
+        <div class="cdc-row"><div class="cdc-key">Formule</div><div class="cdc-val"><strong>${escHtml(formuleLabel)}</strong></div></div>
+        <div class="cdc-row"><div class="cdc-key">Montant total</div><div class="cdc-val"><strong>${escHtml(prixLabel)}</strong></div></div>
         <div class="cdc-row"><div class="cdc-key">Nom</div><div class="cdc-val">${escHtml(nom)}</div></div>
         <div class="cdc-row"><div class="cdc-key">Téléphone</div><div class="cdc-val">${escHtml(tel)}</div></div>
         <div class="cdc-row"><div class="cdc-key">Email</div><div class="cdc-val">${escHtml(email)}</div></div>
@@ -924,11 +1007,20 @@
 
   // ── PAIEMENT ──────────────────────────
   function handlePayment() {
-    const formule = getChecked('formule');
-    const link = STRIPE_LINKS[formule];
+    const site = document.getElementById('f-pro').checked ? 'pro' : 'essentiel';
+    const hasMaint = document.getElementById('f-maint-toggle').checked;
+
+    let key;
+    if (hasMaint) {
+      key = site + '+maintenance';   // 'essentiel+maintenance' ou 'pro+maintenance'
+    } else {
+      key = site;                    // 'essentiel' ou 'pro'
+    }
+
+    const link = STRIPE_LINKS[key];
 
     if (!link || link.startsWith('STRIPE_LINK')) {
-      alert('Lien de paiement non encore configuré. Contactez contact@activityweb.be pour finaliser votre commande.');
+      alert('Lien de paiement non encore configuré.\nContactez contact@activityweb.be pour finaliser votre commande.');
       return;
     }
 
