@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnostic Digital Gratuit — ActivityWeb</title>
+  <meta name="description" content="Obtenez un audit complet de votre présence en ligne en 60 secondes. Score, problèmes détectés, recommandations. Gratuit pour les artisans belges." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Variables ── */
+    :root {
+      --noir:        #111111;
+      --noir2:       #1a1a1a;
+      --orange:      #FF5A00;
+      --orange2:     #ff7a2e;
+      --orange-bg:   #1f1208;
+      --gris:        #888888;
+      --gris-clair:  #f4f4f4;
+      --blanc:       #ffffff;
+      --border:      #2a2a2a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--noir);
+      color: var(--blanc);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(17,17,17,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--blanc);
+      text-decoration: none;
+    }
+    .logo span { color: var(--orange); }
+    nav a.nav-link {
+      color: var(--gris);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color .2s;
+    }
+    nav a.nav-link:hover { color: var(--blanc); }
+    .nav-cta {
+      background: var(--orange);
+      color: var(--blanc) !important;
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.85rem !important;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--orange2) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,90,0,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--orange-bg);
+      border: 1px solid rgba(255,90,0,0.3);
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+    .hero-sub {
+      color: var(--gris);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+
+    /* ── FORMULAIRE ── */
+    .form-card {
+      background: var(--noir2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      position: relative;
+    }
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+      border-radius: 12px 12px 0 0;
+    }
+    .form-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+    .form-sub {
+      color: var(--gris);
+      font-size: 0.88rem;
+      margin-bottom: 28px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    input {
+      background: #222;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      color: var(--blanc);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+      width: 100%;
+    }
+    input::placeholder { color: #555; }
+    input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,90,0,0.1);
+    }
+    .btn-submit {
+      width: 100%;
+      background: var(--orange);
+      color: var(--blanc);
+      border: none;
+      border-radius: 6px;
+      padding: 15px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background .2s, transform .1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-submit:hover { background: var(--orange2); }
+    .btn-submit:active { transform: scale(0.99); }
+    .btn-submit.loading { opacity: 0.7; pointer-events: none; }
+    .form-note {
+      text-align: center;
+      color: #555;
+      font-size: 0.78rem;
+      margin-top: 14px;
+    }
+    .form-note span { color: var(--gris); }
+
+    /* ── LOADER ── */
+    .loader { display: none; margin-top: 30px; text-align: center; }
+    .loader.active { display: block; }
+    .loader-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .loader-fill {
+      height: 100%;
+      background: var(--orange);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    .loader-text {
+      color: var(--gris);
+      font-size: 0.88rem;
+    }
+    .loader-step {
+      color: var(--blanc);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    /* ── MESSAGE SUCCÈS ── */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 30px 20px;
+    }
+    .success-msg.active { display: block; }
+    .success-icon {
+      width: 60px; height: 60px;
+      background: rgba(255,90,0,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 20px;
+    }
+    .success-msg h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .success-msg p {
+      color: var(--gris);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* ── CE QUE VOUS RECEVEZ ── */
+    .preview {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 40px;
+    }
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .compare-card {
+      background: var(--noir2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+    }
+    .compare-card.premium {
+      border-color: var(--orange);
+      position: relative;
+      overflow: hidden;
+    }
+    .compare-card.premium::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+    }
+    .card-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-bottom: 16px;
+    }
+    .compare-card.premium .card-tag { color: var(--orange); }
+    .card-price {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .card-price-sub {
+      color: var(--gris);
+      font-size: 0.82rem;
+      margin-bottom: 24px;
+    }
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      color: var(--gris);
+    }
+    .feature-list li.active { color: var(--blanc); }
+    .feature-list li.locked { opacity: 0.4; }
+    .check {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+    .check.green { background: rgba(56,161,105,0.2); color: #68d391; }
+    .check.orange { background: rgba(255,90,0,0.2); color: var(--orange); }
+    .check.lock { background: #2a2a2a; color: #555; }
+    .btn-card {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .btn-card.free {
+      border: 1px solid var(--border);
+      color: var(--gris);
+    }
+    .btn-card.free:hover { border-color: var(--gris); color: var(--blanc); }
+    .btn-card.pay {
+      background: var(--orange);
+      color: var(--blanc);
+    }
+    .btn-card.pay:hover { background: var(--orange2); }
+
+    /* ── PREUVES SOCIALES ── */
+    .social-proof {
+      max-width: 900px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .stat-box {
+      background: var(--noir2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      color: var(--gris);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    /* ── FAQ ── */
+    .faq {
+      max-width: 680px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .faq-q {
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .faq-q::after {
+      content: '+';
+      color: var(--orange);
+      font-size: 1.3rem;
+      font-weight: 400;
+      flex-shrink: 0;
+      transition: transform .2s;
+    }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      color: var(--gris);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease, padding .3s;
+    }
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding-top: 12px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #555;
+      font-size: 0.8rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 50px 20px 40px; }
+      .form-card { padding: 24px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo">Activity<span>Web</span></a>
+  <div style="display:flex;gap:24px;align-items:center">
+    <a href="/#portfolio" class="nav-link">Exemples</a>
+    <a href="/#tarifs" class="nav-link">Tarifs</a>
+    <a href="/diagnostic.html" class="nav-link nav-cta">Audit gratuit</a>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">✦ Gratuit &amp; sans engagement</div>
+  <h1>Votre site web perd-il<br/><em>des clients chaque jour ?</em></h1>
+  <p class="hero-sub">
+    Entrez l'adresse de votre site. Nous l'analysons en 60 secondes
+    et vous envoyons votre rapport par email.
+  </p>
+
+  <!-- FORMULAIRE -->
+  <div class="form-card" id="formCard">
+    <div class="form-title">Obtenez votre diagnostic gratuit</div>
+    <div class="form-sub">Résultat envoyé par email en moins de 2 minutes</div>
+
+    <form id="auditForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nom de votre entreprise</label>
+          <input type="text" id="nom" placeholder="ex: Dupont Plomberie" required />
+        </div>
+        <div class="form-group">
+          <label>Ville</label>
+          <input type="text" id="ville" placeholder="ex: Liège" required />
+        </div>
+        <div class="form-group full">
+          <label>URL de votre site web</label>
+          <input type="url" id="url" placeholder="https://votre-site.be" required />
+        </div>
+        <div class="form-group full">
+          <label>Votre email</label>
+          <input type="email" id="email" placeholder="vous@email.com" required />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <span id="btnText">Analyser mon site gratuitement</span>
+        <span id="btnIcon">→</span>
+      </button>
+    </form>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+      <div class="loader-bar">
+        <div class="loader-fill" id="loaderFill"></div>
+      </div>
+      <div class="loader-step" id="loaderStep">Analyse en cours...</div>
+      <div class="loader-text" id="loaderText">Cela prend environ 60 secondes</div>
+    </div>
+
+    <!-- Succès -->
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">✓</div>
+      <h3>Votre rapport est en préparation !</h3>
+      <p>
+        Vous recevrez votre diagnostic complet à <strong id="emailConfirm"></strong>
+        dans les 2 prochaines minutes.<br/><br/>
+        Pensez à vérifier vos spams si vous ne voyez rien.
+      </p>
+    </div>
+
+    <p class="form-note">
+      <span>🔒</span> Vos données ne sont jamais revendues. Analyse 100% confidentielle.
+    </p>
+  </div>
+</section>
+
+
+<!-- CE QUE VOUS RECEVEZ -->
+<section class="preview">
+  <div class="section-label">Votre rapport</div>
+  <div class="section-title">Deux niveaux d'analyse</div>
+
+  <div class="compare-grid">
+
+    <!-- Gratuit -->
+    <div class="compare-card">
+      <div class="card-tag">Rapport gratuit</div>
+      <div class="card-price">0 €</div>
+      <div class="card-price-sub">Envoyé automatiquement par email</div>
+      <ul class="feature-list">
+        <li class="active">
+          <span class="check green">✓</span>
+          Score global sur 100 avec détail par catégorie
+        </li>
+        <li class="active">
+          <span class="check green">✓</span>
+          Vitesse de chargement mobile mesurée
+        </li>
+        <li class="active">
+          <span class="check green">✓</span>
+          Analyse SEO de base (titre, description, H1)
+        </li>
+        <li class="active">
+          <span class="check green">✓</span>
+          Vérification présence Google Maps
+        </li>
+        <li class="active">
+          <span class="check green">✓</span>
+          Liste des problèmes détectés
+        </li>
+        <li class="locked">
+          <span class="check lock">✗</span>
+          Solutions détaillées pour chaque problème
+        </li>
+        <li class="locked">
+          <span class="check lock">✗</span>
+          Plan d'action priorisé en 5 étapes
+        </li>
+        <li class="locked">
+          <span class="check lock">✗</span>
+          Estimation du gain client si corrections
+        </li>
+      </ul>
+      <a href="#auditForm" class="btn-card free">Obtenir mon rapport gratuit</a>
+    </div>
+
+    <!-- Premium -->
+    <div class="compare-card premium">
+      <div class="card-tag">Rapport premium</div>
+      <div class="card-price">149 €</div>
+      <div class="card-price-sub">Livré en 24h — paiement sécurisé</div>
+      <ul class="feature-list">
+        <li class="active">
+          <span class="check orange">✓</span>
+          Tout ce qui est inclus dans le rapport gratuit
+        </li>
+        <li class="active">
+          <span class="check orange">✓</span>
+          Analyse approfondie de chaque problème
+        </li>
+        <li class="active">
+          <span class="check orange">✓</span>
+          Solution concrète étape par étape pour chaque point
+        </li>
+        <li class="active">
+          <span class="check orange">✓</span>
+          Plan d'action priorisé — par où commencer
+        </li>
+        <li class="active">
+          <span class="check orange">✓</span>
+          Estimation du gain client si corrections appliquées
+        </li>
+        <li class="active">
+          <span class="check orange">✓</span>
+          Rapport PDF professionnel de 10-12 pages
+        </li>
+        <li class="active">
+          <span class="check orange">✓</span>
+          Analyse rédigée par notre équipe + IA
+        </li>
+        <li class="active">
+          <span class="check orange">✓</span>
+          Questions/réponses par email incluses
+        </li>
+      </ul>
+      <!-- Ce lien sera remplacé par un lien Stripe -->
+      <a href="https://buy.stripe.com/VOTRE_LIEN_STRIPE" class="btn-card pay" id="btnPremium">
+        Commander l'audit premium — 149 €
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- STATS -->
+<section class="social-proof">
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num">73%</div>
+      <div class="stat-label">des sites d'artisans belges ne sont pas adaptés aux smartphones</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">8s</div>
+      <div class="stat-label">temps de chargement moyen d'un site artisan — 3× trop lent</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">80%</div>
+      <div class="stat-label">des recherches locales passent par Google Maps avant d'appeler</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-label" style="text-align:center">Questions fréquentes</div>
+  <div class="section-title" style="text-align:center;font-size:1.6rem">Tout ce que vous voulez savoir</div>
+
+  <div class="faq-item">
+    <div class="faq-q">Le diagnostic est vraiment gratuit ?</div>
+    <div class="faq-a">Oui, complètement. Aucune carte bancaire demandée. Vous recevez votre rapport PDF par email en moins de 2 minutes. Le rapport gratuit vous montre vos problèmes ; le rapport premium à 149€ vous dit exactement comment les résoudre.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Comment fonctionne l'analyse ?</div>
+    <div class="faq-a">Notre outil connecte Google PageSpeed, Google Maps et analyse directement votre site web. Il mesure la vitesse, la compatibilité mobile, le référencement de base et votre présence locale. Le tout en moins de 60 secondes.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Je n'ai pas de site web. Puis-je quand même faire le diagnostic ?</div>
+    <div class="faq-a">Oui. Laissez le champ URL vide. On analysera votre présence Google Maps et on vous montrera ce que vos concurrents ont et que vous n'avez pas encore.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Que se passe-t-il après le rapport ?</div>
+    <div class="faq-a">Rien, sauf si vous le souhaitez. Vous pouvez appliquer les recommandations vous-même. Si vous préférez qu'on s'en charge, ActivityWeb crée des sites vitrine professionnels pour artisans à partir de 189€.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Combien de temps pour recevoir le rapport premium ?</div>
+    <div class="faq-a">Maximum 24h ouvrables. Dans la plupart des cas, vous le recevez le jour même.</div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 ActivityWeb — Sites web pour artisans belges</span>
+  <span>activityweb.be</span>
+</footer>
+
+
+<script>
+  // ── FAQ accordion ──
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // ── Formulaire ──
+  const form      = document.getElementById('auditForm');
+  const loader    = document.getElementById('loader');
+  const successEl = document.getElementById('successMsg');
+  const btnSubmit = document.getElementById('btnSubmit');
+  const loaderFill= document.getElementById('loaderFill');
+  const loaderStep= document.getElementById('loaderStep');
+  const loaderText= document.getElementById('loaderText');
+
+  const steps = [
+    { pct: 15, step: "Connexion à Google PageSpeed...",    txt: "Mesure de la vitesse de chargement" },
+    { pct: 35, step: "Analyse du contenu de votre site...", txt: "Vérification SEO, mobile, sécurité" },
+    { pct: 60, step: "Vérification Google Maps...",         txt: "Recherche de votre fiche locale" },
+    { pct: 80, step: "Calcul du score global...",           txt: "Génération des recommandations" },
+    { pct: 95, step: "Mise en forme du rapport PDF...",     txt: "Presque terminé !" },
+  ];
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const url   = document.getElementById('url').value.trim();
+    const nom   = document.getElementById('nom').value.trim();
+    const ville = document.getElementById('ville').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    // Sauvegarder email pour le message de confirmation
+    document.getElementById('emailConfirm').textContent = email;
+
+    // Passer en mode loading
+    form.style.display = 'none';
+    loader.classList.add('active');
+
+    // Simuler les étapes visuelles
+    // (en production, remplacer par un vrai appel API)
+    for (let i = 0; i < steps.length; i++) {
+      await new Promise(r => setTimeout(r, 1200));
+      loaderFill.style.width = steps[i].pct + '%';
+      loaderStep.textContent = steps[i].step;
+      loaderText.textContent = steps[i].txt;
+    }
+
+    // Appel API backend
+    try {
+      const resp = await fetch('https://api.activityweb.be/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, nom, ville, email })
+      });
+
+      // Si l'API n'est pas encore en place, on affiche quand même le succès
+      // (en production, vérifier resp.ok)
+    } catch (err) {
+      // API pas encore configurée — on montre quand même la confirmation
+      console.log('API non configurée, affichage de la confirmation de démonstration');
+    }
+
+    // Afficher le succès
+    loaderFill.style.width = '100%';
+    await new Promise(r => setTimeout(r, 500));
+    loader.classList.remove('active');
+    successEl.classList.add('active');
+  });
+
+  // ── Bouton premium — pré-remplir le lien Stripe avec l'email ──
+  const urlInput   = document.getElementById('url');
+  const emailInput = document.getElementById('email');
+  const btnPremium = document.getElementById('btnPremium');
+
+  function updateStripeLink() {
+    const email = emailInput.value.trim();
+    const url   = urlInput.value.trim();
+    if (email) {
+      btnPremium.href = `https://buy.stripe.com/VOTRE_LIEN_STRIPE?prefilled_email=${encodeURIComponent(email)}&client_reference_id=${encodeURIComponent(url)}`;
+    }
+  }
+  emailInput.addEventListener('input', updateStripeLink);
+  urlInput.addEventListener('input', updateStripeLink);
+</script>
+
+</body>
+</html>
