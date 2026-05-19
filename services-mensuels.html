@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services mensuels – ActivityWeb</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:     #0f1f38;
+    --navy-mid: #1a3254;
+    --orange:   #e8682a;
+    --orange-lt:#f5844d;
+    --cream:    #f9f5f0;
+    --white:    #ffffff;
+    --text:     #1a1a2e;
+    --muted:    #6b7a99;
+    --border:   rgba(0,0,0,0.1);
+    --success:  #2d8a4e;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans', sans-serif; background:var(--cream); color:var(--text); min-height:100vh; }
+
+  /* NAV */
+  nav {
+    height:56px; background:var(--navy);
+    display:flex; align-items:center; padding:0 5%;
+    position:sticky; top:0; z-index:100;
+  }
+  .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo-mark {
+    width:32px; height:32px; background:var(--orange); border-radius:5px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'DM Serif Display', serif; font-size:0.8rem; color:white;
+  }
+  .logo-text { font-family:'DM Serif Display', serif; font-size:1.1rem; color:white; }
+  .logo-text span { color:var(--orange); }
+  .nav-back { margin-left:auto; font-size:0.82rem; color:rgba(255,255,255,0.5); text-decoration:none; transition:color 0.2s; }
+  .nav-back:hover { color:white; }
+
+  /* HERO */
+  .hero {
+    background:var(--navy);
+    padding:64px 5% 56px;
+    text-align:center;
+  }
+  .hero-eyebrow {
+    font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--orange); font-weight:600; margin-bottom:14px;
+  }
+  .hero-title {
+    font-family:'DM Serif Display', serif;
+    font-size:clamp(2rem, 5vw, 3rem);
+    color:white; line-height:1.15; margin-bottom:16px;
+  }
+  .hero-title em { color:var(--orange); font-style:italic; }
+  .hero-desc { font-size:1rem; color:rgba(255,255,255,0.55); max-width:520px; margin:0 auto; line-height:1.7; }
+
+  /* CARDS */
+  .cards-wrap {
+    max-width:780px; margin:0 auto;
+    padding:56px 20px 80px;
+    display:grid; grid-template-columns:1fr 1fr; gap:24px;
+  }
+  @media(max-width:600px) { .cards-wrap { grid-template-columns:1fr; } }
+
+  .card {
+    background:var(--white);
+    border-radius:14px;
+    border:1.5px solid var(--border);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover { box-shadow:0 12px 40px rgba(0,0,0,0.1); transform:translateY(-3px); }
+
+  .card-top {
+    background:var(--navy); padding:28px 28px 24px;
+  }
+  .card-icon { font-size:1.8rem; margin-bottom:10px; }
+  .card-name {
+    font-family:'DM Serif Display', serif;
+    font-size:1.35rem; color:white; margin-bottom:6px;
+  }
+  .card-tagline { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.5; }
+
+  .card-price-wrap {
+    padding:20px 28px 0;
+    display:flex; align-items:baseline; gap:6px;
+  }
+  .card-price {
+    font-family:'DM Serif Display', serif;
+    font-size:2.4rem; color:var(--orange);
+  }
+  .card-price-unit { font-size:0.85rem; color:var(--muted); }
+
+  .card-features {
+    padding:16px 28px 24px;
+    list-style:none; flex:1;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .card-features li {
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:0.875rem; color:var(--text); line-height:1.5;
+  }
+  .card-features li::before {
+    content:'✓';
+    color:var(--success); font-weight:700;
+    flex-shrink:0; margin-top:1px;
+  }
+
+  .card-note {
+    margin:0 28px 20px;
+    background:rgba(232,104,42,0.06);
+    border:1px solid rgba(232,104,42,0.2);
+    border-radius:6px; padding:10px 14px;
+    font-size:0.78rem; color:var(--orange); line-height:1.5;
+  }
+
+  .btn-subscribe {
+    display:block; margin:0 28px 28px;
+    background:var(--orange); color:white;
+    text-align:center; padding:14px 20px;
+    border-radius:7px; font-weight:600; font-size:0.95rem;
+    text-decoration:none; transition:background 0.2s, transform 0.15s;
+    border:none; cursor:pointer; font-family:'DM Sans', sans-serif;
+  }
+  .btn-subscribe:hover { background:var(--orange-lt); transform:translateY(-1px); }
+
+  .secure-row {
+    display:flex; justify-content:center; gap:20px; flex-wrap:wrap;
+    margin-top:32px; font-size:0.78rem; color:var(--muted);
+  }
+  .secure-row span { display:flex; align-items:center; gap:5px; }
+
+  /* FAQ */
+  .faq-wrap { max-width:640px; margin:0 auto; padding:0 20px 80px; }
+  .faq-title {
+    font-family:'DM Serif Display', serif;
+    font-size:1.5rem; color:var(--navy);
+    margin-bottom:24px; text-align:center;
+  }
+  .faq-item {
+    border-bottom:1px solid var(--border);
+    padding:16px 0;
+  }
+  .faq-q { font-weight:600; font-size:0.92rem; color:var(--navy); margin-bottom:6px; }
+  .faq-a { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">AW</div>
+    <div class="logo-text">Activity<span>Web</span></div>
+  </a>
+  <a href="index.html" class="nav-back">← Retour</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Services mensuels</div>
+  <h1 class="hero-title">Votre site actif,<br><em>chaque mois</em></h1>
+  <p class="hero-desc">Deux services sans engagement pour développer et entretenir votre présence en ligne. Résiliables à tout moment.</p>
+</div>
+
+<div class="cards-wrap">
+
+  <!-- MAINTENANCE -->
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon">🔧</div>
+      <div class="card-name">Maintenance</div>
+      <div class="card-tagline">Votre site toujours à jour, toujours en ligne</div>
+    </div>
+    <div class="card-price-wrap">
+      <div class="card-price">19€</div>
+      <div class="card-price-unit">/ mois · sans engagement</div>
+    </div>
+    <ul class="card-features">
+      <li>Surveillance domaine &amp; hébergement</li>
+      <li>1 mise à jour par mois (textes, photos, horaires)</li>
+      <li>Sauvegardes mensuelles du site</li>
+      <li>Support prioritaire sous 24h ouvrées</li>
+      <li>Rapport mensuel de visibilité Google</li>
+    </ul>
+    <div class="card-note">💡 Sans maintenance, les mises à jour de sécurité ne sont pas appliquées et votre référencement peut en pâtir.</div>
+    <a href="https://buy.stripe.com/9B6dRbfsNbObgLGcSg14403" class="btn-subscribe">Activer la maintenance →</a>
+  </div>
+
+  <!-- RÉSEAUX SOCIAUX -->
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon">📱</div>
+      <div class="card-name">Réseaux sociaux</div>
+      <div class="card-tagline">8 posts professionnels créés et publiés chaque mois</div>
+    </div>
+    <div class="card-price-wrap">
+      <div class="card-price">49€</div>
+      <div class="card-price-unit">/ mois · sans engagement</div>
+    </div>
+    <ul class="card-features">
+      <li>8 posts visuels créés chaque mois</li>
+      <li>Textes rédigés et publiés pour vous</li>
+      <li>Facebook &amp; Instagram inclus</li>
+      <li>Cohérence avec l'identité visuelle de votre site</li>
+      <li>Rapport mensuel d'engagement</li>
+    </ul>
+    <div class="card-note">💡 Une présence régulière sur les réseaux renforce votre crédibilité et génère des contacts locaux.</div>
+    <a href="https://buy.stripe.com/9B68wR6WhdWj6727xW14404" class="btn-subscribe">Activer les réseaux →</a>
+  </div>
+
+</div>
+
+<div class="faq-wrap">
+  <div class="faq-title">Questions fréquentes</div>
+
+  <div class="faq-item">
+    <div class="faq-q">Puis-je résilier à tout moment ?</div>
+    <div class="faq-a">Oui, sans frais ni préavis. Vous résiliez depuis votre espace Stripe ou en nous envoyant un simple email.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Ces services sont-ils disponibles sans avoir de site ActivityWeb ?</div>
+    <div class="faq-a">Non, ces services sont réservés aux clients ayant un site réalisé par ActivityWeb.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">La mise à jour mensuelle incluse dans la maintenance, c'est quoi exactement ?</div>
+    <div class="faq-a">Tout changement de contenu : nouveaux textes, remplacement de photos, modification des horaires ou tarifs, ajout d'une promotion. Au-delà d'une demande par mois, un devis séparé est établi.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Puis-je prendre les deux services ?</div>
+    <div class="faq-a">Oui, les deux services sont cumulables. Vous pouvez souscrire à la maintenance et aux réseaux sociaux simultanément.</div>
+  </div>
+
+</div>
+
+<script>
+  // Vérification des liens Stripe au chargement
+  document.querySelectorAll('.btn-subscribe').forEach(btn => {
+    if (btn.getAttribute('href').startsWith('STRIPE_LINK')) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Ce service sera disponible très prochainement.\nContactez-nous : contact@activityweb.be');
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

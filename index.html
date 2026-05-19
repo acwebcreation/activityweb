@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ActivityWeb – Studio Digital | Sites web pour artisans</title>
+<meta name="description" content="Site web professionnel one-page pour artisans belges. Livré en 7 jours à partir de 219€. Plombiers, électriciens, paysagistes et plus.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0f1f38;
+    --navy-mid:   #1a3254;
+    --navy-light: #243d66;
+    --orange:     #e8682a;
+    --orange-lt:  #f5844d;
+    --cream:      #f9f5f0;
+    --white:      #ffffff;
+    --text:       #1a1a2e;
+    --muted:      #6b7a99;
+    --border:     rgba(0,0,0,0.08);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    font-family:'DM Sans', sans-serif;
+    background:var(--cream);
+    color:var(--text);
+    overflow-x:hidden;
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    position:fixed; top:0; left:0; right:0;
+    height:64px;
+    background:var(--navy);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 5%;
+    z-index:200;
+    box-shadow:0 2px 20px rgba(0,0,0,0.25);
+  }
+
+  .nav-logo {
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none;
+  }
+
+  .logo-mark {
+    width:36px; height:36px;
+    background:var(--orange);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'DM Serif Display', serif;
+    font-size:0.85rem;
+    color:white;
+    letter-spacing:-0.02em;
+  }
+
+  .logo-text {
+    font-family:'DM Serif Display', serif;
+    font-size:1.2rem;
+    color:white;
+  }
+
+  .logo-text span { color:var(--orange); }
+
+  .nav-links {
+    display:flex; align-items:center; gap:28px;
+    list-style:none;
+  }
+
+  .nav-links a {
+    color:rgba(255,255,255,0.65);
+    text-decoration:none;
+    font-size:0.875rem;
+    font-weight:500;
+    transition:color 0.2s;
+  }
+  .nav-links a:hover { color:white; }
+
+  .nav-cta {
+    background:var(--orange);
+    color:white !important;
+    padding:8px 20px;
+    border-radius:4px;
+    font-weight:600 !important;
+    transition:background 0.2s !important;
+  }
+  .nav-cta:hover { background:var(--orange-lt) !important; }
+
+  @media(max-width:768px) {
+    .nav-links { display:none; }
+  }
+
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    min-height:100vh;
+    background:var(--navy);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    padding:80px 5% 60px;
+    gap:40px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero::before {
+    content:'';
+    position:absolute; top:-120px; right:-80px;
+    width:550px; height:550px;
+    background:radial-gradient(circle, rgba(232,104,42,0.1) 0%, transparent 70%);
+    border-radius:50%;
+  }
+
+  @media(max-width:900px) {
+    .hero { grid-template-columns:1fr; }
+    .hero-visual { display:none; }
+  }
+
+  .hero-content { position:relative; z-index:1; }
+
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(232,104,42,0.15);
+    border:1px solid rgba(232,104,42,0.3);
+    color:var(--orange-lt);
+    padding:6px 14px; border-radius:4px;
+    font-size:0.78rem; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase;
+    margin-bottom:28px;
+  }
+  .hero-badge::before { content:'●'; font-size:0.55rem; }
+
+  h1 {
+    font-family:'DM Serif Display', serif;
+    font-size:clamp(2.6rem,4.5vw,3.8rem);
+    color:white;
+    line-height:1.1;
+    margin-bottom:22px;
+  }
+
+  h1 em { font-style:italic; color:var(--orange); }
+
+  .hero-sub {
+    font-size:1.05rem;
+    color:rgba(255,255,255,0.6);
+    line-height:1.75;
+    max-width:480px;
+    margin-bottom:40px;
+  }
+
+  .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
+
+  .btn-primary {
+    background:var(--orange); color:white;
+    padding:13px 28px; border-radius:4px;
+    font-size:0.92rem; font-weight:600;
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:6px;
+    transition:all 0.2s;
+  }
+  .btn-primary:hover { background:var(--orange-lt); transform:translateY(-1px); }
+
+  .btn-ghost {
+    background:transparent; color:white;
+    padding:13px 28px; border-radius:4px;
+    font-size:0.92rem; font-weight:500;
+    text-decoration:none;
+    border:1px solid rgba(255,255,255,0.22);
+    transition:all 0.2s;
+  }
+  .btn-ghost:hover { border-color:rgba(255,255,255,0.55); }
+
+  .hero-stats {
+    display:flex; gap:40px; flex-wrap:wrap;
+    margin-top:56px; padding-top:36px;
+    border-top:1px solid rgba(255,255,255,0.1);
+  }
+
+  .stat-num {
+    font-family:'DM Serif Display', serif;
+    font-size:2rem; color:var(--orange); line-height:1;
+  }
+
+  .stat-label {
+    font-size:0.75rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:rgba(255,255,255,0.45);
+    margin-top:4px;
+  }
+
+  /* ── HERO VISUAL ─────────────────────────── */
+  .hero-visual {
+    position:relative; z-index:1;
+    display:flex; justify-content:center; align-items:center;
+  }
+
+  .mockup-browser {
+    width:100%; max-width:440px;
+    background:var(--navy-mid);
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.08);
+    overflow:hidden;
+    box-shadow:0 40px 80px rgba(0,0,0,0.4);
+  }
+
+  .browser-bar {
+    height:36px; background:var(--navy-light);
+    display:flex; align-items:center; padding:0 14px; gap:8px;
+  }
+
+  .browser-dot {
+    width:10px; height:10px; border-radius:50%;
+  }
+  .d1 { background:#ff5f57; }
+  .d2 { background:#febc2e; }
+  .d3 { background:#28c840; }
+
+  .browser-url {
+    flex:1; background:rgba(0,0,0,0.3);
+    border-radius:4px; height:20px;
+    display:flex; align-items:center; padding:0 10px;
+    font-size:0.72rem; color:rgba(255,255,255,0.4);
+    margin:0 12px;
+  }
+
+  .browser-content { padding:20px; }
+
+  /* mini fake site preview */
+  .mini-hero {
+    background:var(--navy);
+    border-radius:6px;
+    padding:20px 16px;
+    margin-bottom:12px;
+  }
+
+  .mini-tag {
+    width:60px; height:6px; border-radius:3px;
+    background:rgba(232,104,42,0.5);
+    margin-bottom:10px;
+  }
+
+  .mini-h {
+    height:12px; border-radius:3px;
+    background:rgba(255,255,255,0.7);
+    width:80%;
+    margin-bottom:8px;
+  }
+
+  .mini-h2 {
+    height:10px; border-radius:3px;
+    background:rgba(255,255,255,0.3);
+    width:60%;
+    margin-bottom:16px;
+  }
+
+  .mini-btn {
+    width:90px; height:28px; border-radius:4px;
+    background:var(--orange);
+  }
+
+  .mini-cards {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
+    margin-top:12px;
+  }
+
+  .mini-card {
+    background:var(--cream);
+    border-radius:5px; padding:10px 8px;
+  }
+
+  .mini-card-icon {
+    width:18px; height:18px; border-radius:3px;
+    background:rgba(232,104,42,0.3);
+    margin-bottom:6px;
+  }
+
+  .mini-line {
+    height:5px; border-radius:2px;
+    background:rgba(0,0,0,0.12);
+    margin-bottom:4px;
+  }
+
+  .mini-line.short { width:70%; }
+
+  .browser-caption {
+    text-align:center; padding:12px;
+    font-size:0.75rem; color:rgba(255,255,255,0.35);
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+
+  /* float badges on the mockup */
+  .mockup-badge {
+    position:absolute;
+    background:white;
+    border-radius:8px;
+    padding:8px 12px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.2);
+    display:flex; align-items:center; gap:8px;
+    font-size:0.78rem; font-weight:500; color:var(--text);
+  }
+
+  .mockup-badge.b1 { top:-20px; right:-20px; }
+  .mockup-badge.b2 { bottom:10px; left:-30px; }
+
+  .badge-icon { font-size:1rem; }
+  .badge-txt small { display:block; font-size:0.65rem; color:var(--muted); font-weight:400; }
+
+  /* ── SECTIONS ────────────────────────────── */
+  section { padding:80px 5%; }
+
+  .section-tag {
+    display:inline-block; font-size:0.72rem;
+    font-weight:600; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--orange);
+    margin-bottom:12px;
+  }
+
+  h2 {
+    font-family:'DM Serif Display', serif;
+    font-size:clamp(1.9rem,3.5vw,2.7rem);
+    color:var(--text); line-height:1.2;
+    margin-bottom:14px;
+  }
+
+  h2 em { font-style:italic; color:var(--orange); }
+
+  .section-sub {
+    font-size:0.97rem; color:var(--muted);
+    line-height:1.7; max-width:480px; margin-bottom:48px;
+  }
+
+  /* ── CONSTAT ─────────────────────────────── */
+  .constat { background:var(--white); }
+
+  .constat-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:20px;
+  }
+
+  .constat-card {
+    background:var(--cream);
+    border-radius:8px; padding:28px 24px;
+    border:1px solid var(--border);
+  }
+
+  .constat-card .icon { font-size:1.5rem; margin-bottom:14px; }
+  .constat-card h3 { font-size:1rem; font-weight:600; color:var(--navy); margin-bottom:8px; }
+  .constat-card p { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+
+  .solution-box {
+    margin-top:40px;
+    background:var(--navy);
+    border-radius:10px;
+    padding:36px 32px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center; gap:28px;
+  }
+
+  @media(max-width:600px) { .solution-box { grid-template-columns:1fr; } }
+
+  .solution-box h3 {
+    font-family:'DM Serif Display', serif;
+    font-size:1.4rem; color:white; margin-bottom:10px;
+  }
+
+  .solution-steps {
+    display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;
+  }
+
+  .sol-step {
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.12);
+    color:rgba(255,255,255,0.75);
+    padding:6px 14px; border-radius:4px;
+    font-size:0.82rem;
+    display:flex; align-items:center; gap:6px;
+  }
+
+  .sol-step::before { content:'✓'; color:var(--orange); font-weight:700; }
+
+  /* ── OFFRES ──────────────────────────────── */
+  .offres { background:var(--cream); }
+
+  .offres-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:20px;
+    align-items:start;
+  }
+
+  .offre-card {
+    background:var(--white);
+    border-radius:10px; padding:32px 28px;
+    border:1px solid var(--border);
+    position:relative;
+    transition:box-shadow 0.25s;
+  }
+
+  .offre-card:hover { box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+
+  .offre-card.featured {
+    border-color:var(--orange);
+    border-width:2px;
+  }
+
+  .offre-badge {
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    background:var(--orange); color:white;
+    font-size:0.72rem; font-weight:700;
+    padding:4px 14px; border-radius:20px;
+    white-space:nowrap;
+  }
+
+  .offre-icon { font-size:1.8rem; margin-bottom:16px; }
+  .offre-name { font-size:1.1rem; font-weight:600; color:var(--navy); margin-bottom:4px; }
+  .offre-tagline { font-size:0.85rem; color:var(--muted); margin-bottom:20px; }
+
+  .offre-price {
+    display:flex; align-items:baseline; gap:4px;
+    margin-bottom:4px;
+  }
+  .price-main {
+    font-family:'DM Serif Display', serif;
+    font-size:2.6rem; color:var(--navy); line-height:1;
+  }
+  .price-unit { font-size:0.85rem; color:var(--muted); }
+  .price-note { font-size:0.78rem; color:var(--muted); margin-bottom:24px; }
+
+  .offre-features {
+    list-style:none; display:flex; flex-direction:column; gap:10px;
+    margin-bottom:28px;
+  }
+
+  .offre-features li {
+    font-size:0.875rem; color:var(--text);
+    display:flex; align-items:flex-start; gap:8px;
+    line-height:1.45;
+  }
+
+  .offre-features li::before {
+    content:'✓'; color:var(--orange); font-weight:700;
+    flex-shrink:0; margin-top:1px;
+  }
+
+  .offre-features li.strike { color:var(--muted); text-decoration:line-through; }
+  .offre-features li.strike::before { content:'–'; color:var(--muted); font-weight:400; }
+
+  .btn-offre {
+    width:100%; text-align:center;
+    display:block; padding:12px;
+    border-radius:5px; font-size:0.9rem; font-weight:600;
+    text-decoration:none; transition:all 0.2s;
+  }
+
+  .btn-offre.main { background:var(--orange); color:white; }
+  .btn-offre.main:hover { background:var(--orange-lt); }
+
+  .btn-offre.outline {
+    background:transparent; color:var(--navy);
+    border:1.5px solid rgba(0,0,0,0.15);
+  }
+  .btn-offre.outline:hover { border-color:var(--navy); }
+
+  /* ── COMMENT ÇA MARCHE ───────────────────── */
+  .process { background:var(--navy); }
+  .process h2 { color:white; }
+  .process .section-sub { color:rgba(255,255,255,0.5); }
+
+  .steps {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:2px;
+    background:rgba(255,255,255,0.06);
+    border-radius:10px;
+    overflow:hidden;
+  }
+
+  .step {
+    padding:36px 28px;
+    background:var(--navy);
+    transition:background 0.2s;
+    position:relative;
+  }
+
+  .step:hover { background:var(--navy-mid); }
+
+  .step-num {
+    font-family:'DM Serif Display', serif;
+    font-size:3rem; line-height:1;
+    color:rgba(232,104,42,0.2);
+    margin-bottom:16px;
+  }
+
+  .step-icon { font-size:1.5rem; margin-bottom:14px; }
+
+  .step h3 {
+    font-family:'DM Serif Display', serif;
+    font-size:1.15rem; color:white; margin-bottom:8px;
+  }
+
+  .step p { font-size:0.875rem; color:rgba(255,255,255,0.5); line-height:1.65; }
+
+  .step-arrow {
+    display:none;
+    position:absolute; right:-12px; top:50%;
+    transform:translateY(-50%);
+    color:var(--orange); font-size:1.2rem; z-index:1;
+  }
+
+  @media(min-width:800px) {
+    .steps { grid-template-columns:repeat(4,1fr); }
+    .step:not(:last-child) .step-arrow { display:block; }
+  }
+
+  /* ── EXEMPLES ────────────────────────────── */
+  .exemples { background:var(--white); }
+
+  .exemples-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:24px;
+  }
+
+  .exemple-card {
+    background:var(--cream);
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    transition:all 0.25s;
+  }
+
+  .exemple-card:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(0,0,0,0.1); }
+
+  .exemple-preview {
+    height:180px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:3rem; position:relative; overflow:hidden;
+  }
+
+  .prev-plombier { background:linear-gradient(135deg, #0f1f38 0%, #1a3254 100%); }
+  .prev-elec { background:linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+  .prev-paysagiste { background:linear-gradient(135deg, #1c3a2a 0%, #2d5a3e 100%); }
+
+  .exemple-preview::after {
+    content:'';
+    position:absolute; inset:0;
+    background:rgba(0,0,0,0.1);
+  }
+
+  .exemple-preview span { position:relative; z-index:1; }
+
+  .exemple-info { padding:20px 20px 24px; }
+
+  .exemple-meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+
+  .exemple-sector {
+    font-size:0.72rem; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--orange);
+  }
+
+  .exemple-style {
+    font-size:0.72rem; color:var(--muted);
+    background:rgba(0,0,0,0.05);
+    padding:3px 8px; border-radius:3px;
+  }
+
+  .exemple-card h3 {
+    font-family:'DM Serif Display', serif;
+    font-size:1.1rem; color:var(--navy); margin-bottom:6px;
+  }
+
+  .exemple-card p { font-size:0.85rem; color:var(--muted); line-height:1.55; margin-bottom:16px; }
+
+  .btn-preview {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:0.82rem; font-weight:600; color:var(--orange);
+    text-decoration:none;
+    transition:gap 0.2s;
+  }
+  .btn-preview:hover { gap:10px; }
+
+  /* ── CONTACT ─────────────────────────────── */
+  .contact { background:var(--cream); }
+
+  .contact-links {
+    display:flex; gap:16px; flex-wrap:wrap; margin-bottom:40px;
+  }
+
+  .contact-link {
+    display:flex; align-items:center; gap:10px;
+    background:white; border-radius:8px; padding:14px 20px;
+    border:1px solid var(--border); text-decoration:none;
+    transition:all 0.2s; color:var(--text);
+  }
+  .contact-link:hover { border-color:var(--orange); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+
+  .contact-link .cl-icon { font-size:1.1rem; }
+  .contact-link strong { display:block; font-size:0.9rem; color:var(--navy); }
+  .contact-link span { font-size:0.8rem; color:var(--muted); }
+
+  .contact-form {
+    background:white; border-radius:10px;
+    padding:36px 32px; border:1px solid var(--border);
+    max-width:600px;
+  }
+
+  .form-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;
+  }
+
+  @media(max-width:500px) { .form-grid { grid-template-columns:1fr; } }
+
+  input, textarea, select {
+    width:100%; padding:11px 14px;
+    border:1.5px solid rgba(0,0,0,0.1);
+    border-radius:6px;
+    font-family:'DM Sans', sans-serif; font-size:0.9rem;
+    background:var(--cream); color:var(--text);
+    outline:none; transition:border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { border-color:var(--orange); }
+  textarea { resize:vertical; min-height:100px; }
+  select option { background:white; }
+
+  .form-btn {
+    width:100%; padding:13px;
+    background:var(--navy); color:white;
+    border:none; border-radius:6px;
+    font-family:'DM Sans', sans-serif;
+    font-size:0.95rem; font-weight:600;
+    cursor:pointer; transition:background 0.2s;
+    margin-top:6px;
+  }
+  .form-btn:hover { background:var(--navy-mid); }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    background:var(--navy);
+    color:rgba(255,255,255,0.45);
+    text-align:center;
+    padding:32px 5%;
+    font-size:0.82rem;
+  }
+
+  footer strong { color:rgba(255,255,255,0.75); }
+  footer a { color:rgba(255,255,255,0.5); text-decoration:none; }
+  footer a:hover { color:var(--orange); }
+
+  /* ── ANIMATIONS ──────────────────────────── */
+  .fade-in { opacity:0; transform:translateY(18px); animation:fadeIn 0.65s ease forwards; }
+  @keyframes fadeIn { to { opacity:1; transform:none; } }
+  .d1x { animation-delay:.12s; }
+  .d2x { animation-delay:.25s; }
+  .d3x { animation-delay:.38s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="logo-mark">AW</div>
+    <div class="logo-text">Activity<span>Web</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#constat">Le problème</a></li>
+    <li><a href="#offres">Formules</a></li>
+    <li><a href="#process">Comment ça marche</a></li>
+    <li><a href="#exemples">Exemples</a></li>
+    <li><a href="formulaire.html" class="nav-cta">Demander un devis</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Studio Digital · Belgique francophone</div>
+    <h1 class="fade-in">Votre site web qui<br><em>ramène</em> des clients</h1>
+    <p class="hero-sub fade-in d1x">En 7 jours, on crée votre site one-page professionnel — pensé pour les artisans et sociétés de services. Visible sur Google, rapide, sans jargon.</p>
+    <div class="hero-ctas fade-in d2x">
+      <a href="formulaire.html" class="btn-primary">Je veux mon site →</a>
+      <a href="#offres" class="btn-ghost">Voir les formules</a>
+    </div>
+    <div class="hero-stats fade-in d3x">
+      <div><div class="stat-num">7 j</div><div class="stat-label">Livraison garantie</div></div>
+      <div><div class="stat-num">219€</div><div class="stat-label">Formule de départ</div></div>
+      <div><div class="stat-num">97%</div><div class="stat-label">Clients satisfaits</div></div>
+    </div>
+  </div>
+
+  <div class="hero-visual fade-in d2x">
+    <div style="position:relative; width:100%; max-width:440px;">
+      <div class="mockup-browser">
+        <div class="browser-bar">
+          <div class="browser-dot d1"></div>
+          <div class="browser-dot d2"></div>
+          <div class="browser-dot d3"></div>
+          <div class="browser-url">votrenom.be</div>
+        </div>
+        <div class="browser-content">
+          <div class="mini-hero">
+            <div class="mini-tag"></div>
+            <div class="mini-h"></div>
+            <div class="mini-h2"></div>
+            <div class="mini-btn"></div>
+          </div>
+          <div class="mini-cards">
+            <div class="mini-card">
+              <div class="mini-card-icon"></div>
+              <div class="mini-line"></div>
+              <div class="mini-line short"></div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card-icon"></div>
+              <div class="mini-line"></div>
+              <div class="mini-line short"></div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card-icon"></div>
+              <div class="mini-line"></div>
+              <div class="mini-line short"></div>
+            </div>
+          </div>
+        </div>
+        <div class="browser-caption">Votre site livré en 7 jours</div>
+      </div>
+
+      <div class="mockup-badge b1">
+        <div class="badge-icon">⚡</div>
+        <div class="badge-txt">
+          <strong>En ligne !</strong>
+          <small>Livré en 7 jours</small>
+        </div>
+      </div>
+
+      <div class="mockup-badge b2">
+        <div class="badge-icon">📱</div>
+        <div class="badge-txt">
+          <strong>Mobile-first</strong>
+          <small>Parfait sur tous écrans</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSTAT -->
+<section class="constat" id="constat">
+  <div class="section-tag">Le constat</div>
+  <h2>Vos clients cherchent<br><em>sur Google.</em> Êtes-vous là ?</h2>
+  <p class="section-sub">Sans présence en ligne, vous laissez vos concurrents prendre vos clients. Chaque jour compte.</p>
+
+  <div class="constat-grid">
+    <div class="constat-card">
+      <div class="icon">🔍</div>
+      <h3>87% des clients cherchent en ligne</h3>
+      <p>Avant d'appeler un artisan, la plupart tapent sur Google. Sans site, vous n'existez pas.</p>
+    </div>
+    <div class="constat-card">
+      <div class="icon">📉</div>
+      <h3>Le bouche-à-oreille ne suffit plus</h3>
+      <p>C'est un bon début mais ça plafonne. Un site tourne 24h/24 et capte de nouveaux prospects en continu.</p>
+    </div>
+    <div class="constat-card">
+      <div class="icon">💸</div>
+      <h3>Vos concurrents y sont déjà</h3>
+      <p>Chaque semaine sans site, ce sont des appels qui vont ailleurs. Le coût de l'inaction est réel.</p>
+    </div>
+    <div class="constat-card">
+      <div class="icon">⏰</div>
+      <h3>Pas le temps de s'en occuper</h3>
+      <p>Normal — vous avez un métier. C'est exactement pour ça qu'ActivityWeb existe.</p>
+    </div>
+  </div>
+
+  <div class="solution-box">
+    <div>
+      <h3>La solution ActivityWeb</h3>
+      <p style="font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.65;">Un site one-page professionnel, optimisé pour votre secteur, livré en 7 jours. Vous remplissez le formulaire, on fait tout le reste.</p>
+      <div class="solution-steps">
+        <div class="sol-step">Design sur mesure</div>
+        <div class="sol-step">Mise en ligne incluse</div>
+        <div class="sol-step">Livré en 7 jours</div>
+        <div class="sol-step">Sans jargon</div>
+      </div>
+    </div>
+    <a href="formulaire.html" class="btn-primary" style="white-space:nowrap;">Démarrer →</a>
+  </div>
+</section>
+
+<!-- OFFRES -->
+<section class="offres" id="offres">
+  <div class="section-tag">Les formules</div>
+  <h2>Simple. Transparent.<br><em>Sans surprise.</em></h2>
+  <p class="section-sub">Choisissez ce dont vous avez besoin aujourd'hui. Vous pouvez évoluer à tout moment.</p>
+
+  <!-- PACK ESSENTIEL -->
+  <div class="offres-grid" style="grid-template-columns:1fr;">
+    <div class="offre-card featured" style="display:grid;grid-template-columns:1fr auto;gap:28px;align-items:start;">
+      <div>
+        <div class="offre-badge" style="position:static;transform:none;display:inline-block;margin-bottom:16px;">🏁 Point de départ</div>
+        <div class="offre-icon">🛠️</div>
+        <div class="offre-name">Pack Essentiel</div>
+        <div class="offre-tagline">Votre présence professionnelle sur le web, clé en main.</div>
+        <ul class="offre-features" style="margin-bottom:0;">
+          <li>Site one-page professionnel</li>
+          <li>Design sur mesure adapté à votre secteur</li>
+          <li>Formulaire de contact fonctionnel</li>
+          <li>Optimisé mobile &amp; rapide</li>
+          <li>Mise en ligne sur votre domaine</li>
+          <li>3 retouches offertes (1er mois)</li>
+          <li>Livré en 7 jours ouvrés</li>
+        </ul>
+      </div>
+      <div style="text-align:right;min-width:140px;">
+        <div class="offre-price" style="justify-content:flex-end;">
+          <span class="price-main">219€</span>
+        </div>
+        <div class="price-note" style="text-align:right;">paiement unique</div>
+        <a href="formulaire.html" class="btn-offre main" style="margin-top:20px;white-space:nowrap;">Démarrer →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTENSIONS -->
+  <div style="margin-top:12px;">
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:12px;">
+      <span>Extensions ponctuelles</span>
+      <span style="flex:1;height:1px;background:var(--border);display:inline-block;"></span>
+      <span>Ajoutables à tout moment</span>
+    </div>
+    <div class="offres-grid">
+
+      <div class="offre-card">
+        <div class="offre-icon">🎁</div>
+        <div class="offre-name">Leadmagnet</div>
+        <div class="offre-tagline">Captez des contacts qualifiés automatiquement.</div>
+        <div class="offre-price">
+          <span class="price-main">79€</span>
+          <span class="price-unit">unique</span>
+        </div>
+        <div class="price-note">Ajout au site existant possible</div>
+        <ul class="offre-features">
+          <li>Création du PDF à offrir</li>
+          <li>Page de capture intégrée au site</li>
+          <li>Séquence email de bienvenue</li>
+        </ul>
+      </div>
+
+      <div class="offre-card">
+        <div class="offre-icon">📋</div>
+        <div class="offre-name">Devis en ligne</div>
+        <div class="offre-tagline">Recevez des demandes de devis qualifiées 24h/24.</div>
+        <div class="offre-price">
+          <span class="price-main">89€</span>
+          <span class="price-unit">unique</span>
+        </div>
+        <div class="price-note">Ajout au site existant possible</div>
+        <ul class="offre-features">
+          <li>Formulaire multi-étapes sur mesure</li>
+          <li>Récapitulatif envoyé par email</li>
+          <li>Intégration directe à votre site</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PACK COMPLET -->
+  <div style="margin-top:12px;background:var(--navy);border-radius:10px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+    <div>
+      <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">⭐ Meilleure valeur</div>
+      <div style="color:white;font-family:'DM Serif Display',serif;font-size:1.35rem;margin-bottom:6px;">Pack Complet</div>
+      <p style="font-size:0.88rem;color:rgba(255,255,255,0.5);line-height:1.6;max-width:420px;margin-bottom:14px;">Site vitrine + Leadmagnet + Devis en ligne. Tout ce qu'il faut pour démarrer fort.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:5px 12px;border-radius:4px;font-size:0.8rem;">✓ Pack Essentiel</span>
+        <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:5px 12px;border-radius:4px;font-size:0.8rem;">✓ Leadmagnet</span>
+        <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:5px 12px;border-radius:4px;font-size:0.8rem;">✓ Devis en ligne</span>
+      </div>
+    </div>
+    <div style="text-align:right;flex-shrink:0;">
+      <div style="font-family:'DM Serif Display',serif;font-size:2.6rem;color:var(--orange);line-height:1;">349€</div>
+      <div style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:4px;">paiement unique</div>
+      <div style="font-size:0.78rem;color:#68d391;background:rgba(104,211,145,0.1);border:1px solid rgba(104,211,145,0.2);border-radius:20px;padding:3px 10px;display:inline-block;margin-bottom:16px;">Économisez 38€</div>
+      <br>
+      <a href="formulaire.html" class="btn-primary" style="white-space:nowrap;">Choisir ce pack →</a>
+    </div>
+  </div>
+
+  <!-- SERVICES MENSUELS -->
+  <div style="margin-top:28px;">
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:12px;">
+      <span>Services mensuels</span>
+      <span style="flex:1;height:1px;background:var(--border);display:inline-block;"></span>
+      <span>Activables à tout moment</span>
+    </div>
+    <div class="offres-grid">
+
+      <div class="offre-card" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;">
+          <div class="offre-icon" style="font-size:1.4rem;margin-bottom:10px;">🔧</div>
+          <div class="offre-name">Maintenance</div>
+          <div class="offre-tagline" style="margin-bottom:0;">Mises à jour, corrections et sauvegardes. Votre site reste sécurisé sans que vous vous en occupiez.</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div class="offre-price" style="justify-content:flex-end;">
+            <span class="price-main">19€</span>
+            <span class="price-unit">/mois</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="offre-card" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;">
+          <div class="offre-icon" style="font-size:1.4rem;margin-bottom:10px;">📱</div>
+          <div class="offre-name">Réseaux sociaux</div>
+          <div class="offre-tagline" style="margin-bottom:0;">8 posts créés et publiés chaque mois pour maintenir votre visibilité sans y passer du temps.</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div class="offre-price" style="justify-content:flex-end;">
+            <span class="price-main">49€</span>
+            <span class="price-unit">/mois</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT ÇA MARCHE -->
+<section class="process" id="process">
+  <div class="section-tag">Comment ça marche</div>
+  <h2 style="color:white;">En ligne en 7 jours.<br><em>Vraiment.</em></h2>
+  <p class="section-sub">Pas d'appel, pas d'attente. Tout se passe en ligne, simplement.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon">📋</div>
+      <h3>Remplissez le formulaire</h3>
+      <p>Répondez à nos questions sur votre activité, vos couleurs, votre contenu. 5 minutes, pas plus.</p>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon">📄</div>
+      <h3>Recevez votre cahier des charges</h3>
+      <p>On génère un résumé complet de votre projet. Vous le validez avant de passer à l'étape suivante.</p>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon">💳</div>
+      <h3>Validez et payez</h3>
+      <p>Paiement sécurisé en ligne. Dès réception, on démarre la création de votre site.</p>
+      <div class="step-arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-icon">🚀</div>
+      <h3>On crée et on livre</h3>
+      <p>Design, textes, mise en ligne sur votre domaine. Votre site est prêt en 7 jours. Vous recevez les accès.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXEMPLES -->
+<section class="exemples" id="exemples">
+  <div class="section-tag">Portfolio</div>
+  <h2>Exemples de sites<br><em>pour artisans</em></h2>
+  <p class="section-sub">Des designs fictifs pour illustrer la variété des styles possibles. Chaque site est adapté à son métier et à son image.</p>
+
+  <div class="exemples-grid">
+
+    <div class="exemple-card">
+      <div class="exemple-preview prev-plombier">
+        <span>🔧</span>
+      </div>
+      <div class="exemple-info">
+        <div class="exemple-meta">
+          <span class="exemple-sector">Plomberie</span>
+          <span class="exemple-style">Style : Institutionnel</span>
+        </div>
+        <h3>Marc Dupont – Plombier</h3>
+        <p>Navy foncé &amp; orange. Ton professionnel et rassurant. Mise en avant des urgences et des garanties.</p>
+        <a href="plombier-marc-dupont.html" target="_blank" class="btn-preview">Voir le site →</a>
+      </div>
+    </div>
+
+    <div class="exemple-card">
+      <div class="exemple-preview prev-elec">
+        <span>⚡</span>
+      </div>
+      <div class="exemple-info">
+        <div class="exemple-meta">
+          <span class="exemple-sector">Électricité</span>
+          <span class="exemple-style">Style : Industriel</span>
+        </div>
+        <h3>Kevin Lambert – Électricien</h3>
+        <p>Noir &amp; jaune, typography bold. Impact visuel fort. Certification RGIE mise en avant.</p>
+        <a href="electricien-kevin-lambert.html" target="_blank" class="btn-preview">Voir le site →</a>
+      </div>
+    </div>
+     <div class="exemple-card">
+      <div class="exemple-preview prev-elec">
+        <span>⚡</span>
+      </div>
+      <div class="exemple-info">
+        <div class="exemple-meta">
+          <span class="exemple-sector">Coiffeur</span>
+          <span class="exemple-style">Style : moderne</span>
+        </div>
+        <h3>Eloise Moreau – Coiffeur</h3>
+        <p>Noir &amp; jaune, typography bold. Impact visuel fort. Certification RGIE mise en avant.</p>
+        <a href="coiffeur-elise-moreau.html" target="_blank" class="btn-preview">Voir le site →</a>
+      </div>
+    </div>
+
+    <div class="exemple-card">
+      <div class="exemple-preview prev-paysagiste">
+        <span>🌿</span>
+      </div>
+      <div class="exemple-info">
+        <div class="exemple-meta">
+          <span class="exemple-sector">Paysagisme</span>
+          <span class="exemple-style">Style : Organique</span>
+        </div>
+        <h3>Sophie Renard – Paysagiste</h3>
+        <p>Vert profond &amp; crème. Typographie serif douce. Section saisons, approche naturelle.</p>
+        <a href="paysagiste-sophie-renard.html" target="_blank" class="btn-preview">Voir le site →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:36px;">
+    <p style="font-size:.9rem;color:var(--muted);margin-bottom:16px;">Votre métier n'est pas listé ? On s'adapte à tout secteur.</p>
+    <a href="formulaire.html" class="btn-primary">Créer mon site →</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-tag">Contact</div>
+  <h2>Parlons de <em>votre</em> projet</h2>
+  <p class="section-sub">Remplissez le formulaire ou contactez-moi directement. Réponse sous 24h.</p>
+
+  <div class="contact-links">
+    <a href="https://wa.me/32476841263" class="contact-link">
+      <div class="cl-icon">💬</div>
+      <div>
+        <strong>WhatsApp</strong>
+        <span>Réponse rapide</span>
+      </div>
+    </a>
+    <a href="mailto:contact@activityweb.be" class="contact-link">
+      <div class="cl-icon">✉️</div>
+      <div>
+        <strong>contact@activityweb.be</strong>
+        <span>Réponse sous 24h</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="contact-form">
+    <form action="mailto:contact@activityweb.be" method="post" enctype="text/plain">
+      <div class="form-grid">
+        <input type="text" name="nom" placeholder="Votre nom" required />
+        <input type="text" name="activite" placeholder="Votre activité" />
+      </div>
+      <select name="secteur" style="margin-bottom:14px;">
+        <option value="">Choisissez votre secteur…</option>
+        <option>Plomberie</option>
+        <option>Électricité</option>
+        <option>Nettoyage</option>
+        <option>Peinture / Décoration</option>
+        <option>Menuiserie / Charpente</option>
+        <option>Toiture / Couverture</option>
+        <option>Jardin / Espaces verts</option>
+        <option>Autre</option>
+      </select>
+      <input type="text" name="contact" placeholder="Email ou téléphone" style="margin-bottom:14px;" required />
+      <textarea name="projet" placeholder="Votre projet en 2 mots"></textarea>
+      <button type="submit" class="form-btn">Envoyer ma demande →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>ActivityWeb – Studio Digital</strong> · BCE 0558.805.548<br>
+  <span style="margin-top:6px;display:inline-block;">
+    <a href="mailto:contact@activityweb.be">contact@activityweb.be</a> · © 2025 ActivityWeb
+  </span>
+</footer>
+
+</body>
+</html>

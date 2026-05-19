@@ -485,10 +485,10 @@
         <div style="flex:1;">
           <div style="font-weight:600;font-size:0.95rem;color:#0f1f38;">🚀 Pack Complet</div>
           <div style="font-size:0.82rem;color:#6b7a99;margin-top:2px;">Essentiel + Leadmagnet + Devis en ligne — tout inclus</div>
-          <div style="font-size:0.78rem;color:#2d8a4e;margin-top:4px;font-weight:600;">💡 349€ au lieu de 387€ — économisez 38€</div>
+          <div style="font-size:0.78rem;color:#2d8a4e;margin-top:4px;font-weight:600;">💡 399€ au lieu de 444€ — économisez 45€</div>
         </div>
         <div style="text-align:right;white-space:nowrap;">
-          <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:#e8682a;">349€</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:#e8682a;">399€</div>
           <div style="font-size:0.72rem;color:#6b7a99;">unique</div>
         </div>
       </label>
@@ -522,33 +522,32 @@
 
     <!-- SERVICES MENSUELS -->
     <div class="field" style="margin-top:8px;">
-      <label>Services mensuels <span>(optionnel — résiliables)</span></label>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;">
+      <div style="background:rgba(232,104,42,0.05);border:1.5px solid rgba(232,104,42,0.2);border-radius:8px;padding:16px 18px;">
+        <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;">Services optionnels après livraison</div>
+        <div style="font-size:0.85rem;color:var(--text);line-height:1.6;margin-bottom:14px;">
+          Une fois votre site livré, deux services mensuels sont disponibles pour développer votre présence en ligne. Si l'un d'eux vous intéresse, cochez la case — vous recevrez un email de confirmation avec tous les détails.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
 
-        <label for="f-maintenance" id="card-maintenance" style="display:flex;align-items:center;gap:14px;background:white;border:2px solid rgba(0,0,0,0.1);border-radius:8px;padding:14px 18px;cursor:pointer;transition:all 0.15s;" onclick="toggleExt('maintenance')">
-          <input type="checkbox" id="f-maintenance" style="width:18px;height:18px;accent-color:#e8682a;flex-shrink:0;" onchange="updateTotal()">
-          <div style="flex:1;">
-            <div style="font-weight:600;font-size:0.92rem;color:#0f1f38;">🔧 Maintenance</div>
-            <div style="font-size:0.8rem;color:#6b7a99;margin-top:2px;">Mises à jour, corrections, sauvegardes · support prioritaire</div>
-          </div>
-          <div style="text-align:right;white-space:nowrap;">
-            <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#e8682a;">19€</div>
-            <div style="font-size:0.72rem;color:#6b7a99;">/mois</div>
-          </div>
-        </label>
+          <label for="f-maintenance" style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+            <input type="checkbox" id="f-maintenance" style="width:18px;height:18px;accent-color:#e8682a;flex-shrink:0;">
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;color:#0f1f38;">🔧 Maintenance mensuelle — 19€/mois</div>
+              <div style="font-size:0.78rem;color:#6b7a99;margin-top:2px;">Mises à jour, corrections, sauvegardes · support prioritaire 24h</div>
+              <div style="font-size:0.75rem;color:var(--orange);margin-top:2px;">✉️ Vous recevrez un email pour confirmer votre sélection</div>
+            </div>
+          </label>
 
-        <label for="f-reseaux" id="card-reseaux" style="display:flex;align-items:center;gap:14px;background:white;border:2px solid rgba(0,0,0,0.1);border-radius:8px;padding:14px 18px;cursor:pointer;transition:all 0.15s;" onclick="toggleExt('reseaux')">
-          <input type="checkbox" id="f-reseaux" style="width:18px;height:18px;accent-color:#e8682a;flex-shrink:0;" onchange="updateTotal()">
-          <div style="flex:1;">
-            <div style="font-weight:600;font-size:0.92rem;color:#0f1f38;">📱 Réseaux sociaux</div>
-            <div style="font-size:0.8rem;color:#6b7a99;margin-top:2px;">8 posts créés et publiés chaque mois</div>
-          </div>
-          <div style="text-align:right;white-space:nowrap;">
-            <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#e8682a;">49€</div>
-            <div style="font-size:0.72rem;color:#6b7a99;">/mois</div>
-          </div>
-        </label>
+          <label for="f-reseaux" style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+            <input type="checkbox" id="f-reseaux" style="width:18px;height:18px;accent-color:#e8682a;flex-shrink:0;">
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;color:#0f1f38;">📱 Réseaux sociaux — 49€/mois</div>
+              <div style="font-size:0.78rem;color:#6b7a99;margin-top:2px;">8 posts créés et publiés chaque mois sur vos réseaux</div>
+              <div style="font-size:0.75rem;color:var(--orange);margin-top:2px;">✉️ Vous recevrez un email pour confirmer votre sélection</div>
+            </div>
+          </label>
 
+        </div>
       </div>
     </div>
 
@@ -816,14 +815,8 @@
   // ── STRIPE : liens à configurer dans Stripe Dashboard ──
   // Créer un Payment Link par combinaison dans Stripe
   const STRIPE_LINKS = {
-    'essentiel':                          'STRIPE_LINK_ESSENTIEL_219',
-    'essentiel+leadmagnet':               'STRIPE_LINK_ESSENTIEL_LEAD_268',
-    'essentiel+devis':                    'STRIPE_LINK_ESSENTIEL_DEVIS_278',
-    'essentiel+leadmagnet+devis':         'STRIPE_LINK_ESSENTIEL_LEAD_DEVIS_357',
-    'pack-complet':                       'STRIPE_LINK_PACK_COMPLET_399',
-    // Pour les récurrents : rediriger vers contact ou Stripe subscription
-    'maintenance':                        'STRIPE_LINK_MAINTENANCE_19_MOIS',
-    'reseaux':                            'STRIPE_LINK_RESEAUX_49_MOIS',
+    'essentiel':     'https://buy.stripe.com/fZu7sN6Wh6tReDy3hG14402',
+    'pack-complet':  'https://buy.stripe.com/6oUcN74O97xVbrmbOc14401',
   };
 
   const PRIX = {
@@ -882,30 +875,10 @@
 
   function updateTotal() {
     const packComplet = document.getElementById('f-pack-complet').checked;
-    const hasLead     = !packComplet && document.getElementById('f-leadmagnet').checked;
-    const hasDevis    = !packComplet && document.getElementById('f-devis').checked;
-    const hasMaint    = document.getElementById('f-maintenance').checked;
-    const hasReseaux  = document.getElementById('f-reseaux').checked;
-
-    let total = packComplet ? PRIX.packcomplet : PRIX.essentiel;
-    if (!packComplet && hasLead)  total += PRIX.leadmagnet;
-    if (!packComplet && hasDevis) total += PRIX.devis;
-    if (hasMaint)   total += PRIX.maintenance;
-    if (hasReseaux) total += PRIX.reseaux;
-
-    const parts = [];
-    if (packComplet) parts.push('Pack Complet 399€');
-    else {
-      parts.push('Essentiel€');
-      if (hasLead)  parts.push('Leadmagnet +79€');
-      if (hasDevis) parts.push('Devis +89€');
-    }
-    if (hasMaint)   parts.push('Maintenance +19€/mois');
-    if (hasReseaux) parts.push('Réseaux +49€/mois');
-
-    const hasMensuel = hasMaint || hasReseaux;
-    document.getElementById('total-detail').textContent = parts.join(' · ');
-    document.getElementById('total-amount').textContent = total + '€' + (hasMensuel ? ' + mensuel' : '');
+    const total = packComplet ? PRIX.packcomplet : PRIX.essentiel;
+    const label = packComplet ? 'Pack Complet' : 'Pack Essentiel';
+    document.getElementById('total-detail').textContent = label;
+    document.getElementById('total-amount').textContent = total + '€';
   }
 
   // Init état visuel
