@@ -1156,7 +1156,7 @@
       formData.append('Zone',      val('f-zone') || '—');
       formData.append('Remarques', val('f-remarques') || '—');
 
-      await fetch('https://formsubmit.co/contact@activityweb.be', {
+      await navigator.sendBeacon('https://formsubmit.co/contact@activityweb.be', {
         method: 'POST',
         body: formData
       });
