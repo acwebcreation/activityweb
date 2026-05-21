@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merci — Ton Starter Kit est en route | ActivityWeb</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', serif;
+    background: #111111;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .check {
+    width: 80px; height: 80px;
+    background: #00C896;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 32px;
+    animation: pop .4s ease;
+  }
+  @keyframes pop {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  h1 {
+    font-size: 32px;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  h1 span { color: #FF6B00; }
+  .sub {
+    font-size: 16px;
+    color: #888;
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .steps {
+    background: #1A1A1A;
+    border: 1px solid #2A2A2A;
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 440px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 40px;
+  }
+  .steps h2 {
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1.5px;
+    color: #FF6B00;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .step:last-child { margin-bottom: 0; }
+  .step-n {
+    width: 28px; height: 28px;
+    background: #FF6B00;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Courier New', monospace;
+    font-size: 12px; font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .step-text { font-size: 14px; color: #ccc; line-height: 1.5; padding-top: 4px; }
+  .step-text strong { color: #fff; }
+  .btn {
+    display: inline-block;
+    background: #FF6B00;
+    color: #fff;
+    padding: 16px 36px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Georgia', serif;
+    transition: background .2s, transform .15s;
+  }
+  .btn:hover { background: #FF8C33; transform: translateY(-2px); }
+  footer {
+    margin-top: 48px;
+    font-size: 11px;
+    color: #333;
+    font-family: 'Courier New', monospace;
+  }
+  footer a { color: #555; text-decoration: none; }
+</style>
+</head>
+<body>
+
+  <div class="check">✓</div>
+
+  <h1>C'est dans ta boîte mail,<br><span>vérifie tes spams !</span></h1>
+  <p class="sub">
+    Ton Starter Kit IA est en route. Si tu ne le vois pas dans 2 minutes,
+    regarde dans tes spams et ajoute activityweb.be à tes contacts.
+  </p>
+
+  <div class="steps">
+    <h2>Et maintenant ?</h2>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-text"><strong>Ouvre l'email</strong> — le PDF est joint directement.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-text"><strong>Teste le prompt n°1</strong> — tu vois un résultat en moins de 3 minutes.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-text"><strong>Les 25 prompts complets</strong> pour ton métier sont disponibles sur ActivityWeb si tu veux aller plus loin.</div>
+    </div>
+  </div>
+
+  <a href="https://www.activityweb.be" class="btn">
+    Voir tous les guides →
+  </a>
+
+  <footer>
+    <p>© ActivityWeb — <a href="https://activityweb.be">activityweb.be</a></p>
+  </footer>
+
+</body>
+</html>
