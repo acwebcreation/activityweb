@@ -5,7 +5,7 @@
 // ═══════════════════════════════════════════════════
 
 // ── Ta clé API Systeme.io ──────────────────────────
-$API_KEY = 'COLLE-TA-CLE-API-SYSTEME.IO-ICI';
+$API_KEY = 'jqr2ztyvx0g8k56q3ol29z4hkvr7ujyi57phyqo1pwanajgks11fclhf8g3uzkfw';
 
 // ── URLs de redirection ────────────────────────────
 $URL_MERCI  = 'https://www.activityweb.be/merci.html';
