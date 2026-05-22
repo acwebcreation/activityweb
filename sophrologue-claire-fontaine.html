@@ -524,5 +524,12 @@
   <span style="margin-top:8px;display:inline-block;">BCE 0XXX.XXX.XXX · © 2025 Claire Fontaine · <a href="#">Mentions légales</a></span>
 </footer>
 
+<script>
+function demoAlert(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector("button[type=submit], .btn-submit");
+  if (btn) { btn.textContent = "✓ Message reçu (démonstration)"; btn.style.background = "#2d8a4e"; btn.disabled = true; }
+}
+</script>
 </body>
 </html>

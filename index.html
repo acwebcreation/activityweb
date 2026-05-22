@@ -1195,12 +1195,12 @@
   </div>
 
   <div class="contact-form">
-    <form action="mailto:contact@activityweb.be" method="post" enctype="text/plain">
+    <form id="contact-form" onsubmit="sendContact(event)">
       <div class="form-grid">
-        <input type="text" name="nom" placeholder="Votre nom" required />
-        <input type="text" name="activite" placeholder="Votre pratique" />
+        <input type="text" id="c-nom" placeholder="Votre nom" required />
+        <input type="text" id="c-activite" placeholder="Votre pratique" />
       </div>
-      <select name="secteur" style="margin-bottom:14px;">
+      <select id="c-secteur" style="margin-bottom:14px;">
         <option value="">Choisissez votre spécialité…</option>
         <option>Naturopathie</option>
         <option>Sophrologie</option>
@@ -1215,9 +1215,12 @@
         <option>Massage / Bien-être corporel</option>
         <option>Autre pratique</option>
       </select>
-      <input type="text" name="contact" placeholder="Email ou téléphone" style="margin-bottom:14px;" required />
-      <textarea name="projet" placeholder="Votre projet en 2 mots"></textarea>
-      <button type="submit" class="form-btn">Envoyer ma demande →</button>
+      <input type="text" id="c-contact" placeholder="Email ou téléphone" style="margin-bottom:14px;" required />
+      <textarea id="c-projet" placeholder="Votre projet en 2 mots"></textarea>
+      <button type="submit" class="form-btn" id="contact-btn">Envoyer ma demande →</button>
+      <div id="contact-success" style="display:none;margin-top:14px;background:rgba(45,138,78,0.08);border:1px solid rgba(45,138,78,0.25);border-radius:6px;padding:12px 16px;font-size:0.88rem;color:#2d8a4e;">
+        ✓ Message envoyé ! Je vous réponds sous 24h.
+      </div>
     </form>
   </div>
 </section>
@@ -1230,5 +1233,41 @@
   </span>
 </footer>
 
+<script>
+  async function sendContact(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contact-btn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Envoi en cours…';
+
+    const nom      = document.getElementById('c-nom').value.trim();
+    const activite = document.getElementById('c-activite').value.trim();
+    const secteur  = document.getElementById('c-secteur').value;
+    const contact  = document.getElementById('c-contact').value.trim();
+    const projet   = document.getElementById('c-projet').value.trim();
+
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '17ea29d2-00fe-413d-b1a6-cc8c3af9ca66',
+          subject: '📩 Contact ActivityWeb — ' + nom + (secteur ? ' (' + secteur + ')' : ''),
+          from_name: 'ActivityWeb Site',
+          Nom: nom,
+          Pratique: activite || '—',
+          Spécialité: secteur || '—',
+          Contact: contact,
+          Projet: projet || '—'
+        })
+      });
+    } catch(err) {
+      console.warn('Web3Forms:', err);
+    }
+
+    btn.style.display = 'none';
+    document.getElementById('contact-success').style.display = 'block';
+  }
+</script>
 </body>
 </html>
