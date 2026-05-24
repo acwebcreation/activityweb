@@ -479,18 +479,30 @@
       </div>
     </div>
 
-    <!-- SERVICES COMPLÉMENTAIRES INFO -->
+
+    <!-- SERVICES COMPLÉMENTAIRES COCHABLES -->
     <div class="field" style="margin-top:8px;">
       <div style="background:rgba(0,0,0,0.03);border:1.5px solid rgba(0,0,0,0.08);border-radius:8px;padding:16px 18px;">
-        <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Autres services disponibles</div>
-        <div style="font-size:0.83rem;color:var(--muted);line-height:1.65;margin-bottom:12px;">Révisions supplémentaires, maintenance, réseaux sociaux, rédaction de textes… Ces services s'ajoutent après livraison selon vos besoins.</div>
-        <div style="display:flex;flex-wrap:wrap;gap:7px;">
-          <span style="display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid rgba(0,0,0,0.1);border-radius:5px;padding:5px 11px;font-size:0.78rem;color:var(--muted);">✏️ Révisions ×4 — 29€</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid rgba(0,0,0,0.1);border-radius:5px;padding:5px 11px;font-size:0.78rem;color:var(--muted);">🔧 Maintenance — 19€/mois</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid rgba(0,0,0,0.1);border-radius:5px;padding:5px 11px;font-size:0.78rem;color:var(--muted);">📱 Réseaux — 49€/mois</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid rgba(0,0,0,0.1);border-radius:5px;padding:5px 11px;font-size:0.78rem;color:var(--muted);">✍️ Textes — 79€</span>
+        <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Services après livraison <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.76rem;">(cochez si intéressé — pas inclus dans le paiement)</span></div>
+        <div style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:12px;">Je vous enverrai le lien de commande pour ces services après livraison de votre site.</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+            <input type="checkbox" id="f-revisions" style="width:16px;height:16px;accent-color:#e8682a;flex-shrink:0;">
+            <span style="font-size:0.87rem;color:var(--text);">✏️ <strong>Révisions supplémentaires</strong> — 29€ · Pack de 4 interventions, sans date limite</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+            <input type="checkbox" id="f-maintenance" style="width:16px;height:16px;accent-color:#e8682a;flex-shrink:0;">
+            <span style="font-size:0.87rem;color:var(--text);">🔧 <strong>Maintenance mensuelle</strong> — 19€/mois · Mises à jour, sauvegardes, support 24h</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+            <input type="checkbox" id="f-reseaux" style="width:16px;height:16px;accent-color:#e8682a;flex-shrink:0;">
+            <span style="font-size:0.87rem;color:var(--text);">📱 <strong>Réseaux sociaux</strong> — 49€/mois · 8 posts/mois créés et publiés</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+            <input type="checkbox" id="f-copywriting" style="width:16px;height:16px;accent-color:#e8682a;flex-shrink:0;">
+            <span style="font-size:0.87rem;color:var(--text);">✍️ <strong>Rédaction des textes</strong> — 79€ · Tous vos textes de site rédigés pour vous</span>
+          </label>
         </div>
-        <div style="font-size:0.76rem;color:var(--orange);margin-top:10px;">→ Je vous enverrai un lien vers la page de commande après livraison de votre site.</div>
       </div>
     </div>
 
@@ -906,10 +918,21 @@
     const secteurFinal = (secteur === 'Autre' && secteurA) ? secteurA : secteur;
 
     const hasLead  = document.getElementById('f-leadmagnet').checked;
+    const hasRevisions   = document.getElementById('f-revisions').checked;
+    const hasMaint       = document.getElementById('f-maintenance').checked;
+    const hasReseaux     = document.getElementById('f-reseaux').checked;
+    const hasCopywriting = document.getElementById('f-copywriting').checked;
 
     const formuleLabel = hasLead ? 'Site one-page + Leadmagnet bien-être' : 'Site one-page';
     const totalPrix    = PRIX.essentiel + (hasLead ? PRIX.leadmagnet : 0);
     const prixLabel    = totalPrix + '€ (paiement unique)';
+
+    const servicesSuivi = [];
+    if (hasRevisions)   servicesSuivi.push('✏️ Révisions ×4 — 29€');
+    if (hasMaint)       servicesSuivi.push('🔧 Maintenance — 19€/mois');
+    if (hasReseaux)     servicesSuivi.push('📱 Réseaux sociaux — 49€/mois');
+    if (hasCopywriting) servicesSuivi.push('✍️ Rédaction textes — 79€');
+    const servicesSuiviLabel = servicesSuivi.length ? servicesSuivi.join(', ') : 'Aucun';
 
     const colorPrimary = val('f-color-primary') || getColorName('primary');
     const colorAccent  = val('f-color-accent')  || getColorName('accent');
@@ -949,6 +972,7 @@
         <div class="cdc-section-title">Formule &amp; contact</div>
         <div class="cdc-row"><div class="cdc-key">Formule</div><div class="cdc-val"><strong>${escHtml(formuleLabel)}</strong></div></div>
         <div class="cdc-row"><div class="cdc-key">Montant total</div><div class="cdc-val"><strong>${escHtml(prixLabel)}</strong></div></div>
+        ${servicesSuivi.length ? `<div class="cdc-row"><div class="cdc-key">Services suivi</div><div class="cdc-val" style="color:var(--orange);">${escHtml(servicesSuiviLabel)}</div></div>` : ''}
         <div class="cdc-row"><div class="cdc-key">Nom / Cabinet</div><div class="cdc-val">${escHtml(nom)}</div></div>
         <div class="cdc-row"><div class="cdc-key">Téléphone</div><div class="cdc-val">${escHtml(tel)}</div></div>
         <div class="cdc-row"><div class="cdc-key">Email</div><div class="cdc-val">${escHtml(email)}</div></div>
@@ -1054,6 +1078,14 @@
           Téléphone: tel,
           Spécialité: secteurF,
           Formule: formuleLabel,
+          'Services après livraison': (() => {
+            const s = [];
+            if (document.getElementById('f-revisions').checked)   s.push('Révisions ×4 — 29€');
+            if (document.getElementById('f-maintenance').checked)  s.push('Maintenance — 19€/mois');
+            if (document.getElementById('f-reseaux').checked)      s.push('Réseaux sociaux — 49€/mois');
+            if (document.getElementById('f-copywriting').checked)  s.push('Rédaction textes — 79€');
+            return s.length ? s.join(', ') : 'Aucun';
+          })(),
           Accroche: val('f-slogan') || '—',
           Prestations: val('f-services') || '—',
           'Lieu / zone': val('f-zone') || '—',
