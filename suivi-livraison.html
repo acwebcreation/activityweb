@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email de suivi post-livraison – ActivityWeb (template interne)</title>
+<style>
+  body { font-family: -apple-system, 'Segoe UI', sans-serif; background:#f0f2f5; color:#1a1a2e; margin:0; padding:32px 16px; }
+  .wrapper { max-width:680px; margin:0 auto; }
+
+  .meta-box {
+    background:#fff3cd; border:1px solid #ffc107; border-radius:8px;
+    padding:16px 20px; margin-bottom:24px; font-size:0.85rem; color:#856404;
+  }
+  .meta-box strong { display:block; margin-bottom:4px; font-size:0.9rem; }
+
+  .email-card {
+    background:white; border-radius:12px;
+    box-shadow:0 4px 24px rgba(0,0,0,0.1);
+    overflow:hidden;
+  }
+
+  .email-header {
+    background:#0f1f38; padding:28px 36px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .logo-mark { width:36px; height:36px; background:#e8682a; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; color:white; font-family:'Georgia',serif; }
+  .logo-text { font-family:'Georgia',serif; font-size:1.1rem; color:white; }
+  .logo-text span { color:#e8682a; }
+
+  .email-body { padding:36px; }
+
+  .subj { font-size:0.75rem; color:#6b7a99; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px; }
+  .subject-line { font-size:1.05rem; font-weight:700; color:#0f1f38; margin-bottom:28px; padding-bottom:16px; border-bottom:1px solid rgba(0,0,0,0.08); }
+
+  p { font-size:0.93rem; line-height:1.8; color:#2a2a3e; margin-bottom:16px; }
+  p strong { color:#0f1f38; }
+
+  .highlight-box {
+    background:#f9f5f0; border-left:3px solid #e8682a;
+    border-radius:0 8px 8px 0; padding:16px 20px; margin:20px 0;
+  }
+  .highlight-box p { margin:0; font-size:0.88rem; }
+
+  .services-table { width:100%; border-collapse:collapse; margin:20px 0; font-size:0.88rem; }
+  .services-table th { background:#0f1f38; color:rgba(255,255,255,0.65); padding:9px 14px; text-align:left; font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; }
+  .services-table td { padding:10px 14px; border-bottom:1px solid rgba(0,0,0,0.07); }
+  .services-table tr:last-child td { border-bottom:none; }
+  .services-table tr:nth-child(even) td { background:rgba(0,0,0,0.02); }
+  .price { font-weight:700; color:#e8682a; }
+
+  .cta-btn {
+    display:inline-block; background:#e8682a; color:white;
+    padding:13px 28px; border-radius:6px; font-weight:700;
+    font-size:0.92rem; text-decoration:none; margin:8px 0;
+  }
+
+  .sign-off { margin-top:28px; padding-top:20px; border-top:1px solid rgba(0,0,0,0.08); font-size:0.88rem; color:#6b7a99; }
+  .sign-off strong { display:block; color:#0f1f38; font-size:0.95rem; }
+
+  .email-footer { background:#f9f5f0; padding:16px 36px; font-size:0.78rem; color:#6b7a99; border-top:1px solid rgba(0,0,0,0.06); }
+
+  /* Variantes */
+  .tab-row { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .tab { padding:8px 16px; border-radius:5px; font-size:0.82rem; font-weight:600; cursor:pointer; border:1.5px solid rgba(0,0,0,0.12); background:white; color:#6b7a99; transition:all 0.2s; }
+  .tab.active { background:#0f1f38; color:white; border-color:#0f1f38; }
+  .variant { display:none; }
+  .variant.active { display:block; }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="meta-box">
+    <strong>📋 Template interne ActivityWeb — Email post-livraison</strong>
+    Copiez le texte adapté à la situation du client et envoyez depuis votre boîte contact@activityweb.be.
+    Remplacez les <strong>[variables entre crochets]</strong> avant d'envoyer.
+  </div>
+
+  <div class="tab-row">
+    <div class="tab active" onclick="showVariant('standard')">Livraison standard</div>
+    <div class="tab" onclick="showVariant('avecservices')">Client avec services cochés</div>
+    <div class="tab" onclick="showVariant('relance')">Relance J+14 (sans réponse)</div>
+  </div>
+
+  <!-- VARIANTE 1 : Standard -->
+  <div class="variant active" id="v-standard">
+    <div class="email-card">
+      <div class="email-header">
+        <div class="logo-mark">AW</div>
+        <div class="logo-text">Activity<span>Web</span></div>
+      </div>
+      <div class="email-body">
+        <div class="subj">Objet de l'email</div>
+        <div class="subject-line">🚀 Votre site est en ligne, [Prénom] !</div>
+
+        <p>Bonjour <strong>[Prénom]</strong>,</p>
+        <p>Bonne nouvelle : votre site est <strong>en ligne</strong> 🎉</p>
+        <p>Voici votre lien : <strong><a href="#">[https://votresite.be]</a></strong></p>
+
+        <div class="highlight-box">
+          <p>📌 <strong>Vos 3 retouches offertes sont disponibles jusqu'au [date J+30].</strong><br>
+          Pour demander une retouche, répondez simplement à cet email en décrivant ce que vous souhaitez modifier.</p>
+        </div>
+
+        <p>Pour accéder à votre site et le gérer, voici vos accès :</p>
+        <p>🔑 <strong>Hébergeur :</strong> [nom hébergeur]<br>
+        📧 <strong>Login :</strong> [email]<br>
+        🔒 <strong>Mot de passe :</strong> [à transmettre séparément par sécurité]</p>
+
+        <p style="margin-top:24px;">Pour continuer à développer votre présence en ligne, voici les services disponibles à tout moment :</p>
+
+        <table class="services-table">
+          <thead>
+            <tr><th>Service</th><th>Prix</th><th>Lien</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>✏️ Révisions supplémentaires ×4</td><td class="price">29€</td><td><a href="https://activityweb.be/services-mensuels.html">Commander →</a></td></tr>
+            <tr><td>🔧 Maintenance mensuelle</td><td class="price">19€/mois</td><td><a href="https://activityweb.be/services-mensuels.html">Commander →</a></td></tr>
+            <tr><td>📱 Réseaux sociaux (8 posts/mois)</td><td class="price">49€/mois</td><td><a href="https://activityweb.be/services-mensuels.html">Commander →</a></td></tr>
+            <tr><td>✍️ Rédaction des textes</td><td class="price">79€</td><td><a href="https://activityweb.be/services-mensuels.html">Commander →</a></td></tr>
+          </tbody>
+        </table>
+
+        <p>Très belle continuation dans votre activité,</p>
+
+        <div class="sign-off">
+          <strong>Alex — ActivityWeb Studio</strong>
+          contact@activityweb.be · +32 476 84 12 63<br>
+          <a href="https://wa.me/32476841263">WhatsApp</a> · <a href="https://activityweb.be">activityweb.be</a>
+        </div>
+      </div>
+      <div class="email-footer">ActivityWeb Studio · BCE 0558.805.548 · contact@activityweb.be</div>
+    </div>
+  </div>
+
+  <!-- VARIANTE 2 : Avec services cochés -->
+  <div class="variant" id="v-avecservices">
+    <div class="email-card">
+      <div class="email-header">
+        <div class="logo-mark">AW</div>
+        <div class="logo-text">Activity<span>Web</span></div>
+      </div>
+      <div class="email-body">
+        <div class="subj">Objet de l'email</div>
+        <div class="subject-line">🚀 Votre site est livré — et vos services complémentaires sont prêts</div>
+
+        <p>Bonjour <strong>[Prénom]</strong>,</p>
+        <p>Votre site est <strong>en ligne</strong> 🎉 — voici le lien : <strong><a href="#">[https://votresite.be]</a></strong></p>
+
+        <div class="highlight-box">
+          <p>📌 Lors de votre commande, vous avez coché un intérêt pour :<br>
+          <strong>[liste des services cochés — ex : Maintenance + Réseaux sociaux]</strong><br>
+          Les liens de commande sont ci-dessous — cliquez quand vous êtes prêt.</p>
+        </div>
+
+        <table class="services-table">
+          <thead>
+            <tr><th>Service sélectionné</th><th>Prix</th><th>Commander</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🔧 Maintenance mensuelle</td><td class="price">19€/mois</td><td><a href="https://buy.stripe.com/9B6dRbfsNbObgLGcSg14403">Activer →</a></td></tr>
+            <tr><td>📱 Réseaux sociaux</td><td class="price">49€/mois</td><td><a href="https://buy.stripe.com/9B68wR6WhdWj6727xW14404">Activer →</a></td></tr>
+            <tr><td>✏️ Révisions ×4</td><td class="price">29€</td><td><a href="https://activityweb.be/services-mensuels.html">Commander →</a></td></tr>
+            <tr><td>✍️ Rédaction textes</td><td class="price">79€</td><td><a href="https://activityweb.be/services-mensuels.html">Commander →</a></td></tr>
+          </tbody>
+        </table>
+
+        <p>Vos <strong>3 retouches offertes</strong> sont valables jusqu'au <strong>[date J+30]</strong>. Répondez à cet email pour en faire la demande.</p>
+
+        <p>Belle continuation,</p>
+        <div class="sign-off">
+          <strong>Alex — ActivityWeb Studio</strong>
+          contact@activityweb.be · +32 476 84 12 63
+        </div>
+      </div>
+      <div class="email-footer">ActivityWeb Studio · BCE 0558.805.548 · contact@activityweb.be</div>
+    </div>
+  </div>
+
+  <!-- VARIANTE 3 : Relance J+14 -->
+  <div class="variant" id="v-relance">
+    <div class="email-card">
+      <div class="email-header">
+        <div class="logo-mark">AW</div>
+        <div class="logo-text">Activity<span>Web</span></div>
+      </div>
+      <div class="email-body">
+        <div class="subj">Objet de l'email</div>
+        <div class="subject-line">Comment ça se passe avec votre site, [Prénom] ?</div>
+
+        <p>Bonjour <strong>[Prénom]</strong>,</p>
+        <p>Votre site est en ligne depuis quelques semaines — j'espère que vous commencez à recevoir des contacts !</p>
+        <p>Je vous écris pour deux choses :</p>
+
+        <div class="highlight-box">
+          <p>⏰ <strong>Il vous reste encore [X] retouche(s) offertes</strong>, valables jusqu'au <strong>[date J+30]</strong>.<br>
+          C'est le bon moment pour peaufiner un texte, ajuster une couleur ou ajouter un témoignage.</p>
+        </div>
+
+        <p>Et si votre site vous convient, je serais vraiment reconnaissant si vous pouviez <strong>laisser un avis</strong> — cela aide beaucoup d'autres praticiens à nous trouver :</p>
+        <p><a class="cta-btn" href="mailto:contact@activityweb.be?subject=Mon%20avis%20ActivityWeb">Laisser un témoignage →</a></p>
+
+        <p>Enfin, si vous pensez à un confrère ou une consoeur qui cherche un site, n'hésitez pas à leur partager notre adresse : <a href="https://activityweb.be">activityweb.be</a></p>
+
+        <p>Bonne continuation,</p>
+        <div class="sign-off">
+          <strong>Alex — ActivityWeb Studio</strong>
+          contact@activityweb.be · +32 476 84 12 63
+        </div>
+      </div>
+      <div class="email-footer">ActivityWeb Studio · BCE 0558.805.548 · contact@activityweb.be</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showVariant(id) {
+    document.querySelectorAll('.variant').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('v-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
