@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Services mensuels – ActivityWeb</title>
+<title>Services complémentaires – ActivityWeb Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -18,136 +18,221 @@
     --border:   rgba(0,0,0,0.1);
     --success:  #2d8a4e;
   }
-
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
   body { font-family:'DM Sans', sans-serif; background:var(--cream); color:var(--text); min-height:100vh; }
 
-  /* NAV */
   nav {
     height:56px; background:var(--navy);
     display:flex; align-items:center; padding:0 5%;
     position:sticky; top:0; z-index:100;
+    box-shadow:0 2px 12px rgba(0,0,0,0.2);
   }
   .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .logo-mark {
-    width:32px; height:32px; background:var(--orange); border-radius:5px;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'DM Serif Display', serif; font-size:0.8rem; color:white;
-  }
-  .logo-text { font-family:'DM Serif Display', serif; font-size:1.1rem; color:white; }
+  .logo-mark { width:32px; height:32px; background:var(--orange); border-radius:5px; display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-size:0.8rem; color:white; }
+  .logo-text { font-family:'DM Serif Display',serif; font-size:1.1rem; color:white; }
   .logo-text span { color:var(--orange); }
   .nav-back { margin-left:auto; font-size:0.82rem; color:rgba(255,255,255,0.5); text-decoration:none; transition:color 0.2s; }
   .nav-back:hover { color:white; }
 
-  /* HERO */
-  .hero {
-    background:var(--navy);
-    padding:64px 5% 56px;
-    text-align:center;
-  }
-  .hero-eyebrow {
-    font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--orange); font-weight:600; margin-bottom:14px;
-  }
-  .hero-title {
-    font-family:'DM Serif Display', serif;
-    font-size:clamp(2rem, 5vw, 3rem);
-    color:white; line-height:1.15; margin-bottom:16px;
-  }
+  .hero { background:var(--navy); padding:48px 5% 40px; text-align:center; }
+  .hero-eyebrow { font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:600; margin-bottom:12px; }
+  .hero-title { font-family:'DM Serif Display',serif; font-size:clamp(1.8rem,4vw,2.6rem); color:white; line-height:1.15; margin-bottom:12px; }
   .hero-title em { color:var(--orange); font-style:italic; }
-  .hero-desc { font-size:1rem; color:rgba(255,255,255,0.55); max-width:520px; margin:0 auto; line-height:1.7; }
+  .hero-desc { font-size:0.95rem; color:rgba(255,255,255,0.5); max-width:500px; margin:0 auto; line-height:1.7; }
 
-  /* CARDS */
-  .cards-wrap {
-    max-width:780px; margin:0 auto;
-    padding:56px 20px 80px;
-    display:grid; grid-template-columns:1fr 1fr; gap:24px;
-  }
-  @media(max-width:600px) { .cards-wrap { grid-template-columns:1fr; } }
+  .page { max-width:720px; margin:0 auto; padding:48px 20px 100px; }
 
-  .card {
-    background:var(--white);
-    border-radius:14px;
-    border:1.5px solid var(--border);
-    overflow:hidden;
-    display:flex; flex-direction:column;
-    transition:box-shadow 0.2s, transform 0.2s;
+  /* ── ÉTAPES ── */
+  .step-header {
+    display:flex; align-items:center; gap:14px;
+    margin-bottom:28px; margin-top:40px;
   }
-  .card:hover { box-shadow:0 12px 40px rgba(0,0,0,0.1); transform:translateY(-3px); }
-
-  .card-top {
-    background:var(--navy); padding:28px 28px 24px;
-  }
-  .card-icon { font-size:1.8rem; margin-bottom:10px; }
-  .card-name {
-    font-family:'DM Serif Display', serif;
-    font-size:1.35rem; color:white; margin-bottom:6px;
-  }
-  .card-tagline { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.5; }
-
-  .card-price-wrap {
-    padding:20px 28px 0;
-    display:flex; align-items:baseline; gap:6px;
-  }
-  .card-price {
-    font-family:'DM Serif Display', serif;
-    font-size:2.4rem; color:var(--orange);
-  }
-  .card-price-unit { font-size:0.85rem; color:var(--muted); }
-
-  .card-features {
-    padding:16px 28px 24px;
-    list-style:none; flex:1;
-    display:flex; flex-direction:column; gap:10px;
-  }
-  .card-features li {
-    display:flex; align-items:flex-start; gap:10px;
-    font-size:0.875rem; color:var(--text); line-height:1.5;
-  }
-  .card-features li::before {
-    content:'✓';
-    color:var(--success); font-weight:700;
-    flex-shrink:0; margin-top:1px;
-  }
-
-  .card-note {
-    margin:0 28px 20px;
-    background:rgba(232,104,42,0.06);
-    border:1px solid rgba(232,104,42,0.2);
-    border-radius:6px; padding:10px 14px;
-    font-size:0.78rem; color:var(--orange); line-height:1.5;
-  }
-
-  .btn-subscribe {
-    display:block; margin:0 28px 28px;
+  .step-header:first-child { margin-top:0; }
+  .step-num-circle {
+    width:36px; height:36px; border-radius:50%;
     background:var(--orange); color:white;
-    text-align:center; padding:14px 20px;
-    border-radius:7px; font-weight:600; font-size:0.95rem;
-    text-decoration:none; transition:background 0.2s, transform 0.15s;
-    border:none; cursor:pointer; font-family:'DM Sans', sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:0.95rem; flex-shrink:0;
   }
-  .btn-subscribe:hover { background:var(--orange-lt); transform:translateY(-1px); }
+  .step-header h2 { font-family:'DM Serif Display',serif; font-size:1.4rem; color:var(--navy); }
+  .step-header p { font-size:0.85rem; color:var(--muted); margin-top:2px; }
 
-  .secure-row {
-    display:flex; justify-content:center; gap:20px; flex-wrap:wrap;
-    margin-top:32px; font-size:0.78rem; color:var(--muted);
-  }
-  .secure-row span { display:flex; align-items:center; gap:5px; }
+  /* ── CARDS SERVICES ── */
+  .services-grid { display:flex; flex-direction:column; gap:14px; }
 
-  /* FAQ */
-  .faq-wrap { max-width:640px; margin:0 auto; padding:0 20px 80px; }
-  .faq-title {
-    font-family:'DM Serif Display', serif;
-    font-size:1.5rem; color:var(--navy);
-    margin-bottom:24px; text-align:center;
+  .service-card {
+    background:var(--white);
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    padding:0;
+    overflow:hidden;
+    transition:border-color 0.2s, box-shadow 0.2s;
+    cursor:pointer;
   }
-  .faq-item {
-    border-bottom:1px solid var(--border);
-    padding:16px 0;
+  .service-card:hover { border-color:rgba(232,104,42,0.4); }
+  .service-card.selected { border-color:var(--orange); box-shadow:0 0 0 3px rgba(232,104,42,0.1); }
+
+  .service-card-inner {
+    display:flex; align-items:flex-start; gap:0;
   }
-  .faq-q { font-weight:600; font-size:0.92rem; color:var(--navy); margin-bottom:6px; }
-  .faq-a { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+
+  .service-checkbox-col {
+    padding:20px 16px 20px 20px;
+    display:flex; align-items:flex-start; padding-top:22px;
+    flex-shrink:0;
+  }
+
+  .service-checkbox-col input[type=checkbox] {
+    width:20px; height:20px; accent-color:var(--orange); cursor:pointer; flex-shrink:0;
+  }
+
+  .service-main { flex:1; padding:18px 20px 18px 0; }
+
+  .service-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:6px; }
+  .service-name { font-weight:600; font-size:0.98rem; color:var(--navy); }
+  .service-badge {
+    font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    padding:3px 9px; border-radius:20px; flex-shrink:0; white-space:nowrap;
+  }
+  .badge-unique { background:rgba(232,104,42,0.1); color:var(--orange); }
+  .badge-mensuel { background:rgba(45,138,78,0.1); color:var(--success); }
+
+  .service-desc { font-size:0.85rem; color:var(--muted); line-height:1.6; margin-bottom:10px; }
+  .service-price { font-family:'DM Serif Display',serif; font-size:1.5rem; color:var(--orange); }
+  .service-price small { font-family:'DM Sans',sans-serif; font-size:0.78rem; color:var(--muted); font-weight:400; }
+
+  /* ── CHAMPS CONTEXTUELS ── */
+  .service-fields {
+    display:none;
+    border-top:1px solid rgba(0,0,0,0.07);
+    padding:18px 20px 20px 56px;
+    background:rgba(249,245,240,0.6);
+  }
+  .service-card.selected .service-fields { display:block; }
+
+  .field { margin-bottom:16px; }
+  .field:last-child { margin-bottom:0; }
+  label.field-label { display:block; font-size:0.8rem; font-weight:600; color:var(--navy); margin-bottom:5px; }
+  label.field-label span { font-weight:400; color:var(--muted); }
+  input[type=text], input[type=email], input[type=tel], textarea, select {
+    width:100%; padding:10px 13px;
+    border:1.5px solid rgba(0,0,0,0.12); border-radius:7px;
+    font-family:'DM Sans',sans-serif; font-size:0.88rem;
+    background:var(--white); color:var(--text); outline:none;
+    transition:border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { border-color:var(--orange); }
+  textarea { resize:vertical; min-height:80px; }
+  .field-hint { font-size:0.76rem; color:var(--muted); margin-top:4px; line-height:1.5; }
+
+  .chips-sm { display:flex; flex-wrap:wrap; gap:7px; }
+  .chip-input { display:none; }
+  .chip-label {
+    display:inline-flex; align-items:center; gap:5px;
+    background:var(--white); border:1.5px solid rgba(0,0,0,0.12);
+    border-radius:6px; padding:6px 12px;
+    font-size:0.82rem; cursor:pointer; transition:all 0.15s;
+  }
+  .chip-input:checked + .chip-label {
+    background:rgba(232,104,42,0.08); border-color:var(--orange);
+    color:var(--orange); font-weight:600;
+  }
+
+  /* ── INFOS CLIENT ── */
+  .client-box {
+    background:var(--white);
+    border:1.5px solid var(--border);
+    border-radius:10px; padding:24px;
+  }
+  .field-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media(max-width:480px) { .field-grid { grid-template-columns:1fr; } }
+
+  /* ── RÉCAP & PAIEMENT ── */
+  .recap-box {
+    background:var(--navy); border-radius:10px;
+    padding:24px 28px; margin-top:28px;
+  }
+  .recap-title { font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:14px; }
+  .recap-lines { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+  .recap-line { display:flex; justify-content:space-between; align-items:center; font-size:0.88rem; }
+  .recap-line .rl-name { color:rgba(255,255,255,0.7); }
+  .recap-line .rl-price { color:white; font-weight:600; }
+  .recap-empty { font-size:0.88rem; color:rgba(255,255,255,0.35); font-style:italic; }
+  .recap-total { border-top:1px solid rgba(255,255,255,0.12); padding-top:14px; display:flex; justify-content:space-between; align-items:center; }
+  .recap-total .rt-label { font-size:0.82rem; color:rgba(255,255,255,0.5); }
+  .recap-total .rt-amount { font-family:'DM Serif Display',serif; font-size:2rem; color:var(--orange); }
+
+  .mensuel-note {
+    background:rgba(45,138,78,0.1); border:1px solid rgba(45,138,78,0.25);
+    border-radius:6px; padding:10px 14px;
+    font-size:0.78rem; color:#2d8a4e; margin-bottom:16px; line-height:1.5;
+  }
+
+  .btn-submit {
+    width:100%; padding:16px; border:none; border-radius:7px;
+    background:var(--orange); color:white;
+    font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700;
+    cursor:pointer; transition:background 0.2s, transform 0.15s;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    margin-top:16px;
+  }
+  .btn-submit:hover { background:var(--orange-lt); transform:translateY(-1px); }
+  .btn-submit:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+  .pay-secure { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:12px; }
+  .pay-badge { font-size:0.74rem; color:rgba(255,255,255,0.35); display:flex; align-items:center; gap:5px; }
+
+  /* ── TABLEAU INFO ── */
+  .info-section { margin-top:60px; padding-top:40px; border-top:1px solid var(--border); }
+  .info-title { font-family:'DM Serif Display',serif; font-size:1.4rem; color:var(--navy); margin-bottom:6px; }
+  .info-desc { font-size:0.88rem; color:var(--muted); margin-bottom:24px; line-height:1.6; }
+
+  .info-table { width:100%; border-collapse:collapse; font-size:0.875rem; }
+  .info-table th {
+    background:var(--navy); color:rgba(255,255,255,0.7);
+    font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    padding:10px 14px; text-align:left;
+  }
+  .info-table th:first-child { border-radius:6px 0 0 0; }
+  .info-table th:last-child { border-radius:0 6px 0 0; }
+  .info-table td { padding:12px 14px; border-bottom:1px solid rgba(0,0,0,0.07); vertical-align:top; }
+  .info-table tr:last-child td { border-bottom:none; }
+  .info-table tr:nth-child(even) td { background:rgba(0,0,0,0.02); }
+  .info-table .service-col { font-weight:600; color:var(--navy); }
+  .info-table .price-col { font-weight:700; color:var(--orange); white-space:nowrap; }
+  .info-table .type-pill {
+    display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:0.05em;
+    text-transform:uppercase; padding:2px 8px; border-radius:20px;
+  }
+  .info-table .pill-unique { background:rgba(232,104,42,0.1); color:var(--orange); }
+  .info-table .pill-mensuel { background:rgba(45,138,78,0.1); color:var(--success); }
+
+  .cta-contact {
+    margin-top:24px; background:var(--white);
+    border:1.5px solid var(--border); border-radius:10px;
+    padding:20px 24px; display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+  }
+  .cta-contact p { font-size:0.88rem; color:var(--muted); line-height:1.5; }
+  .cta-contact p strong { color:var(--navy); display:block; margin-bottom:3px; }
+  .btn-mailto {
+    background:var(--navy); color:white;
+    padding:11px 22px; border-radius:6px;
+    font-size:0.88rem; font-weight:600; text-decoration:none;
+    white-space:nowrap; transition:background 0.2s;
+    display:inline-flex; align-items:center; gap:7px;
+  }
+  .btn-mailto:hover { background:var(--navy-mid); }
+
+  /* ── SUCCESS ── */
+  #success-screen {
+    display:none; text-align:center; padding:60px 20px;
+  }
+  #success-screen.visible { display:block; }
+  .success-icon { font-size:3rem; margin-bottom:16px; }
+  .success-title { font-family:'DM Serif Display',serif; font-size:1.8rem; color:var(--navy); margin-bottom:10px; }
+  .success-desc { font-size:0.95rem; color:var(--muted); line-height:1.7; max-width:420px; margin:0 auto; }
 </style>
 </head>
 <body>
@@ -161,94 +246,522 @@
 </nav>
 
 <div class="hero">
-  <div class="hero-eyebrow">Services mensuels</div>
-  <h1 class="hero-title">Votre site actif,<br><em>chaque mois</em></h1>
-  <p class="hero-desc">Deux services sans engagement pour développer et entretenir votre présence en ligne. Résiliables à tout moment.</p>
+  <div class="hero-eyebrow">Services complémentaires</div>
+  <h1 class="hero-title">Sélectionnez vos<br><em>services</em></h1>
+  <p class="hero-desc">Cochez ce dont vous avez besoin, remplissez les quelques infos nécessaires et réglez en ligne.</p>
 </div>
 
-<div class="cards-wrap">
+<div class="page">
 
-  <!-- MAINTENANCE -->
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon">🔧</div>
-      <div class="card-name">Maintenance</div>
-      <div class="card-tagline">Votre site toujours à jour, toujours en ligne</div>
+  <div id="main-content">
+
+    <!-- ÉTAPE 1 : SÉLECTION -->
+    <div class="step-header" style="margin-top:0;">
+      <div class="step-num-circle">1</div>
+      <div>
+        <h2>Choisissez vos services</h2>
+        <p>Cliquez sur une carte pour la sélectionner et remplir les détails</p>
+      </div>
     </div>
-    <div class="card-price-wrap">
-      <div class="card-price">19€</div>
-      <div class="card-price-unit">/ mois · sans engagement</div>
+
+    <div class="services-grid">
+
+      <!-- LEADMAGNET -->
+      <div class="service-card" id="card-lead" onclick="toggleCard('lead')">
+        <div class="service-card-inner">
+          <div class="service-checkbox-col">
+            <input type="checkbox" id="chk-lead" onclick="event.stopPropagation();" onchange="toggleCard('lead', this.checked)">
+          </div>
+          <div class="service-main">
+            <div class="service-top">
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:4px;">🎁</div>
+                <div class="service-name">Leadmagnet PDF bien-être</div>
+              </div>
+              <span class="service-badge badge-unique">Unique</span>
+            </div>
+            <div class="service-desc">Un mini-guide PDF (3 à 8 pages) offert à vos visiteurs pour capturer des emails qualifiés. Comprend la page de capture + email de bienvenue automatique.</div>
+            <div class="service-price">89€ <small>paiement unique</small></div>
+          </div>
+        </div>
+        <div class="service-fields">
+          <div class="field">
+            <label class="field-label">Sujet du PDF <span>(titre ou thème)</span></label>
+            <input type="text" id="lead-sujet" placeholder="Ex : 5 rituels matinaux pour retrouver votre énergie" onclick="event.stopPropagation()">
+            <div class="field-hint">Pas d'idée ? Laissez vide, on proposera quelque chose adapté à votre pratique.</div>
+          </div>
+          <div class="field">
+            <label class="field-label">À qui s'adresse ce PDF ?</label>
+            <input type="text" id="lead-cible" placeholder="Ex : Femmes actives cherchant à retrouver leur vitalité" onclick="event.stopPropagation()">
+          </div>
+          <div class="field">
+            <label class="field-label">Ton souhaité</label>
+            <div class="chips-sm" onclick="event.stopPropagation()">
+              <input type="radio" name="lead-ton" id="lt1" value="Pratique / conseils concrets" class="chip-input">
+              <label for="lt1" class="chip-label">🛠️ Pratique</label>
+              <input type="radio" name="lead-ton" id="lt2" value="Pédagogique" class="chip-input">
+              <label for="lt2" class="chip-label">📚 Pédagogique</label>
+              <input type="radio" name="lead-ton" id="lt3" value="Doux / bienveillant" class="chip-input">
+              <label for="lt3" class="chip-label">🕊️ Doux</label>
+              <input type="radio" name="lead-ton" id="lt4" value="Inspirant" class="chip-input">
+              <label for="lt4" class="chip-label">✨ Inspirant</label>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Remarques <span>(optionnel)</span></label>
+            <textarea id="lead-remarques" placeholder="Thèmes à inclure, choses à éviter, style souhaité…" onclick="event.stopPropagation()"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- RÉVISIONS -->
+      <div class="service-card" id="card-revisions" onclick="toggleCard('revisions')">
+        <div class="service-card-inner">
+          <div class="service-checkbox-col">
+            <input type="checkbox" id="chk-revisions" onclick="event.stopPropagation();" onchange="toggleCard('revisions', this.checked)">
+          </div>
+          <div class="service-main">
+            <div class="service-top">
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:4px;">✏️</div>
+                <div class="service-name">Pack de 4 révisions supplémentaires</div>
+              </div>
+              <span class="service-badge badge-unique">Unique</span>
+            </div>
+            <div class="service-desc">Besoin de modifier votre site après la livraison ? Ce pack vous donne 4 interventions à utiliser quand vous voulez, sans limite dans le temps.</div>
+            <div class="service-price">29€ <small>paiement unique</small></div>
+          </div>
+        </div>
+        <div class="service-fields">
+          <div class="field">
+            <label class="field-label">Quelles modifications souhaitez-vous ? <span>(optionnel)</span></label>
+            <textarea id="revisions-detail" placeholder="Ex : Modifier la section tarifs, changer la photo hero, ajouter un témoignage…" onclick="event.stopPropagation()"></textarea>
+            <div class="field-hint">Pas d'urgence, vous pouvez décrire les modifications plus tard par email.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAINTENANCE -->
+      <div class="service-card" id="card-maintenance" onclick="toggleCard('maintenance')">
+        <div class="service-card-inner">
+          <div class="service-checkbox-col">
+            <input type="checkbox" id="chk-maintenance" onclick="event.stopPropagation();" onchange="toggleCard('maintenance', this.checked)">
+          </div>
+          <div class="service-main">
+            <div class="service-top">
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:4px;">🔧</div>
+                <div class="service-name">Maintenance mensuelle</div>
+              </div>
+              <span class="service-badge badge-mensuel">Mensuel · Sans engagement</span>
+            </div>
+            <div class="service-desc">Surveillance du site, mises à jour de sécurité, 1 modification/mois incluse, sauvegardes et rapport mensuel de visibilité. Support prioritaire sous 24h.</div>
+            <div class="service-price">19€<small>/mois · résiliable à tout moment</small></div>
+          </div>
+        </div>
+        <div class="service-fields">
+          <div class="field">
+            <label class="field-label">Avez-vous des modifications urgentes à faire ?</label>
+            <textarea id="maintenance-urgence" placeholder="Ex : Mettre à jour mes horaires, changer mon numéro de téléphone…" onclick="event.stopPropagation()" style="min-height:65px;"></textarea>
+            <div class="field-hint">Je vous contacte sous 24h après réception du paiement.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RÉSEAUX SOCIAUX -->
+      <div class="service-card" id="card-reseaux" onclick="toggleCard('reseaux')">
+        <div class="service-card-inner">
+          <div class="service-checkbox-col">
+            <input type="checkbox" id="chk-reseaux" onclick="event.stopPropagation();" onchange="toggleCard('reseaux', this.checked)">
+          </div>
+          <div class="service-main">
+            <div class="service-top">
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:4px;">📱</div>
+                <div class="service-name">Gestion réseaux sociaux</div>
+              </div>
+              <span class="service-badge badge-mensuel">Mensuel · Sans engagement</span>
+            </div>
+            <div class="service-desc">8 posts visuels créés, rédigés et publiés chaque mois sur Facebook &amp; Instagram. Cohérence avec votre identité visuelle + rapport d'engagement mensuel.</div>
+            <div class="service-price">49€<small>/mois · résiliable à tout moment</small></div>
+          </div>
+        </div>
+        <div class="service-fields">
+          <div class="field">
+            <label class="field-label">Sur quel(s) réseau(x) êtes-vous actif ?</label>
+            <div class="chips-sm" onclick="event.stopPropagation()">
+              <input type="checkbox" name="reseaux-type" id="rt1" value="Instagram" class="chip-input">
+              <label for="rt1" class="chip-label">📸 Instagram</label>
+              <input type="checkbox" name="reseaux-type" id="rt2" value="Facebook" class="chip-input">
+              <label for="rt2" class="chip-label">📘 Facebook</label>
+              <input type="checkbox" name="reseaux-type" id="rt3" value="Les deux" class="chip-input">
+              <label for="rt3" class="chip-label">Les deux</label>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Avez-vous déjà un compte actif ?</label>
+            <input type="text" id="reseaux-compte" placeholder="Ex : @moncompteinstagram ou URL de votre page Facebook" onclick="event.stopPropagation()">
+          </div>
+          <div class="field">
+            <label class="field-label">Thèmes ou sujets à aborder <span>(optionnel)</span></label>
+            <textarea id="reseaux-themes" placeholder="Ex : Conseils bien-être, coulisses de mon cabinet, témoignages clients, saisons…" onclick="event.stopPropagation()" style="min-height:65px;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- COPYWRITING -->
+      <div class="service-card" id="card-copy" onclick="toggleCard('copy')">
+        <div class="service-card-inner">
+          <div class="service-checkbox-col">
+            <input type="checkbox" id="chk-copy" onclick="event.stopPropagation();" onchange="toggleCard('copy', this.checked)">
+          </div>
+          <div class="service-main">
+            <div class="service-top">
+              <div>
+                <div style="font-size:1.3rem;margin-bottom:4px;">✍️</div>
+                <div class="service-name">Rédaction des textes du site</div>
+              </div>
+              <span class="service-badge badge-unique">Unique</span>
+            </div>
+            <div class="service-desc">Vous ne savez pas quoi écrire sur votre site ? Je rédige tous vos textes (accueil, à propos, prestations, FAQ) adaptés à votre pratique et à votre ton.</div>
+            <div class="service-price">79€ <small>paiement unique</small></div>
+          </div>
+        </div>
+        <div class="service-fields">
+          <div class="field">
+            <label class="field-label">Décrivez votre pratique en quelques lignes</label>
+            <textarea id="copy-pratique" placeholder="Ex : Je suis sophrologue depuis 8 ans, je travaille avec des adultes en burnout et des enfants anxieux. Mon approche est douce et progressive…" onclick="event.stopPropagation()"></textarea>
+          </div>
+          <div class="field">
+            <label class="field-label">Ton souhaité</label>
+            <div class="chips-sm" onclick="event.stopPropagation()">
+              <input type="radio" name="copy-ton" id="ct1" value="Chaleureux et accessible" class="chip-input">
+              <label for="ct1" class="chip-label">🤗 Chaleureux</label>
+              <input type="radio" name="copy-ton" id="ct2" value="Professionnel et rassurant" class="chip-input">
+              <label for="ct2" class="chip-label">🏛️ Pro &amp; rassurant</label>
+              <input type="radio" name="copy-ton" id="ct3" value="Inspirant et engagé" class="chip-input">
+              <label for="ct3" class="chip-label">✨ Inspirant</label>
+              <input type="radio" name="copy-ton" id="ct4" value="Doux et bienveillant" class="chip-input">
+              <label for="ct4" class="chip-label">🕊️ Doux</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <ul class="card-features">
-      <li>Surveillance domaine &amp; hébergement</li>
-      <li>1 mise à jour par mois (textes, photos, horaires)</li>
-      <li>Sauvegardes mensuelles du site</li>
-      <li>Support prioritaire sous 24h ouvrées</li>
-      <li>Rapport mensuel de visibilité Google</li>
-    </ul>
-    <div class="card-note">💡 Sans maintenance, les mises à jour de sécurité ne sont pas appliquées et votre référencement peut en pâtir.</div>
-    <a href="https://buy.stripe.com/9B6dRbfsNbObgLGcSg14403" class="btn-subscribe">Activer la maintenance →</a>
-  </div>
 
-  <!-- RÉSEAUX SOCIAUX -->
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon">📱</div>
-      <div class="card-name">Réseaux sociaux</div>
-      <div class="card-tagline">8 posts professionnels créés et publiés chaque mois</div>
+    <!-- ÉTAPE 2 : INFOS CLIENT -->
+    <div class="step-header">
+      <div class="step-num-circle">2</div>
+      <div>
+        <h2>Vos coordonnées</h2>
+        <p>Pour vous envoyer la confirmation et vous contacter</p>
+      </div>
     </div>
-    <div class="card-price-wrap">
-      <div class="card-price">49€</div>
-      <div class="card-price-unit">/ mois · sans engagement</div>
+
+    <div class="client-box">
+      <div class="field-grid">
+        <div class="field">
+          <label class="field-label">Nom ou cabinet</label>
+          <input type="text" id="cl-nom" placeholder="Claire Fontaine ou Cabinet Harmonie">
+        </div>
+        <div class="field">
+          <label class="field-label">Email</label>
+          <input type="email" id="cl-email" placeholder="vous@exemple.be">
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label class="field-label">Téléphone <span>(optionnel)</span></label>
+          <input type="tel" id="cl-tel" placeholder="04XX XX XX XX">
+        </div>
+        <div class="field">
+          <label class="field-label">Votre pratique</label>
+          <input type="text" id="cl-pratique" placeholder="Ex : Sophrologue, Naturopathe…">
+        </div>
+      </div>
     </div>
-    <ul class="card-features">
-      <li>8 posts visuels créés chaque mois</li>
-      <li>Textes rédigés et publiés pour vous</li>
-      <li>Facebook &amp; Instagram inclus</li>
-      <li>Cohérence avec l'identité visuelle de votre site</li>
-      <li>Rapport mensuel d'engagement</li>
-    </ul>
-    <div class="card-note">💡 Une présence régulière sur les réseaux renforce votre crédibilité et génère des contacts locaux.</div>
-    <a href="https://buy.stripe.com/9B68wR6WhdWj6727xW14404" class="btn-subscribe">Activer les réseaux →</a>
+
+    <!-- ÉTAPE 3 : RÉCAP & PAIEMENT -->
+    <div class="step-header">
+      <div class="step-num-circle">3</div>
+      <div>
+        <h2>Récapitulatif &amp; paiement</h2>
+        <p>Vérifiez votre sélection avant de régler</p>
+      </div>
+    </div>
+
+    <div class="recap-box">
+      <div class="recap-title">Votre sélection</div>
+      <div class="recap-lines" id="recap-lines">
+        <span class="recap-empty">Aucun service sélectionné pour l'instant.</span>
+      </div>
+      <div id="mensuel-note" class="mensuel-note" style="display:none;">
+        💡 Les services mensuels seront activés après confirmation par email. Résiliables à tout moment sans frais.
+      </div>
+      <div class="recap-total">
+        <span class="rt-label">Total à régler aujourd'hui</span>
+        <span class="rt-amount" id="recap-total">0€</span>
+      </div>
+    </div>
+
+    <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+      💳 Valider et payer
+    </button>
+    <div class="pay-secure">
+      <span class="pay-badge">🔒 Paiement sécurisé Stripe</span>
+      <span class="pay-badge">✉️ Confirmation par email</span>
+      <span class="pay-badge">⚡ Démarrage sous 24h</span>
+    </div>
+
+    <!-- TABLEAU INFORMATIF -->
+    <div class="info-section">
+      <h3 class="info-title">Tous nos services en un coup d'œil</h3>
+      <p class="info-desc">Besoin d'un service non listé ci-dessus, ou d'une formule sur mesure ? Contactez-nous directement.</p>
+
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Type</th>
+            <th>Prix</th>
+            <th>Inclus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="service-col">🎁 Leadmagnet PDF</td>
+            <td><span class="type-pill pill-unique">Unique</span></td>
+            <td class="price-col">89€</td>
+            <td>PDF 3–8 pages · page de capture · email auto</td>
+          </tr>
+          <tr>
+            <td class="service-col">✏️ Révisions (×4)</td>
+            <td><span class="type-pill pill-unique">Unique</span></td>
+            <td class="price-col">29€</td>
+            <td>4 interventions sans date limite</td>
+          </tr>
+          <tr>
+            <td class="service-col">✍️ Rédaction textes</td>
+            <td><span class="type-pill pill-unique">Unique</span></td>
+            <td class="price-col">79€</td>
+            <td>Tous les textes du site rédigés pour vous</td>
+          </tr>
+          <tr>
+            <td class="service-col">🔧 Maintenance</td>
+            <td><span class="type-pill pill-mensuel">Mensuel</span></td>
+            <td class="price-col">19€/mois</td>
+            <td>Mises à jour · 1 modif/mois · sauvegardes · support 24h</td>
+          </tr>
+          <tr>
+            <td class="service-col">📱 Réseaux sociaux</td>
+            <td><span class="type-pill pill-mensuel">Mensuel</span></td>
+            <td class="price-col">49€/mois</td>
+            <td>8 posts/mois · Facebook &amp; Instagram · rapport</td>
+          </tr>
+          <tr>
+            <td class="service-col">🌐 Traduction FR/NL</td>
+            <td><span class="type-pill pill-unique">Unique</span></td>
+            <td class="price-col">49€</td>
+            <td>Traduction complète du site · SEO bilingue</td>
+          </tr>
+          <tr>
+            <td class="service-col">📩 Newsletter mensuelle</td>
+            <td><span class="type-pill pill-mensuel">Mensuel</span></td>
+            <td class="price-col">29€/mois</td>
+            <td>1 email soigné envoyé à votre liste chaque mois</td>
+          </tr>
+          <tr>
+            <td class="service-col">⚡ Livraison urgente</td>
+            <td><span class="type-pill pill-unique">Unique</span></td>
+            <td class="price-col">+49€</td>
+            <td>Livraison en 48h au lieu de 7 jours ouvrés</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cta-contact">
+        <p>
+          <strong>Intéressé par un service non disponible ici ?</strong>
+          Envoyez-moi un email avec vos besoins et je vous réponds sous 24h avec un devis personnalisé.
+        </p>
+        <a href="mailto:contact@activityweb.be?subject=Demande%20de%20service%20complémentaire&body=Bonjour%2C%0A%0AJe%20suis%20intéressé%20par%20le%20service%20suivant%20:%0A%0A[décrivez%20votre%20besoin]%0A%0ANom%20:%0APratique%20:%0ATéléphone%20:" class="btn-mailto">✉️ Nous contacter</a>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+
+  <!-- ÉCRAN SUCCÈS -->
+  <div id="success-screen">
+    <div class="success-icon">✅</div>
+    <h2 class="success-title">Demande bien reçue !</h2>
+    <p class="success-desc">Je vous envoie un email de confirmation dans quelques minutes avec les détails de paiement pour chaque service sélectionné. Démarrage sous 24h.</p>
   </div>
 
-</div>
+</div><!-- /page -->
 
-<div class="faq-wrap">
-  <div class="faq-title">Questions fréquentes</div>
-
-  <div class="faq-item">
-    <div class="faq-q">Puis-je résilier à tout moment ?</div>
-    <div class="faq-a">Oui, sans frais ni préavis. Vous résiliez depuis votre espace Stripe ou en nous envoyant un simple email.</div>
+<footer style="background:var(--navy);color:rgba(255,255,255,0.4);text-align:center;padding:24px 5%;font-size:0.8rem;">
+  <strong style="color:rgba(255,255,255,0.7);font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;">ActivityWeb Studio</strong><br>
+  <div style="margin-top:10px;">
+    <a href="mailto:contact@activityweb.be" style="color:rgba(255,255,255,0.4);text-decoration:none;">contact@activityweb.be</a>
   </div>
-
-  <div class="faq-item">
-    <div class="faq-q">Ces services sont-ils disponibles sans avoir de site ActivityWeb ?</div>
-    <div class="faq-a">Non, ces services sont réservés aux clients ayant un site réalisé par ActivityWeb.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q">La mise à jour mensuelle incluse dans la maintenance, c'est quoi exactement ?</div>
-    <div class="faq-a">Tout changement de contenu : nouveaux textes, remplacement de photos, modification des horaires ou tarifs, ajout d'une promotion. Au-delà d'une demande par mois, un devis séparé est établi.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q">Puis-je prendre les deux services ?</div>
-    <div class="faq-a">Oui, les deux services sont cumulables. Vous pouvez souscrire à la maintenance et aux réseaux sociaux simultanément.</div>
-  </div>
-
-</div>
+</footer>
 
 <script>
-  // Vérification des liens Stripe au chargement
-  document.querySelectorAll('.btn-subscribe').forEach(btn => {
-    if (btn.getAttribute('href').startsWith('STRIPE_LINK')) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('Ce service sera disponible très prochainement.\nContactez-nous : contact@activityweb.be');
-      });
+  // ── CONFIG STRIPE ──
+  const STRIPE = {
+    lead:        'STRIPE_LINK_LEAD_89',       // Leadmagnet 89€
+    revisions:   'STRIPE_LINK_REVISIONS_29',  // Révisions 29€
+    maintenance: 'STRIPE_LINK_MAINTENANCE_19',// Maintenance 19€/mois
+    reseaux:     'STRIPE_LINK_RESEAUX_49',    // Réseaux 49€/mois
+    copy:        'STRIPE_LINK_COPY_79',       // Copywriting 79€
+  };
+
+  // Prix affichés (les mensuels = 0 dans le total unique car traités séparément)
+  const PRICES = {
+    lead:        { label:'🎁 Leadmagnet PDF',          price:89,  mensuel:false },
+    revisions:   { label:'✏️ Pack révisions ×4',       price:29,  mensuel:false },
+    maintenance: { label:'🔧 Maintenance',             price:0,   mensuel:true, mensuelLabel:'19€/mois' },
+    reseaux:     { label:'📱 Réseaux sociaux',         price:0,   mensuel:true, mensuelLabel:'49€/mois' },
+    copy:        { label:'✍️ Rédaction textes',        price:79,  mensuel:false },
+  };
+
+  const selected = new Set();
+
+  function toggleCard(id, forceState) {
+    const card = document.getElementById('card-' + id);
+    const chk  = document.getElementById('chk-' + id);
+    const newState = forceState !== undefined ? forceState : !selected.has(id);
+
+    if (newState) {
+      selected.add(id);
+      card.classList.add('selected');
+      chk.checked = true;
+    } else {
+      selected.delete(id);
+      card.classList.remove('selected');
+      chk.checked = false;
     }
-  });
+    updateRecap();
+  }
+
+  function updateRecap() {
+    const lines = document.getElementById('recap-lines');
+    const totalEl = document.getElementById('recap-total');
+    const mensuelNote = document.getElementById('mensuel-note');
+
+    if (selected.size === 0) {
+      lines.innerHTML = '<span class="recap-empty">Aucun service sélectionné pour l\'instant.</span>';
+      totalEl.textContent = '0€';
+      mensuelNote.style.display = 'none';
+      return;
+    }
+
+    let total = 0;
+    let hasMensuel = false;
+    let html = '';
+
+    selected.forEach(id => {
+      const p = PRICES[id];
+      if (p.mensuel) {
+        hasMensuel = true;
+        html += `<div class="recap-line"><span class="rl-name">${p.label}</span><span class="rl-price">${p.mensuelLabel}</span></div>`;
+      } else {
+        total += p.price;
+        html += `<div class="recap-line"><span class="rl-name">${p.label}</span><span class="rl-price">${p.price}€</span></div>`;
+      }
+    });
+
+    lines.innerHTML = html;
+    totalEl.textContent = total + '€' + (hasMensuel ? ' + abonnements' : '');
+    mensuelNote.style.display = hasMensuel ? 'block' : 'none';
+  }
+
+  async function handleSubmit() {
+    const nom     = document.getElementById('cl-nom').value.trim();
+    const email   = document.getElementById('cl-email').value.trim();
+    const tel     = document.getElementById('cl-tel').value.trim();
+    const pratique= document.getElementById('cl-pratique').value.trim();
+
+    if (selected.size === 0) {
+      alert('Veuillez sélectionner au moins un service.');
+      return;
+    }
+    if (!nom || !email) {
+      alert('Merci de renseigner votre nom et votre email.');
+      return;
+    }
+
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = '⏳ Envoi en cours…';
+
+    // Collecte des détails par service
+    const details = {};
+    if (selected.has('lead')) {
+      details['Leadmagnet – Sujet'] = document.getElementById('lead-sujet').value || '—';
+      details['Leadmagnet – Cible'] = document.getElementById('lead-cible').value || '—';
+      details['Leadmagnet – Ton'] = document.querySelector('input[name="lead-ton"]:checked')?.value || '—';
+      details['Leadmagnet – Remarques'] = document.getElementById('lead-remarques').value || '—';
+    }
+    if (selected.has('revisions')) {
+      details['Révisions – Détail'] = document.getElementById('revisions-detail').value || '—';
+    }
+    if (selected.has('maintenance')) {
+      details['Maintenance – Urgences'] = document.getElementById('maintenance-urgence').value || '—';
+    }
+    if (selected.has('reseaux')) {
+      const reseauxTypes = [...document.querySelectorAll('input[name="reseaux-type"]:checked')].map(el=>el.value).join(', ') || '—';
+      details['Réseaux – Plateformes'] = reseauxTypes;
+      details['Réseaux – Compte'] = document.getElementById('reseaux-compte').value || '—';
+      details['Réseaux – Thèmes'] = document.getElementById('reseaux-themes').value || '—';
+    }
+    if (selected.has('copy')) {
+      details['Copywriting – Pratique'] = document.getElementById('copy-pratique').value || '—';
+      details['Copywriting – Ton'] = document.querySelector('input[name="copy-ton"]:checked')?.value || '—';
+    }
+
+    const servicesLabel = [...selected].map(id => PRICES[id].label).join(', ');
+
+    // Envoi Web3Forms
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '17ea29d2-00fe-413d-b1a6-cc8c3af9ca66',
+          subject: '🛎️ Nouvelle demande services – ' + nom + ' (' + pratique + ')',
+          from_name: 'ActivityWeb Services',
+          Client: nom,
+          Email: email,
+          Téléphone: tel || '—',
+          Pratique: pratique || '—',
+          Services: servicesLabel,
+          ...details
+        })
+      });
+    } catch(e) { console.warn('Web3Forms:', e); }
+
+    // Redirection Stripe selon sélection
+    // Priorité : si un seul service payant unique → Stripe direct
+    // Si plusieurs ou mensuel → afficher succès et Alex contacte
+    const uniqueSelected = [...selected].filter(id => !PRICES[id].mensuel);
+    const mensuelSelected = [...selected].filter(id => PRICES[id].mensuel);
+
+    if (uniqueSelected.length === 1 && mensuelSelected.length === 0) {
+      // Un seul service unique → Stripe direct
+      const stripeUrl = STRIPE[uniqueSelected[0]];
+      if (stripeUrl && !stripeUrl.startsWith('STRIPE_LINK')) {
+        window.location.href = stripeUrl;
+        return;
+      }
+    }
+
+    // Sinon → écran succès (Alex enverra les liens par email)
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('success-screen').classList.add('visible');
+    window.scrollTo(0, 0);
+  }
 </script>
 
 </body>
