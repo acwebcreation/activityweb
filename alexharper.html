@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Harper — Auteur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0e0e0e;
+      --paper:      #f7f4ef;
+      --muted:      #8a8070;
+      --accent:     #c8a96e;
+      --link-bg:    #1a1814;
+      --link-hover: #252118;
+    }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.25rem;
+    }
+
+    /* ── Signature : ligne verticale gauche ── */
+    .container {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── En-tête ── */
+    header {
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 8vw, 3.2rem);
+      font-weight: 300;
+      letter-spacing: .12em;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin-top: .8rem;
+      font-size: .72rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Séparateur décoratif ── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 1.6rem auto 0;
+      opacity: .6;
+    }
+
+    /* ── Section ── */
+    .section-label {
+      font-size: .62rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      margin-top: 2.4rem;
+      width: 100%;
+      text-align: left;
+      padding-left: 2px;
+    }
+
+    /* ── Liens ── */
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--link-bg);
+      border: 1px solid #2e2b24;
+      border-radius: 3px;
+      padding: 1rem 1.25rem;
+      text-decoration: none;
+      color: var(--paper);
+      transition: background .2s, border-color .2s, transform .15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform .2s ease;
+    }
+
+    .link-card:hover {
+      background: var(--link-hover);
+      border-color: #3e3a30;
+      transform: translateX(3px);
+    }
+
+    .link-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .link-icon {
+      font-size: 1.1rem;
+      opacity: .7;
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+    }
+
+    .link-body {
+      display: flex;
+      flex-direction: column;
+      gap: .18rem;
+    }
+
+    .link-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: .04em;
+      line-height: 1.2;
+    }
+
+    .link-sub {
+      font-size: .68rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Badge "nouveau" ── */
+    .badge {
+      margin-left: auto;
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      padding: .2rem .45rem;
+      opacity: .85;
+      flex-shrink: 0;
+    }
+
+    /* ── Bientôt disponible ── */
+    .link-card.soon {
+      opacity: .45;
+      pointer-events: none;
+    }
+
+    .link-card.soon::before { display: none; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 3rem;
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #3e3a30;
+      text-align: center;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link-card, .link-card::before { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1 class="name">Alex <em>Harper</em></h1>
+      <p class="tagline">Romans &amp; Poésie</p>
+      <div class="divider"></div>
+    </header>
+
+    <!-- Romans -->
+    <p class="section-label">Romans</p>
+    <div class="links">
+      <a class="link-card" href="https://www.amazon.fr/" target="_blank" rel="noopener">
+        <span class="link-icon">📖</span>
+        <div class="link-body">
+          <span class="link-title">Les Vignes de Mathieu</span>
+          <span class="link-sub">Les Frères Castellan — Tome 1 · Amazon KDP</span>
+        </div>
+        <span class="badge">Nouveau</span>
+      </a>
+    </div>
+
+    <!-- Poésie -->
+    <p class="section-label">Poésie</p>
+    <div class="links">
+      <a class="link-card soon" href="#" aria-disabled="true">
+        <span class="link-icon">✦</span>
+        <div class="link-body">
+          <span class="link-title">Recueil — Titre à venir</span>
+          <span class="link-sub">Bientôt disponible</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Suivre -->
+    <p class="section-label">Suivre</p>
+    <div class="links">
+      <a class="link-card" href="https://www.tiktok.com/@alexharperstudio" target="_blank" rel="noopener">
+        <span class="link-icon">▶</span>
+        <div class="link-body">
+          <span class="link-title">TikTok</span>
+          <span class="link-sub">@alexharperstudio · extraits &amp; poèmes</span>
+        </div>
+      </a>
+    </div>
+
+    <footer>© Alex Harper — activityweb.be</footer>
+  </div>
+</body>
+</html>
