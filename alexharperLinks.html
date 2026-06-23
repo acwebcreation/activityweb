@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Harper — Auteur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0e0e0e;
+      --paper:      #f7f4ef;
+      --muted:      #8a8070;
+      --accent:     #c8a96e;
+      --link-bg:    #1a1814;
+      --link-hover: #252118;
+    }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 8vw, 3.2rem);
+      font-weight: 300;
+      letter-spacing: .12em;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin-top: .8rem;
+      font-size: .72rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 1.6rem auto 0;
+      opacity: .6;
+    }
+
+    .section-label {
+      font-size: .62rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      margin-top: 2.4rem;
+      width: 100%;
+      text-align: left;
+      padding-left: 2px;
+    }
+
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--link-bg);
+      border: 1px solid #2e2b24;
+      border-radius: 3px;
+      padding: 1rem 1.25rem;
+      text-decoration: none;
+      color: var(--paper);
+      transition: background .2s, border-color .2s, transform .15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform .2s ease;
+    }
+
+    .link-card:hover {
+      background: var(--link-hover);
+      border-color: #3e3a30;
+      transform: translateX(3px);
+    }
+
+    .link-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .link-icon {
+      font-size: 1.1rem;
+      opacity: .7;
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+    }
+
+    .link-body {
+      display: flex;
+      flex-direction: column;
+      gap: .18rem;
+    }
+
+    .link-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: .04em;
+      line-height: 1.2;
+    }
+
+    .link-sub {
+      font-size: .68rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .badge {
+      margin-left: auto;
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      padding: .2rem .45rem;
+      opacity: .85;
+      flex-shrink: 0;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #3e3a30;
+      text-align: center;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link-card, .link-card::before { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1 class="name">Alex <em>Harper</em></h1>
+      <p class="tagline">Poésie &amp; Musique</p>
+      <div class="divider"></div>
+    </header>
+
+    <!-- Poésie -->
+    <p class="section-label">Poésie</p>
+    <div class="links">
+      <a class="link-card" href="https://www.amazon.com.be/que-nai-jamais-dit-renaissances/dp/B0H4XMG14P/ref=sr_1_2?crid=IW3NFKDWIR5H&dib=eyJ2IjoiMSJ9.7KCngZpHD_tKXUl63JgtLaRZWnqCFxFppD-EQF1wWhrzPsIDtXNtlKRBOzDdGWznyldcUAwlHjocFMwaaL43w2fRvZiDLpK_L_aobRnEWxUETqZ2GTesiMG5bK7Rvwlt0YUP-x3WALepup-jzhSUaLmA2DlZyjtCQVzNGv-ijzoEEBVjNnigEpkO94DPHd11d-hZFCMY4vOyo9wLof7z5J3ez1sauiLr-h4u1QlkPlw.m93y_walPmrEUx06RKWDEXP_vNUe6iC7xiFxKD199FQ&dib_tag=se&keywords=ce+que+je+n%27ai+jamais+dit&qid=1782220720&s=books&sprefix=ce+que+je+n%27ai+jamais+dit%2Cstripbooks%2C147&sr=1-2" target="_blank" rel="noopener">
+        <span class="link-icon">✦</span>
+        <div class="link-body">
+          <span class="link-title">Ce que je n'ai jamais dit</span>
+          <span class="link-sub">Recueil de poésie · Amazon</span>
+        </div>
+        <span class="badge">Nouveau</span>
+      </a>
+    </div>
+
+    <!-- Affiches & Cartes -->
+    <p class="section-label">Affiches &amp; Cartes</p>
+    <div class="links">
+      <a class="link-card" href="https://www.etsy.com/shop/ActivityWebStudio" target="_blank" rel="noopener">
+        <span class="link-icon">🖼</span>
+        <div class="link-body">
+          <span class="link-title">Boutique Etsy</span>
+          <span class="link-sub">Affiches &amp; cartes à imprimer · ActivityWebStudio</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Musique -->
+    <p class="section-label">Musique</p>
+    <div class="links">
+      <a class="link-card" href="https://www.youtube.com/@AlexHarperVerse" target="_blank" rel="noopener">
+        <span class="link-icon">▶</span>
+        <div class="link-body">
+          <span class="link-title">Poème en Musique</span>
+          <span class="link-sub">YouTube · @AlexHarperVerse</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Suivre -->
+    <p class="section-label">Suivre</p>
+    <div class="links">
+      <a class="link-card" href="https://www.tiktok.com/@alexharperstudio" target="_blank" rel="noopener">
+        <span class="link-icon">◈</span>
+        <div class="link-body">
+          <span class="link-title">TikTok</span>
+          <span class="link-sub">@alexharperstudio · extraits &amp; poèmes</span>
+        </div>
+      </a>
+    </div>
+
+    <footer>© Alex Harper — activityweb.be</footer>
+  </div>
+</body>
+</html>
