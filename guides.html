@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ActivityWeb Studio – Sites web professionnels pour indépendants, livrés en 7 jours</title>
-<meta name="description" content="Site one-page professionnel pour indépendants : artisans, praticiens du bien-être, commerçants. Livré en 7 jours à partir de 449€. Sans prise de tête technique.">
+<title>Guides IA – Prompts prêts à l'emploi pour votre activité | ActivityWeb</title>
+<meta name="description" content="Guides PDF de prompts IA prêts à l'emploi : un guide généraliste pour tout indépendant, et des guides par spécialité pour artisans et praticiens du bien-être.">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -759,251 +759,277 @@
   .d1x { animation-delay:.12s; }
   .d2x { animation-delay:.25s; }
   .d3x { animation-delay:.38s; }
+
+  /* ── GUIDES CATALOG PAGE ─────────────────── */
+  .guides-hero { background:var(--navy); padding:150px 5% 70px; }
+  .guides-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.2rem,4vw,3.2rem); color:white; line-height:1.15; margin-bottom:16px; }
+  .guides-hero h1 em { font-style:italic; color:var(--orange); }
+  .guides-hero p { font-size:1.02rem; color:rgba(255,255,255,0.6); line-height:1.7; max-width:560px; }
+
+  .catalog-section { padding:64px 5%; }
+  .catalog-section.alt { background:var(--white); }
+  .catalog-label { display:flex; align-items:center; gap:14px; margin-bottom:32px; }
+  .catalog-label .dot { width:10px; height:10px; border-radius:50%; background:var(--orange); flex-shrink:0; }
+  .catalog-label h2 { font-family:'DM Serif Display',serif; font-size:1.5rem; color:var(--navy); }
+  .catalog-label .cnt { font-size:0.8rem; color:var(--muted); background:var(--cream); padding:4px 12px; border-radius:20px; border:1px solid var(--border); }
+
+  .featured-guide { background:var(--navy); border-radius:14px; padding:40px; display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center; max-width:1000px; }
+  @media(max-width:700px){ .featured-guide{ grid-template-columns:1fr; } }
+  .featured-guide .fg-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(232,104,42,0.15); border:1px solid rgba(232,104,42,0.3); color:var(--orange-lt); padding:5px 14px; border-radius:4px; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px; }
+  .featured-guide h3 { font-family:'DM Serif Display',serif; font-size:1.7rem; color:white; margin-bottom:10px; line-height:1.2; }
+  .featured-guide p { font-size:0.9rem; color:rgba(255,255,255,0.55); line-height:1.7; max-width:480px; margin-bottom:18px; }
+  .featured-guide .fg-tags { display:flex; flex-wrap:wrap; gap:8px; }
+  .featured-guide .fg-tag { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); color:rgba(255,255,255,0.7); padding:4px 11px; border-radius:4px; font-size:0.72rem; }
+  .fg-buy { text-align:center; }
+  .fg-price { font-family:'DM Serif Display',serif; font-size:2.6rem; color:var(--orange); line-height:1; margin-bottom:4px; }
+  .fg-note { font-size:0.75rem; color:rgba(255,255,255,0.45); margin-bottom:18px; }
+  .fg-btn { display:inline-block; background:var(--orange); color:white; padding:13px 28px; border-radius:5px; font-size:0.9rem; font-weight:600; text-decoration:none; white-space:nowrap; transition:background 0.2s; }
+  .fg-btn:hover { background:var(--orange-lt); }
+
+  .soon-badge { background:rgba(0,0,0,0.06); color:var(--muted); padding:8px 16px; border-radius:4px; font-size:0.78rem; font-weight:600; }
+
+  .guides-teaser-band { max-width:1000px; margin:0 auto; background:var(--navy); border-radius:10px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+  .guides-teaser-band p { font-size:0.9rem; color:rgba(255,255,255,0.6); max-width:480px; }
+  .guides-teaser-band strong { color:white; display:block; font-size:1.05rem; margin-bottom:4px; font-family:'DM Serif Display',serif; font-weight:400; }
 </style>
 </head>
+
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">
-    <div class="logo-mark">AW</div>
-    <div class="logo-text">Activity<span>Web</span></div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="bien-etre.html">Praticiens bien-être</a></li>
-    <li><a href="artisans.html">Artisans &amp; services</a></li>
-    <li><a href="guides.html">Guides IA</a></li>
-    <li><a href="#process">Comment ça marche</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="formulaire.html" class="nav-cta">Créer mon site →</a></li>
-  </ul>
+<a href="index.html#hero" class="nav-logo">
+<div class="logo-mark">AW</div>
+<div class="logo-text">Activity<span>Web</span></div>
+</a>
+<ul class="nav-links">
+<li><a href="index.html">Accueil</a></li>
+<li><a href="artisans.html">Artisans</a></li>
+<li><a href="bien-etre.html">Bien-être</a></li>
+<li><a href="#generaliste">Guides IA</a></li>
+<li><a href="formulaire.html" class="nav-cta">Créer mon site →</a></li>
+</ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-content">
-    <div class="hero-badge">Studio Digital · Belgique</div>
-    <h1>Votre activité sur le web,<br>sans la <em>prise de tête</em></h1>
-    <p class="hero-sub fade-in d1x">En 7 jours, on crée le site one-page professionnel de votre activité : artisan, praticien du bien-être ou indépendant. Vos clients vous cherchent sur Google : soyez celui qu'ils trouvent.</p>
-    <div class="hero-ctas fade-in d2x">
-      <a href="#portes" class="btn-primary">Trouver ma formule →</a>
-      <a href="#process" class="btn-ghost">Comment ça marche</a>
-    </div>
-    <div class="hero-stats fade-in d3x">
-      <div><div class="stat-num">7 j</div><div class="stat-label">Livraison garantie</div></div>
-      <div><div class="stat-num">449€</div><div class="stat-label">Paiement unique</div></div>
-      <div><div class="stat-num">100%</div><div class="stat-label">En ligne, sans rendez-vous</div></div>
-    </div>
-  </div>
-
-  <div class="hero-visual fade-in d2x">
-    <div style="position:relative; width:100%; max-width:440px;">
-      <div class="mockup-browser">
-        <div class="browser-bar">
-          <div class="browser-dot d1"></div>
-          <div class="browser-dot d2"></div>
-          <div class="browser-dot d3"></div>
-          <div class="browser-url">votre-entreprise.be</div>
-        </div>
-        <div class="browser-content">
-          <div class="mini-hero">
-            <div class="mini-tag"></div>
-            <div class="mini-h"></div>
-            <div class="mini-h2"></div>
-            <div class="mini-btn"></div>
-          </div>
-          <div class="mini-cards">
-            <div class="mini-card">
-              <div class="mini-card-icon"></div>
-              <div class="mini-line"></div>
-              <div class="mini-line short"></div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-card-icon"></div>
-              <div class="mini-line"></div>
-              <div class="mini-line short"></div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-card-icon"></div>
-              <div class="mini-line"></div>
-              <div class="mini-line short"></div>
-            </div>
-          </div>
-        </div>
-        <div class="browser-caption">Votre site livré en 7 jours</div>
-      </div>
-
-      <div class="mockup-badge b1">
-        <div class="badge-icon">🚀</div>
-        <div class="badge-txt">
-          <strong>En ligne !</strong>
-          <small>Livré en 7 jours</small>
-        </div>
-      </div>
-
-      <div class="mockup-badge b2">
-        <div class="badge-icon">📞</div>
-        <div class="badge-txt">
-          <strong>Nouveaux contacts</strong>
-          <small>chaque semaine</small>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="guides-hero" id="hero">
+<div class="hero-badge">Ressources IA</div>
+<h1>Des <em>guides IA</em><br>prêts à l'emploi pour votre activité</h1>
+<p>Des prompts testés et rédigés, à copier-coller dans ChatGPT ou toute autre IA — pour rédiger vos devis, vos posts, vos réponses clients, sans bloquer sur la page blanche.</p>
 </section>
 
-<!-- PORTES PAR MÉTIER -->
-<section style="background:var(--cream);padding:80px 5%;" id="portes">
-  <div class="section-tag">Pour qui ?</div>
-  <h2>Un site pensé pour<br><em>votre métier</em></h2>
-  <p class="section-sub">Un électricien et une sophrologue n'ont pas les mêmes clients. Choisissez votre univers, chaque formule est adaptée à votre réalité.</p>
+<!-- GÉNÉRALISTE -->
+<section class="catalog-section alt" id="generaliste">
+<div class="catalog-label">
+<span class="dot"></span>
+<h2>Généraliste — pour tout indépendant</h2>
+<span class="cnt">1 guide disponible</span>
+</div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1000px;">
-
-    <a href="artisans.html" style="text-decoration:none;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:36px 32px;display:block;transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(15,31,56,0.12)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-      <div style="font-size:2.2rem;margin-bottom:16px;">🛠️</div>
-      <h3 style="font-family:'DM Serif Display',serif;font-size:1.45rem;color:var(--navy);margin-bottom:10px;">Artisans &amp; services</h3>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:18px;">Électriciens, plombiers, paysagistes, coiffeurs, garagistes… Un site qui décroche l'appel quand un client cherche votre métier sur Google. Numéro cliquable, demande de devis, zone d'intervention.</p>
-      <span style="color:var(--orange);font-weight:600;font-size:0.9rem;">Découvrir la formule artisan →</span>
-    </a>
-
-    <a href="bien-etre.html" style="text-decoration:none;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:36px 32px;display:block;transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(15,31,56,0.12)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-      <div style="font-size:2.2rem;margin-bottom:16px;">🌿</div>
-      <h3 style="font-family:'DM Serif Display',serif;font-size:1.45rem;color:var(--navy);margin-bottom:10px;">Praticiens du bien-être</h3>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:18px;">Naturopathes, sophrologues, coachs, thérapeutes… Un site qui rassure vos futurs clients dès les premières secondes : votre approche, vos séances, vos valeurs. Avec guides IA et leadmagnet en option.</p>
-      <span style="color:var(--orange);font-weight:600;font-size:0.9rem;">Découvrir la formule bien-être →</span>
-    </a>
-
-  </div>
-
-  <div style="max-width:1000px;margin-top:20px;background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:16px 22px;font-size:0.875rem;color:var(--muted);line-height:1.6;">
-    <strong style="color:var(--navy);">Autre activité ?</strong> Commerçant, profession libérale, association… La formule reste la même : site one-page, 449€, livré en 7 jours. <a href="formulaire.html" style="color:var(--orange);font-weight:600;">Remplissez directement le formulaire →</a>
-  </div>
+<div class="featured-guide">
+<div>
+<div class="fg-badge">✨ Disponible maintenant</div>
+<h3>Le Guide IA de l'Entrepreneur Indépendant</h3>
+<p>40 prompts prêts à l'emploi pour communiquer comme un pro — devis, réseaux sociaux, service client, productivité, vente. Utile quel que soit votre métier : artisan, praticien du bien-être, commerçant, consultant...</p>
+<div class="fg-tags">
+<span class="fg-tag">Devis</span>
+<span class="fg-tag">Réseaux sociaux</span>
+<span class="fg-tag">Service client</span>
+<span class="fg-tag">Productivité</span>
+<span class="fg-tag">Vente</span>
+<span class="fg-tag">Fidélisation</span>
+</div>
+</div>
+<div class="fg-buy">
+<div class="fg-price">9€</div>
+<div class="fg-note">PDF · 45 pages · accès immédiat</div>
+<a href="https://wa.me/32476841263?text=Bonjour%2C%20je%20souhaite%20me%20procurer%20Le%20Guide%20IA%20de%20l'Entrepreneur%20Ind%C3%A9pendant%20(9%E2%82%AC)" target="_blank" class="fg-btn">Se procurer le guide →</a>
+</div>
+</div>
 </section>
 
-<!-- COMMENT ÇA MARCHE -->
-<section class="process" id="process">
-  <div class="section-tag">Comment ça marche</div>
-  <h2 style="color:white;">En ligne en 7 jours.<br><em>Vraiment.</em></h2>
-  <p class="section-sub">Pas d'appel, pas d'attente. Tout se passe en ligne, simplement.</p>
+<!-- PAR SPÉCIALITÉ : ARTISANS -->
+<section class="catalog-section" id="artisans-guides">
+<div class="catalog-label">
+<span class="dot" style="background:#2e3f6e;"></span>
+<h2>Par spécialité — Artisans</h2>
+<span class="cnt">Bientôt disponibles</span>
+</div>
 
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-icon">📋</div>
-      <h3>Remplissez le formulaire</h3>
-      <p>Répondez à nos questions sur votre activité, vos couleurs et votre contenu. 5 minutes, pas plus.</p>
-      <div class="step-arrow">→</div>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-icon">📄</div>
-      <h3>Recevez votre cahier des charges</h3>
-      <p>On génère un résumé complet de votre projet. Vous le validez avant de passer à l'étape suivante.</p>
-      <div class="step-arrow">→</div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-icon">💳</div>
-      <h3>Validez et payez</h3>
-      <p>Paiement sécurisé en ligne. Dès réception, on démarre la création de votre site.</p>
-      <div class="step-arrow">→</div>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-icon">🚀</div>
-      <h3>On crée et on livre</h3>
-      <p>Design, textes, mise en ligne sur votre domaine. Votre site est prêt en 7 jours. Vous recevez les accès.</p>
-    </div>
-  </div>
+<div class="guides-grid" style="max-width:1000px;">
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-naturo">
+<div class="guide-cover-badge">Guide Prompts IA</div>
+<div class="guide-cover-title">Électricien &<br>Installateur</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">40 prompts · 48 pages · PDF immédiat</div>
+<p class="guide-desc">Rédigez vos textes de site, posts Facebook, réponses de devis et présentations de chantier adaptés à l'électricité.</p>
+<div class="guide-footer">
+<div class="guide-price">9€</div>
+<span class="soon-badge">Bientôt →</span>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-sophro">
+<div class="guide-cover-badge">Guide Prompts IA</div>
+<div class="guide-cover-title">Plombier &<br>Chauffagiste</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">40 prompts · 48 pages · PDF immédiat</div>
+<p class="guide-desc">Communiquez sur vos interventions, dépannages et devis avec des mots qui rassurent vos futurs clients.</p>
+<div class="guide-footer">
+<div class="guide-price">9€</div>
+<span class="soon-badge">Bientôt →</span>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-coach">
+<div class="guide-cover-badge">Guide Prompts IA</div>
+<div class="guide-cover-title">Paysagiste &<br>Jardinier</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">40 prompts · 48 pages · PDF immédiat</div>
+<p class="guide-desc">Des prompts calibrés pour valoriser vos réalisations : posts avant-après, pages de vente, emails de suivi client.</p>
+<div class="guide-footer">
+<div class="guide-price">9€</div>
+<span class="soon-badge">Bientôt →</span>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-ind">
+<div class="guide-cover-badge">Guide Prompts IA</div>
+<div class="guide-cover-title">Coiffeur &<br>Salon de beauté</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">25 prompts · 42 pages · PDF immédiat</div>
+<p class="guide-desc">Le guide pour tout salon indépendant : pitchs, offres, contenus réseaux et emails professionnels.</p>
+<div class="guide-footer">
+<div class="guide-price">9€</div>
+<span class="soon-badge">Bientôt →</span>
+</div>
+</div>
+</div>
+
+</div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="section-tag">Contact</div>
-  <h2>Parlons de <em>votre</em> projet</h2>
-  <p class="section-sub">Une question avant de vous lancer ? Contactez-moi directement. Réponse sous 24h.</p>
+<!-- PAR SPÉCIALITÉ : BIEN-ÊTRE -->
+<section class="catalog-section alt" id="bienetre-guides">
+<div class="catalog-label">
+<span class="dot" style="background:#3a5440;"></span>
+<h2>Par spécialité — Bien-être</h2>
+<span class="cnt">Bientôt disponibles</span>
+</div>
 
-  <div class="contact-links">
-    <a href="https://wa.me/32476841263" class="contact-link">
-      <div class="cl-icon">💬</div>
-      <div>
-        <strong>WhatsApp</strong>
-        <span>Réponse rapide</span>
-      </div>
-    </a>
-    <a href="mailto:contact@activityweb.be" class="contact-link">
-      <div class="cl-icon">✉️</div>
-      <div>
-        <strong>contact@activityweb.be</strong>
-        <span>Réponse sous 24h</span>
-      </div>
-    </a>
-  </div>
+<div class="guides-grid" style="max-width:1000px;">
 
-  <div class="contact-form">
-    <form id="contact-form" onsubmit="sendContact(event)">
-      <div class="form-grid">
-        <input type="text" id="c-nom" placeholder="Votre nom" required />
-        <input type="text" id="c-activite" placeholder="Votre métier ou pratique" />
-      </div>
-      <input type="text" id="c-contact" placeholder="Email ou téléphone" style="margin-bottom:14px;" required />
-      <textarea id="c-projet" placeholder="Votre projet en 2 mots"></textarea>
-      <button type="submit" class="form-btn" id="contact-btn">Envoyer ma demande →</button>
-      <div id="contact-success" style="display:none;margin-top:14px;background:rgba(45,138,78,0.08);border:1px solid rgba(45,138,78,0.25);border-radius:6px;padding:12px 16px;font-size:0.88rem;color:#2d8a4e;">
-        ✓ Message envoyé ! Je vous réponds sous 24h.
-      </div>
-    </form>
-  </div>
+<div class="guide-card">
+<div class="guide-cover guide-cover-naturo">
+<div class="guide-cover-badge">Guide Prompts IA</div>
+<div class="guide-cover-title">Naturopathe &<br>Thérapeute holistique</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">40 prompts · 48 pages · PDF immédiat</div>
+<p class="guide-desc">Rédigez vos textes de site, posts Instagram, emails et présentations de séances grâce à des prompts adaptés à la naturopathie.</p>
+<div class="guide-footer">
+<div class="guide-price">9€</div>
+<span class="soon-badge">Bientôt →</span>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-sophro">
+<div class="guide-cover-badge">Guide Prompts IA</div>
+<div class="guide-cover-title">Sophrologue &<br>Relaxologue</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">40 prompts · 48 pages · PDF immédiat</div>
+<p class="guide-desc">Communiquez sur vos séances, vos ateliers et votre approche avec des mots qui parlent à vos futurs clients.</p>
+<div class="guide-footer">
+<div class="guide-price">9€</div>
+<span class="soon-badge">Bientôt →</span>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-coach">
+<div class="guide-cover-badge">Guide Prompts IA</div>
+<div class="guide-cover-title">Coach Nutrition &<br>Bien-être alimentaire</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">40 prompts · 48 pages · PDF immédiat</div>
+<p class="guide-desc">Des prompts calibrés pour parler de nutrition sans jargon : posts, pages de vente, emails de suivi client.</p>
+<div class="guide-footer">
+<div class="guide-price">9€</div>
+<span class="soon-badge">Bientôt →</span>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-ind">
+<div class="guide-cover-badge">Guide Prompts IA</div>
+<div class="guide-cover-title">Coach indépendant<br>& Consultant bien-être</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">25 prompts · 42 pages · PDF immédiat</div>
+<p class="guide-desc">Le guide universel pour tout praticien indépendant : pitchs, offres, contenus réseaux et emails professionnels.</p>
+<div class="guide-footer">
+<div class="guide-price">9€</div>
+<span class="soon-badge">Bientôt →</span>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- CONTACT TEASER -->
+<section class="catalog-section">
+<div class="guides-teaser-band">
+<div>
+<strong>Une idée de guide pour votre métier ?</strong>
+<p>Si vous ne trouvez pas votre spécialité dans la liste, dites-le-moi — je complète le catalogue au fur et à mesure des demandes.</p>
+</div>
+<a href="https://wa.me/32476841263" target="_blank" class="btn-primary" style="white-space:nowrap;">Me contacter →</a>
+</div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <strong>ActivityWeb Studio – Sites web &amp; Digital</strong> · BCE 0558.805.548<br>
-  <span style="margin-top:6px;display:inline-block;">
-    <a href="mailto:contact@activityweb.be">contact@activityweb.be</a> · © 2025 ActivityWeb
-  </span>
-  <div style="display:flex;justify-content:center;gap:20px;margin-top:18px;flex-wrap:wrap;">
-    <a href="https://www.pinterest.com/ActivityWebStudio/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Pinterest</a>
-    <a href="https://www.instagram.com/activitywebstudio/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Instagram</a>
-    <a href="https://www.youtube.com/@activityweb" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">YouTube</a>
-    <a href="https://www.etsy.com/shop/ActivityWebStudio" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Etsy</a>
-  </div>
+<strong>ActivityWeb Studio – Sites web &amp; Digital</strong> · BCE 0558.805.548<br>
+<span style="margin-top:6px;display:inline-block;">
+<a href="mailto:contact@activityweb.be">contact@activityweb.be</a> · © 2025 ActivityWeb
+</span>
+<div style="display:flex;justify-content:center;gap:20px;margin-top:18px;flex-wrap:wrap;">
+<a href="https://www.pinterest.com/ActivityWebStudio/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+Pinterest
+</a>
+<a href="https://www.instagram.com/activitywebstudio/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+Instagram
+</a>
+<a href="https://www.youtube.com/@activityweb" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+YouTube
+</a>
+<a href="https://www.etsy.com/shop/ActivityWebStudio" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.8rem;transition:color 0.2s;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10.045 0C4.5 0 0 4.5 0 10.045c0 5.544 4.5 10.044 10.045 10.044 5.545 0 10.044-4.5 10.044-10.044C20.089 4.5 15.59 0 10.045 0zm4.5 14.5h-9v-1.5h9v1.5zm0-3h-9V10h9v1.5zm0-3h-9V7h9v1.5z"/></svg>
+Etsy
+</a>
+</div>
 </footer>
 
-<script>
-  async function sendContact(e) {
-    e.preventDefault();
-    const btn = document.getElementById('contact-btn');
-    btn.disabled = true;
-    btn.textContent = '⏳ Envoi en cours…';
-
-    const nom      = document.getElementById('c-nom').value.trim();
-    const activite = document.getElementById('c-activite').value.trim();
-    const contact  = document.getElementById('c-contact').value.trim();
-    const projet   = document.getElementById('c-projet').value.trim();
-
-    try {
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: '17ea29d2-00fe-413d-b1a6-cc8c3af9ca66',
-          subject: '📩 Contact ActivityWeb — ' + nom + (activite ? ' (' + activite + ')' : ''),
-          from_name: 'ActivityWeb Site',
-          Nom: nom,
-          Activité: activite || '—',
-          Contact: contact,
-          Projet: projet || '—'
-        })
-      });
-    } catch(err) {
-      console.warn('Web3Forms:', err);
-    }
-
-    btn.style.display = 'none';
-    document.getElementById('contact-success').style.display = 'block';
-  }
-</script>
 </body>
 </html>
