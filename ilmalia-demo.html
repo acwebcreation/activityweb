@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILMALIA — Cooperation and Development Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10263A;
+    --ink-soft:#3C5568;
+    --paper:#FAF6EF;
+    --paper-dim:#F1EBDD;
+    --clay:#A6552C;
+    --clay-soft:#C97E52;
+    --gold:#C89B3C;
+    --sage:#6C7A5A;
+    --line: rgba(16,38,58,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--clay);
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px; height:1px;
+    background:var(--clay);
+    display:inline-block;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+
+  /* ---- NAV ---- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,246,239,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1180px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.1rem 2rem;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size:1.3rem; font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .logo span{color:var(--clay);}
+  nav ul{list-style:none; display:flex; gap:2.2rem;}
+  nav a{
+    color:var(--ink-soft); text-decoration:none;
+    font-size:0.88rem; letter-spacing:0.02em;
+    transition:color .2s;
+  }
+  nav a:hover{color:var(--clay);}
+  .nav-cta{
+    border:1px solid var(--ink);
+    padding:0.5rem 1.1rem;
+    border-radius:2px;
+    font-size:0.82rem !important;
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--paper) !important;}
+
+  /* ---- HERO ---- */
+  .hero{
+    position:relative;
+    background:var(--ink);
+    color:var(--paper);
+    overflow:hidden;
+    padding:6.5rem 2rem 5rem;
+  }
+  .topo{
+    position:absolute; inset:0;
+    opacity:0.16;
+    background-image:
+      repeating-radial-gradient(circle at 18% 30%, transparent 0, transparent 26px, rgba(200,155,60,0.5) 27px, transparent 28px, transparent 70px),
+      repeating-radial-gradient(circle at 85% 75%, transparent 0, transparent 34px, rgba(200,155,60,0.4) 35px, transparent 36px, transparent 90px);
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative; max-width:1180px; margin:0 auto;
+  }
+  .hero-inner .eyebrow{color:var(--gold);}
+  .hero-inner .eyebrow::before{background:var(--gold);}
+  .hero h1{
+    color:var(--paper);
+    font-size:clamp(2.4rem, 5vw, 4.1rem);
+    line-height:1.05;
+    max-width:14ch;
+    margin:1.4rem 0 1.6rem;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--clay-soft);
+  }
+  .hero p{
+    max-width:46ch;
+    color:rgba(250,246,239,0.78);
+    font-size:1.05rem;
+    margin-bottom:2.2rem;
+  }
+  .hero-actions{display:flex; gap:1rem; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--clay);
+    color:var(--paper);
+    padding:0.85rem 1.6rem;
+    text-decoration:none;
+    font-size:0.88rem;
+    letter-spacing:0.02em;
+    border-radius:2px;
+    transition:background .2s;
+  }
+  .btn-primary:hover{background:var(--clay-soft);}
+  .btn-ghost{
+    border:1px solid rgba(250,246,239,0.35);
+    color:var(--paper);
+    padding:0.85rem 1.6rem;
+    text-decoration:none;
+    font-size:0.88rem;
+    border-radius:2px;
+    transition:border-color .2s;
+  }
+  .btn-ghost:hover{border-color:var(--gold);}
+
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:2rem;
+    margin-top:4rem;
+    padding-top:2.2rem;
+    border-top:1px solid rgba(250,246,239,0.16);
+    max-width:640px;
+  }
+  .hero-stats .num{
+    font-family:'Fraunces', serif; font-size:2.1rem; color:var(--gold);
+  }
+  .hero-stats .lbl{
+    font-size:0.8rem; color:rgba(250,246,239,0.65); margin-top:0.2rem;
+  }
+
+  /* ---- SECTION SHARED ---- */
+  section{padding:5.5rem 2rem;}
+  .wrap{max-width:1180px; margin:0 auto;}
+  .section-head{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:3rem; align-items:end;
+    margin-bottom:3rem;
+  }
+  .section-head h2{font-size:clamp(1.8rem,3vw,2.5rem);}
+  .section-head p{color:var(--ink-soft); font-size:0.98rem;}
+
+  /* ---- MISSION ---- */
+  .mission{background:var(--paper);}
+  .mission-grid{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:4rem; align-items:start;
+  }
+  .mission-grid h2{font-size:clamp(1.9rem,3.4vw,2.7rem); line-height:1.15;}
+  .mission-grid .lede{
+    font-size:1.08rem; color:var(--ink-soft); margin-bottom:1.6rem;
+  }
+  .mission-list{list-style:none;}
+  .mission-list li{
+    display:flex; gap:1rem; padding:1.1rem 0; border-top:1px solid var(--line);
+    font-size:0.95rem; color:var(--ink-soft);
+  }
+  .mission-list li:last-child{border-bottom:1px solid var(--line);}
+  .mission-list b{color:var(--ink); font-weight:500; min-width:130px; flex-shrink:0;}
+
+  /* ---- EXPERTISE ---- */
+  .expertise{background:var(--paper-dim);}
+  .grid-fields{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .field-card{
+    background:var(--paper-dim);
+    padding:2.2rem 1.6rem;
+    min-height:200px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    position:relative;
+    overflow:hidden;
+    transition:background .25s;
+  }
+  .field-card:hover{background:var(--paper);}
+  .field-card::before{
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--field-color, var(--clay));
+    transform:scaleX(0); transform-origin:left;
+    transition:transform .3s;
+  }
+  .field-card:hover::before{transform:scaleX(1);}
+  .field-idx{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem;
+    color:var(--field-color, var(--clay));
+  }
+  .field-name{
+    font-family:'Fraunces', serif; font-size:1.15rem; margin-top:1.6rem;
+    color:var(--ink);
+  }
+
+  /* ---- PARTNERS ---- */
+  .partners{background:var(--ink); color:var(--paper); text-align:center;}
+  .partners .eyebrow{justify-content:center; color:var(--gold);}
+  .partners .eyebrow::before{display:none;}
+  .partners h2{color:var(--paper); font-size:1.9rem; max-width:26ch; margin:1.2rem auto 2.5rem;}
+  .partner-regions{
+    display:flex; justify-content:center; gap:3rem; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem;
+    letter-spacing:0.08em; text-transform:uppercase;
+    color:rgba(250,246,239,0.6);
+  }
+  .partner-regions span{
+    padding-bottom:0.8rem; border-bottom:1px solid rgba(250,246,239,0.25);
+  }
+
+  /* ---- CONTACT ---- */
+  .contact{
+    background:var(--paper);
+    text-align:center;
+  }
+  .contact h2{font-size:clamp(2rem,4vw,2.8rem); max-width:18ch; margin:0 auto 1.2rem;}
+  .contact p{color:var(--ink-soft); max-width:44ch; margin:0 auto 2rem;}
+
+  footer{
+    background:var(--ink); color:rgba(250,246,239,0.55);
+    padding:2rem; text-align:center; font-size:0.82rem;
+  }
+  footer a{color:rgba(250,246,239,0.8);}
+
+  @media (max-width: 860px){
+    nav ul{display:none;}
+    .hero-stats{grid-template-columns:1fr; gap:1.4rem;}
+    .mission-grid{grid-template-columns:1fr; gap:2rem;}
+    .section-head{grid-template-columns:1fr;}
+    .grid-fields{grid-template-columns:repeat(2,1fr);}
+    .partner-regions{gap:1.4rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">ILMALIA<span>.</span></div>
+    <ul>
+      <li><a href="#mission">Who we are</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#contact" class="nav-cta">Contact us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="topo"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Cooperation &amp; Development Consulting</div>
+    <h1>Building tomorrow's <em>Africa</em>, one partnership at a time</h1>
+    <p>ILMALIA connects private and public decision-makers to carry out development projects across infrastructure, energy, mining and agro-industry in Sub-Saharan Africa.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a conversation</a>
+      <a href="#expertise" class="btn-ghost">Our expertise</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">8</div><div class="lbl">Fields of expertise</div></div>
+      <div><div class="num">4</div><div class="lbl">Continents of partners</div></div>
+      <div><div class="num">20+</div><div class="lbl">Years combined field experience</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="mission" id="mission">
+  <div class="wrap mission-grid">
+    <div>
+      <div class="eyebrow">Who we are</div>
+      <h2>An active partner in Africa's economic growth</h2>
+    </div>
+    <div>
+      <p class="lede">ILMALIA is convinced that Africa has all the potential to become the center of tomorrow's world development — and works to bring that potential to life.</p>
+      <ul class="mission-list">
+        <li><b>Philosophy</b> Concentrating expertise to give private and public sectors the means to reach that goal, growing the middle class as a lever for economic growth.</li>
+        <li><b>Mission</b> Bring together stakeholders from around the world who believe in Africa's evolution, to carry out development projects across many fields.</li>
+        <li><b>Standards</b> All funds handled are clear, clean and of non-criminal origin, free of fraud, laundering or terrorism financing links.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="expertise" id="expertise">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Fields of expertise</h2>
+      <p>Eight sectors where ILMALIA connects capital, expertise and opportunity across the continent.</p>
+    </div>
+    <div class="grid-fields">
+      <div class="field-card" style="--field-color:#A6552C">
+        <span class="field-idx">01</span>
+        <span class="field-name">Infrastructures</span>
+      </div>
+      <div class="field-card" style="--field-color:#C89B3C">
+        <span class="field-idx">02</span>
+        <span class="field-name">Energy — renewable &amp; hydraulic</span>
+      </div>
+      <div class="field-card" style="--field-color:#3C5568">
+        <span class="field-idx">03</span>
+        <span class="field-name">Petrol &amp; Gas</span>
+      </div>
+      <div class="field-card" style="--field-color:#6C7A5A">
+        <span class="field-idx">04</span>
+        <span class="field-name">Mass housing</span>
+      </div>
+      <div class="field-card" style="--field-color:#6C7A5A">
+        <span class="field-idx">05</span>
+        <span class="field-name">Environment</span>
+      </div>
+      <div class="field-card" style="--field-color:#A6552C">
+        <span class="field-idx">06</span>
+        <span class="field-name">Mining</span>
+      </div>
+      <div class="field-card" style="--field-color:#3C5568">
+        <span class="field-idx">07</span>
+        <span class="field-name">Banking industry</span>
+      </div>
+      <div class="field-card" style="--field-color:#C89B3C">
+        <span class="field-idx">08</span>
+        <span class="field-name">Agro-industry</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners" id="partners">
+  <div class="wrap">
+    <div class="eyebrow">Our partners</div>
+    <h2>Technical experts, financial institutions, investment funds and advisors across four continents</h2>
+    <div class="partner-regions">
+      <span>Europe</span>
+      <span>Middle East</span>
+      <span>Asia</span>
+      <span>USA</span>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Get in touch</div>
+    <h2>Let's talk about your project</h2>
+    <p>Whether you're a stakeholder, an institution or an investor — ILMALIA is ready to discuss how we can work together.</p>
+    <a href="mailto:contact@ilmalia.com" class="btn-primary">contact@ilmalia.com</a>
+  </div>
+</section>
+
+<footer>
+  Copyright © <a href="https://activityweb.be">ActivityWeb</a> — All rights reserved. · Version démo, textes provisoires
+</footer>
+
+</body>
+</html>
