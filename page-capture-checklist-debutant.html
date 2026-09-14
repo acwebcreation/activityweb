@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ne te lance pas sans ça — Checklist gratuite | ActivityWeb</title>
+<meta name="description" content="Télécharge gratuitement la checklist complète de l'indépendant ou entrepreneur débutant : légal, présence en ligne, outils, prospection, identité visuelle.">
+<style>
+  :root {
+    --noir: #111111;
+    --noir2: #1A1A1A;
+    --orange: #FF6B00;
+    --orange-l: #FFF0E6;
+    --orange-m: #FF8C33;
+    --blanc: #FFFFFF;
+    --creme: #FDFAF6;
+    --gris-f: #F5F4F1;
+    --gris-m: #E8E5DF;
+    --gris-t: #888880;
+    --vert: #00C896;
+    --texte: #2A2A2A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--creme);
+    color: var(--texte);
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero { background: var(--noir); padding: 0; position: relative; overflow: hidden; }
+
+  .hero-inner {
+    max-width: 900px; margin: 0 auto; padding: 60px 24px 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-block; background: var(--vert); color: var(--noir);
+    font-family: 'Courier New', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; padding: 6px 14px; border-radius: 20px;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+
+  .hero h1 { font-family: 'Georgia', serif; font-size: 40px; font-weight: 700; color: var(--blanc); line-height: 1.15; margin-bottom: 16px; }
+  .hero h1 span { color: var(--orange); }
+
+  .hero-sub { font-size: 16px; color: #AAAAAA; line-height: 1.7; margin-bottom: 28px; }
+
+  .hero-profs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+
+  .prof-tag {
+    background: rgba(255,107,0,0.15); border: 1px solid rgba(255,107,0,0.3); color: var(--orange);
+    font-family: 'Courier New', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    padding: 4px 10px; border-radius: 3px; text-transform: uppercase;
+  }
+
+  /* ── MOCKUP PDF ── */
+  .hero-visual { display: flex; justify-content: center; align-items: flex-end; padding-bottom: 0; }
+
+  .pdf-mockup {
+    width: 220px; height: 311px; background: var(--noir2); border-radius: 6px;
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.6), -4px -4px 0 rgba(255,255,255,0.03);
+    position: relative; overflow: hidden; flex-shrink: 0;
+  }
+  .pdf-mockup .orange-block { position: absolute; top: 0; right: 0; width: 100px; height: 155px; background: var(--orange); }
+  .pdf-mockup .gratuit-badge {
+    position: absolute; top: 14px; left: 14px; background: var(--vert); color: var(--noir);
+    font-family: 'Courier New', monospace; font-size: 9px; font-weight: 700; padding: 3px 8px;
+    border-radius: 10px; letter-spacing: 1px; text-transform: uppercase; z-index: 2;
+  }
+  .pdf-mockup .tag {
+    position: absolute; top: 88px; left: 14px; font-family: 'Courier New', monospace; font-size: 7px;
+    font-weight: 700; color: var(--orange); letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .pdf-mockup .t1 { position: absolute; top: 102px; left: 14px; right: 10px; font-size: 14px; font-weight: 700; color: var(--blanc); font-family: 'Georgia', serif; line-height: 1.2; }
+  .pdf-mockup .t2 { position: absolute; top: 148px; left: 14px; right: 10px; font-size: 14px; font-weight: 700; color: var(--orange); font-family: 'Georgia', serif; line-height: 1.2; }
+  .pdf-mockup .sub { position: absolute; top: 190px; left: 14px; right: 14px; font-size: 7px; color: #666; line-height: 1.5; font-family: 'Courier New', monospace; }
+  .pdf-mockup .badges { position: absolute; bottom: 32px; left: 14px; display: flex; gap: 6px; }
+  .pdf-mockup .badge { background: var(--orange); border-radius: 3px; padding: 4px 8px; text-align: center; }
+  .pdf-mockup .badge .bn { font-size: 10px; font-weight: 700; color: var(--blanc); display: block; font-family: 'Courier New', monospace; }
+  .pdf-mockup .badge .bl { font-size: 5px; color: rgba(255,255,255,0.75); display: block; font-family: 'Courier New', monospace; }
+  .pdf-mockup .brand { position: absolute; bottom: 10px; left: 14px; font-size: 6px; color: #444; font-family: 'Courier New', monospace; }
+  .pdf-mockup .stripe { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: var(--orange); }
+
+  /* ── FORM SECTION ── */
+  .form-section { background: var(--noir); padding: 48px 24px 64px; border-top: 1px solid #222; }
+  .form-wrap { max-width: 500px; margin: 0 auto; text-align: center; }
+  .form-wrap h2 { font-size: 22px; color: var(--blanc); margin-bottom: 8px; }
+  .form-wrap p { font-size: 14px; color: #888; margin-bottom: 28px; }
+
+  .systemeio-form { background: rgba(255,255,255,0.03); border: 1px solid #333; border-radius: 10px; padding: 32px 28px; }
+
+  .form-privacy { font-size: 11px; color: #555; margin-top: 12px; font-family: 'Courier New', monospace; }
+
+  /* ── CE QUE TU REÇOIS ── */
+  .section-what { padding: 72px 24px; background: var(--creme); }
+  .section-what .inner { max-width: 820px; margin: 0 auto; }
+  .section-label { font-family: 'Courier New', monospace; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--orange); text-transform: uppercase; margin-bottom: 12px; }
+  .section-what h2 { font-size: 32px; font-weight: 700; color: var(--noir); margin-bottom: 48px; line-height: 1.25; }
+
+  .prompts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .prompt-card { background: var(--blanc); border: 1px solid var(--gris-m); border-radius: 10px; padding: 24px; position: relative; transition: border-color .2s, transform .2s; }
+  .prompt-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+  .prompt-num { width: 36px; height: 36px; background: var(--orange); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: 'Courier New', monospace; font-size: 14px; font-weight: 700; color: var(--blanc); margin-bottom: 14px; }
+  .prompt-card h3 { font-size: 15px; font-weight: 700; color: var(--noir); margin-bottom: 8px; }
+  .prompt-card p { font-size: 13px; color: var(--gris-t); line-height: 1.6; }
+  .prompt-card-full { background: var(--noir); border-color: var(--noir); grid-column: 1 / -1; }
+  .prompt-card-full .prompt-num { background: var(--orange); }
+  .prompt-card-full h3 { color: var(--blanc); }
+  .prompt-card-full p { color: #888; }
+
+  /* ── POUR QUI ── */
+  .section-who { background: var(--noir); padding: 72px 24px; }
+  .section-who .inner { max-width: 820px; margin: 0 auto; }
+  .section-who h2 { font-size: 32px; color: var(--blanc); margin-bottom: 40px; }
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 40px; }
+  .who-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 8px; padding: 20px; transition: border-color .2s; }
+  .who-card:hover { border-color: var(--orange); }
+  .who-icon { font-size: 24px; margin-bottom: 10px; }
+  .who-card h3 { font-size: 14px; font-weight: 700; color: var(--blanc); margin-bottom: 6px; font-family: 'Courier New', monospace; letter-spacing: 0.5px; text-transform: uppercase; }
+  .who-card p { font-size: 12px; color: #666; line-height: 1.5; }
+
+  /* ── PACK TEASER ── */
+  .section-pack { padding: 60px 24px; background: var(--gris-f); }
+  .section-pack .inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .section-pack h2 { font-size: 26px; color: var(--noir); margin-bottom: 12px; }
+  .section-pack p { font-size: 14px; color: var(--gris-t); margin-bottom: 24px; line-height: 1.7; }
+  .pack-link { display: inline-block; color: var(--orange); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--orange); padding-bottom: 2px; }
+
+  /* ── CTA BAS ── */
+  .section-cta { background: var(--orange); padding: 72px 24px; text-align: center; }
+  .section-cta h2 { font-size: 34px; color: var(--blanc); margin-bottom: 12px; }
+  .section-cta p { font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 36px; }
+  .cta-btn { display: inline-block; background: var(--noir); color: var(--blanc); font-size: 16px; font-weight: 700; padding: 18px 40px; border-radius: 6px; text-decoration: none; transition: transform .2s, background .2s; font-family: 'Georgia', serif; }
+  .cta-btn:hover { background: #333; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--noir); padding: 28px 24px; text-align: center; }
+  footer p { font-size: 11px; color: #444; font-family: 'Courier New', monospace; line-height: 1.8; }
+  footer a { color: var(--orange); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 0; }
+    .hero-visual { padding-bottom: 40px; }
+    .hero h1 { font-size: 30px; }
+    .prompts-grid { grid-template-columns: 1fr; }
+    .who-grid { grid-template-columns: 1fr 1fr; }
+    .section-cta h2 { font-size: 26px; }
+  }
+  @media (max-width: 480px) {
+    .who-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">✦ Offert par ActivityWeb</div>
+      <h1>Ne te lance pas <span>sans ça</span></h1>
+      <p class="hero-sub">
+        La checklist complète de l'indépendant ou entrepreneur débutant : légal, présence en ligne,
+        outils, prospection, identité visuelle. Tout ce qu'il faut avoir en place avant — ou juste
+        après — ton lancement. Gratuit.
+      </p>
+      <div class="hero-profs">
+        <span class="prof-tag">Indépendants</span>
+        <span class="prof-tag">Auto-entrepreneurs</span>
+        <span class="prof-tag">Freelances</span>
+        <span class="prof-tag">Artisans</span>
+        <span class="prof-tag">Praticiens</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="pdf-mockup">
+        <div class="stripe"></div>
+        <div class="orange-block"></div>
+        <div class="gratuit-badge">GRATUIT</div>
+        <div class="tag">GUIDE ACTIVITYWEB</div>
+        <div class="t1">NE TE LANCE<br>PAS SANS ÇA</div>
+        <div class="t2">La checklist du<br>débutant pressé</div>
+        <div class="sub">Pour indépendants et<br>entrepreneurs qui débutent<br>en Belgique ou en France.</div>
+        <div class="badges">
+          <div class="badge"><span class="bn">5</span><span class="bl">blocs</span></div>
+          <div class="badge"><span class="bn">22</span><span class="bl">points</span></div>
+          <div class="badge"><span class="bn">0€</span><span class="bl">gratuit</span></div>
+        </div>
+        <div class="brand">activityweb.be</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULAIRE -->
+  <div class="form-section">
+    <div class="form-wrap">
+      <h2>Télécharge la checklist gratuitement</h2>
+      <p>Entre ton prénom et ton email — reçois le PDF immédiatement.</p>
+
+      <form class="systemeio-form" id="lead-form" onsubmit="submitLead(event)">
+        <input
+          type="text"
+          id="lead-prenom"
+          name="prenom"
+          placeholder="Ton prénom"
+          required
+          style="width:100%;background:#1A1A1A;border:1px solid #333;border-radius:6px;
+                 padding:14px 16px;font-size:15px;color:#fff;margin-bottom:12px;
+                 font-family:Georgia,serif;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='#FF6B00'"
+          onblur="this.style.borderColor='#333'"
+        />
+        <input
+          type="email"
+          id="lead-email"
+          name="email"
+          placeholder="Ton adresse email"
+          required
+          style="width:100%;background:#1A1A1A;border:1px solid #333;border-radius:6px;
+                 padding:14px 16px;font-size:15px;color:#fff;margin-bottom:16px;
+                 font-family:Georgia,serif;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='#FF6B00'"
+          onblur="this.style.borderColor='#333'"
+        />
+        <button
+          type="submit"
+          id="lead-btn"
+          style="width:100%;background:#FF6B00;color:#fff;border:none;border-radius:6px;
+                 padding:16px;font-size:16px;font-weight:700;font-family:Georgia,serif;
+                 cursor:pointer;transition:background .2s;"
+          onmouseover="this.style.background='#FF8C33'"
+          onmouseout="this.style.background='#FF6B00'"
+        >
+          Je télécharge la checklist →
+        </button>
+      </form>
+
+      <p class="form-privacy">
+        🔒 Aucun spam. Tu peux te désabonner à tout moment.<br>
+        En t'inscrivant, tu recevras également des conseils pour démarrer ton activité.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CE QUE TU REÇOIS ════════════════════════════════════════════ -->
+<section class="section-what">
+  <div class="inner">
+    <p class="section-label">Dans cette checklist gratuite</p>
+    <h2>5 blocs pour ne rien<br>oublier avant de te lancer</h2>
+
+    <div class="prompts-grid">
+      <div class="prompt-card">
+        <div class="prompt-num">1</div>
+        <h3>Légal &amp; admin</h3>
+        <p>Statut, immatriculation, assurance, CGV, facture conforme — les bases pour exercer en règle.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-num">2</div>
+        <h3>Présence en ligne</h3>
+        <p>Nom de domaine, site minimum viable, email pro, réseau prioritaire, Google Business Profile.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-num">3</div>
+        <h3>Outils du quotidien</h3>
+        <p>Facturation, prise de RDV, paiement, stockage — pour ne pas perdre de temps sur l'admin.</p>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-num">4</div>
+        <h3>Prospection</h3>
+        <p>Définir son offre, trouver ses 10 premiers clients, relancer, demander un avis.</p>
+      </div>
+      <div class="prompt-card-full">
+        <div class="prompt-num">5</div>
+        <h3>Identité visuelle &amp; checklist récap</h3>
+        <p>Logo, couleurs, polices, template de post — et une page récap à cocher au fur et à mesure, pour tout suivre d'un coup d'œil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ POUR QUI ════════════════════════════════════════════════════ -->
+<section class="section-who">
+  <div class="inner">
+    <h2>Pour qui ?</h2>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">🚀</div>
+        <h3>Débutants</h3>
+        <p>Tu démarres ou tu vas démarrer une activité indépendante.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🛠️</div>
+        <h3>Artisans</h3>
+        <p>Électricien, plombier, paysagiste, coiffeur, garagiste…</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🌿</div>
+        <h3>Praticiens</h3>
+        <p>Coach, naturopathe, sophrologue, thérapeute…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PACK TEASER ═════════════════════════════════════════════════ -->
+<section class="section-pack">
+  <div class="inner">
+    <h2>Envie d'aller plus loin ?</h2>
+    <p>
+      Cette checklist fait partie du Pack SaaS Débutant — CGV, base d'annuaires,
+      emails de prospection, scripts d'appel, kit design et prompts IA pour démarrer
+      sans tout créer soi-même. 79€ pour les 100 premiers, puis 99€.
+    </p>
+    <a href="pack-debutant.html" class="pack-link">Découvrir le pack →</a>
+  </div>
+</section>
+
+<!-- ══ CTA BAS ═════════════════════════════════════════════════════ -->
+<section class="section-cta">
+  <h2>Prêt à ne rien oublier ?</h2>
+  <p>Télécharge la checklist gratuite — 2 minutes suffisent.</p>
+  <a href="#top" class="cta-btn">Je télécharge maintenant ↑</a>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════════ -->
+<footer>
+  <p>
+    ActivityWeb Studio – Sites web &amp; Digital · BCE 0558.805.548<br>
+    <a href="mailto:contact@activityweb.be">contact@activityweb.be</a> · © 2025 ActivityWeb
+  </p>
+</footer>
+
+<script>
+  async function submitLead(e) {
+    e.preventDefault();
+
+    const btn    = document.getElementById('lead-btn');
+    const prenom = document.getElementById('lead-prenom').value.trim();
+    const email  = document.getElementById('lead-email').value.trim();
+
+    btn.textContent = '⏳ Envoi en cours…';
+    btn.disabled = true;
+    btn.style.background = '#cc5500';
+
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '17ea29d2-00fe-413d-b1a6-cc8c3af9ca66',
+          subject: '📋 Nouvelle checklist débutant — ' + prenom,
+          from_name: 'ActivityWeb Leadmagnet',
+          Prénom: prenom,
+          Email: email,
+          Source: 'page-capture-checklist-debutant.html'
+        })
+      });
+    } catch(err) {
+      console.warn('Web3Forms:', err);
+    }
+
+    // ⚠️ Vérifie que ce fichier existe bien dans /downloads/ avant mise en ligne
+    window.location.href = 'https://www.activityweb.be/downloads/leadmagnet-checklist-debutant.pdf';
+  }
+
+  document.querySelectorAll('a[href="#top"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>

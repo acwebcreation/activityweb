@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pack SaaS Débutant — Tout pour démarrer votre activité | ActivityWeb</title>
+<meta name="description" content="CGV, annuaires, emails de prospection, scripts d'appel, kit design et prompts IA — le pack complet pour démarrer votre activité indépendante en Belgique ou en France. 79€ pour les 100 premiers.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0f1f38;
+  --navy-mid: #1a3254;
+  --navy-light: #243d66;
+  --orange: #e8682a;
+  --orange-lt: #f5844d;
+  --cream: #f9f5f0;
+  --white: #ffffff;
+  --text: #1a1a2e;
+  --muted: #6b7a99;
+  --border: rgba(0,0,0,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans', sans-serif; background:var(--cream); color:var(--text); overflow-x:hidden; }
+
+/* ── NAV (identique au reste du site) ───────── */
+nav { position:fixed; top:0; left:0; right:0; height:64px; background:var(--navy); display:flex; align-items:center; justify-content:space-between; padding:0 5%; z-index:200; box-shadow:0 2px 20px rgba(0,0,0,0.25); }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.logo-mark { width:36px; height:36px; background:var(--orange); border-radius:6px; display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display', serif; font-size:0.85rem; color:white; letter-spacing:-0.02em; }
+.logo-text { font-family:'DM Serif Display', serif; font-size:1.2rem; color:white; }
+.logo-text span { color:var(--orange); }
+.nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+.nav-links a { color:rgba(255,255,255,0.65); text-decoration:none; font-size:0.875rem; font-weight:500; transition:color 0.2s; }
+.nav-links a:hover { color:white; }
+.nav-cta { background:var(--orange); color:white !important; padding:8px 20px; border-radius:4px; font-weight:600 !important; transition:background 0.2s !important; }
+.nav-cta:hover { background:var(--orange-lt) !important; }
+@media(max-width:768px) { .nav-links { display:none; } }
+
+/* ── HERO ────────────────────────────────── */
+.pack-hero { background:var(--navy); padding:150px 5% 70px; }
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(232,104,42,0.15); border:1px solid rgba(232,104,42,0.3); color:var(--orange-lt); padding:6px 14px; border-radius:4px; font-size:0.78rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:24px; }
+.hero-badge::before { content:'●'; font-size:0.55rem; }
+.pack-hero h1 { font-family:'DM Serif Display', serif; font-size:clamp(2.2rem,4.2vw,3.4rem); color:white; line-height:1.15; margin-bottom:18px; max-width:14em; }
+.pack-hero h1 em { font-style:italic; color:var(--orange); }
+.pack-hero p.lede { font-size:1.05rem; color:rgba(255,255,255,0.6); line-height:1.75; max-width:34em; margin-bottom:34px; }
+
+.hero-cta-row { display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-bottom:22px; }
+.btn-primary { background:var(--orange); color:white; padding:14px 30px; border-radius:5px; font-size:0.95rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s; }
+.btn-primary:hover { background:var(--orange-lt); transform:translateY(-1px); }
+.price-inline { font-family:'DM Serif Display',serif; color:white; font-size:1.1rem; }
+.price-inline .num { color:var(--orange); font-size:1.6rem; }
+.price-inline .was { text-decoration:line-through; color:rgba(255,255,255,0.35); font-size:0.9rem; margin-left:6px; font-family:'DM Sans',sans-serif; }
+
+.counter-line { font-size:0.85rem; color:rgba(255,255,255,0.55); }
+.counter-line strong { color:var(--orange); font-variant-numeric:tabular-nums; }
+.counter-bar { width:100%; max-width:280px; height:6px; background:rgba(255,255,255,0.12); border-radius:3px; margin-top:8px; overflow:hidden; }
+.counter-bar-fill { height:100%; background:var(--orange); width:0%; transition:width .6s ease; }
+
+/* ── SECTIONS GÉNÉRIQUES ─────────────────── */
+section.pack-section { padding:72px 5%; }
+section.pack-section.alt { background:var(--white); }
+.section-tag { display:inline-block; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange); margin-bottom:12px; }
+h2 { font-family:'DM Serif Display', serif; font-size:clamp(1.8rem,3.2vw,2.4rem); color:var(--text); line-height:1.2; margin-bottom:14px; }
+h2 em { font-style:italic; color:var(--orange); }
+.section-sub { font-size:0.97rem; color:var(--muted); line-height:1.7; max-width:520px; margin-bottom:44px; }
+
+/* ── CONTENU DU PACK ─────────────────────── */
+.item-row { display:flex; gap:20px; padding:24px 0; border-top:1px solid var(--border); max-width:720px; }
+.item-row:last-child { border-bottom:1px solid var(--border); }
+.item-mark { font-family:'DM Serif Display',serif; font-weight:400; font-size:1.3rem; color:var(--orange); min-width:34px; }
+.item-body h3 { font-size:1.05rem; font-weight:600; color:var(--navy); margin-bottom:5px; }
+.item-body p { font-size:0.875rem; color:var(--muted); line-height:1.6; margin:0; }
+
+/* ── REÇU / VALEUR CUMULÉE ───────────────── */
+.receipt-wrap { display:flex; justify-content:center; }
+.receipt { background:var(--navy); border-radius:14px; width:100%; max-width:460px; padding:36px 32px 30px; }
+.receipt-title { font-family:'DM Serif Display',serif; font-size:1.1rem; text-align:center; margin-bottom:24px; color:white; }
+.receipt-line { display:flex; justify-content:space-between; gap:12px; padding:10px 0; font-size:0.92rem; border-bottom:1px dashed rgba(255,255,255,0.15); }
+.receipt-line .label { color:rgba(255,255,255,0.75); }
+.receipt-line .val { color:rgba(255,255,255,0.4); text-decoration:line-through; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.receipt-total { display:flex; justify-content:space-between; padding-top:18px; margin-top:6px; border-top:1px solid rgba(255,255,255,0.25); }
+.receipt-total .label { font-family:'DM Serif Display',serif; font-size:1.05rem; color:white; }
+.receipt-total .val { text-decoration:line-through; color:rgba(255,255,255,0.4); font-size:1rem; }
+.receipt-final { display:flex; justify-content:space-between; align-items:baseline; background:rgba(232,104,42,0.12); border:1px solid rgba(232,104,42,0.3); border-radius:8px; margin-top:16px; padding:16px 18px; }
+.receipt-final .label { font-size:0.9rem; color:rgba(255,255,255,0.75); }
+.receipt-final .val { font-family:'DM Serif Display',serif; font-weight:400; font-size:1.9rem; color:var(--orange); }
+
+/* ── POUR QUI ────────────────────────────── */
+.split { display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:900px; }
+@media(max-width:620px){ .split{ grid-template-columns:1fr; } }
+.split-col h3 { font-family:'DM Serif Display',serif; font-weight:400; font-size:1.15rem; color:var(--navy); margin-bottom:16px; }
+.split-col ul { list-style:none; }
+.split-col li { padding:10px 0 10px 24px; position:relative; font-size:0.9rem; color:var(--text); border-top:1px solid var(--border); line-height:1.5; }
+.split-col.yes li::before { content:'+'; position:absolute; left:0; color:var(--orange); font-weight:700; }
+.split-col.no li::before { content:'–'; position:absolute; left:0; color:#B0473A; font-weight:700; }
+
+/* ── FAQ ─────────────────────────────────── */
+.faq-item { border-top:1px solid var(--border); padding:22px 0; max-width:720px; }
+.faq-item:last-child { border-bottom:1px solid var(--border); }
+.faq-item h3 { font-size:0.95rem; font-weight:600; color:var(--navy); margin-bottom:8px; }
+.faq-item p { margin:0; color:var(--muted); font-size:0.875rem; line-height:1.6; }
+
+/* ── CTA FINALE ──────────────────────────── */
+.pack-final { background:var(--navy); text-align:center; padding:80px 5%; }
+.pack-final h2 { color:white; max-width:16em; margin:0 auto 14px; }
+.pack-final p { color:rgba(255,255,255,0.55); max-width:32em; margin:0 auto 30px; font-size:0.97rem; line-height:1.7; }
+
+footer { background:var(--navy); color:rgba(255,255,255,0.45); text-align:center; padding:32px 5%; font-size:0.82rem; border-top:1px solid rgba(255,255,255,0.08); }
+footer strong { color:rgba(255,255,255,0.75); }
+footer a { color:rgba(255,255,255,0.5); text-decoration:none; }
+footer a:hover { color:var(--orange); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html#hero" class="nav-logo">
+    <div class="logo-mark">AW</div>
+    <div class="logo-text">Activity<span>Web</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="guides.html">Guides IA</a></li>
+    <li><a href="#contenu">Le pack</a></li>
+    <li><a href="#faq">Questions</a></li>
+    <li><a href="#tarif" class="nav-cta">Je commence pour 79€</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="pack-hero">
+  <div class="hero-badge">Pack SaaS Débutant · ActivityWeb</div>
+  <h1>Tout ce qu'il te faut pour démarrer, <em>sans tout créer toi-même</em></h1>
+  <p class="lede">CGV, base d'annuaires, emails de prospection, scripts d'appel, kit design et prompts IA — condensés pour les indépendants et entrepreneurs qui débutent en Belgique ou en France.</p>
+
+  <div class="hero-cta-row">
+    <a href="#tarif" class="btn-primary">Je commence pour 79€ →</a>
+    <div class="price-inline"><span class="num">79€</span><span class="was">99€</span></div>
+  </div>
+
+  <div class="counter-line">
+    <strong id="spotsLeft">—</strong> places restantes au tarif de lancement sur 100
+    <div class="counter-bar"><div class="counter-bar-fill" id="counterFill"></div></div>
+  </div>
+</section>
+
+<!-- CONTENU DU PACK -->
+<section class="pack-section alt" id="contenu">
+  <div class="section-tag">Ce que contient le pack</div>
+  <h2>Sept éléments prêts à l'emploi</h2>
+  <p class="section-sub">Pensés pour un indépendant qui démarre en Belgique ou en France.</p>
+
+  <div class="item-row">
+    <div class="item-mark">01</div>
+    <div class="item-body">
+      <h3>CGV &amp; Politique de confidentialité</h3>
+      <p>Base rédigée pour la Belgique et la France (RGPD, droit de rétractation, mentions légales), à personnaliser et faire valider selon ton activité.</p>
+    </div>
+  </div>
+  <div class="item-row">
+    <div class="item-mark">02</div>
+    <div class="item-body">
+      <h3>97 annuaires francophones vérifiés</h3>
+      <p>France, Belgique, Suisse, Québec, plateformes sectorielles et freelance — classés par catégorie, avec lien direct.</p>
+    </div>
+  </div>
+  <div class="item-row">
+    <div class="item-mark">03</div>
+    <div class="item-body">
+      <h3>45+ emails de prospection prêts à l'emploi</h3>
+      <p>10 séquences complètes (prise de RDV, vente, webinaire, réactivation) et 6 templates ponctuels, avec prompts IA de personnalisation.</p>
+    </div>
+  </div>
+  <div class="item-row">
+    <div class="item-mark">04</div>
+    <div class="item-body">
+      <h3>Scripts d'appel &amp; bibliothèque d'objections</h3>
+      <p>La structure d'un bon appel en 7 phases, 5 scripts par situation, et les réponses aux objections les plus fréquentes.</p>
+    </div>
+  </div>
+  <div class="item-row">
+    <div class="item-mark">05</div>
+    <div class="item-body">
+      <h3>Kit design — 6 templates Canva</h3>
+      <p>Conseil du jour, citation, offre, promo, avant/après, témoignage — palette neutre facile à recolorer, plus un guide de personnalisation pas à pas.</p>
+    </div>
+  </div>
+  <div class="item-row">
+    <div class="item-mark">06</div>
+    <div class="item-body">
+      <h3>6 prompts IA — Business plan</h3>
+      <p>Proposition de valeur, persona client, structuration de l'offre, analyse concurrentielle, mini business plan, test de désirabilité.</p>
+    </div>
+  </div>
+  <div class="item-row">
+    <div class="item-mark">07</div>
+    <div class="item-body">
+      <h3>Checklist "Ne te lance pas sans ça"</h3>
+      <p>Le guide de démarrage complet (légal, présence en ligne, outils, prospection, identité visuelle) en bonus du pack.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALEUR CUMULÉE -->
+<section class="pack-section">
+  <div class="section-tag">Ce que ça vaudrait séparément</div>
+  <h2>Le <em>reçu</em>, si acheté pièce par pièce</h2>
+  <p class="section-sub">Chaque élément existe comme produit indépendant sur le marché. Voici une estimation basse de leur prix pris un par un.</p>
+
+  <div class="receipt-wrap">
+    <div class="receipt">
+      <div class="receipt-title">REÇU — SI ACHETÉ SÉPARÉMENT</div>
+      <div class="receipt-line"><span class="label">CGV &amp; confidentialité (BE/FR)</span><span class="val">60€</span></div>
+      <div class="receipt-line"><span class="label">Base de 97 annuaires vérifiés</span><span class="val">20€</span></div>
+      <div class="receipt-line"><span class="label">45+ emails de prospection</span><span class="val">35€</span></div>
+      <div class="receipt-line"><span class="label">Scripts d'appel &amp; objections</span><span class="val">25€</span></div>
+      <div class="receipt-line"><span class="label">Kit design 6 templates + guide</span><span class="val">20€</span></div>
+      <div class="receipt-line"><span class="label">6 prompts IA business plan</span><span class="val">12€</span></div>
+      <div class="receipt-total"><span class="label">Total séparé</span><span class="val">172€</span></div>
+      <div class="receipt-final"><span class="label">Prix du pack aujourd'hui</span><span class="val">79€</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- POUR QUI -->
+<section class="pack-section alt">
+  <div class="section-tag">Pour qui</div>
+  <h2>Avant de <em>commander</em></h2>
+  <div class="split">
+    <div class="split-col yes">
+      <h3>Ce pack est fait pour toi si</h3>
+      <ul>
+        <li>Tu démarres une activité indépendante en Belgique ou en France</li>
+        <li>Tu n'as pas le temps de tout créer de zéro (légal, prospection, visuels)</li>
+        <li>Tu préfères partir d'une base solide plutôt qu'une page blanche</li>
+      </ul>
+    </div>
+    <div class="split-col no">
+      <h3>Ce pack n'est pas fait pour toi si</h3>
+      <ul>
+        <li>Tu as déjà tes CGV, tes templates et ta prospection en place</li>
+        <li>Tu cherches un accompagnement individuel plutôt que des ressources</li>
+        <li>Ton activité est hors Belgique/France (les CGV ne couvrent que ces deux droits)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="pack-section" id="faq">
+  <div class="section-tag">Questions fréquentes</div>
+  <h2>Avant de te <em>lancer</em></h2>
+
+  <div class="faq-item">
+    <h3>Les CGV sont-elles prêtes à l'emploi telles quelles ?</h3>
+    <p>Ce sont des bases solides à personnaliser (informations entre crochets à compléter). Elles ne remplacent pas un avocat — fais relire le document final selon ton secteur et ton pays.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Le prix va vraiment augmenter ?</h3>
+    <p>Oui — le tarif à 79€ est limité aux 100 premiers achats, avec un plafond appliqué directement sur le lien de paiement. Passé ce cap, le pack repasse à 99€.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Sous quel format je reçois le pack ?</h3>
+    <p>Des fichiers PDF prêts à consulter et personnaliser, plus les liens vers les 6 templates Canva modifiables.</p>
+  </div>
+  <div class="faq-item">
+    <h3>C'est adapté à mon secteur d'activité ?</h3>
+    <p>Le contenu est généraliste et pensé pour tout type d'indépendant débutant — service ou petit produit. Certaines mentions (secteurs réglementés) peuvent nécessiter des ajustements spécifiques.</p>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<div class="pack-final" id="tarif">
+  <h2>Démarre avec une base complète, pas une page blanche</h2>
+  <p>79€ pour les 100 premiers, puis 99€. Places limitées et suivies en temps réel.</p>
+  <a href="https://buy.stripe.com/VOTRE-LIEN-DE-PAIEMENT" class="btn-primary">Je commence pour 79€ →</a>
+  <div class="counter-line" style="margin-top:22px;">
+    <strong id="spotsLeft2">—</strong> places restantes sur 100
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>ActivityWeb Studio – Sites web &amp; Digital</strong> · BCE 0558.805.548<br>
+  <span style="margin-top:6px;display:inline-block;">
+    <a href="mailto:contact@activityweb.be">contact@activityweb.be</a> · © 2025 ActivityWeb
+  </span>
+</footer>
+
+<script>
+  // ---------------------------------------------------------------
+  // Compteur de places en temps réel — branché sur le Worker
+  // Cloudflare (worker.js) qui interroge l'API Stripe.
+  // Remplace l'URL ci-dessous par celle de ton Worker déployé.
+  // ---------------------------------------------------------------
+  const COUNTER_ENDPOINT = "https://pack-saas-compteur.TON-SOUS-DOMAINE.workers.dev";
+  const FALLBACK_USED = 0;
+  const LIMIT = 100;
+  const REFRESH_MS = 120000;
+
+  function renderCounter(used, limit) {
+    const left = Math.max(limit - used, 0);
+    document.querySelectorAll('#spotsLeft, #spotsLeft2').forEach(el => el.textContent = left);
+    const fill = document.getElementById('counterFill');
+    if (fill) fill.style.width = Math.min((used / limit) * 100, 100) + '%';
+  }
+
+  async function loadCounter() {
+    if (!COUNTER_ENDPOINT || COUNTER_ENDPOINT.includes("TON-SOUS-DOMAINE")) {
+      renderCounter(FALLBACK_USED, LIMIT);
+      return;
+    }
+    try {
+      const res = await fetch(COUNTER_ENDPOINT, { cache: "no-store" });
+      if (!res.ok) throw new Error("worker error");
+      const data = await res.json();
+      if (typeof data.used !== "number") throw new Error("bad payload");
+      renderCounter(data.used, data.limit || LIMIT);
+    } catch (e) {
+      renderCounter(FALLBACK_USED, LIMIT);
+    }
+  }
+
+  loadCounter();
+  setInterval(loadCounter, REFRESH_MS);
+</script>
+
+</body>
+</html>

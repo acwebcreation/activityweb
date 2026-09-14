@@ -1,0 +1,17 @@
+name = "pack-saas-compteur"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+# L'ID du Payment Link Stripe (pas secret) — le trouver dans
+# Stripe Dashboard > Payment Links > [ton lien] > l'URL ou l'API
+# ressemble à "plink_1AbCdEfGhIjKlMnOp"
+PAYMENT_LINK_ID = "plink_REMPLACE_MOI"
+
+# Domaine autorisé à appeler ce Worker (ton site) — évite que
+# n'importe quel autre site pompe ton compteur
+ALLOWED_ORIGIN = "https://activityweb.be"
+
+# STRIPE_SECRET_KEY n'est PAS mis ici : il se configure avec
+#   wrangler secret put STRIPE_SECRET_KEY
+# pour ne jamais apparaître en clair dans ce fichier ou sur GitHub.
