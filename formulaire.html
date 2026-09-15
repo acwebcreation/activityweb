@@ -833,6 +833,28 @@
 <script>
   let currentStep = 1;
   const TOTAL_STEPS = 5;
+  let partialSent = false;
+
+  function sendPartialCapture(stepReached) {
+    if (partialSent) return;
+    const nom   = val('f-nom');
+    const email = val('f-email');
+    if (!email) return; // rien à relancer sans email
+
+    partialSent = true;
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: '17ea29d2-00fe-413d-b1a6-cc8c3af9ca66',
+        subject: '⏳ Formulaire démarré — ' + (nom || 'sans nom'),
+        from_name: 'ActivityWeb Formulaire (partiel)',
+        Client: nom || '—',
+        Email: email,
+        'Étape atteinte': stepReached + ' / ' + TOTAL_STEPS
+      })
+    }).catch(e => console.warn('Web3Forms (partiel):', e));
+  }
 
   const STRIPE_LINKS = {
     // Un seul lien pour l'instant — le leadmagnet est facturé manuellement ou via un 2e lien à créer
@@ -868,6 +890,7 @@
   document.addEventListener('DOMContentLoaded', () => { updateTotal(); });
 
   function goTo(step) {
+    if (currentStep === 1 && step !== 1) sendPartialCapture(step);
     const currentEl = document.getElementById('step-' + currentStep);
     if (currentEl) currentEl.classList.remove('active');
     currentStep = step;
