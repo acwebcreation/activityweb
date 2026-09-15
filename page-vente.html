@@ -77,6 +77,21 @@
   .btn:hover{background:#163B3A;}
   .price-note{font-size:14px;color:var(--taupe);}
 
+  .launch-bar{
+    background:var(--gold);
+    color:var(--ink);
+    font-size:14.5px;
+  }
+  .launch-inner{
+    padding:12px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  #countdown{font-weight:600;letter-spacing:0.02em;}
+
   /* PROBLEM / SOLUTION */
   section.split{
     padding:80px 0;
@@ -174,11 +189,18 @@
     <h1>Lance ton activité complémentaire, une étape claire à la fois.</h1>
     <p class="lede">Un programme structuré jour par jour pour trouver ton idée, créer ton premier produit, construire ta vitrine et faire ta première vente — sans budget publicitaire, sans compétence technique, à raison d'environ 1h par jour.</p>
     <div class="cta-row">
-      <a class="btn" href="#prix">Rejoindre le programme — 99€</a>
-      <span class="price-note">Paiement en 3x sans frais disponible</span>
+      <a class="btn" href="#prix">Rejoindre le programme — 79€</a>
+      <span class="price-note">Prix de lancement, 100 premières places</span>
     </div>
   </div>
 </header>
+
+<div class="launch-bar" id="launch-bar">
+  <div class="wrap-wide launch-inner">
+    <span>Prix de lancement à 79€ (au lieu de 99€) — <strong id="places-restantes">Il reste 100 places</strong></span>
+    <span id="countdown">--j --h --m</span>
+  </div>
+</div>
 
 <section class="split">
   <div class="wrap">
@@ -260,8 +282,8 @@
 <section class="price" id="prix">
   <div class="wrap">
     <h2>Rejoindre le programme</h2>
-    <div class="amount">99€</div>
-    <div class="split-pay">ou 3 × 33€ sans frais</div>
+    <div class="amount">79€ <span style="font-size:26px;color:var(--taupe-light);text-decoration:line-through;">99€</span></div>
+    <div class="split-pay">Prix de lancement — <span id="places-restantes-2">100 premières places</span></div>
     <a class="btn" href="#">Je commence le défi</a>
     <p class="fine">Accès immédiat au guide et au plan d'action. Produit numérique livré directement après paiement.</p>
   </div>
@@ -273,6 +295,45 @@
     <p>Contact : [ton email] — <a href="#">Conditions générales de vente</a></p>
   </div>
 </footer>
+
+<script>
+  /* =========================================================
+     À METTRE À JOUR TOI-MÊME :
+
+     1) DATE LIMITE du prix de lancement — modifie la ligne ci-dessous.
+        Une fois la date passée, le bandeau affiche "Offre terminée"
+        (pense aussi à changer le prix affiché sur la page à ce moment-là).
+  ========================================================= */
+  const DATE_LIMITE = new Date("2026-09-26T23:59:59");
+
+  /* 2) PLACES RESTANTES — change ce nombre à chaque vente confirmée.
+        Ne jamais automatiser une baisse fictive de ce chiffre :
+        il doit refléter le nombre réel de ventes.
+  ========================================================= */
+  const PLACES_RESTANTES = 100;
+
+  document.querySelectorAll('#places-restantes, #places-restantes-2').forEach(el => {
+    el.textContent = PLACES_RESTANTES > 0
+      ? `Il reste ${PLACES_RESTANTES} places`
+      : "Plus de places à ce prix";
+  });
+
+  function updateCountdown(){
+    const now = new Date();
+    const diff = DATE_LIMITE - now;
+    const el = document.getElementById('countdown');
+    if (diff <= 0){
+      el.textContent = "Offre de lancement terminée";
+      return;
+    }
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+    el.textContent = `${days}j ${hours}h ${mins}m restants`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+</script>
 
 </body>
 </html>
