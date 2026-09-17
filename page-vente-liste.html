@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Défi Side-Hustle — Offre exclusive liste</title>
+<meta name="robots" content="noindex">
+<!-- Cette page n'est volontairement pas indexée (noindex) : elle est réservée aux abonnés de la liste email, à ne pas lier depuis le site public. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1712; --ink-soft:#4A4339; --paper:#FBF7EF; --card:#F3EBDC; --card-line:#E4D6BE;
+    --accent:#E85D0B; --accent-dark:#B94708; --black:#141210;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Lora',serif; color:var(--ink); background:var(--paper); line-height:1.62; font-size:17px;}
+  h1,h2,h3,.btn,.eyebrow,.badge,.price,.step-num{font-family:'Poppins',sans-serif;}
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+
+  /* HERO */
+  .hero{background:radial-gradient(ellipse at 20% -10%, #262019 0%, var(--black) 60%); color:#F4EDE0; padding:70px 0 60px 0;}
+  .eyebrow{color:var(--accent); letter-spacing:3px; text-transform:uppercase; font-size:13px; font-weight:700; margin-bottom:18px;}
+  .hero h1{font-size:38px; font-weight:800; line-height:1.15; margin:0 0 18px 0; color:#FBF7EF;}
+  .hero .thanks{font-size:16px; color:#CBBFA9; font-style:italic; margin-bottom:22px; max-width:560px;}
+  .hero p.lead{font-size:16.5px; color:#D8C9AD; max-width:560px; margin:0 0 30px 0;}
+
+  .price-box{
+    background:#1c1712; border:1px solid #4A4033; border-radius:10px; padding:24px 26px; max-width:480px;
+  }
+  .price-row{display:flex; align-items:baseline; gap:14px; margin-bottom:6px;}
+  .price{font-size:40px; font-weight:800; color:var(--accent);}
+  .price-old{font-size:20px; color:#8A7C63; text-decoration:line-through;}
+  .price-label{font-size:12.5px; color:#B79A6E; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:14px;}
+  .places{
+    display:inline-block; background:#2A2118; border:1px solid var(--accent); color:#F0C9A0; font-size:13px;
+    font-weight:600; padding:6px 12px; border-radius:20px; margin-bottom:16px;
+  }
+  /* MANUEL : mets à jour le nombre ci-dessous ("87") au fur et à mesure des ventes. Dès qu'il atteint 0, remplace tout le bloc .price-box par la version "prix normal 79€" (voir commentaire en bas de fichier). */
+  .btn{
+    display:inline-block; background:var(--accent); color:#fff; font-weight:700; font-size:16px;
+    padding:15px 26px; border-radius:6px; text-decoration:none; text-align:center; width:100%;
+  }
+  .btn:hover{background:var(--accent-dark);}
+  .fine{font-size:12.5px; color:#8A7C63; margin-top:12px; text-align:center;}
+
+  /* SECTIONS */
+  section{padding:50px 0;}
+  h2{font-size:24px; font-weight:800; color:var(--accent-dark); margin:0 0 14px 0;}
+  p{margin:0 0 14px 0;}
+  .section-alt{background:var(--card); border-top:1px solid var(--card-line); border-bottom:1px solid var(--card-line);}
+
+  .steps{display:flex; flex-direction:column; gap:22px; margin-top:20px;}
+  .step{display:flex; gap:18px; align-items:flex-start;}
+  .step-num{font-size:26px; font-weight:800; color:var(--accent); width:40px; flex-shrink:0;}
+  .step h3{margin:0 0 4px 0; font-size:17px; color:var(--ink);}
+  .step p{margin:0; font-size:15px; color:var(--ink-soft);}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:20px;}
+  .item{background:#fff; border:1px solid var(--card-line); border-radius:8px; padding:16px 18px;}
+  .item h3{margin:0 0 6px 0; font-size:15.5px; color:var(--ink);}
+  .item p{margin:0; font-size:13.6px; color:var(--ink-soft);}
+  .item.bonus{border-color:var(--accent); background:#FFF6EE;}
+  .item.bonus h3{color:var(--accent-dark);}
+  @media (max-width:600px){ .grid{grid-template-columns:1fr;} .hero h1{font-size:29px;} }
+
+  .final-price{background:var(--black); color:#F4EDE0; padding:56px 0; text-align:center;}
+  .final-price .price-box{margin:0 auto; text-align:left;}
+
+  .legal{font-size:12.5px; color:#8A7C63; padding:34px 0; text-align:center; line-height:1.7;}
+  .legal a{color:var(--accent-dark);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Défi Side-Hustle — 30 jours · Offre réservée à la liste</div>
+    <h1>Merci de faire partie de cette liste.</h1>
+    <p class="thanks">En guise de remerciement pour être resté·e abonné·e, tu as accès au programme avant tout le monde — à un tarif qui ne sera plus jamais proposé une fois les 100 premières places écoulées.</p>
+    <p class="lead">Un programme structuré jour par jour pour trouver ton idée, créer ton premier produit, construire ta vitrine et faire ta première vente — sans budget publicitaire, sans compétence technique, à raison d'environ 1h par jour.</p>
+
+    <div class="price-box">
+      <div class="price-label">Offre liste — réservée aux 100 premières places</div>
+      <div class="price-row"><span class="price">49€</span><span class="price-old">79€</span></div>
+      <div class="places">🔒 Places restantes au tarif liste : 87</div>
+      <a href="#" class="btn">Je rejoins le programme — 49€</a>
+      <div class="fine">Accès immédiat après paiement · Passé les 100 places, retour au tarif normal de 79€</div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Le problème</h2>
+    <p>Tu veux un revenu complémentaire, mais entre les formations qui promettent monts et merveilles et les idées trop vagues pour être lancées, tu ne sais pas par où commencer — ni comment avancer sans y passer tes soirées pendant six mois.</p>
+    <h2>La méthode</h2>
+    <p>Un parcours de 30 jours, une tâche précise par jour, environ une heure. Pas de promesse de revenu, pas de recette miracle : une méthode pour transformer une idée en offre réelle, testée avant d'être construite, et vendue une première fois avant la fin du mois.</p>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <h2>Quatre semaines, un objectif à chaque étape</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div><h3>Trouver et valider l'idée</h3><p>Identifier un side-hustle adapté à ton temps et tes compétences, et le tester avant de produire quoi que ce soit.</p></div></div>
+      <div class="step"><div class="step-num">02</div><div><h3>Créer le produit</h3><p>Structurer, rédiger et mettre en forme une première version vendable, avec une identité simple et soignée.</p></div></div>
+      <div class="step"><div class="step-num">03</div><div><h3>Construire la vitrine</h3><p>Page de vente, paiement, livraison et séquence email — le tunnel complet, testé de bout en bout.</p></div></div>
+      <div class="step"><div class="step-num">04</div><div><h3>Lancer et vendre</h3><p>Teasing, ouverture des ventes, ajustements en direct, et bilan pour la suite.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Ce que contient le programme</h2>
+    <div class="grid">
+      <div class="item"><h3>Guide premium</h3><p>La méthode complète : mindset, offre, branding minimaliste, création produit, vente.</p></div>
+      <div class="item"><h3>Plan d'action 30 jours</h3><p>Une fiche par jour, une action concrète d'environ une heure.</p></div>
+      <div class="item"><h3>Cahier d'exercices Jour 1</h3><p>Tableau de décision, quiz de profil, fiche de choix et engagement personnel.</p></div>
+      <div class="item"><h3>Templates page de vente & emails</h3><p>Trames prêtes à adapter pour ta propre offre et ta séquence de lancement.</p></div>
+      <div class="item"><h3>Checklists</h3><p>Produit prêt à vendre, tunnel testé, base légale de départ.</p></div>
+      <div class="item"><h3>30 idées de side-hustle</h3><p>Une liste de départ si tu n'as pas encore d'idée précise.</p></div>
+      <div class="item bonus"><h3>🎁 Bonus — Scripts de vente & TikTok</h3><p>20 scripts de vente, 10 scripts DM, 5 relances, 3 modèles d'upsell et 30 scripts TikTok complets.</p></div>
+      <div class="item bonus"><h3>🎁 Bonus — Badge & certificat</h3><p>Un certificat de complétion et un badge réutilisable à la fin des 30 jours.</p></div>
+    </div>
+    <p style="margin-top:22px; font-size:14.5px; color:var(--ink-soft); font-style:italic;">Ce programme ne garantit aucun montant de revenu. Il donne une méthode et un cadre pour avancer, une étape à la fois — le résultat dépend de l'exécution, de l'idée choisie et de la régularité.</p>
+  </div>
+</section>
+
+<div class="final-price">
+  <div class="wrap">
+    <h2 style="color:#FBF7EF;">Rejoindre le programme au tarif liste</h2>
+    <div class="price-box">
+      <div class="price-label">Offre liste — réservée aux 100 premières places</div>
+      <div class="price-row"><span class="price">49€</span><span class="price-old">79€</span></div>
+      <div class="places">🔒 Places restantes au tarif liste : 87</div>
+      <a href="#" class="btn">Je commence le défi — 49€</a>
+      <div class="fine">Accès immédiat au guide et au plan d'action. Produit numérique livré directement après paiement.</div>
+    </div>
+  </div>
+</div>
+
+<div class="legal">
+  <div class="wrap">
+    Aucune donnée personnelle n'est partagée avec des tiers. Pour toute question avant d'achat, écris directement à l'adresse ci-dessous.<br><br>
+    [Ton nom / raison commerciale] — Auto-entrepreneur, Belgique.<br>
+    Contact : [ton email] — <a href="cgvSide.html">Conditions générales de vente</a>
+  </div>
+</div>
+
+<!--
+  NOTES POUR LA MISE À JOUR (Alex) :
+  1. Remplace le lien href="#" des deux boutons par ton vrai lien Stripe (Payment Link) réservé au tarif 49€ —
+     distinct du lien à 79€ utilisé sur page-vente.html.
+  2. Le compteur "Places restantes au tarif liste : 87" est MANUEL — il n'y a pas de compteur automatique ici.
+     Mets-le à jour toi-même (ou demande-moi de le connecter à un compteur Stripe/Worker) à chaque vente.
+  3. Dès que le compteur atteint 0 : remplace le contenu des deux .price-box par un simple message
+     "Le tarif liste à 49€ est épuisé — le programme reste disponible au tarif normal à 79€" avec un lien
+     vers page-vente.html (le lien à 79€), pour ne pas laisser cette page vendre indéfiniment à 49€.
+  4. Remplace [ton nom / raison commerciale] et [ton email] par tes vraies coordonnées, comme sur page-vente.html.
+  5. Cette page est en noindex : ne la lie pas depuis ton menu ou ton site public, envoie-la uniquement par email à ta liste.
+-->
+
+</body>
+</html>
