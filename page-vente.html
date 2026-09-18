@@ -190,14 +190,14 @@
     <p class="lede">Un programme structuré jour par jour pour trouver ton idée, créer ton premier produit, construire ta vitrine et faire ta première vente — sans budget publicitaire, sans compétence technique, à raison d'environ 1h par jour.</p>
     <div class="cta-row">
       <a class="btn" href="#prix">Rejoindre le programme — 79€</a>
-      <span class="price-note">Prix de lancement, 100 premières places</span>
+      <span class="price-note">Prix de lancement, jusqu'au 31 octobre 2026</span>
     </div>
   </div>
 </header>
 
 <div class="launch-bar" id="launch-bar">
   <div class="wrap-wide launch-inner">
-    <span>Prix de lancement à 79€ (au lieu de 99€) — <strong id="places-restantes">Il reste 100 places</strong></span>
+    <span>Prix de lancement à 79€ (au lieu de 99€) — valable jusqu'au 31 octobre</span>
     <span id="countdown">--j --h --m</span>
   </div>
 </div>
@@ -283,16 +283,16 @@
   <div class="wrap">
     <h2>Rejoindre le programme</h2>
     <div class="amount">79€ <span style="font-size:26px;color:var(--taupe-light);text-decoration:line-through;">99€</span></div>
-    <div class="split-pay">Prix de lancement — <span id="places-restantes-2">100 premières places</span></div>
-    <a class="btn" href="#">Je commence le défi</a>
+    <div class="split-pay">Prix de lancement — <span id="places-restantes-2">jusqqu'au 31 octobre 2026</span></div>
+    <a class="btn" href="https://buy.stripe.com/cNi14ofl10YXbSd7y983C06">Je commence le défi</a>
     <p class="fine">Accès immédiat au guide et au plan d'action. Produit numérique livré directement après paiement.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p>[Ton nom / raison commerciale] — Auto-entrepreneur, Belgique.</p>
-    <p>Contact : [ton email] — <a href="#">Conditions générales de vente</a></p>
+    <p>Alex de ActivityWeb — Auto-entrepreneur, Belgique.</p>
+    <p>Contact :contact@activityweb.be — <a href="cgv.html">Conditions générales de vente</a></p>
   </div>
 </footer>
 
@@ -300,23 +300,12 @@
   /* =========================================================
      À METTRE À JOUR TOI-MÊME :
 
-     1) DATE LIMITE du prix de lancement — modifie la ligne ci-dessous.
-        Une fois la date passée, le bandeau affiche "Offre terminée"
-        (pense aussi à changer le prix affiché sur la page à ce moment-là).
+     DATE LIMITE du prix de lancement — modifie la ligne ci-dessous.
+     Une fois la date passée, le bandeau affiche "Offre terminée"
+     (pense aussi à changer le prix affiché sur la page à ce moment-là,
+     et à désactiver le lien de paiement à 79€ côté Stripe).
   ========================================================= */
-  const DATE_LIMITE = new Date("2026-09-26T23:59:59");
-
-  /* 2) PLACES RESTANTES — change ce nombre à chaque vente confirmée.
-        Ne jamais automatiser une baisse fictive de ce chiffre :
-        il doit refléter le nombre réel de ventes.
-  ========================================================= */
-  const PLACES_RESTANTES = 100;
-
-  document.querySelectorAll('#places-restantes, #places-restantes-2').forEach(el => {
-    el.textContent = PLACES_RESTANTES > 0
-      ? `Il reste ${PLACES_RESTANTES} places`
-      : "Plus de places à ce prix";
-  });
+  const DATE_LIMITE = new Date("2026-10-31T23:59:59");
 
   function updateCountdown(){
     const now = new Date();
