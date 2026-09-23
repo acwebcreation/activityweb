@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pack SaaS Débutant — Tout pour démarrer votre activité | ActivityWeb</title>
-<meta name="description" content="CGV, annuaires, emails de prospection, scripts d'appel, kit design et prompts IA — le pack complet pour démarrer votre activité indépendante en Belgique ou en France. 79€ pour les 100 premiers.">
+<title>Pack SaaS Débutant : tout pour démarrer votre activité | ActivityWeb</title>
+<meta name="description" content="CGV, annuaires, emails de prospection, scripts d'appel, kit design, prompts IA, versions Word modifiables et fichier de suivi de prospection. Le pack complet pour démarrer votre activité indépendante en Belgique ou en France, 67 €.">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -23,7 +23,7 @@
 html { scroll-behavior:smooth; }
 body { font-family:'DM Sans', sans-serif; background:var(--cream); color:var(--text); overflow-x:hidden; }
 
-/* ── NAV (identique au reste du site) ───────── */
+/* NAV (identique au reste du site) */
 nav { position:fixed; top:0; left:0; right:0; height:64px; background:var(--navy); display:flex; align-items:center; justify-content:space-between; padding:0 5%; z-index:200; box-shadow:0 2px 20px rgba(0,0,0,0.25); }
 .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
 .logo-mark { width:36px; height:36px; background:var(--orange); border-radius:6px; display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display', serif; font-size:0.85rem; color:white; letter-spacing:-0.02em; }
@@ -49,12 +49,9 @@ nav { position:fixed; top:0; left:0; right:0; height:64px; background:var(--navy
 .btn-primary:hover { background:var(--orange-lt); transform:translateY(-1px); }
 .price-inline { font-family:'DM Serif Display',serif; color:white; font-size:1.1rem; }
 .price-inline .num { color:var(--orange); font-size:1.6rem; }
-.price-inline .was { text-decoration:line-through; color:rgba(255,255,255,0.35); font-size:0.9rem; margin-left:6px; font-family:'DM Sans',sans-serif; }
+.price-inline .unit { color:rgba(255,255,255,0.5); font-size:0.85rem; margin-left:6px; font-family:'DM Sans',sans-serif; }
+.reassure { font-size:0.85rem; color:rgba(255,255,255,0.5); }
 
-.counter-line { font-size:0.85rem; color:rgba(255,255,255,0.55); }
-.counter-line strong { color:var(--orange); font-variant-numeric:tabular-nums; }
-.counter-bar { width:100%; max-width:280px; height:6px; background:rgba(255,255,255,0.12); border-radius:3px; margin-top:8px; overflow:hidden; }
-.counter-bar-fill { height:100%; background:var(--orange); width:0%; transition:width .6s ease; }
 
 /* ── SECTIONS GÉNÉRIQUES ─────────────────── */
 section.pack-section { padding:72px 5%; }
@@ -77,10 +74,10 @@ h2 em { font-style:italic; color:var(--orange); }
 .receipt-title { font-family:'DM Serif Display',serif; font-size:1.1rem; text-align:center; margin-bottom:24px; color:white; }
 .receipt-line { display:flex; justify-content:space-between; gap:12px; padding:10px 0; font-size:0.92rem; border-bottom:1px dashed rgba(255,255,255,0.15); }
 .receipt-line .label { color:rgba(255,255,255,0.75); }
-.receipt-line .val { color:rgba(255,255,255,0.4); text-decoration:line-through; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.receipt-line .val { color:rgba(255,255,255,0.55); white-space:nowrap; font-variant-numeric:tabular-nums; }
 .receipt-total { display:flex; justify-content:space-between; padding-top:18px; margin-top:6px; border-top:1px solid rgba(255,255,255,0.25); }
 .receipt-total .label { font-family:'DM Serif Display',serif; font-size:1.05rem; color:white; }
-.receipt-total .val { text-decoration:line-through; color:rgba(255,255,255,0.4); font-size:1rem; }
+.receipt-total .val { color:rgba(255,255,255,0.7); font-size:1rem; }
 .receipt-final { display:flex; justify-content:space-between; align-items:baseline; background:rgba(232,104,42,0.12); border:1px solid rgba(232,104,42,0.3); border-radius:8px; margin-top:16px; padding:16px 18px; }
 .receipt-final .label { font-size:0.9rem; color:rgba(255,255,255,0.75); }
 .receipt-final .val { font-family:'DM Serif Display',serif; font-weight:400; font-size:1.9rem; color:var(--orange); }
@@ -124,80 +121,90 @@ footer a:hover { color:var(--orange); }
     <li><a href="guides.html">Guides IA</a></li>
     <li><a href="#contenu">Le pack</a></li>
     <li><a href="#faq">Questions</a></li>
-    <li><a href="#tarif" class="nav-cta">Je commence pour 79€</a></li>
+    <li><a href="#tarif" class="nav-cta">Je commence pour 67€</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="pack-hero">
   <div class="hero-badge">Pack SaaS Débutant · ActivityWeb</div>
-  <h1>Tout ce qu'il te faut pour démarrer, <em>sans tout créer toi-même</em></h1>
-  <p class="lede">CGV, base d'annuaires, emails de prospection, scripts d'appel, kit design et prompts IA — condensés pour les indépendants et entrepreneurs qui débutent en Belgique ou en France.</p>
+  <h1>Tout ce qu'il vous faut pour démarrer, <em>sans tout créer vous-même</em></h1>
+  <p class="lede">CGV, annuaires, emails de prospection, scripts d'appel, kit design et prompts IA. En PDF et en Word modifiable, avec un fichier de suivi de prospection. Pensé pour les indépendants et entrepreneurs qui débutent en Belgique ou en France.</p>
 
   <div class="hero-cta-row">
-    <a href="#tarif" class="btn-primary">Je commence pour 79€ →</a>
-    <div class="price-inline"><span class="num">79€</span><span class="was">99€</span></div>
+    <a href="#tarif" class="btn-primary">Je commence pour 67€ →</a>
+    <div class="price-inline"><span class="num">67€</span><span class="unit">paiement unique</span></div>
   </div>
-
-  <div class="counter-line">
-    <strong id="spotsLeft">—</strong> places restantes au tarif de lancement sur 100
-    <div class="counter-bar"><div class="counter-bar-fill" id="counterFill"></div></div>
-  </div>
+  <p class="reassure">Téléchargement immédiat après le paiement. Pas d'abonnement.</p>
 </section>
 
 <!-- CONTENU DU PACK -->
 <section class="pack-section alt" id="contenu">
   <div class="section-tag">Ce que contient le pack</div>
-  <h2>Sept éléments prêts à l'emploi</h2>
+  <h2>Neuf éléments prêts à l'emploi</h2>
   <p class="section-sub">Pensés pour un indépendant qui démarre en Belgique ou en France.</p>
 
   <div class="item-row">
     <div class="item-mark">01</div>
     <div class="item-body">
-      <h3>CGV &amp; Politique de confidentialité</h3>
-      <p>Base rédigée pour la Belgique et la France (RGPD, droit de rétractation, mentions légales), à personnaliser et faire valider selon ton activité.</p>
+      <h3>CGV &amp; politique de confidentialité</h3>
+      <p>Modèles pour la Belgique et la France (RGPD, droit de rétractation, TVA), avec une checklist avant publication. À personnaliser et à faire valider selon votre activité.</p>
     </div>
   </div>
   <div class="item-row">
     <div class="item-mark">02</div>
     <div class="item-body">
       <h3>97 annuaires francophones vérifiés</h3>
-      <p>France, Belgique, Suisse, Québec, plateformes sectorielles et freelance — classés par catégorie, avec lien direct.</p>
+      <p>France, Belgique, Suisse, Québec, plateformes sectorielles, freelance et avis clients. Classés par catégorie, avec une case à cocher pour suivre vos inscriptions.</p>
     </div>
   </div>
   <div class="item-row">
     <div class="item-mark">03</div>
     <div class="item-body">
-      <h3>45+ emails de prospection prêts à l'emploi</h3>
-      <p>10 séquences complètes (prise de RDV, vente, webinaire, réactivation) et 6 templates ponctuels, avec prompts IA de personnalisation.</p>
+      <h3>39 emails de prospection prêts à l'emploi</h3>
+      <p>10 séquences complètes (prise de RDV, vente directe, atelier gratuit, réactivation) et 6 templates ponctuels, avec un prompt IA de personnalisation pour chaque séquence.</p>
     </div>
   </div>
   <div class="item-row">
     <div class="item-mark">04</div>
     <div class="item-body">
       <h3>Scripts d'appel &amp; bibliothèque d'objections</h3>
-      <p>La structure d'un bon appel en 7 phases, 5 scripts par situation, et les réponses aux objections les plus fréquentes.</p>
+      <p>La structure d'un bon appel en 7 phases, 5 scripts par situation, les réponses aux 6 objections les plus fréquentes et une checklist avant de décrocher.</p>
     </div>
   </div>
   <div class="item-row">
     <div class="item-mark">05</div>
     <div class="item-body">
-      <h3>Kit design — 6 templates Canva</h3>
-      <p>Conseil du jour, citation, offre, promo, avant/après, témoignage — palette neutre facile à recolorer, plus un guide de personnalisation pas à pas.</p>
+      <h3>Kit design : 6 templates Canva</h3>
+      <p>Conseil du jour, citation, offre, promo, avant/après, témoignage. Une palette neutre facile à recolorer, et un guide de personnalisation pas à pas.</p>
     </div>
   </div>
   <div class="item-row">
     <div class="item-mark">06</div>
     <div class="item-body">
-      <h3>6 prompts IA — Business plan</h3>
-      <p>Proposition de valeur, persona client, structuration de l'offre, analyse concurrentielle, mini business plan, test de désirabilité.</p>
+      <h3>6 prompts IA pour votre business plan</h3>
+      <p>Proposition de valeur, client idéal, formules d'offre, analyse des concurrents, mini business plan et test de votre idée. Chaque prompt a ses questions de relance.</p>
     </div>
   </div>
   <div class="item-row">
     <div class="item-mark">07</div>
     <div class="item-body">
-      <h3>Checklist "Ne te lance pas sans ça"</h3>
-      <p>Le guide de démarrage complet (légal, présence en ligne, outils, prospection, identité visuelle) en bonus du pack.</p>
+      <h3>Versions Word modifiables</h3>
+      <p>Tous les guides existent aussi en Word (.docx). Vous modifiez directement le texte, vous copiez vos CGV sur votre site, vous adaptez les emails à votre ton. Compatible Google Docs.</p>
+    </div>
+  </div>
+  <div class="item-row">
+    <div class="item-mark">08</div>
+    <div class="item-body">
+      <h3>Fichier de suivi de prospection</h3>
+      <p>Un tableau Excel prêt à l'emploi : vos prospects, vos relances (en rouge dès qu'elles sont en retard), vos devis et un tableau de bord qui calcule tout seul votre taux de conversion et votre chiffre d'affaires.</p>
+    </div>
+  </div>
+  <div class="item-row">
+    <div class="item-mark">09</div>
+    <div class="item-body">
+      <h3>Bonus : checklist « Ne te lance pas sans ça »</h3>
+      <p>Le guide de démarrage complet (légal, présence en ligne, outils, prospection, identité visuelle) inclus dans le pack.</p>
     </div>
   </div>
 </section>
@@ -205,20 +212,22 @@ footer a:hover { color:var(--orange); }
 <!-- VALEUR CUMULÉE -->
 <section class="pack-section">
   <div class="section-tag">Ce que ça vaudrait séparément</div>
-  <h2>Le <em>reçu</em>, si acheté pièce par pièce</h2>
-  <p class="section-sub">Chaque élément existe comme produit indépendant sur le marché. Voici une estimation basse de leur prix pris un par un.</p>
+  <h2>Le <em>reçu</em>, pièce par pièce</h2>
+  <p class="section-sub">Chaque élément existe comme produit indépendant sur le marché. Voici une estimation basse de leur valeur prise une par une.</p>
 
   <div class="receipt-wrap">
     <div class="receipt">
-      <div class="receipt-title">REÇU — SI ACHETÉ SÉPARÉMENT</div>
+      <div class="receipt-title">VALEUR ESTIMÉE SÉPARÉMENT</div>
       <div class="receipt-line"><span class="label">CGV &amp; confidentialité (BE/FR)</span><span class="val">60€</span></div>
       <div class="receipt-line"><span class="label">Base de 97 annuaires vérifiés</span><span class="val">20€</span></div>
-      <div class="receipt-line"><span class="label">45+ emails de prospection</span><span class="val">35€</span></div>
+      <div class="receipt-line"><span class="label">39 emails de prospection</span><span class="val">35€</span></div>
       <div class="receipt-line"><span class="label">Scripts d'appel &amp; objections</span><span class="val">25€</span></div>
       <div class="receipt-line"><span class="label">Kit design 6 templates + guide</span><span class="val">20€</span></div>
       <div class="receipt-line"><span class="label">6 prompts IA business plan</span><span class="val">12€</span></div>
-      <div class="receipt-total"><span class="label">Total séparé</span><span class="val">172€</span></div>
-      <div class="receipt-final"><span class="label">Prix du pack aujourd'hui</span><span class="val">79€</span></div>
+      <div class="receipt-line"><span class="label">Versions Word modifiables</span><span class="val">20€</span></div>
+      <div class="receipt-line"><span class="label">Fichier de suivi de prospection</span><span class="val">15€</span></div>
+      <div class="receipt-total"><span class="label">Total séparé</span><span class="val">207€</span></div>
+      <div class="receipt-final"><span class="label">Prix du pack complet</span><span class="val">67€</span></div>
     </div>
   </div>
 </section>
@@ -229,19 +238,19 @@ footer a:hover { color:var(--orange); }
   <h2>Avant de <em>commander</em></h2>
   <div class="split">
     <div class="split-col yes">
-      <h3>Ce pack est fait pour toi si</h3>
+      <h3>Ce pack est fait pour vous si</h3>
       <ul>
-        <li>Tu démarres une activité indépendante en Belgique ou en France</li>
-        <li>Tu n'as pas le temps de tout créer de zéro (légal, prospection, visuels)</li>
-        <li>Tu préfères partir d'une base solide plutôt qu'une page blanche</li>
+        <li>Vous démarrez une activité indépendante en Belgique ou en France</li>
+        <li>Vous n'avez pas le temps de tout créer de zéro (légal, prospection, visuels)</li>
+        <li>Vous préférez partir d'une base solide plutôt que d'une page blanche</li>
       </ul>
     </div>
     <div class="split-col no">
-      <h3>Ce pack n'est pas fait pour toi si</h3>
+      <h3>Ce pack n'est pas fait pour vous si</h3>
       <ul>
-        <li>Tu as déjà tes CGV, tes templates et ta prospection en place</li>
-        <li>Tu cherches un accompagnement individuel plutôt que des ressources</li>
-        <li>Ton activité est hors Belgique/France (les CGV ne couvrent que ces deux droits)</li>
+        <li>Vos CGV, vos templates et votre prospection sont déjà en place</li>
+        <li>Vous cherchez un accompagnement individuel plutôt que des ressources</li>
+        <li>Votre activité est hors Belgique et France (les CGV ne couvrent que ces deux droits)</li>
       </ul>
     </div>
   </div>
@@ -250,41 +259,42 @@ footer a:hover { color:var(--orange); }
 <!-- FAQ -->
 <section class="pack-section" id="faq">
   <div class="section-tag">Questions fréquentes</div>
-  <h2>Avant de te <em>lancer</em></h2>
+  <h2>Avant de vous <em>lancer</em></h2>
 
   <div class="faq-item">
-    <h3>Les CGV sont-elles prêtes à l'emploi telles quelles ?</h3>
-    <p>Ce sont des bases solides à personnaliser (informations entre crochets à compléter). Elles ne remplacent pas un avocat — fais relire le document final selon ton secteur et ton pays.</p>
-  </div>
-  <div class="faq-item">
-    <h3>Le prix va vraiment augmenter ?</h3>
-    <p>Oui — le tarif à 79€ est limité aux 100 premiers achats, avec un plafond appliqué directement sur le lien de paiement. Passé ce cap, le pack repasse à 99€.</p>
-  </div>
-  <div class="faq-item">
     <h3>Sous quel format je reçois le pack ?</h3>
-    <p>Des fichiers PDF prêts à consulter et personnaliser, plus les liens vers les 6 templates Canva modifiables.</p>
+    <p>Chaque guide en PDF prêt à consulter et en Word (.docx) modifiable, le fichier Excel de suivi de prospection, et les liens vers les 6 templates Canva. Le tout dans un seul fichier à télécharger juste après le paiement.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Je peux modifier les documents ?</h3>
+    <p>Oui, c'est tout l'intérêt des versions Word. Les éléments à remplacer sont signalés en orange. Les fichiers s'ouvrent dans Word, LibreOffice ou Google Docs, et le suivi de prospection dans Excel ou Google Sheets.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Les CGV sont-elles prêtes à l'emploi telles quelles ?</h3>
+    <p>Ce sont des bases solides à personnaliser (informations entre crochets à compléter). Elles ne remplacent pas un avocat. Faites relire le document final selon votre secteur et votre pays.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Y a-t-il un abonnement ?</h3>
+    <p>Non. Vous payez 67 € une seule fois, vous téléchargez les fichiers et ils sont à vous.</p>
   </div>
   <div class="faq-item">
     <h3>C'est adapté à mon secteur d'activité ?</h3>
-    <p>Le contenu est généraliste et pensé pour tout type d'indépendant débutant — service ou petit produit. Certaines mentions (secteurs réglementés) peuvent nécessiter des ajustements spécifiques.</p>
+    <p>Le contenu est généraliste et pensé pour tout type d'indépendant débutant, qu'il vende un service ou un petit produit. Certaines mentions (secteurs réglementés) peuvent demander des ajustements spécifiques.</p>
   </div>
 </section>
 
 <!-- CTA FINALE -->
 <div class="pack-final" id="tarif">
-  <h2>Démarre avec une base complète, pas une page blanche</h2>
-  <p>79€ pour les 100 premiers, puis 99€. Places limitées et suivies en temps réel.</p>
-  <a href="https://buy.stripe.com/VOTRE-LIEN-DE-PAIEMENT" class="btn-primary">Je commence pour 79€ →</a>
-  <div class="counter-line" style="margin-top:22px;">
-    <strong id="spotsLeft2">—</strong> places restantes sur 100
-  </div>
+  <h2>Démarrez avec une base complète, pas une page blanche</h2>
+  <p>67 € en paiement unique. Téléchargement immédiat de tous les fichiers.</p>
+  <a href="https://buy.stripe.com/dRm14o7SzcHFbSd7y983C0a" class="btn-primary">Je commence pour 67€ →</a>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <strong>ActivityWeb Studio – Sites web &amp; Digital</strong> · BCE 0558.805.548<br>
+  <strong>ActivityWeb Studio · Sites web &amp; Digital</strong> · BCE 0558.805.548<br>
   <span style="margin-top:6px;display:inline-block;">
-    <a href="mailto:contact@activityweb.be">contact@activityweb.be</a> · © 2025 ActivityWeb
+    <a href="mailto:contact@activityweb.be">contact@activityweb.be</a> · © 2026 ActivityWeb
   </span>
   <div style="margin-top:10px;">
     <a href="mentions-legales.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.78rem;">Mentions légales</a>
@@ -294,44 +304,6 @@ footer a:hover { color:var(--orange); }
     <a href="politique-confidentialite.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.78rem;">Confidentialité</a>
   </div>
 </footer>
-
-<script>
-  // ---------------------------------------------------------------
-  // Compteur de places en temps réel — branché sur le Worker
-  // Cloudflare (worker.js) qui interroge l'API Stripe.
-  // Remplace l'URL ci-dessous par celle de ton Worker déployé.
-  // ---------------------------------------------------------------
-  const COUNTER_ENDPOINT = "https://pack-saas-compteur.TON-SOUS-DOMAINE.workers.dev";
-  const FALLBACK_USED = 0;
-  const LIMIT = 100;
-  const REFRESH_MS = 120000;
-
-  function renderCounter(used, limit) {
-    const left = Math.max(limit - used, 0);
-    document.querySelectorAll('#spotsLeft, #spotsLeft2').forEach(el => el.textContent = left);
-    const fill = document.getElementById('counterFill');
-    if (fill) fill.style.width = Math.min((used / limit) * 100, 100) + '%';
-  }
-
-  async function loadCounter() {
-    if (!COUNTER_ENDPOINT || COUNTER_ENDPOINT.includes("TON-SOUS-DOMAINE")) {
-      renderCounter(FALLBACK_USED, LIMIT);
-      return;
-    }
-    try {
-      const res = await fetch(COUNTER_ENDPOINT, { cache: "no-store" });
-      if (!res.ok) throw new Error("worker error");
-      const data = await res.json();
-      if (typeof data.used !== "number") throw new Error("bad payload");
-      renderCounter(data.used, data.limit || LIMIT);
-    } catch (e) {
-      renderCounter(FALLBACK_USED, LIMIT);
-    }
-  }
-
-  loadCounter();
-  setInterval(loadCounter, REFRESH_MS);
-</script>
 
 </body>
 </html>
