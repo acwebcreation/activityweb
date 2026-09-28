@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Surprises personnalisées à envoyer par lien | ActivityWeb Studio</title>
-<meta name="description" content="Lettre animée de Saint-Nicolas, cartes à gratter, bons cadeaux, poèmes : personnalisez votre surprise en quelques minutes et envoyez-la par un simple lien.">
-<meta property="og:title" content="Surprises personnalisées à envoyer par lien">
-<meta property="og:description" content="Lettres animées, cartes à gratter, bons cadeaux et poèmes. Rien à imprimer.">
+<title>Petites applis pour faire plaisir et se simplifier la vie | ActivityWeb Studio</title>
+<meta name="description" content="Lettres animées, cartes à gratter, bons cadeaux, et bientôt des applis pour les parents, les études, les enfants et les dys. À utiliser en ligne, rien à imprimer.">
+<meta property="og:title" content="Petites applis pour faire plaisir et se simplifier la vie">
+<meta property="og:description" content="Fêtes & surprises, parents, études, enfants, dys : des applis simples, à utiliser en ligne.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,28 +17,43 @@
     --sun:#FFC93C; --marigold:#F28C28; --berry:#D6336C; --line:#EADFC8;
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{margin:0;background:var(--paper);color:var(--ink);
     font:400 1.0625rem/1.6 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif}
   a{color:inherit}
   :focus-visible{outline:3px solid var(--berry);outline-offset:3px;border-radius:4px}
   .wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
-  .display{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
+  h1,h2,h3,h4,.brand,.price{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
 
-  /* En-tête + hero */
+  /* Hero */
   .hero{background:linear-gradient(165deg,var(--sun) 0%,var(--marigold) 100%);
-    border-radius:0 0 2rem 2rem;padding-bottom:2.5rem}
+    border-radius:0 0 2rem 2rem;padding-bottom:2.8rem}
   .top{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 1.5rem}
-  .brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.15rem;text-decoration:none}
+  .brand{font-weight:800;font-size:1.15rem;text-decoration:none}
   .top a.etsy{font-weight:600;font-size:.95rem}
-  h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
-    font-size:clamp(2.1rem,6.5vw,3.8rem);line-height:1.04;letter-spacing:-.02em;
-    margin:0 0 1rem;max-width:17ch}
+  h1{font-weight:800;font-size:clamp(2.1rem,6.5vw,3.8rem);line-height:1.04;letter-spacing:-.02em;
+    margin:0 0 1rem;max-width:18ch}
   .lead{max-width:38rem;font-size:1.15rem;margin:0 0 2rem}
-  .cal-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.1rem;margin:0 0 .6rem}
 
-  /* Le calendrier des fêtes (feuilles d'éphéméride) */
-  .cal{display:flex;gap:1rem;overflow-x:auto;padding:.6rem .3rem 1.2rem;
-    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  /* Les deux portes d'entrée */
+  .doors{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+  .door{display:flex;gap:1rem;align-items:center;background:#fff;border:2px solid var(--ink);
+    border-radius:1rem;box-shadow:0 5px 0 var(--ink);padding:1.1rem 1.2rem;text-decoration:none;
+    transition:transform .15s ease}
+  .door:hover{transform:translateY(-3px)}
+  .door .ico{font-size:2.4rem;line-height:1}
+  .door strong{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.35rem;line-height:1.15}
+  .door span{color:var(--muted);font-size:.95rem}
+
+  /* Univers */
+  .universe{padding:3.5rem 0 1rem}
+  .universe > h2{font-weight:800;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 .4rem}
+  .universe > .intro{color:var(--muted);max-width:40rem;margin:0 0 1.4rem}
+  .universe + .universe{border-top:3px solid var(--ink);margin-top:2.5rem}
+
+  /* Calendrier des fêtes */
+  .cal-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.05rem;margin:0 0 .5rem}
+  .cal{display:flex;gap:1rem;overflow-x:auto;padding:.6rem .3rem 1.2rem;scroll-snap-type:x mandatory}
   .sheet{flex:0 0 7.4rem;scroll-snap-align:start;background:#fff;border:2px solid var(--ink);
     border-radius:.6rem;box-shadow:0 4px 0 var(--ink);text-align:center;text-decoration:none;
     overflow:hidden;transition:transform .15s ease}
@@ -53,10 +68,45 @@
   .sheet.next .m{background:var(--ink)}
   .sheet.next .c{color:var(--berry);font-weight:600}
 
+  /* Pastilles de catégories (Au quotidien) */
+  .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 .5rem;padding:0;list-style:none}
+  .chips a{display:inline-flex;gap:.4rem;align-items:center;text-decoration:none;font-weight:600;
+    background:#fff;border:2px solid var(--ink);border-radius:2rem;padding:.35rem .95rem;box-shadow:0 3px 0 var(--ink)}
+  .chips a:hover{background:var(--sun)}
+
+  /* Rubriques (une fête ou une catégorie) */
+  .rubric{padding:2.2rem 0 .5rem}
+  .rubric + .rubric{border-top:2px dashed var(--line)}
+  .rubric-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem}
+  .rubric h3{font-weight:800;font-size:clamp(1.45rem,3.6vw,1.9rem);line-height:1.1;margin:0}
+  .badge{background:var(--berry);color:#fff;font-weight:600;font-size:.82rem;padding:.2rem .7rem;border-radius:1rem}
+  .when{margin:.2rem 0 0;font-weight:600}
+  .rubric .intro{color:var(--muted);margin:.2rem 0 1.3rem;max-width:40rem}
+
+  /* Cartes outils */
+  .tools{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr))}
+  .tool{background:#fff;border:2px solid var(--ink);border-radius:1rem;box-shadow:0 5px 0 var(--ink);
+    display:flex;flex-direction:column;overflow:hidden}
+  .tool .pic{height:7.5rem;display:grid;place-items:center;font-size:3.4rem;border-bottom:2px dashed var(--ink)}
+  .tool .body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;flex:1}
+  .tool h4{font-weight:800;font-size:1.25rem;line-height:1.15;margin:0 0 .4rem}
+  .tool p{margin:0 0 1rem;font-size:.97rem;color:var(--muted)}
+  .tool .meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;margin-bottom:.9rem}
+  .price{font-weight:800;font-size:1.35rem}
+  .langs{font-size:.8rem;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:.4rem;padding:.15rem .45rem}
+  .btn{display:block;text-align:center;background:var(--ink);color:#fff;text-decoration:none;
+    font-weight:600;padding:.75rem 1rem;border-radius:.6rem}
+  .btn:hover{background:var(--berry)}
+  .btn.off{background:var(--line);color:var(--muted)}
+
+  /* Encart "bientôt" quand un univers est encore vide */
+  .soon{background:#fff;border:2px dashed var(--ink);border-radius:1rem;padding:1.4rem 1.3rem;max-width:44rem}
+  .soon p{margin:0}
+  .soon .icons{font-size:1.8rem;margin-bottom:.4rem;letter-spacing:.3rem}
+
   /* Comment ça marche */
-  .how{padding:3rem 0 1rem}
-  .how h2,.event h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
-    font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.1;margin:0 0 1.2rem;letter-spacing:-.01em}
+  .how{padding:3rem 0 0}
+  .how h2{font-weight:800;font-size:clamp(1.6rem,4vw,2.2rem);margin:0 0 1.2rem}
   .steps{list-style:none;margin:0;padding:0;display:grid;gap:1.2rem;
     grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));counter-reset:s}
   .steps li{counter-increment:s;display:flex;gap:.8rem;align-items:flex-start}
@@ -66,37 +116,14 @@
   .steps strong{display:block}
   .steps span{color:var(--muted);font-size:.97rem}
 
-  /* Sections par fête */
-  .event{padding:2.5rem 0 1rem;border-top:2px dashed var(--line);margin-top:1.5rem}
-  .event-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem;margin-bottom:.3rem}
-  .event-head h2{margin:0}
-  .badge{background:var(--berry);color:#fff;font-weight:600;font-size:.82rem;
-    padding:.2rem .7rem;border-radius:1rem}
-  .event-intro{color:var(--muted);margin:.2rem 0 1.4rem;max-width:40rem}
-  .tools{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr))}
-  .tool{background:#fff;border:2px solid var(--ink);border-radius:1rem;box-shadow:0 5px 0 var(--ink);
-    display:flex;flex-direction:column;overflow:hidden}
-  .tool .pic{height:7.5rem;display:grid;place-items:center;font-size:3.4rem;border-bottom:2px dashed var(--ink)}
-  .tool .body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;flex:1}
-  .tool h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.25rem;line-height:1.15;margin:0 0 .4rem}
-  .tool p{margin:0 0 1rem;font-size:.97rem;color:var(--muted)}
-  .tool .meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;margin-bottom:.9rem}
-  .price{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.35rem;color:var(--ink)}
-  .langs{font-size:.8rem;font-weight:600;color:var(--ink);background:var(--paper);
-    border:1px solid var(--line);border-radius:.4rem;padding:.15rem .45rem}
-  .btn{display:block;text-align:center;background:var(--ink);color:#fff;text-decoration:none;
-    font-weight:600;padding:.75rem 1rem;border-radius:.6rem}
-  .btn:hover{background:var(--berry)}
-  .btn.off{background:var(--line);color:var(--muted);pointer-events:none}
-
-  /* Pied de page */
   footer{margin-top:3.5rem;background:var(--ink);color:#fff;padding:2.5rem 0}
   footer p{margin:0 0 .6rem;max-width:40rem}
   footer a{color:var(--sun);font-weight:600}
   footer .small{color:#CDBFC7;font-size:.9rem}
 
   @media (prefers-reduced-motion:reduce){
-    .sheet,.sheet:hover,.sheet.next,.sheet.next:hover{transition:none;transform:none}
+    html{scroll-behavior:auto}
+    .door,.door:hover,.sheet,.sheet:hover,.sheet.next,.sheet.next:hover{transition:none;transform:none}
   }
 </style>
 </head>
@@ -105,154 +132,207 @@
 <div class="hero">
   <div class="wrap">
     <header class="top">
-      <a class="brand" href="/">ActivityWeb Studio</a>
+      <a class="brand" href="https://www.activityweb.be/">ActivityWeb Studio</a>
       <a class="etsy" href="https://www.etsy.com/shop/ActivityWebStudio">Nos avis sur Etsy</a>
     </header>
-    <h1>Des surprises personnalisées, à envoyer par un simple lien.</h1>
-    <p class="lead">Lettres animées, cartes à gratter, bons cadeaux et poèmes. Vous personnalisez en quelques minutes, vous recevez votre lien, vous le partagez par WhatsApp, SMS ou e-mail. Rien à imprimer.</p>
-    <p class="cal-title">Le calendrier des fêtes</p>
-    <nav class="cal" id="calendrier" aria-label="Choisir une fête"></nav>
+    <h1>Des petites applis pour faire plaisir et se simplifier la vie.</h1>
+    <p class="lead">Des outils simples, à utiliser directement dans le navigateur, sur téléphone comme sur ordinateur. Rien à installer, rien à imprimer.</p>
+    <nav class="doors" aria-label="Choisir un univers">
+      <a class="door" href="#fetes">
+        <span class="ico" aria-hidden="true">🎉</span>
+        <span><strong>Fêtes & surprises</strong><span>Lettres animées, cartes à gratter, bons cadeaux</span></span>
+      </a>
+      <a class="door" href="#quotidien">
+        <span class="ico" aria-hidden="true">📚</span>
+        <span><strong>Au quotidien</strong><span>Parents, études, enfants, dys</span></span>
+      </a>
+    </nav>
   </div>
 </div>
 
 <main class="wrap">
+  <section class="universe" id="fetes">
+    <h2>Fêtes & surprises</h2>
+    <p class="intro">Personnalisez votre surprise en quelques minutes, puis envoyez-la par WhatsApp, SMS ou e-mail.</p>
+    <p class="cal-title">Le calendrier des fêtes</p>
+    <nav class="cal" id="calendrier" aria-label="Choisir une fête"></nav>
+    <div id="liste-fetes"></div>
+  </section>
+
+  <section class="universe" id="quotidien">
+    <h2>Au quotidien</h2>
+    <p class="intro">Des applis pratiques pour les parents, les élèves et les étudiants, avec des outils pensés pour les enfants dys.</p>
+    <ul class="chips" id="pastilles"></ul>
+    <div id="liste-quotidien"></div>
+  </section>
+
   <section class="how">
     <h2>Comment ça marche</h2>
     <ol class="steps">
-      <li><div><strong>Choisissez votre outil</strong><span>Payez en ligne en toute sécurité.</span></div></li>
-      <li><div><strong>Personnalisez-le</strong><span>Prénoms, message, date : tout se fait dans votre navigateur.</span></div></li>
-      <li><div><strong>Envoyez le lien</strong><span>Par WhatsApp, SMS ou e-mail. La surprise s'ouvre sur téléphone comme sur ordinateur.</span></div></li>
+      <li><div><strong>Choisissez votre appli</strong><span>Payez en ligne en toute sécurité.</span></div></li>
+      <li><div><strong>Recevez votre lien</strong><span>Il s'affiche juste après le paiement.</span></div></li>
+      <li><div><strong>Utilisez-la tout de suite</strong><span>Dans votre navigateur, sur téléphone comme sur ordinateur.</span></div></li>
     </ol>
   </section>
-
-  <div id="fetes"></div>
 </main>
 
 <footer>
   <div class="wrap">
-    <p class="display" style="font-weight:800;font-size:1.3rem">ActivityWeb Studio</p>
-    <p>Des outils créés en Belgique, disponibles en français, anglais et allemand.</p>
-    <p class="small">Vous préférez commander sur Etsy ? Tous nos outils y sont aussi : <a href="https://www.etsy.com/shop/ActivityWebStudio">voir la boutique Etsy</a>.</p>
+    <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem">ActivityWeb Studio</p>
+    <p>Des applis créées en Belgique, disponibles en français, anglais et allemand.</p>
+    <p class="small">Vous préférez commander sur Etsy ? Nos outils y sont aussi : <a href="https://www.etsy.com/shop/ActivityWebStudio">voir la boutique Etsy</a>.</p>
   </div>
 </footer>
 
 <script>
 /* =========================================================
-   À MODIFIER : LES FÊTES
-   - jour / mois : la date de la fête (laisser vide = toute l'année)
-   - une fête sans outil n'apparaît pas sur la page
+   À MODIFIER 1 : LES FÊTES (univers "Fêtes & surprises")
+   - jour / mois : date de la fête (sans date = toute l'année)
    ========================================================= */
 const FETES = [
-  { id:"halloween",     nom:"Halloween",              jour:31, mois:10, emoji:"🎃", fond:"#FFE0B8",
+  { id:"halloween",     nom:"Halloween",            jour:31, mois:10, emoji:"🎃", fond:"#FFE0B8",
     intro:"Des surprises qui font frissonner (un peu) petits et grands." },
-  { id:"saint-nicolas", nom:"Saint-Nicolas",          jour:6,  mois:12, emoji:"📜", fond:"#FFD9E2",
+  { id:"saint-nicolas", nom:"Saint-Nicolas",        jour:6,  mois:12, emoji:"📜", fond:"#FFD9E2",
     intro:"La magie du grand saint, livrée directement sur le téléphone des enfants." },
-  { id:"amour",         nom:"Amour & couple",         jour:14, mois:2,  emoji:"💌", fond:"#FFE3E8",
+  { id:"amour",         nom:"Amour & couple",       jour:14, mois:2,  emoji:"💌", fond:"#FFE3E8",
     intro:"Saint-Valentin, mariage, anniversaire de couple." },
-  { id:"diplome",       nom:"Diplôme & réussite",     jour:30, mois:6,  emoji:"🎓", fond:"#E4F0FF",
+  { id:"diplome",       nom:"Diplôme & réussite",   jour:30, mois:6,  emoji:"🎓", fond:"#E4F0FF",
     intro:"Pour féliciter un examen réussi, un diplôme, un nouveau départ." },
-  { id:"naissance",     nom:"Naissance & baptême",                      emoji:"🍼", fond:"#E6F3EC",
+  { id:"naissance",     nom:"Naissance & baptême",                    emoji:"🍼", fond:"#E6F3EC",
     intro:"Pour accueillir un bébé avec des mots rien qu'à lui." },
-  { id:"hommage",       nom:"Hommage",                                  emoji:"🕊️", fond:"#EEF0EA",
+  { id:"hommage",       nom:"Hommage",                                emoji:"🕊️", fond:"#EEF0EA",
     intro:"Des mots doux pour accompagner un moment difficile." },
-  { id:"autres",        nom:"Toutes les occasions",                     emoji:"🎁", fond:"#FFF1C7",
+  { id:"autres",        nom:"Toutes les occasions",                   emoji:"🎁", fond:"#FFF1C7",
     intro:"Anniversaire, merci, fête des mères ou des pères : pour tout le reste." }
 ];
 
 /* =========================================================
-   À MODIFIER : LES OUTILS
-   Pour ajouter un outil, copie un bloc { ... }, colle-le
-   en dessous et change les textes.
-   - fete   : l'id de la fête (voir liste au-dessus)
-   - page   : l'adresse de la page de l'outil
-   - bientot: true = affiché mais pas encore en vente
+   À MODIFIER 2 : LES CATÉGORIES (univers "Au quotidien")
+   ========================================================= */
+const CATEGORIES = [
+  { id:"parents", nom:"Parents", emoji:"🏡", fond:"#FFF1C7",
+    intro:"Organiser la maison, les routines et le planning de la famille." },
+  { id:"etudes",  nom:"Études",  emoji:"📚", fond:"#E4F0FF",
+    intro:"Réviser, s'organiser et préparer ses examens." },
+  { id:"enfants", nom:"Enfants", emoji:"🧸", fond:"#E6F3EC",
+    intro:"Des jeux pour apprendre en s'amusant." },
+  { id:"dys",     nom:"Dys",     emoji:"🔤", fond:"#EFE6FA",
+    intro:"Des outils pensés pour les enfants et ados dys : lecture facilitée, repères visuels, étapes courtes." }
+];
+
+/* =========================================================
+   À MODIFIER 3 : LES APPLIS
+   Pour en ajouter une, copie un bloc { ... } et change les textes.
+   - rubrique : l'id d'une fête OU d'une catégorie (voir au-dessus)
+   - page     : l'adresse COMPLÈTE de la page de vente
+   - bientot  : true = affichée, mais pas encore en vente
+   Une fête ou une catégorie sans appli n'apparaît pas.
    ========================================================= */
 const OUTILS = [
-  { fete:"saint-nicolas", nom:"Lettre animée de Saint-Nicolas", emoji:"📜",
-    texte:"Un parchemin qui se déroule avec le prénom de l'enfant et un message du grand saint.",
-    prix:"6,99 €", langues:"FR · EN · DE", page:"lettre-saint-nicolas.html" },
-
-  { fete:"halloween", nom:"Carte à gratter d'Halloween", emoji:"🎃",
+  { rubrique:"halloween", nom:"Carte à gratter d'Halloween", emoji:"🎃",
     texte:"On gratte du bout du doigt pour découvrir la surprise ou l'annonce cachée.",
-    prix:"3,99 €", langues:"FR · EN · DE", page:"carte-halloween.html" },
+    prix:"3,99 €", langues:"FR · EN · DE",
+    page:"https://www.activityweb.be/mes-applis/carte-halloween.html" },
 
-  { fete:"amour", nom:"Poème personnalisé de mariage", emoji:"💍",
-    texte:"Un poème écrit avec les prénoms et l'histoire des mariés.",
-    prix:"8,99 €", langues:"FR", page:"poeme-mariage.html" },
+  { rubrique:"saint-nicolas", nom:"Lettre animée de Saint-Nicolas", emoji:"📜",
+    texte:"Un parchemin qui se déroule avec le prénom de l'enfant et un message du grand saint.",
+    prix:"6,99 €", langues:"FR · EN · DE",
+    page:"", bientot:true },
 
-  { fete:"naissance", nom:"Poème personnalisé de naissance", emoji:"🍼",
-    texte:"Un poème de bienvenue au prénom du bébé, à partager avec toute la famille.",
-    prix:"8,99 €", langues:"FR", page:"poeme-naissance.html" },
-
-  { fete:"hommage", nom:"Poème d'hommage personnalisé", emoji:"🕊️",
-    texte:"Un texte délicat au prénom de la personne disparue, pour une carte ou une cérémonie.",
-    prix:"8,99 €", langues:"FR", page:"poeme-hommage.html" },
-
-  { fete:"autres", nom:"Bon cadeau personnalisé", emoji:"🎁",
+  { rubrique:"autres", nom:"Bon cadeau personnalisé", emoji:"🎁",
     texte:"Un bon cadeau à votre façon, pour l'occasion de votre choix, à offrir par lien.",
-    prix:"3,99 €", langues:"FR · EN · DE", page:"bon-cadeau.html" }
+    prix:"3,99 €", langues:"FR · EN · DE",
+    page:"", bientot:true }
+
+  /* Exemple pour l'univers "Au quotidien".
+     Pour l'activer, supprime la ligne de début et la ligne de fin de ce commentaire. 
+  ,{ rubrique:"dys", nom:"Lecteur adapté dys", emoji:"🔤",
+    texte:"Collez un texte, il s'affiche avec une police lisible, des lignes colorées et un espacement adapté.",
+    prix:"4,99 €", langues:"FR",
+    page:"https://www.activityweb.be/mes-applis/lecteur-dys.html" }
+  */
 ];
 
 /* ---------- Rien à modifier en dessous ---------- */
 const MOIS = ["janv.","févr.","mars","avril","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
 const MOIS_LONG = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 const today = new Date(); today.setHours(0,0,0,0);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const aDesOutils = r => OUTILS.some(o => o.rubrique === r.id);
 
 function joursAvant(f){
   if(!f.jour) return null;
   let d = new Date(today.getFullYear(), f.mois-1, f.jour);
   if(d < today) d = new Date(today.getFullYear()+1, f.mois-1, f.jour);
-  return Math.round((d - today)/86400000);
+  return Math.round((d - today) / 86400000);
 }
-function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
-const actives = FETES
-  .filter(f => OUTILS.some(o => o.fete === f.id))
-  .map(f => ({...f, dans: joursAvant(f)}));
+function carte(o, fond){
+  const bouton = o.bientot || !o.page
+    ? '<span class="btn off">Bientôt disponible</span>'
+    : `<a class="btn" href="${esc(o.page)}">Découvrir l'appli</a>`;
+  return `<article class="tool">
+    <div class="pic" style="background:${fond}" aria-hidden="true">${o.emoji}</div>
+    <div class="body">
+      <h4>${esc(o.nom)}</h4>
+      <p>${esc(o.texte)}</p>
+      <div class="meta"><span class="price">${esc(o.prix)}</span><span class="langs">${esc(o.langues)}</span></div>
+      ${bouton}
+    </div>
+  </article>`;
+}
 
-const datees = actives.filter(f => f.dans !== null).sort((a,b) => a.dans - b.dans);
-const libres = actives.filter(f => f.dans === null);
-const ordre = [...datees, ...libres];
-const prochaine = datees[0] ? datees[0].id : null;
+function rubrique(r, extraTete = "", date = ""){
+  const outils = OUTILS.filter(o => o.rubrique === r.id);
+  return `<section class="rubric" id="${r.id}">
+    <div class="rubric-head"><h3>${r.emoji} ${esc(r.nom)}</h3>${extraTete}</div>
+    ${date}
+    <p class="intro">${esc(r.intro)}</p>
+    <div class="tools">${outils.map(o => carte(o, r.fond)).join("")}</div>
+  </section>`;
+}
 
-document.getElementById("calendrier").innerHTML = ordre.map(f => {
-  const next = f.id === prochaine;
-  const mois = f.jour ? MOIS[f.mois-1] : "Toute l'année";
+/* Univers Fêtes */
+const fetes = FETES.filter(aDesOutils).map(f => ({...f, dans: joursAvant(f)}));
+const ordreFetes = [
+  ...fetes.filter(f => f.dans !== null).sort((a,b) => a.dans - b.dans),
+  ...fetes.filter(f => f.dans === null)
+];
+const prochaine = ordreFetes.find(f => f.dans !== null);
+
+document.getElementById("calendrier").innerHTML = ordreFetes.map(f => {
+  const next = prochaine && f.id === prochaine.id;
   const chiffre = f.jour ? `<div class="d">${f.jour}</div>` : `<div class="d emoji" aria-hidden="true">${f.emoji}</div>`;
-  let compte = "";
+  let compte = "&nbsp;";
   if(f.dans === 0) compte = "Aujourd'hui";
   else if(f.dans === 1) compte = "Demain";
   else if(f.dans !== null) compte = `Dans ${f.dans} jours`;
   return `<a class="sheet${next ? " next" : ""}" href="#${f.id}">
-    <div class="m">${mois}</div>${chiffre}
-    <div class="n">${esc(f.nom)}</div>
-    <div class="c">${compte || "&nbsp;"}</div></a>`;
+    <div class="m">${f.jour ? MOIS[f.mois-1] : "Toute l'année"}</div>${chiffre}
+    <div class="n">${esc(f.nom)}</div><div class="c">${compte}</div></a>`;
 }).join("");
 
-document.getElementById("fetes").innerHTML = ordre.map(f => {
-  const outils = OUTILS.filter(o => o.fete === f.id);
-  const date = f.jour ? `<p class="event-intro" style="margin:0;color:var(--ink);font-weight:600">Le ${f.jour === 1 ? "1er" : f.jour} ${MOIS_LONG[f.mois-1]}</p>` : "";
-  return `<section class="event" id="${f.id}">
-    <div class="event-head"><h2>${esc(f.nom)}</h2>${f.id === prochaine ? '<span class="badge">C\'est la saison</span>' : ""}</div>
-    ${date}
-    <p class="event-intro">${esc(f.intro)}</p>
-    <div class="tools">${outils.map(o => `
-      <article class="tool">
-        <div class="pic" style="background:${f.fond}" aria-hidden="true">${o.emoji}</div>
-        <div class="body">
-          <h3>${esc(o.nom)}</h3>
-          <p>${esc(o.texte)}</p>
-          <div class="meta"><span class="price">${esc(o.prix)}</span><span class="langs">${esc(o.langues)}</span></div>
-          ${o.bientot
-            ? '<span class="btn off">Bientôt disponible</span>'
-            : `<a class="btn" href="${esc(o.page)}">Découvrir l'outil</a>`}
-        </div>
-      </article>`).join("")}
-    </div>
-  </section>`;
-}).join("");
+document.getElementById("liste-fetes").innerHTML = ordreFetes.map(f => rubrique(
+  f,
+  prochaine && f.id === prochaine.id ? '<span class="badge">C\'est la saison</span>' : "",
+  f.jour ? `<p class="when">Le ${f.jour === 1 ? "1er" : f.jour} ${MOIS_LONG[f.mois-1]}</p>` : ""
+)).join("");
 
-/* Arrivée depuis Pinterest avec #halloween, #saint-nicolas, etc. */
+/* Univers Au quotidien */
+const cats = CATEGORIES.filter(aDesOutils);
+if(cats.length){
+  document.getElementById("pastilles").innerHTML = cats.map(c =>
+    `<li><a href="#${c.id}"><span aria-hidden="true">${c.emoji}</span>${esc(c.nom)}</a></li>`).join("");
+  document.getElementById("liste-quotidien").innerHTML = cats.map(c => rubrique(c)).join("");
+} else {
+  document.getElementById("pastilles").remove();
+  document.getElementById("liste-quotidien").innerHTML = `<div class="soon">
+    <div class="icons" aria-hidden="true">🏡📚🧸🔤</div>
+    <p><strong>Bientôt ici :</strong> des applis pour les parents, les études, les enfants et les dys.</p>
+  </div>`;
+}
+
+/* Arrivée avec une ancre (#halloween, #dys…), par exemple depuis Pinterest */
 if(location.hash){
   const cible = document.querySelector(location.hash);
   if(cible) cible.scrollIntoView();
