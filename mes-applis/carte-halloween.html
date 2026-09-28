@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carte à gratter d'Halloween personnalisée à envoyer par lien | ActivityWeb Studio</title>
+<meta name="description" content="Écrivez votre message, le destinataire le découvre en grattant l'écran. Carte à gratter d'Halloween personnalisée, à envoyer par WhatsApp, SMS ou e-mail. 3,99 €.">
+<meta property="og:title" content="Carte à gratter d'Halloween personnalisée">
+<meta property="og:description" content="Votre message caché sous une carte à gratter, à envoyer par un simple lien.">
+<meta property="og:type" content="product">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF9EC; --ink:#3A2233; --muted:#6E5A66; --night:#2A1726;
+    --pumpkin:#F28C28; --pumpkin-deep:#D9621A; --sun:#FFC93C; --line:#EADFC8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font:400 1.0625rem/1.6 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:66rem;margin:0 auto;padding:0 1.25rem}
+  h1,h2,h3,.price{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
+
+  /* Hero nocturne */
+  .hero{background:var(--night);color:var(--paper);border-radius:0 0 2rem 2rem;padding-bottom:3rem}
+  .top{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 1.5rem;gap:1rem}
+  .top a{text-decoration:none;font-weight:600;font-size:.95rem}
+  .brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.1rem}
+  .hero-grid{display:grid;gap:2.2rem;align-items:center;grid-template-columns:1fr}
+  @media (min-width:820px){.hero-grid{grid-template-columns:1.05fr .95fr}}
+  h1{font-weight:800;font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 1rem;max-width:15ch}
+  .lead{font-size:1.15rem;max-width:34rem;margin:0 0 1.6rem;color:#F1E6DA}
+  .buy-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem}
+  .price{font-weight:800;font-size:2.2rem;line-height:1}
+  .btn{display:inline-block;background:var(--pumpkin);color:var(--night);text-decoration:none;
+    font-weight:600;font-size:1.05rem;padding:.85rem 1.6rem;border-radius:.7rem;
+    border:2px solid var(--night);box-shadow:0 4px 0 var(--sun)}
+  .btn:hover{background:var(--sun)}
+  .facts{list-style:none;padding:0;margin:1.4rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem}
+  .facts li{border:1px solid #6B4E62;border-radius:2rem;padding:.2rem .8rem;font-size:.9rem;color:#F1E6DA}
+
+  /* Démo à gratter */
+  .demo{position:relative}
+  .card{position:relative;aspect-ratio:4/3;border-radius:1.1rem;overflow:hidden;
+    border:3px solid var(--paper);box-shadow:0 8px 0 var(--pumpkin);background:var(--paper);color:var(--ink);
+    transform:rotate(1.5deg)}
+  .secret{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    align-items:center;text-align:center;padding:1.5rem}
+  .secret .big{font-size:3rem;line-height:1}
+  .secret h3{font-weight:800;font-size:clamp(1.4rem,3.6vw,1.9rem);margin:.5rem 0 .3rem;line-height:1.1}
+  .secret p{margin:0;color:var(--muted);max-width:22rem}
+  canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab;transition:opacity .6s ease}
+  canvas.gone{opacity:0;pointer-events:none}
+  .demo-bar{display:flex;justify-content:space-between;align-items:center;margin-top:1.1rem;font-size:.92rem;color:#F1E6DA}
+  .linkbtn{background:none;border:0;color:var(--sun);font:inherit;font-weight:600;text-decoration:underline;cursor:pointer;padding:0}
+
+  /* Sections */
+  section{padding:3rem 0 .5rem}
+  h2{font-weight:800;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.1;letter-spacing:-.01em;margin:0 0 1.3rem}
+  .uses{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+  .use{border-left:4px solid var(--pumpkin);padding:.2rem 0 .2rem 1rem}
+  .use strong{display:block;font-size:1.05rem}
+  .use span{color:var(--muted);font-size:.97rem}
+
+  .steps{list-style:none;margin:0;padding:0;display:grid;gap:1.2rem;
+    grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));counter-reset:s}
+  .steps li{counter-increment:s;display:flex;gap:.8rem;align-items:flex-start}
+  .steps li::before{content:counter(s);flex:0 0 2.2rem;height:2.2rem;border-radius:50%;
+    background:var(--pumpkin);border:2px solid var(--ink);display:grid;place-items:center;
+    font-family:"Bricolage Grotesque",sans-serif;font-weight:800}
+  .steps strong{display:block}
+  .steps span{color:var(--muted);font-size:.97rem}
+
+  .included{list-style:none;padding:0;margin:0;display:grid;gap:.7rem;max-width:40rem}
+  .included li{padding-left:1.8rem;position:relative}
+  .included li::before{content:"✓";position:absolute;left:0;font-weight:800;color:var(--pumpkin-deep)}
+
+  details{border-bottom:2px dashed var(--line);padding:.9rem 0;max-width:44rem}
+  summary{font-weight:600;cursor:pointer}
+  details p{margin:.6rem 0 0;color:var(--muted)}
+
+  .final{margin:3rem 0 0;background:var(--pumpkin);border:2px solid var(--ink);border-radius:1.2rem;
+    box-shadow:0 6px 0 var(--ink);padding:2rem 1.5rem;text-align:center}
+  .final h2{margin-bottom:.6rem}
+  .final p{margin:0 0 1.3rem}
+  .final .btn{background:var(--night);color:var(--paper);box-shadow:none;border-color:var(--night)}
+  .final .btn:hover{background:var(--ink)}
+  .legal{font-size:.82rem;color:var(--muted);max-width:40rem;margin:1rem auto 0}
+  .final .legal{color:var(--ink)}
+
+  footer{margin-top:3.5rem;background:var(--ink);color:#fff;padding:2.2rem 0 6rem}
+  footer p{margin:0 0 .5rem}
+  footer a{color:var(--sun);font-weight:600}
+  footer .small{color:#CDBFC7;font-size:.9rem}
+
+  /* Barre d'achat fixe sur mobile */
+  .sticky{position:fixed;left:0;right:0;bottom:0;background:var(--night);color:var(--paper);
+    display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    padding:.7rem 1.1rem calc(.7rem + env(safe-area-inset-bottom,0px));
+    border-top:2px solid var(--pumpkin);z-index:10}
+  .sticky .price{font-size:1.5rem}
+  .sticky .btn{padding:.6rem 1.2rem;box-shadow:none}
+  @media (min-width:820px){.sticky{display:none} footer{padding-bottom:2.2rem}}
+
+  @media (prefers-reduced-motion:reduce){ canvas{transition:none} .card{transform:none} }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <header class="top">
+      <a href="./">Tous les outils</a>
+      <span class="brand">ActivityWeb Studio</span>
+    </header>
+
+    <div class="hero-grid">
+      <div>
+        <h1>Carte à gratter d'Halloween</h1>
+        <p class="lead">Vous écrivez votre message, il reste caché. La personne qui reçoit le lien gratte l'écran du bout du doigt pour le découvrir. Idéal pour une annonce, une invitation ou une petite surprise.</p>
+        <div class="buy-row">
+          <span class="price">3,99 €</span>
+          <a class="btn buy" href="#">Acheter la carte</a>
+        </div>
+        <ul class="facts">
+          <li>Français, anglais, allemand</li>
+          <li>Rien à imprimer</li>
+          <li>Téléphone et ordinateur</li>
+        </ul>
+      </div>
+
+      <div class="demo">
+        <div class="card">
+          <div class="secret" aria-live="polite">
+            <div class="big" aria-hidden="true">🎃</div>
+            <h3>Joyeux Halloween, Léa !</h3>
+            <p>Rendez-vous samedi à 18 h pour la chasse aux bonbons. Costume obligatoire.</p>
+          </div>
+          <canvas id="scratch" aria-label="Zone à gratter : glissez le doigt ou la souris pour découvrir le message"></canvas>
+        </div>
+        <div class="demo-bar">
+          <span>Essayez : grattez la carte.</span>
+          <button class="linkbtn" id="reveal" type="button">Tout révéler</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <section>
+    <h2>Pour quelles occasions ?</h2>
+    <div class="uses">
+      <div class="use"><strong>Une annonce</strong><span>Une grossesse, un voyage, une bonne nouvelle à révéler de façon originale.</span></div>
+      <div class="use"><strong>Une invitation</strong><span>Soirée costumée, chasse aux bonbons, fête entre amis.</span></div>
+      <div class="use"><strong>Un cadeau caché</strong><span>Un bon, une sortie ou une surprise à découvrir en grattant.</span></div>
+      <div class="use"><strong>Un simple clin d'œil</strong><span>Un message drôle ou tendre pour les enfants, la famille ou les collègues.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Comment ça marche</h2>
+    <ol class="steps">
+      <li><div><strong>Payez en ligne</strong><span>Paiement sécurisé par Stripe.</span></div></li>
+      <li><div><strong>Recevez votre lien</strong><span>Il s'affiche juste après le paiement. Ajoutez-le à vos favoris.</span></div></li>
+      <li><div><strong>Écrivez et envoyez</strong><span>Personnalisez votre message, puis partagez la carte par WhatsApp, SMS ou e-mail.</span></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Ce qui est inclus</h2>
+    <ul class="included">
+      <li>L'accès à l'outil de création de la carte à gratter</li>
+      <li>Trois langues au choix : français, anglais et allemand</li>
+      <li>Un guide PDF pas à pas, en trois langues</li>
+      <li>Une carte qui s'ouvre dans le navigateur, sans application à installer</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Questions fréquentes</h2>
+    <details>
+      <summary>La personne qui reçoit la carte doit-elle installer quelque chose ?</summary>
+      <p>Non. Elle clique sur le lien et la carte s'ouvre dans son navigateur, sur téléphone comme sur ordinateur.</p>
+    </details>
+    <details>
+      <summary>Est-ce que je reçois un fichier ?</summary>
+      <p>Non, vous recevez un lien vers l'outil en ligne. Vous y créez votre carte, puis vous envoyez son lien à qui vous voulez.</p>
+    </details>
+    <details>
+      <summary>Puis-je l'utiliser en dehors d'Halloween ?</summary>
+      <p>Oui, le message est libre. Le décor reste celui d'Halloween.</p>
+    </details>
+    <details>
+      <summary>J'ai perdu mon lien, que faire ?</summary>
+      <p>Répondez à l'e-mail de reçu envoyé par Stripe après votre paiement, nous vous renverrons le lien.</p>
+    </details>
+  </section>
+
+  <div class="final">
+    <h2>Prêt à préparer votre surprise ?</h2>
+    <p>3,99 €, et votre carte peut partir dans quelques minutes.</p>
+    <a class="btn buy" href="#">Acheter la carte</a>
+    <p class="legal">Contenu numérique fourni immédiatement après le paiement. En achetant, vous acceptez cette fourniture immédiate et renoncez à votre droit de rétractation.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>ActivityWeb Studio</strong>, des outils créés en Belgique.</p>
+    <p class="small"><a href="./">Voir tous les outils</a> ou <a href="https://www.etsy.com/shop/ActivityWebStudio">nos avis clients sur Etsy</a>.</p>
+  </div>
+</footer>
+
+<div class="sticky">
+  <span class="price">3,99 €</span>
+  <a class="btn buy" href="#">Acheter la carte</a>
+</div>
+
+<script>
+/* ============================================
+   À MODIFIER : colle ici ton Stripe Payment Link
+   ============================================ */
+const LIEN_STRIPE = "https://buy.stripe.com/COLLE-TON-LIEN-ICI";
+
+document.querySelectorAll(".buy").forEach(a => a.href = LIEN_STRIPE);
+
+/* ---------- Démo de la carte à gratter ---------- */
+const cv = document.getElementById("scratch");
+const ctx = cv.getContext("2d");
+let w = 0, h = 0, drawing = false, last = null, done = false;
+
+function paintCoating(){
+  const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  w = r.width; h = r.height;
+  cv.width = w * dpr; cv.height = h * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.globalCompositeOperation = "source-over";
+  const g = ctx.createLinearGradient(0, 0, w, h);
+  g.addColorStop(0, "#F28C28"); g.addColorStop(1, "#D9621A");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  ctx.globalAlpha = .18; ctx.font = "26px serif"; ctx.textAlign = "center";
+  for(let y = 30; y < h + 30; y += 56){
+    for(let x = (y / 56 % 2) * 40 + 20; x < w + 40; x += 80){ ctx.fillText("🎃", x, y); }
+  }
+  ctx.globalAlpha = 1; ctx.fillStyle = "#2A1726";
+  ctx.font = "800 " + Math.max(22, w / 14) + "px 'Bricolage Grotesque', sans-serif";
+  ctx.fillText("Grattez ici", w / 2, h / 2 + 8);
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.lineWidth = 44;
+}
+
+function pos(e){ const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+
+function scratch(p){
+  ctx.beginPath();
+  if(last){ ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); }
+  ctx.arc(p.x, p.y, 22, 0, Math.PI * 2); ctx.fill();
+  last = p;
+}
+
+function clearedRatio(){
+  const data = ctx.getImageData(0, 0, cv.width, cv.height).data;
+  let clear = 0, n = 0;
+  for(let i = 3; i < data.length; i += 64){ n++; if(data[i] === 0) clear++; }
+  return clear / n;
+}
+
+function revealAll(){ done = true; cv.classList.add("gone"); document.getElementById("reveal").textContent = "Recommencer"; }
+function reset(){ done = false; cv.classList.remove("gone"); paintCoating(); document.getElementById("reveal").textContent = "Tout révéler"; }
+
+cv.addEventListener("pointerdown", e => { if(done) return; drawing = true; last = null; cv.setPointerCapture(e.pointerId); scratch(pos(e)); });
+cv.addEventListener("pointermove", e => { if(drawing) scratch(pos(e)); });
+["pointerup","pointercancel"].forEach(t => cv.addEventListener(t, () => {
+  if(!drawing) return; drawing = false; last = null;
+  if(clearedRatio() > .5) revealAll();
+}));
+document.getElementById("reveal").addEventListener("click", () => done ? reset() : revealAll());
+
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(paintCoating);
+window.addEventListener("resize", () => { if(!done) paintCoating(); });
+</script>
+</body>
+</html>
