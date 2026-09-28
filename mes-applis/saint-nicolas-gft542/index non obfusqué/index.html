@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="docTitle">Une lettre de Saint-Nicolas</title>
+<meta property="og:title" content="Une lettre de Saint-Nicolas est arrivée" data-i18n-content="ogTitle">
+<meta property="og:description" content="Touche le sceau pour ouvrir ton parchemin." data-i18n-content="metaDesc">
+<meta property="og:image" content="https://mes-applis-96z.pages.dev/saint-nicolas-gft542/og.png">
+<meta name="description" content="Touche le sceau pour ouvrir ton parchemin." data-i18n-content="metaDesc">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Pinyon+Script&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky-top:#0f1d3a; --sky-bot:#23365f;
+  --parch:#f2dfb4; --parch-edge:#c9a46a; --ink:#3b2412;
+  --mitre:#9b1d2c; --gold:#d4a93a; --wood:#6b3f1d;
+  --panel:#fbf6ea; --panel-ink:#2a2014; --line:#d9c7a0;
+  --ui:"Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --old:"IM Fell DW Pica", Georgia, "Times New Roman", serif;
+  --script:"Pinyon Script", "Brush Script MT", cursive;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --panel:#1f2b45; --panel-ink:#f1e6cf; --line:#3d4d70; }
+}
+:root[data-theme="dark"]{ --panel:#1f2b45; --panel-ink:#f1e6cf; --line:#3d4d70; }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{
+  margin:0; min-height:100vh; font-family:var(--ui); color:var(--panel-ink);
+  background:linear-gradient(180deg,var(--sky-top),var(--sky-bot) 70%,#2f4570);
+  background-color:var(--sky-top); overflow-x:hidden;
+}
+#snow{ position:fixed; inset:0; pointer-events:none; z-index:0; }
+main{ position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:2rem 1rem 4rem;
+  display:grid; gap:2rem; grid-template-columns:minmax(0,340px) minmax(0,1fr); align-items:start; }
+body.view main{ grid-template-columns:minmax(0,1fr); }
+body.view main{ padding-top:calc(2rem + 2.6rem); }
+body.view .editor{ display:none; }
+
+/* ---------- Editor ---------- */
+.editor{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:1.25rem 1.25rem 1.5rem; position:sticky; top:calc(1rem + env(safe-area-inset-top,0px)); }
+.editor h1{ font-family:var(--old); font-weight:400; font-size:1.6rem; margin:0 0 .25rem; }
+.editor p.hint{ margin:0 0 1rem; font-size:.95rem; opacity:.8; line-height:1.4; }
+label{ display:block; font-weight:500; font-size:.92rem; margin:.9rem 0 .3rem; }
+input,textarea,select{ width:100%; font:inherit; font-size:1rem; padding:.55rem .65rem; border:1px solid var(--line); border-radius:8px; background:transparent; color:inherit; }
+textarea{ resize:vertical; min-height:4.5rem; line-height:1.4; }
+.row{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+.small{ font-size:.82rem; opacity:.7; margin-top:.25rem; }
+.btns{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.2rem; }
+button{ font:inherit; font-weight:700; border:0; border-radius:999px; padding:.7rem 1.2rem; cursor:pointer; }
+.primary{ background:var(--mitre); color:#fff5e0; }
+.ghost{ background:transparent; color:inherit; border:1px solid var(--line); }
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+#shareOut{ margin-top:.8rem; display:none; }
+#shareOut.show{ display:block; }
+#linkOut{ display:none; margin-top:1rem; }
+#linkOut.show{ display:block; }
+.wa{ display:inline-block; font-weight:700; text-decoration:none; border-radius:999px; padding:.7rem 1.2rem; background:#1f7a4d; color:#fff; }
+.wa:focus-visible,.textbtn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+.lang{ position:fixed; z-index:5; top:calc(.6rem + env(safe-area-inset-top,0px)); right:.8rem; display:flex; gap:.2rem;
+  background:rgba(15,29,58,.55); border:1px solid rgba(246,231,196,.18); border-radius:999px; padding:.2rem; }
+.lang button{ padding:.3rem .6rem; font-size:.8rem; font-weight:500; letter-spacing:.04em; color:#f6e7c4; background:transparent; opacity:.65; }
+.lang button[aria-pressed="true"]{ background:rgba(246,231,196,.16); opacity:1; }
+.textbtn{ background:none; border:0; padding:0; margin-top:1rem; font-weight:500; text-decoration:underline; color:inherit; opacity:.8; }
+
+/* ---------- Stage ---------- */
+.stage{ display:flex; flex-direction:column; align-items:center; min-height:70vh; }
+.opener{ margin:12vh auto 0; text-align:center; color:#f6e7c4; }
+.opener p{ font-family:var(--old); font-size:clamp(1.3rem,3.5vw,1.9rem); margin:1.2rem 0 0; }
+.seal-btn{ width:130px; height:130px; border-radius:50%; padding:0; background:radial-gradient(circle at 35% 30%,#c33a48,var(--mitre) 55%,#6e1019);
+  box-shadow:0 0 0 6px rgba(155,29,44,.35),0 10px 30px rgba(0,0,0,.45); color:#f6d98a; font-family:var(--old); font-size:2.6rem; animation:pulse 2.4s ease-in-out infinite; }
+@keyframes pulse{ 50%{ transform:scale(1.06); box-shadow:0 0 0 14px rgba(155,29,44,.12),0 10px 30px rgba(0,0,0,.45);} }
+
+.scroll{ width:min(620px,100%); display:none; flex-direction:column; align-items:center; filter:drop-shadow(0 18px 30px rgba(0,0,0,.45)); }
+.scroll.on{ display:flex; }
+.rod{ position:relative; width:108%; height:30px; border-radius:15px; z-index:2;
+  background:linear-gradient(180deg,#9a6534 0%,#c98d52 30%,var(--wood) 70%,#3e230f 100%); }
+.rod::before,.rod::after{ content:""; position:absolute; top:-6px; width:34px; height:42px; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#ffe7a3,var(--gold) 45%,#8a6412); }
+.rod::before{ left:-14px; } .rod::after{ right:-14px; }
+.paper{ width:100%; height:0; overflow:hidden; margin:-8px 0; position:relative; z-index:1;
+  transition:height 2.6s cubic-bezier(.35,.1,.25,1);
+  background:
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(150,100,40,.35) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(90deg,var(--parch-edge),var(--parch) 8%,var(--parch) 92%,var(--parch-edge));
+}
+.inner{ padding:2.6rem clamp(1.4rem,6vw,3.4rem) 2.4rem; color:var(--ink); font-family:var(--old); }
+.inner .greet{ font-size:clamp(1.7rem,5vw,2.4rem); margin:0 0 1rem; }
+.inner .lead{ font-size:1.15rem; line-height:1.65; margin:0 0 1rem; font-style:italic; }
+.inner ul{ list-style:none; padding:0; margin:0 0 1.4rem; }
+.inner li{ position:relative; padding-left:2rem; font-size:1.15rem; line-height:1.55; margin:.55rem 0; }
+.inner li::before{ content:"✦"; position:absolute; left:.2rem; top:0; color:var(--mitre); }
+.inner .mot{ font-size:1.15rem; line-height:1.7; margin:0 0 1.6rem; white-space:pre-line; }
+.sign{ display:flex; align-items:center; justify-content:flex-end; gap:1rem; }
+.sign span{ font-family:var(--script); font-size:clamp(2.2rem,7vw,3rem); color:#2c1a0d; line-height:1; }
+.wax{ width:70px; height:70px; border-radius:50%; flex:none; display:grid; place-items:center; color:#f2cd78; font-size:1.3rem; letter-spacing:.05em;
+  background:radial-gradient(circle at 35% 30%,#c33a48,var(--mitre) 55%,#6e1019); box-shadow:inset 0 0 0 4px rgba(0,0,0,.18),0 3px 6px rgba(0,0,0,.3); transform:rotate(-12deg); }
+.date{ margin-top:1.4rem; font-size:.95rem; opacity:.7; text-align:right; }
+.r{ opacity:0; transform:translateY(6px); transition:opacity .9s ease, transform .9s ease; }
+.r.in{ opacity:1; transform:none; }
+.replay{ margin-top:2rem; color:#f6e7c4; border-color:rgba(246,231,196,.4); }
+
+@media (max-width:820px){
+  main{ grid-template-columns:minmax(0,1fr); }
+  .editor{ position:static; }
+}
+@media (prefers-reduced-motion: reduce){
+  .paper{ transition:none; } .r{ transition:none; } .seal-btn{ animation:none; }
+}
+</style>
+</head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+<nav class="lang" id="lang" data-i18n-aria="langAria" aria-label="Langue">
+  <button type="button" data-lang="fr" lang="fr">FR</button>
+  <button type="button" data-lang="en" lang="en">EN</button>
+  <button type="button" data-lang="de" lang="de">DE</button>
+</nav>
+<main>
+  <section class="editor" data-i18n-aria="editorAria" aria-label="Personnaliser la lettre">
+    <h1 data-i18n="editorTitle">La lettre du Saint</h1>
+    <p class="hint" data-i18n="hint">Remplissez, déroulez pour vérifier, puis créez le lien à envoyer par WhatsApp pour le matin du 6 décembre.</p>
+
+    <div class="row">
+      <div>
+        <label for="prenom" data-i18n="labelName">Prénom de l'enfant</label>
+        <input id="prenom" maxlength="30" data-i18n-placeholder="phName">
+      </div>
+      <div>
+        <label for="genre" data-i18n="labelGender">Accord</label>
+        <select id="genre">
+          <option value="m" data-i18n="genderM">Cher…</option>
+          <option value="f" data-i18n="genderF">Chère…</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="progres" data-i18n="labelProgress">Ses progrès de l'année</label>
+    <textarea id="progres" rows="4" data-i18n-placeholder="phProgress"></textarea>
+    <div class="small" data-i18n="helpProgress">Une ligne par progrès (3 ou 4, c'est parfait).</div>
+
+    <label for="mot" data-i18n="labelNote">Le petit mot du Saint</label>
+    <textarea id="mot" rows="4" data-i18n-placeholder="phNote"></textarea>
+
+    <label for="lieu" data-i18n="labelPlace">Signé depuis</label>
+    <input id="lieu" maxlength="60" data-i18n-placeholder="phPlace">
+
+    <div class="btns">
+      <button class="primary" id="preview" data-i18n="btnPreview">Dérouler la lettre</button>
+      <button class="ghost" id="mklink" data-i18n="btnLink">Créer le lien</button>
+    </div>
+    <div id="linkOut">
+      <label for="link" data-i18n="labelLink">Lien de la lettre</label>
+      <input id="link" readonly>
+      <div class="btns">
+        <a class="wa" id="wa" href="#" target="_blank" rel="noopener" data-i18n="btnWhatsApp">Envoyer sur WhatsApp</a>
+        <button class="ghost" id="copy" data-i18n="btnCopy">Copier</button>
+      </div>
+    </div>
+    <button class="textbtn" id="share" data-i18n="btnDownload">Ou télécharger la lettre en fichier</button>
+    <div id="shareOut"><div class="small" id="copied"></div></div>
+  </section>
+
+  <section class="stage" aria-live="polite">
+    <div class="opener" id="opener">
+      <button class="seal-btn" id="openSeal" data-i18n-aria="openAria" aria-label="Ouvrir la lettre">S N</button>
+      <p id="openerText"></p>
+    </div>
+
+    <div class="scroll" id="scroll">
+      <div class="rod"></div>
+      <div class="paper" id="paper">
+        <div class="inner" id="inner">
+          <p class="greet r" id="oGreet"></p>
+          <p class="lead r" data-i18n="lead">Cette année, j'ai ouvert mon grand livre et j'ai lu de très belles choses à ton sujet :</p>
+          <ul id="oList"></ul>
+          <p class="mot r" id="oMot"></p>
+          <div class="sign r"><span data-i18n="signature">Saint Nicolas</span><div class="wax" aria-hidden="true">SN</div></div>
+          <p class="date r" id="oLieu"></p>
+        </div>
+      </div>
+      <div class="rod"></div>
+      <button class="ghost replay" id="replay" data-i18n="btnReplay">Relire depuis le début</button>
+    </div>
+  </section>
+</main>
+
+<script id="preset" type="application/json" data-keep>null</script>
+<script data-keep>
+(function(){
+  const SRC = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const $ = id => document.getElementById(id);
+  // Adresse publique où la page est hébergée : à remplacer par l'adresse Cloudflare Pages de l'outil
+  const PUBLIC_URL = 'https://mes-applis-96z.pages.dev/saint-nicolas-gft542/';
+
+  /* ================= Traductions ================= */
+  const LANGS = ['fr','en','de'];
+  const I18N = {
+    fr: {
+      docTitle: 'Une lettre de Saint-Nicolas',
+      ogTitle: 'Une lettre de Saint-Nicolas est arrivée',
+      metaDesc: 'Touche le sceau pour ouvrir ton parchemin.',
+      langAria: 'Langue',
+      editorAria: 'Personnaliser la lettre',
+      editorTitle: 'La lettre du Saint',
+      hint: 'Remplissez, déroulez pour vérifier, puis créez le lien à envoyer par WhatsApp pour le matin du {date}.',
+      labelName: "Prénom de l'enfant",
+      phName: 'Ex. : Lucas',
+      labelGender: 'Accord',
+      genderM: 'Cher… (garçon)',
+      genderF: 'Chère… (fille)',
+      labelProgress: "Ses progrès de l'année",
+      phProgress: 'tu as appris à nager…',
+      helpProgress: "Une ligne par progrès (3 ou 4, c'est parfait).",
+      labelNote: 'Le petit mot du Saint',
+      phNote: 'Un conseil, un encouragement, une surprise…',
+      labelPlace: 'Signé depuis',
+      phPlace: 'Myre, le 6 décembre',
+      btnPreview: 'Dérouler la lettre',
+      btnLink: 'Créer le lien',
+      labelLink: 'Lien de la lettre',
+      btnWhatsApp: 'Envoyer sur WhatsApp',
+      btnCopy: 'Copier',
+      copyDone: 'Copié',
+      copyFail: 'Sélectionnez le lien',
+      btnDownload: 'Ou télécharger la lettre en fichier',
+      openAria: 'Ouvrir la lettre',
+      openerDefault: 'Une lettre est arrivée pour toi…',
+      openerFor: 'Une lettre est arrivée pour {name}…',
+      lead: "Cette année, j'ai ouvert mon grand livre et j'ai lu de très belles choses à ton sujet :",
+      signature: 'Saint Nicolas',
+      btnReplay: 'Relire depuis le début',
+      greetM: 'Cher {name},',
+      greetF: 'Chère {name},',
+      fallbackName: 'mon enfant',
+      waMessage: '📜 Une lettre de Saint-Nicolas est arrivée pour {name} ! {url}',
+      dlDone: "Lettre téléchargée. Ouvrez le fichier sur l'appareil de l'enfant : il verra le sceau, pas le formulaire.",
+      dlDeclined: 'Téléchargement annulé.',
+      dlUnavailable: "Le téléchargement n'est pas disponible ici.",
+      fileName: 'lettre-saint-nicolas',
+      fileFallback: 'enfant',
+      placeName: 'Myre',
+      placeTpl: '{place}, le {date}',
+      defName: 'Lucas',
+      defProgress: "tu as appris à rouler à vélo sans les petites roues\ntu lis maintenant tes histoires tout seul\ntu as aidé papa à mettre la table sans qu'on te le demande",
+      defNote: "Mon âne et moi passerons chez toi cette nuit. Laisse-lui une carotte près de la cheminée, il en raffole.\nContinue d'être aussi gentil avec ceux que tu aimes."
+    },
+    en: {
+      docTitle: 'A Letter from St. Nicholas',
+      ogTitle: 'A letter from St. Nicholas has arrived',
+      metaDesc: 'Tap the wax seal to open your scroll.',
+      langAria: 'Language',
+      editorAria: 'Personalize the letter',
+      editorTitle: 'The St. Nicholas Letter',
+      hint: 'Fill it in, unroll it to check, then create a link to send via WhatsApp on the morning of {date}.',
+      labelName: "Child's first name",
+      phName: 'e.g., Lucas',
+      labelGender: 'Your child is a',
+      genderM: 'Boy',
+      genderF: 'Girl',
+      labelProgress: "This year's big moments",
+      phProgress: 'you learned to swim…',
+      helpProgress: 'One per line (3 or 4 is perfect).',
+      labelNote: 'A little note from St. Nicholas',
+      phNote: 'Some advice, a word of encouragement, a surprise…',
+      labelPlace: 'Signed from',
+      phPlace: 'Myra, December 6',
+      btnPreview: 'Unroll the letter',
+      btnLink: 'Create the link',
+      labelLink: 'Link to the letter',
+      btnWhatsApp: 'Send via WhatsApp',
+      btnCopy: 'Copy',
+      copyDone: 'Copied!',
+      copyFail: 'Select the link',
+      btnDownload: 'Or download the letter as a file',
+      openAria: 'Open the letter',
+      openerDefault: 'A letter has arrived for you…',
+      openerFor: 'A letter has arrived for {name}…',
+      lead: 'This year, I opened my big book and read some wonderful things about you:',
+      signature: 'St. Nicholas',
+      btnReplay: 'Read it again',
+      greetM: 'Dear {name},',
+      greetF: 'Dear {name},',
+      fallbackName: 'little one',
+      waMessage: '📜 A letter from St. Nicholas just arrived for {name}! {url}',
+      dlDone: "Letter downloaded. Open the file on your child's device: they'll see the wax seal, not the form.",
+      dlDeclined: 'Download canceled.',
+      dlUnavailable: "Downloading isn't available here.",
+      fileName: 'letter-from-st-nicholas',
+      fileFallback: 'child',
+      placeName: 'Myra',
+      placeTpl: '{place}, {date}',
+      defName: 'Lucas',
+      defProgress: 'you learned to ride your bike without training wheels\nyou can read your storybooks all by yourself now\nyou helped Dad set the table without being asked',
+      defNote: "My donkey and I will stop by your house tonight. Leave your shoes out, and maybe a carrot for my donkey. He loves them!\nKeep being so kind to the people you love."
+    },
+    de: {
+      docTitle: 'Ein Brief vom Nikolaus',
+      ogTitle: 'Ein Brief vom Nikolaus ist angekommen',
+      metaDesc: 'Tippe auf das Siegel und öffne deine Schriftrolle.',
+      langAria: 'Sprache',
+      editorAria: 'Brief personalisieren',
+      editorTitle: 'Der Nikolausbrief',
+      hint: 'Füllen Sie alles aus, rollen Sie den Brief zur Kontrolle ab und erstellen Sie dann den Link, den Sie am Morgen des {date} per WhatsApp verschicken.',
+      labelName: 'Vorname des Kindes',
+      phName: 'z. B. Lukas',
+      labelGender: 'Anrede',
+      genderM: 'Lieber … (Junge)',
+      genderF: 'Liebe … (Mädchen)',
+      labelProgress: 'Die Fortschritte des Jahres',
+      phProgress: 'du hast schwimmen gelernt …',
+      helpProgress: 'Ein Fortschritt pro Zeile (3 oder 4 sind ideal).',
+      labelNote: 'Ein paar Worte vom Nikolaus',
+      phNote: 'Ein Rat, ein Lob, eine Überraschung …',
+      labelPlace: 'Unterschrieben in',
+      phPlace: 'Myra, den 6. Dezember',
+      btnPreview: 'Brief entrollen',
+      btnLink: 'Link erstellen',
+      labelLink: 'Link zum Brief',
+      btnWhatsApp: 'Per WhatsApp senden',
+      btnCopy: 'Kopieren',
+      copyDone: 'Kopiert',
+      copyFail: 'Link markieren',
+      btnDownload: 'Oder den Brief als Datei herunterladen',
+      openAria: 'Brief öffnen',
+      openerDefault: 'Ein Brief ist für dich angekommen …',
+      openerFor: 'Ein Brief ist für {name} angekommen …',
+      lead: 'In diesem Jahr habe ich mein goldenes Buch aufgeschlagen und viel Schönes über dich gelesen:',
+      signature: 'Dein Nikolaus',
+      btnReplay: 'Noch einmal lesen',
+      greetM: 'Lieber {name},',
+      greetF: 'Liebe {name},',
+      fallbackName: 'Schatz',
+      waMessage: '📜 Ein Brief vom Nikolaus ist für {name} angekommen! {url}',
+      dlDone: 'Brief heruntergeladen. Öffnen Sie die Datei auf dem Gerät Ihres Kindes: Es sieht das Siegel, nicht das Formular.',
+      dlDeclined: 'Download abgebrochen.',
+      dlUnavailable: 'Der Download ist hier nicht verfügbar.',
+      fileName: 'brief-vom-nikolaus',
+      fileFallback: 'kind',
+      placeName: 'Myra',
+      placeTpl: '{place}, den {date}',
+      defName: 'Lukas',
+      defProgress: 'du kannst jetzt ohne Stützräder Fahrrad fahren\ndu liest deine Geschichten schon ganz allein\ndu hast Papa beim Tischdecken geholfen, ohne dass man dich bitten musste',
+      defNote: 'Heute Nacht komme ich mit meinem Esel bei dir vorbei. Stell deine geputzten Stiefel vor die Tür und vielleicht eine Karotte für meinen Esel, die mag er besonders gern.\nBleib so lieb zu allen, die du gern hast.'
+    }
+  };
+
+  let lang = 'en';
+  function t(key, vars){
+    let str = (I18N[lang] && I18N[lang][key]) ?? I18N.en[key] ?? key;
+    if (vars) str = str.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
+    return str;
+  }
+  // Date du 6 décembre de l'année en cours, formatée selon la langue active
+  function feastDate(l){
+    const y = new Date().getFullYear();
+    return new Intl.DateTimeFormat(l || lang, {day:'numeric', month:'long'}).format(new Date(y, 11, 6));
+  }
+  function defaultPlace(l){
+    const d = I18N[l];
+    return d.placeTpl.replace('{place}', d.placeName).replace('{date}', feastDate(l));
+  }
+  function defaultsFor(l){
+    const d = I18N[l];
+    return { prenom: d.defName, progres: d.defProgress, mot: d.defNote, lieu: defaultPlace(l) };
+  }
+  function detectLang(){
+    const list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+    for (const l of list){ const c = String(l).slice(0,2).toLowerCase(); if (LANGS.includes(c)) return c; }
+    return 'en';
+  }
+  function applyStatic(){
+    const vars = { date: feastDate() };
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n, vars); });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder, vars); });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria, vars)); });
+    document.querySelectorAll('[data-i18n-content]').forEach(el => { el.setAttribute('content', t(el.dataset.i18nContent, vars)); });
+    document.querySelectorAll('#lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  }
+  // Les exemples pré-remplis suivent la langue ; tout texte modifié par l'utilisateur reste tel quel
+  function swapDefaults(from, to){
+    const all = LANGS.map(defaultsFor), next = defaultsFor(to);
+    ['prenom','progres','mot','lieu'].forEach(id => {
+      const el = $(id), v = el.value.trim();
+      if (v === '' || all.some(d => d[id].trim() === v)) el.value = next[id];
+    });
+  }
+
+  /* ================= Logique d'origine ================= */
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let timers = [];
+
+  const enc = o => btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  const dec = s => { s = s.replace(/-/g,'+').replace(/_/g,'/'); while (s.length % 4) s += '='; return JSON.parse(decodeURIComponent(escape(atob(s)))); };
+
+  function readForm(){
+    return {
+      p: $('prenom').value.trim() || t('fallbackName'),
+      g: $('genre').value,
+      l: $('progres').value.split('\n').map(s=>s.trim()).filter(Boolean).slice(0,6),
+      m: $('mot').value.trim(),
+      s: $('lieu').value.trim()
+    };
+  }
+
+  function fill(d){
+    $('oGreet').textContent = t(d.g === 'f' ? 'greetF' : 'greetM', {name: d.p});
+    const ul = $('oList'); ul.innerHTML = '';
+    d.l.forEach(x => { const li = document.createElement('li'); li.className = 'r';
+      li.textContent = x.charAt(0).toUpperCase() + x.slice(1); ul.appendChild(li); });
+    $('oMot').textContent = d.m;
+    $('oLieu').textContent = d.s;
+    $('openerText').textContent = d.p ? t('openerFor', {name: d.p}) : t('openerDefault');
+  }
+
+  function unroll(){
+    timers.forEach(clearTimeout); timers = [];
+    const paper = $('paper'), inner = $('inner');
+    $('opener').style.display = 'none';
+    $('scroll').classList.add('on');
+    const items = inner.querySelectorAll('.r');
+    items.forEach(el => el.classList.remove('in'));
+    paper.style.transition = 'none'; paper.style.height = '0px';
+    void paper.offsetHeight;
+    paper.style.transition = '';
+    requestAnimationFrame(() => { paper.style.height = inner.scrollHeight + 'px'; });
+    const start = reduce ? 0 : 1100, step = reduce ? 0 : 650;
+    items.forEach((el,i) => timers.push(setTimeout(() => el.classList.add('in'), start + i*step)));
+    timers.push(setTimeout(() => { paper.style.height = 'auto'; }, reduce ? 0 : 2800));
+    $('scroll').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+  }
+
+  function showSealed(){
+    $('scroll').classList.remove('on');
+    $('opener').style.display = '';
+  }
+
+  // Données : fichier téléchargé (preset) ou lien (hash)
+  let data = null;
+  try { data = JSON.parse(document.getElementById('preset').textContent); } catch(e){ data = null; }
+  if (data) document.body.classList.add('view');
+  else if (location.hash.length > 1){
+    try { data = dec(location.hash.slice(1)); document.body.classList.add('view'); } catch(e){ data = null; }
+  }
+
+  // Langue : ?lang= du lien > langue enregistrée dans le fichier > navigateur > anglais
+  const urlLang = new URLSearchParams(location.search).get('lang');
+  if (urlLang && LANGS.includes(urlLang.toLowerCase())) lang = urlLang.toLowerCase();
+  else if (data && data.lang && LANGS.includes(data.lang)) lang = data.lang;
+  else lang = detectLang();
+
+  applyStatic();
+  if (!data) swapDefaults(null, lang);
+  const current = () => data || readForm();
+  fill(current());
+  if (data) showSealed();
+
+  $('lang').addEventListener('click', e => {
+    const b = e.target.closest('button[data-lang]'); if (!b || b.dataset.lang === lang) return;
+    const from = lang; lang = b.dataset.lang;
+    applyStatic();
+    if (!data) swapDefaults(from, lang);
+    fill(current());
+    $('shareOut').classList.remove('show'); $('linkOut').classList.remove('show');
+    if ($('scroll').classList.contains('on')) { $('inner').querySelectorAll('.r').forEach(el => el.classList.add('in')); $('paper').style.height = 'auto'; }
+  });
+
+  $('openSeal').addEventListener('click', unroll);
+  $('replay').addEventListener('click', () => { if (data) { showSealed(); } else { unroll(); } });
+  $('preview').addEventListener('click', () => { fill(readForm()); unroll(); });
+  ['prenom','genre','progres','mot','lieu'].forEach(id => $(id).addEventListener('input', () => {
+    fill(readForm()); $('shareOut').classList.remove('show'); $('linkOut').classList.remove('show');
+    if ($('scroll').classList.contains('on')) $('paper').style.height = 'auto';
+  }));
+
+  function buildFile(d){
+    const doc = new DOMParser().parseFromString(SRC, 'text/html');
+    doc.querySelectorAll('script:not([data-keep])').forEach(n => n.remove());
+    doc.getElementById('preset').textContent = JSON.stringify(Object.assign({}, d, {lang})).replace(/</g,'\\u003c');
+    doc.body.className = 'view';
+    return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+  }
+  function say(x){ $('copied').textContent = x; $('shareOut').classList.add('show'); }
+
+  $('mklink').addEventListener('click', () => {
+    const d = readForm();
+    const url = PUBLIC_URL + lang + '/?lang=' + lang + '#' + enc(d);
+    $('link').value = url;
+    $('wa').href = 'https://wa.me/?text=' + encodeURIComponent(t('waMessage', {name: d.p, url}));
+    $('linkOut').classList.add('show');
+    $('copy').textContent = t('btnCopy');
+  });
+  $('copy').addEventListener('click', async () => {
+    $('link').select();
+    try { await navigator.clipboard.writeText($('link').value); $('copy').textContent = t('copyDone'); }
+    catch(e){ try { document.execCommand('copy'); $('copy').textContent = t('copyDone'); } catch(_){ $('copy').textContent = t('copyFail'); } }
+  });
+
+  $('share').addEventListener('click', async () => {
+    const d = readForm();
+    const html = buildFile(d);
+    const name = t('fileName') + '-' + (d.p.normalize('NFD').replace(/[^\w-]+/g,'').toLowerCase() || t('fileFallback')) + '.html';
+    let dl = null;
+    try { dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null; } catch(e){ dl = null; }
+    if (dl){
+      try { await dl.save({filename:name, data:html}); say(t('dlDone')); }
+      catch(e){ if (e && e.code === 'declined') say(t('dlDeclined')); else say(t('dlUnavailable')); }
+      return;
+    }
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([html], {type:'text/html'}));
+    a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    say(t('dlDone'));
+  });
+
+  // Neige
+  const c = $('snow'), ctx = c.getContext('2d'); let flakes = [];
+  function size(){ c.width = innerWidth; c.height = innerHeight;
+    flakes = Array.from({length: Math.min(140, Math.floor(innerWidth/9))}, () => ({
+      x: Math.random()*c.width, y: Math.random()*c.height, r: Math.random()*2.2+.6,
+      v: Math.random()*.6+.25, w: Math.random()*Math.PI*2 })); }
+  size(); addEventListener('resize', size);
+  function tick(){
+    ctx.clearRect(0,0,c.width,c.height); ctx.fillStyle = 'rgba(255,255,255,.8)';
+    flakes.forEach(f => { f.y += f.v; f.w += .01; f.x += Math.sin(f.w)*.3;
+      if (f.y > c.height) { f.y = -4; f.x = Math.random()*c.width; }
+      ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill(); });
+    requestAnimationFrame(tick);
+  }
+  if (!reduce) tick();
+})();
+</script>
+</body>
+</html>
