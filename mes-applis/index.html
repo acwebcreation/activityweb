@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Petites applis pour faire plaisir et se simplifier la vie | ActivityWeb Studio</title>
-<meta name="description" content="Lettres animées, cartes à gratter, bons cadeaux, et bientôt des applis pour les parents, les études, les enfants et les dys. À utiliser en ligne, rien à imprimer.">
-<meta property="og:title" content="Petites applis pour faire plaisir et se simplifier la vie">
-<meta property="og:description" content="Fêtes & surprises, parents, études, enfants, dys : des applis simples, à utiliser en ligne.">
+<title>Lettres animées, cartes à gratter et bons cadeaux à envoyer | ActivityWeb Studio</title>
+<meta name="description" content="Lettres animées, cartes à gratter et bons cadeaux personnalisés, à envoyer par WhatsApp, SMS ou e-mail. Rien à installer, rien à imprimer.">
+<meta property="og:title" content="Lettres animées, cartes à gratter et bons cadeaux à envoyer">
+<meta property="og:description" content="Des surprises personnalisées pour chaque fête, à envoyer par lien en quelques minutes.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,21 +35,17 @@
     margin:0 0 1rem;max-width:18ch}
   .lead{max-width:38rem;font-size:1.15rem;margin:0 0 2rem}
 
-  /* Les deux portes d'entrée */
-  .doors{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
-  .door{display:flex;gap:1rem;align-items:center;background:#fff;border:2px solid var(--ink);
-    border-radius:1rem;box-shadow:0 5px 0 var(--ink);padding:1.1rem 1.2rem;text-decoration:none;
-    transition:transform .15s ease}
-  .door:hover{transform:translateY(-3px)}
-  .door .ico{font-size:2.4rem;line-height:1}
-  .door strong{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.35rem;line-height:1.15}
-  .door span{color:var(--muted);font-size:.95rem}
+  /* Bouton du haut */
+  .cta{display:inline-flex;gap:.7rem;align-items:center;background:#fff;border:2px solid var(--ink);
+    border-radius:1rem;box-shadow:0 5px 0 var(--ink);padding:.9rem 1.3rem;text-decoration:none;
+    font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.2rem;transition:transform .15s ease}
+  .cta:hover{transform:translateY(-3px)}
+  .cta .ico{font-size:1.8rem;line-height:1}
 
   /* Univers */
   .universe{padding:3.5rem 0 1rem}
   .universe > h2{font-weight:800;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 .4rem}
   .universe > .intro{color:var(--muted);max-width:40rem;margin:0 0 1.4rem}
-  .universe + .universe{border-top:3px solid var(--ink);margin-top:2.5rem}
 
   /* Calendrier des fêtes */
   .cal-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.05rem;margin:0 0 .5rem}
@@ -67,12 +63,6 @@
   .sheet.next:hover{transform:rotate(-2.5deg) translateY(-3px)}
   .sheet.next .m{background:var(--ink)}
   .sheet.next .c{color:var(--berry);font-weight:600}
-
-  /* Pastilles de catégories (Au quotidien) */
-  .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 .5rem;padding:0;list-style:none}
-  .chips a{display:inline-flex;gap:.4rem;align-items:center;text-decoration:none;font-weight:600;
-    background:#fff;border:2px solid var(--ink);border-radius:2rem;padding:.35rem .95rem;box-shadow:0 3px 0 var(--ink)}
-  .chips a:hover{background:var(--sun)}
 
   /* Rubriques (une fête ou une catégorie) */
   .rubric{padding:2.2rem 0 .5rem}
@@ -99,11 +89,6 @@
   .btn:hover{background:var(--berry)}
   .btn.off{background:var(--line);color:var(--muted)}
 
-  /* Encart "bientôt" quand un univers est encore vide */
-  .soon{background:#fff;border:2px dashed var(--ink);border-radius:1rem;padding:1.4rem 1.3rem;max-width:44rem}
-  .soon p{margin:0}
-  .soon .icons{font-size:1.8rem;margin-bottom:.4rem;letter-spacing:.3rem}
-
   /* Comment ça marche */
   .how{padding:3rem 0 0}
   .how h2{font-weight:800;font-size:clamp(1.6rem,4vw,2.2rem);margin:0 0 1.2rem}
@@ -123,7 +108,7 @@
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .door,.door:hover,.sheet,.sheet:hover,.sheet.next,.sheet.next:hover{transition:none;transform:none}
+    .cta,.cta:hover,.sheet,.sheet:hover,.sheet.next,.sheet.next:hover{transition:none;transform:none}
   }
 </style>
 </head>
@@ -135,35 +120,19 @@
       <a class="brand" href="https://www.activityweb.be/">ActivityWeb Studio</a>
       <a class="etsy" href="https://www.etsy.com/shop/ActivityWebStudio">Nos avis sur Etsy</a>
     </header>
-    <h1>Des petites applis pour faire plaisir et se simplifier la vie.</h1>
-    <p class="lead">Des outils simples, à utiliser directement dans le navigateur, sur téléphone comme sur ordinateur. Rien à installer, rien à imprimer.</p>
-    <nav class="doors" aria-label="Choisir un univers">
-      <a class="door" href="#fetes">
-        <span class="ico" aria-hidden="true">🎉</span>
-        <span><strong>Fêtes & surprises</strong><span>Lettres animées, cartes à gratter, bons cadeaux</span></span>
-      </a>
-      <a class="door" href="#quotidien">
-        <span class="ico" aria-hidden="true">📚</span>
-        <span><strong>Au quotidien</strong><span>Parents, études, enfants, dys</span></span>
-      </a>
-    </nav>
+    <h1>Des petites surprises à envoyer pour chaque fête.</h1>
+    <p class="lead">Lettres animées, cartes à gratter et bons cadeaux : vous les personnalisez en quelques minutes, puis vous les envoyez par WhatsApp, SMS ou e-mail. Rien à installer, rien à imprimer.</p>
+    <a class="cta" href="#fetes"><span class="ico" aria-hidden="true">🎉</span>Choisir une fête</a>
   </div>
 </div>
 
 <main class="wrap">
   <section class="universe" id="fetes">
     <h2>Fêtes & surprises</h2>
-    <p class="intro">Personnalisez votre surprise en quelques minutes, puis envoyez-la par WhatsApp, SMS ou e-mail.</p>
+    <p class="intro">Les fêtes les plus proches apparaissent en premier. Touchez une date pour voir les surprises disponibles.</p>
     <p class="cal-title">Le calendrier des fêtes</p>
     <nav class="cal" id="calendrier" aria-label="Choisir une fête"></nav>
     <div id="liste-fetes"></div>
-  </section>
-
-  <section class="universe" id="quotidien">
-    <h2>Au quotidien</h2>
-    <p class="intro">Des applis pratiques pour les parents, les élèves et les étudiants, avec des outils pensés pour les enfants dys.</p>
-    <ul class="chips" id="pastilles"></ul>
-    <div id="liste-quotidien"></div>
   </section>
 
   <section class="how">
@@ -207,26 +176,12 @@ const FETES = [
 ];
 
 /* =========================================================
-   À MODIFIER 2 : LES CATÉGORIES (univers "Au quotidien")
-   ========================================================= */
-const CATEGORIES = [
-  { id:"parents", nom:"Parents", emoji:"🏡", fond:"#FFF1C7",
-    intro:"Organiser la maison, les routines et le planning de la famille." },
-  { id:"etudes",  nom:"Études",  emoji:"📚", fond:"#E4F0FF",
-    intro:"Réviser, s'organiser et préparer ses examens." },
-  { id:"enfants", nom:"Enfants", emoji:"🧸", fond:"#E6F3EC",
-    intro:"Des jeux pour apprendre en s'amusant." },
-  { id:"dys",     nom:"Dys",     emoji:"🔤", fond:"#EFE6FA",
-    intro:"Des outils pensés pour les enfants et ados dys : lecture facilitée, repères visuels, étapes courtes." }
-];
-
-/* =========================================================
-   À MODIFIER 3 : LES APPLIS
+   À MODIFIER 2 : LES APPLIS
    Pour en ajouter une, copie un bloc { ... } et change les textes.
-   - rubrique : l'id d'une fête OU d'une catégorie (voir au-dessus)
+   - rubrique : l'id d'une fête (voir au-dessus)
    - page     : l'adresse COMPLÈTE de la page de vente
    - bientot  : true = affichée, mais pas encore en vente
-   Une fête ou une catégorie sans appli n'apparaît pas.
+   Une fête sans appli n'apparaît pas.
    ========================================================= */
 const OUTILS = [
   { rubrique:"halloween", nom:"Carte à gratter d'Halloween", emoji:"🎃",
@@ -243,14 +198,6 @@ const OUTILS = [
     texte:"Un bon cadeau à votre façon, pour l'occasion de votre choix, à offrir par lien.",
     prix:"3,99 €", langues:"FR · EN · DE",
     page:"", bientot:true }
-
-  /* Exemple pour l'univers "Au quotidien".
-     Pour l'activer, supprime la ligne de début et la ligne de fin de ce commentaire. 
-  ,{ rubrique:"dys", nom:"Lecteur adapté dys", emoji:"🔤",
-    texte:"Collez un texte, il s'affiche avec une police lisible, des lignes colorées et un espacement adapté.",
-    prix:"4,99 €", langues:"FR",
-    page:"https://www.activityweb.be/mes-applis/lecteur-dys.html" }
-  */
 ];
 
 /* ---------- Rien à modifier en dessous ---------- */
@@ -292,7 +239,7 @@ function rubrique(r, extraTete = "", date = ""){
   </section>`;
 }
 
-/* Univers Fêtes */
+/* Fêtes */
 const fetes = FETES.filter(aDesOutils).map(f => ({...f, dans: joursAvant(f)}));
 const ordreFetes = [
   ...fetes.filter(f => f.dans !== null).sort((a,b) => a.dans - b.dans),
@@ -318,21 +265,7 @@ document.getElementById("liste-fetes").innerHTML = ordreFetes.map(f => rubrique(
   f.jour ? `<p class="when">Le ${f.jour === 1 ? "1er" : f.jour} ${MOIS_LONG[f.mois-1]}</p>` : ""
 )).join("");
 
-/* Univers Au quotidien */
-const cats = CATEGORIES.filter(aDesOutils);
-if(cats.length){
-  document.getElementById("pastilles").innerHTML = cats.map(c =>
-    `<li><a href="#${c.id}"><span aria-hidden="true">${c.emoji}</span>${esc(c.nom)}</a></li>`).join("");
-  document.getElementById("liste-quotidien").innerHTML = cats.map(c => rubrique(c)).join("");
-} else {
-  document.getElementById("pastilles").remove();
-  document.getElementById("liste-quotidien").innerHTML = `<div class="soon">
-    <div class="icons" aria-hidden="true">🏡📚🧸🔤</div>
-    <p><strong>Bientôt ici :</strong> des applis pour les parents, les études, les enfants et les dys.</p>
-  </div>`;
-}
-
-/* Arrivée avec une ancre (#halloween, #dys…), par exemple depuis Pinterest */
+/* Arrivée avec une ancre (#halloween, #saint-nicolas…), par exemple depuis Pinterest */
 if(location.hash){
   const cible = document.querySelector(location.hash);
   if(cible) cible.scrollIntoView();
