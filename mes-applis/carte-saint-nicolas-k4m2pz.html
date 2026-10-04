@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Carte à gratter de Saint-Nicolas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Nunito Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ed-bg:#F7F1EC; --ed-ink:#2A1E22; --ed-muted:#6B5A5E; --ed-line:#E6D8CF;
+  --ed-card:#FFFFFF; --ed-primary:#7E222B; --ed-red:#B23A2B;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body.no-scroll{overflow:hidden}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+[hidden]{display:none !important}
+
+/* ---------- Boutons ---------- */
+.btn{border:0;border-radius:999px;padding:.7em 1.3em;font-weight:700;font-size:.95rem;line-height:1.2;text-decoration:none;display:inline-block}
+.btn-primary{background:var(--ed-primary);color:#fff}
+.btn-primary:hover{background:#621A21}
+.btn-ghost{background:#fff;color:var(--ed-primary);box-shadow:inset 0 0 0 2px var(--ed-primary)}
+.btn-wa{background:#1F8F4E;color:#fff}
+.btn-link{background:none;border:0;padding:0;color:var(--ed-primary);font-weight:700;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}
+.btn:focus-visible,.btn-link:focus-visible,.chip:focus-visible,.theme-opt:focus-visible,.seg button:focus-visible,.lang button:focus-visible,input:focus-visible,textarea:focus-visible,.reveal-all:focus-visible{outline:3px solid #C9A66B;outline-offset:2px}
+
+/* ---------- Éditeur ---------- */
+body.mode-editor{background:var(--ed-bg);color:var(--ed-ink)}
+.editor{max-width:780px;margin:0 auto;padding:calc(28px + env(safe-area-inset-top,0px)) 18px 0}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:10px}
+.lang{display:inline-flex;gap:2px;background:#fff;border:1px solid var(--ed-line);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;border-radius:999px;padding:.3em .8em;font-weight:700;font-size:.82rem;color:var(--ed-muted)}
+.lang button[aria-pressed="true"]{background:var(--ed-primary);color:#fff}
+.ed-head h1{font-family:var(--serif);font-weight:800;font-size:clamp(2rem,6vw,2.8rem);line-height:1.05;margin:0 0 .35em}
+.ed-head p{color:var(--ed-muted);margin:0;max-width:60ch}
+.ed-section{background:var(--ed-card);border:1px solid var(--ed-line);border-radius:18px;padding:22px;margin-top:22px}
+.ed-section h2{font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:0 0 .3em}
+.hint{color:var(--ed-muted);font-size:.92rem;margin:0 0 14px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label,.flabel{font-weight:700;font-size:.9rem}
+.field input,.field textarea{border:1.5px solid var(--ed-line);border-radius:10px;padding:.6em .75em;background:#fff;color:var(--ed-ink);font-size:1rem;width:100%}
+.field textarea{min-height:88px;resize:vertical}
+.words{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.seg{display:inline-flex;background:var(--ed-bg);border-radius:999px;padding:4px;gap:4px;margin:6px 0 16px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;border-radius:999px;padding:.5em 1.1em;font-weight:700;color:var(--ed-muted)}
+.seg button[aria-pressed="true"]{background:#fff;color:var(--ed-ink);box-shadow:0 1px 3px rgba(38,27,48,.2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--ed-line);background:#fff;border-radius:999px;padding:.45em .95em;font-weight:600;font-size:.92rem;color:var(--ed-ink)}
+.chip:hover{border-color:var(--ed-primary)}
+.themes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.theme-opt{border:2px solid var(--ed-line);border-radius:14px;background:#fff;padding:10px;text-align:left;color:var(--ed-ink)}
+.theme-opt[aria-pressed="true"]{border-color:var(--ed-primary);box-shadow:0 0 0 2px var(--ed-primary)}
+.theme-opt .sw{display:block;height:54px;border-radius:9px;margin-bottom:8px}
+.theme-opt b{display:block;font-size:.95rem}
+.theme-opt small{color:var(--ed-muted);font-size:.82rem}
+.done{background:#FFF3E3;border:1px solid #F2C58E;border-radius:18px;padding:18px 22px;margin-top:22px}
+.done h2{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:0 0 .3em}
+.done p{margin:.2em 0 .8em}
+.linkrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.linkrow input{flex:1 1 260px;min-width:0;border:1.5px solid #E6C9A4;border-radius:10px;padding:.55em .7em;background:#fff;font-size:.9rem;color:var(--ed-ink)}
+.linkbtns{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.actions{position:sticky;bottom:0;margin-top:10px;padding:26px 0 calc(16px + env(safe-area-inset-bottom,0px));background:linear-gradient(rgba(247,241,236,0),var(--ed-bg) 40%);display:flex;gap:10px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.actions .err{color:var(--ed-red);font-weight:700;font-size:.92rem;margin:0 auto 0 0;flex-basis:100%}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ed-ink);color:#fff;padding:.6em 1.1em;border-radius:999px;font-weight:600;font-size:.92rem;z-index:95;max-width:90vw;text-align:center}
+.preview-layer{position:fixed;inset:0;z-index:40;overflow:auto;background:var(--ed-bg)}
+.preview-bar{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;background:var(--ed-ink);color:#fff;font-size:.9rem}
+.preview-bar .btn-primary{background:#fff;color:var(--ed-ink)}
+@media (max-width:600px){
+  .fields{grid-template-columns:1fr}
+  .themes{grid-template-columns:1fr}
+  .theme-opt{display:flex;gap:12px;align-items:center}
+  .theme-opt .sw{width:64px;height:44px;margin:0;flex:none}
+}
+
+/* ---------- Carte à offrir ---------- */
+.t-nuit{--bg:#16203A;--ink:#2A2440;--muted:#5E5872;--accent:#A3303A;--paper:#FFF8F0;--edge:#C9A66B;--credit:rgba(232,211,162,.85);
+  background-color:var(--bg);
+  background-image:radial-gradient(rgba(232,211,162,.55) 1.5px,transparent 2.5px),radial-gradient(rgba(255,248,240,.35) 1px,transparent 2px),linear-gradient(#16203A,#34466F);
+  background-size:68px 68px,41px 41px,100% 100%;background-position:0 0,20px 27px,0 0;background-attachment:fixed}
+.t-mitre{--bg:#7E222B;--ink:#3A1A1E;--muted:#7A4A4F;--accent:#A3303A;--paper:#FFF8F0;--edge:#C9A66B;--credit:rgba(255,240,220,.85);
+  background-color:var(--bg);
+  background-image:radial-gradient(rgba(232,211,162,.5) 2px,transparent 3px),radial-gradient(rgba(255,248,240,.25) 1.5px,transparent 2.5px);
+  background-size:76px 76px,76px 76px;background-position:0 0,38px 38px}
+.t-speculoos{--bg:#F3E6D3;--ink:#4A3424;--muted:#8A6A50;--accent:#A3303A;--paper:#FFFFFF;--edge:#D9B88F;--credit:#7A5A40;
+  background-color:var(--bg);
+  background-image:radial-gradient(rgba(255,255,255,.95) 4px,transparent 5px),radial-gradient(rgba(185,130,79,.35) 2px,transparent 3px);
+  background-size:96px 96px,96px 96px;background-position:0 0,48px 48px}
+.card-host{min-height:100vh;display:flex;justify-content:center;align-items:flex-start;color:var(--ink)}
+.preview-layer .card-host{min-height:calc(100vh - 56px)}
+.card{width:min(100%,520px);padding:calc(28px + env(safe-area-inset-top,0px)) 16px calc(40px + env(safe-area-inset-bottom,0px));text-align:center}
+.paper{background:var(--paper);border-radius:28px;padding:34px 22px 28px;box-shadow:0 24px 50px -20px rgba(0,0,0,.55);border:1px solid var(--edge)}
+.to{font-weight:700;color:var(--muted);margin:0 0 .3em}
+.intro{font-family:var(--serif);font-weight:800;font-size:clamp(1.7rem,7vw,2.35rem);line-height:1.1;margin:0 0 .3em;text-wrap:balance}
+.instr{color:var(--muted);margin:0 0 22px;font-size:.95rem}
+.zone{position:relative;border-radius:20px;overflow:hidden;background:#fff;min-height:200px;display:grid;place-items:center;border:2px solid var(--edge);user-select:none;-webkit-user-select:none}
+.zone .hidden-content{padding:26px 20px}
+.secret{font-family:var(--serif);font-weight:800;font-size:clamp(1.6rem,7vw,2.3rem);line-height:1.15;color:var(--accent);margin:0;text-wrap:balance}
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;user-select:none;-webkit-user-select:none}
+.case{position:relative;aspect-ratio:1;border-radius:50%;overflow:hidden;background:#fff;display:grid;place-items:center;border:2px solid var(--edge)}
+.case span{font-family:var(--serif);font-weight:800;color:var(--accent);line-height:1.05;display:block;max-width:80%;overflow-wrap:normal;word-break:keep-all}
+.scratch{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:pointer;transition:opacity .7s ease}
+.scratch.gone{opacity:0;pointer-events:none}
+.reveal-all{background:none;border:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px;margin-top:18px;font-size:.88rem;padding:.3em}
+.after{margin-top:24px}
+.after.show{animation:rise .6s ease both}
+.after .msg{font-size:1.1rem;white-space:pre-line;margin:0 0 .5em}
+.after .from{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--muted);margin:0 0 .4em;white-space:pre-line}
+.btn-card{background:var(--accent);color:#fff;margin-top:12px}
+.btn-card:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.broken{max-width:420px;margin:0 auto;text-align:center}
+.credit{display:inline-block;margin-top:22px;padding:.4em .8em;font-size:.85rem;font-weight:700;color:var(--credit);text-decoration:none;border-radius:999px}
+.credit:hover{text-decoration:underline;text-underline-offset:3px}
+.credit:focus-visible{outline:2px solid var(--credit);outline-offset:2px}
+.confetti{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:90}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.after.show{animation:none}.scratch{transition:none}}
+</style>
+</head>
+<body>
+<script id="card-data" type="application/json">null</script>
+<script>
+(function () {
+  'use strict';
+
+  /* Adresse publique de l'outil (utilisée seulement si la page est ouverte hors ligne). */
+  var PUBLIC_URL = 'https://mes-applis-96z.pages.dev/carte-saint-nicolas/';
+  /* Lien de la boutique pour la mention « Créé avec ActivityWeb Studio ». */
+  var ETSY_URL = 'https://www.etsy.com/shop/ActivityWebStudio';
+
+  var TEMPLATE = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  var EMBEDDED = null;
+  try { EMBEDDED = JSON.parse(document.getElementById('card-data').textContent); } catch (e) { EMBEDDED = null; }
+  var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STORE_KEY = 'activityweb-carte-saint-nicolas';
+  var LANGS = ['fr', 'en', 'de'];
+
+  /* ---------- Traductions ---------- */
+  var I18N = {
+    fr: {
+      docTitle: 'Carte à gratter de Saint-Nicolas', cardTitle: 'Saint Nicolas t’a laissé une surprise', langAria: 'Langue',
+      edTitle: 'Crée ta carte à gratter de Saint-Nicolas',
+      edLead: 'Écris ta surprise, choisis un style, puis crée le lien à envoyer. La personne gratte l’écran avec son doigt ou sa souris pour la découvrir.',
+      ideasTitle: 'Besoin d’une idée ?', ideasHint: 'Choisis une idée pour remplir la carte, puis modifie les textes comme tu veux.',
+      presetApplied: 'Idée appliquée : adapte les textes à ta surprise.',
+      sectionCard: 'La carte',
+      labelTo: 'Prénom de la personne (facultatif)', phTo: 'Par exemple : Léa',
+      labelFrom: 'Signature (facultatif)', phFrom: 'Par exemple : Saint Nicolas et son âne',
+      labelIntro: 'La phrase d’introduction', phIntro: 'Par exemple : Saint Nicolas est passé cette nuit…',
+      formatLabel: 'Format de la zone à gratter', formatZone: 'Une grande zone', formatCases: 'Trois cases',
+      labelSecret: 'Le message caché', phSecret: 'Par exemple : Ton cadeau est caché derrière le canapé !',
+      labelWords: 'Le texte des trois cases', caseN: 'Case {n}', phWords: ['Derrière', 'le', 'canapé !'],
+      labelAfter: 'Message après la découverte (facultatif)', phAfter: 'Par exemple : Il a dit que tu avais été très sage.',
+      styleTitle: 'Le style',
+      themeNuit: 'Nuit étoilée', descNuit: 'Bleu nuit et or',
+      themeMitre: 'Mitre', descMitre: 'Rouge et or, la grande tradition',
+      themeSpeculoos: 'Spéculoos', descSpeculoos: 'Doux, idéal pour une annonce',
+      btnPreview: 'Voir l’aperçu', btnLink: 'Créer le lien',
+      previewBar: 'Aperçu : voici ce que verra la personne. Tu peux gratter pour tester.', previewClose: 'Revenir à la carte',
+      errSecret: 'Écris le message caché avant de continuer.', errWords: 'Remplis les trois cases avant de continuer.',
+      linkTitle: 'Ta carte est prête !', linkHint: 'Envoie ce lien à la personne. Elle l’ouvre, gratte l’écran et découvre ta surprise. Si tu modifies la carte, crée un nouveau lien.',
+      labelLink: 'Lien de la carte', btnWhatsApp: 'Envoyer sur WhatsApp', btnCopy: 'Copier', copyDone: 'Lien copié.', copyFail: 'Sélectionne le lien pour le copier.',
+      btnDownload: 'Ou télécharger la carte en fichier', dlDone: 'Carte téléchargée : {file}',
+      waMessage: '✨ Saint Nicolas t’a laissé une surprise ! Gratte pour la découvrir : {url}',
+      waMessageName: '✨ {name}, Saint Nicolas t’a laissé une surprise ! Gratte pour la découvrir : {url}',
+      fileName: 'carte-saint-nicolas',
+      forName: 'Pour {name}', defaultIntro: 'Saint Nicolas t’a laissé une surprise…',
+      instrZone: 'Gratte la carte avec ton doigt ou ta souris.', instrCases: 'Gratte les trois cases avec ton doigt ou ta souris.',
+      coatLabel: 'Gratte ici', revealAll: 'Tout découvrir sans gratter', again: 'Regratter la carte',
+      credit: 'Créé avec ActivityWeb Studio',
+      brokenTitle: 'Oups, ce lien est incomplet', broken: 'Demande à la personne qui te l’a envoyé de le renvoyer en entier.'
+    },
+    en: {
+      docTitle: 'Saint Nicholas Scratch Card', cardTitle: 'Saint Nicholas left you a surprise', langAria: 'Language',
+      edTitle: 'Create your Saint Nicholas scratch card',
+      edLead: 'Write your surprise, pick a style, then create a link to send. They scratch the screen with a finger or mouse to reveal it.',
+      ideasTitle: 'Need an idea?', ideasHint: 'Pick an idea to fill in the card, then change the text however you like.',
+      presetApplied: 'Idea added. Now make the text your own.',
+      sectionCard: 'Your card',
+      labelTo: 'Recipient’s name (optional)', phTo: 'e.g., Emma',
+      labelFrom: 'Sign-off (optional)', phFrom: 'e.g., Saint Nicholas and his donkey',
+      labelIntro: 'Opening line', phIntro: 'e.g., Saint Nicholas came by last night…',
+      formatLabel: 'Scratch area', formatZone: 'One big area', formatCases: 'Three circles',
+      labelSecret: 'Hidden message', phSecret: 'e.g., Your present is hidden behind the sofa!',
+      labelWords: 'Text for the three circles', caseN: 'Circle {n}', phWords: ['Behind', 'the', 'sofa!'],
+      labelAfter: 'Message after the reveal (optional)', phAfter: 'e.g., He said you’ve been very good this year.',
+      styleTitle: 'Style',
+      themeNuit: 'Starry Night', descNuit: 'Midnight blue and gold',
+      themeMitre: 'Mitre', descMitre: 'Red and gold, the classic',
+      themeSpeculoos: 'Speculoos', descSpeculoos: 'Soft, perfect for announcements',
+      btnPreview: 'Preview', btnLink: 'Create link',
+      previewBar: 'Preview: this is exactly what they’ll see. Try scratching it.', previewClose: 'Back to editing',
+      errSecret: 'Write your hidden message first.', errWords: 'Fill in all three circles first.',
+      linkTitle: 'Your card is ready!', linkHint: 'Send this link. They open it, scratch the screen and discover your surprise. If you change the card, create a new link.',
+      labelLink: 'Card link', btnWhatsApp: 'Send on WhatsApp', btnCopy: 'Copy', copyDone: 'Link copied.', copyFail: 'Select the link to copy it.',
+      btnDownload: 'Or download the card as a file', dlDone: 'Card downloaded: {file}',
+      waMessage: '✨ Saint Nicholas left you a surprise! Scratch to reveal it: {url}',
+      waMessageName: '✨ {name}, Saint Nicholas left you a surprise! Scratch to reveal it: {url}',
+      fileName: 'saint-nicholas-scratch-card',
+      forName: 'For {name}', defaultIntro: 'Saint Nicholas left you a surprise…',
+      instrZone: 'Scratch the card with your finger or mouse.', instrCases: 'Scratch all three circles with your finger or mouse.',
+      coatLabel: 'Scratch here', revealAll: 'Reveal without scratching', again: 'Scratch again',
+      credit: 'Made with ActivityWeb Studio',
+      brokenTitle: 'Oops, this link is incomplete', broken: 'Ask the person who sent it to send the full link again.'
+    },
+    de: {
+      docTitle: 'Nikolaus-Rubbelkarte', cardTitle: 'Der Nikolaus hat dir eine Überraschung dagelassen', langAria: 'Sprache',
+      edTitle: 'Ihre Nikolaus-Rubbelkarte',
+      edLead: 'Schreiben Sie Ihre Überraschung, wählen Sie einen Stil und erstellen Sie dann den Link zum Verschicken. Die Person rubbelt mit dem Finger oder der Maus über den Bildschirm und entdeckt die Überraschung.',
+      ideasTitle: 'Brauchen Sie eine Idee?', ideasHint: 'Wählen Sie eine Idee, um die Karte auszufüllen, und passen Sie die Texte dann nach Belieben an.',
+      presetApplied: 'Idee übernommen. Passen Sie die Texte jetzt an.',
+      sectionCard: 'Die Karte',
+      labelTo: 'Vorname der Person (optional)', phTo: 'z. B. Lena',
+      labelFrom: 'Unterschrift (optional)', phFrom: 'z. B. Der Nikolaus und Knecht Ruprecht',
+      labelIntro: 'Einleitungssatz', phIntro: 'z. B. Heute Nacht war der Nikolaus da…',
+      formatLabel: 'Rubbelfeld', formatZone: 'Ein großes Feld', formatCases: 'Drei Kreise',
+      labelSecret: 'Versteckte Nachricht', phSecret: 'z. B. Dein Geschenk ist hinter dem Sofa versteckt!',
+      labelWords: 'Text der drei Kreise', caseN: 'Kreis {n}', phWords: ['Hinter', 'dem', 'Sofa!'],
+      labelAfter: 'Nachricht nach dem Aufdecken (optional)', phAfter: 'z. B. Er sagt, du warst dieses Jahr sehr brav.',
+      styleTitle: 'Stil',
+      themeNuit: 'Sternennacht', descNuit: 'Nachtblau und Gold',
+      themeMitre: 'Mitra', descMitre: 'Rot und Gold, ganz klassisch',
+      themeSpeculoos: 'Spekulatius', descSpeculoos: 'Sanft, ideal für Verkündungen',
+      btnPreview: 'Vorschau', btnLink: 'Link erstellen',
+      previewBar: 'Vorschau: So sieht die Person die Karte. Probieren Sie das Rubbeln aus.', previewClose: 'Zurück zur Karte',
+      errSecret: 'Bitte schreiben Sie zuerst die versteckte Nachricht.', errWords: 'Bitte füllen Sie zuerst alle drei Kreise aus.',
+      linkTitle: 'Ihre Karte ist fertig!', linkHint: 'Senden Sie diesen Link. Die Person öffnet ihn, rubbelt und entdeckt Ihre Überraschung. Wenn Sie die Karte ändern, erstellen Sie einen neuen Link.',
+      labelLink: 'Link zur Karte', btnWhatsApp: 'Per WhatsApp senden', btnCopy: 'Kopieren', copyDone: 'Link kopiert.', copyFail: 'Markieren Sie den Link, um ihn zu kopieren.',
+      btnDownload: 'Oder die Karte als Datei herunterladen', dlDone: 'Karte heruntergeladen: {file}',
+      waMessage: '✨ Der Nikolaus hat dir eine Überraschung dagelassen! Rubbel sie frei: {url}',
+      waMessageName: '✨ {name}, der Nikolaus hat dir eine Überraschung dagelassen! Rubbel sie frei: {url}',
+      fileName: 'nikolaus-rubbelkarte',
+      forName: 'Für {name}', defaultIntro: 'Der Nikolaus hat dir eine Überraschung dagelassen…',
+      instrZone: 'Rubbel die Karte mit dem Finger oder der Maus frei.', instrCases: 'Rubbel alle drei Kreise mit dem Finger oder der Maus frei.',
+      coatLabel: 'Hier rubbeln', revealAll: 'Ohne Rubbeln aufdecken', again: 'Noch einmal rubbeln',
+      credit: 'Erstellt mit ActivityWeb Studio',
+      brokenTitle: 'Hoppla, dieser Link ist unvollständig', broken: 'Bitte die Person, die ihn geschickt hat, dir den ganzen Link noch einmal zu senden.'
+    }
+  };
+
+  /* Idées prêtes à l'emploi : [thème, {fr}, {en}, {de}] avec label, intro, secret, words, after */
+  var PRESETS = [
+    ['nuit',
+      { label: 'Cadeau caché', intro: 'Saint Nicolas est passé cette nuit…', secret: 'Ton cadeau est caché derrière le canapé !', words: ['Derrière', 'le', 'canapé !'], after: 'Il a dit que tu avais été très sage.' },
+      { label: 'Hidden present', intro: 'Saint Nicholas came by last night…', secret: 'Your present is hidden behind the sofa!', words: ['Behind', 'the', 'sofa!'], after: 'He said you’ve been very good this year.' },
+      { label: 'Verstecktes Geschenk', intro: 'Heute Nacht war der Nikolaus da…', secret: 'Dein Geschenk ist hinter dem Sofa versteckt!', words: ['Hinter', 'dem', 'Sofa!'], after: 'Er sagt, du warst dieses Jahr sehr brav.' }],
+    ['speculoos',
+      { label: 'Chasse au trésor', intro: 'Saint Nicolas a laissé un indice…', secret: 'Va voir dans la machine à laver !', words: ['Dans la', 'machine', 'à laver !'], after: 'Le prochain indice t’y attend.' },
+      { label: 'Treasure hunt', intro: 'Saint Nicholas left you a clue…', secret: 'Look inside the washing machine!', words: ['Inside the', 'washing', 'machine!'], after: 'Your next clue is waiting there.' },
+      { label: 'Schatzsuche', intro: 'Der Nikolaus hat dir einen Hinweis dagelassen…', secret: 'Schau in die Waschmaschine!', words: ['Schau in', 'die', 'Waschmaschine!'], after: 'Dort wartet dein nächster Hinweis.' }],
+    ['speculoos',
+      { label: 'Annonce de grossesse', intro: 'Saint Nicolas nous a apporté une grande nouvelle…', secret: 'L’an prochain, il y aura un petit soulier de plus !', words: ['Un petit', 'soulier', 'de plus !'], after: 'Bébé arrive en [mois].' },
+      { label: 'Pregnancy announcement', intro: 'Saint Nicholas brought us some big news…', secret: 'Next year, there’ll be one more little shoe!', words: ['One more', 'little', 'shoe!'], after: 'Baby arrives in [month].' },
+      { label: 'Schwangerschaft verkünden', intro: 'Der Nikolaus hat uns eine große Neuigkeit gebracht…', secret: 'Nächstes Jahr steht ein Stiefelchen mehr vor der Tür!', words: ['Ein Stiefelchen', 'mehr', 'nächstes Jahr!'], after: 'Das Baby kommt im [Monat].' }],
+    ['mitre',
+      { label: 'Futurs grands-parents', intro: 'Saint Nicolas t’apporte un cadeau très spécial…', secret: 'Tu vas être mamie !', words: ['Tu vas', 'être', 'mamie !'], after: 'Le plus beau des cadeaux arrive en [mois].' },
+      { label: 'Grandparents-to-be', intro: 'Saint Nicholas brings you a very special gift…', secret: 'You’re going to be a grandma!', words: ['You’ll be', 'a', 'grandma!'], after: 'The best gift of all arrives in [month].' },
+      { label: 'Werdende Großeltern', intro: 'Der Nikolaus bringt dir ein ganz besonderes Geschenk…', secret: 'Du wirst Oma!', words: ['Du wirst', 'bald', 'Oma!'], after: 'Das schönste Geschenk kommt im [Monat].' }],
+    ['mitre',
+      { label: 'Parrain ou marraine', intro: 'Saint Nicolas m’a chargé d’une question…', secret: 'Veux-tu être ma marraine ?', words: ['Veux-tu être', 'ma', 'marraine ?'], after: 'Dis oui, Saint Nicolas compte sur toi !' },
+      { label: 'Godparent proposal', intro: 'Saint Nicholas asked me to pass on a question…', secret: 'Will you be my godmother?', words: ['Will you be', 'my', 'godmother?'], after: 'Say yes, Saint Nicholas is counting on you!' },
+      { label: 'Pate oder Patin', intro: 'Der Nikolaus hat mir eine Frage aufgetragen…', secret: 'Wirst du meine Patin?', words: ['Wirst du', 'meine', 'Patin?'], after: 'Sag ja, der Nikolaus zählt auf dich!' }],
+    ['nuit',
+      { label: 'Sortie surprise', intro: 'Saint Nicolas t’offre une journée spéciale…', secret: 'Samedi, on va au cinéma ensemble !', words: ['On va', 'au', 'cinéma !'], after: 'Rendez-vous samedi à [heure].' },
+      { label: 'Surprise outing', intro: 'Saint Nicholas gives you a special day…', secret: 'On Saturday, we’re going to the movies!', words: ['We’re going', 'to the', 'movies!'], after: 'See you Saturday at [time].' },
+      { label: 'Überraschungsausflug', intro: 'Der Nikolaus schenkt dir einen besonderen Tag…', secret: 'Am Samstag gehen wir zusammen ins Kino!', words: ['Wir gehen', 'ins', 'Kino!'], after: 'Treffpunkt Samstag um [Uhrzeit].' }],
+    ['mitre',
+      { label: 'Bon cadeau', intro: 'Saint Nicolas a glissé un bon dans ton soulier…', secret: 'Bon pour une soirée pizza et film !', words: ['Soirée', 'pizza', 'et film !'], after: 'À utiliser quand tu veux.' },
+      { label: 'Gift voucher', intro: 'Saint Nicholas slipped a voucher into your shoe…', secret: 'Good for one pizza and movie night!', words: ['Pizza', 'and movie', 'night!'], after: 'Use it whenever you like.' },
+      { label: 'Gutschein', intro: 'Der Nikolaus hat einen Gutschein in deinen Stiefel gesteckt…', secret: 'Gutschein für einen Pizza- und Filmabend!', words: ['Pizza', 'und', 'Filmabend!'], after: 'Einlösbar, wann du willst.' }]
+  ];
+
+  var lang = detectLang();
+  function detectLang() {
+    try {
+      var q = new URLSearchParams(location.search).get('lang');
+      if (q && LANGS.indexOf(q) !== -1) return q;
+    } catch (e) {}
+    var n = (navigator.language || 'en').slice(0, 2).toLowerCase();
+    return LANGS.indexOf(n) !== -1 ? n : 'en';
+  }
+  function t(key, vars, l) {
+    var s = (I18N[l || lang] || I18N.en)[key];
+    if (s == null) s = I18N.en[key];
+    if (vars && typeof s === 'string') s = s.replace(/\{(\w+)\}/g, function (m, k) { return vars[k] != null ? vars[k] : m; });
+    return s;
+  }
+
+  /* ---------- Outils ---------- */
+  function h(tag, attrs) {
+    var el = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      var v = attrs[k];
+      if (v == null || v === false) continue;
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k.slice(0, 2) === 'on') el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? '' : v);
+    }
+    for (var i = 2; i < arguments.length; i++) add(el, arguments[i]);
+    return el;
+  }
+  function add(el, c) {
+    if (c == null || c === false) return;
+    if (Array.isArray(c)) { c.forEach(function (x) { add(el, x); }); return; }
+    el.append(c.nodeType ? c : String(c));
+  }
+  function slug(s) {
+    return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30);
+  }
+  function typo(s, l) {
+    s = String(s || '');
+    return l === 'fr' ? s.replace(/ ([?!:;»])/g, '\u00a0$1').replace(/« /g, '«\u00a0') : s;
+  }
+  function toast(msg) {
+    var el = h('div', { class: 'toast', role: 'status', text: msg });
+    document.body.append(el);
+    setTimeout(function () { el.remove(); }, 2600);
+  }
+  function encode(obj) {
+    var bytes = new TextEncoder().encode(JSON.stringify(obj)), bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function decode(str) {
+    str = str.replace(/-/g, '+').replace(/_/g, '/');
+    while (str.length % 4) str += '=';
+    var bin = atob(str), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
+  function baseUrl() {
+    if (/^https?:$/.test(location.protocol)) {
+      var p = location.pathname.replace(/index\.html$/, '');
+      if (p.slice(-1) !== '/') p += '/';
+      return location.origin + p;
+    }
+    return PUBLIC_URL;
+  }
+
+  /* ---------- Styles ---------- */
+  var THEMES = {
+    nuit: { name: 'themeNuit', desc: 'descNuit', swatch: 'linear-gradient(135deg,#E8D3A2,#34466F 45%,#16203A)',
+      coat: ['#1E2A4A', '#34466F', '#25335A', '#E8D3A2'], web: 'rgba(232,211,162,.7)',
+      confetti: ['#C9A66B', '#E8D3A2', '#A3303A', '#FFF8F0', '#34466F'] },
+    mitre: { name: 'themeMitre', desc: 'descMitre', swatch: 'linear-gradient(135deg,#E8D3A2,#C9A66B 40%,#A3303A 70%,#7E222B)',
+      coat: ['#B08A4E', '#E8D3A2', '#C9A66B', '#7E222B'], web: 'rgba(126,34,43,.45)',
+      confetti: ['#A3303A', '#C9A66B', '#E8D3A2', '#7E222B', '#FFF8F0'] },
+    speculoos: { name: 'themeSpeculoos', desc: 'descSpeculoos', swatch: 'linear-gradient(135deg,#FFFFFF,#D9A86C 55%,#A8703F)',
+      coat: ['#B9824F', '#D9A86C', '#A8703F', '#FFF3E0'], web: 'rgba(255,243,224,.6)',
+      confetti: ['#D9A86C', '#A3303A', '#FFFFFF', '#8A6A50', '#C9A66B'] }
+  };
+
+  /* ---------- Zone à gratter ---------- */
+  function drawWeb(ctx, cx, cy, r, a0, color, dpr) {
+    /* Décor Saint-Nicolas : petites étoiles à quatre branches dans un coin */
+    ctx.save();
+    ctx.fillStyle = color;
+    var seed = Math.round(cx + cy) + 7;
+    function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    for (var i = 0; i < 9; i++) {
+      var a = a0 + rnd() * Math.PI / 2, d = r * (0.15 + rnd() * 0.85);
+      var x = cx + Math.cos(a) * d, y = cy + Math.sin(a) * d, s = (4 + rnd() * 7) * dpr;
+      ctx.beginPath();
+      for (var k = 0; k < 8; k++) {
+        var ang = -Math.PI / 2 + k * Math.PI / 4, rr = k % 2 ? s * 0.3 : s;
+        ctx.lineTo(x + Math.cos(ang) * rr, y + Math.sin(ang) * rr);
+      }
+      ctx.closePath(); ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function scratchable(host, canvas, opts) {
+    var ctx = canvas.getContext('2d', { willReadFrequently: true });
+    var dpr = 1, W = 0, H = 0, drawing = false, last = null, moves = 0, done = false, started = false;
+
+    function paint() {
+      var r = host.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = Math.round(r.width * dpr); H = Math.round(r.height * dpr);
+      canvas.width = W; canvas.height = H;
+      ctx.globalCompositeOperation = 'source-over';
+      var c = opts.theme.coat;
+      var g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, c[0]); g.addColorStop(0.5, c[1]); g.addColorStop(1, c[2]);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      var seed = 13;
+      function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+      var n = Math.round((W * H) / (700 * dpr * dpr));
+      for (var i = 0; i < n; i++) {
+        ctx.fillStyle = rnd() < 0.55 ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.08)';
+        ctx.beginPath(); ctx.arc(rnd() * W, rnd() * H, (rnd() * 1.4 + 0.4) * dpr, 0, 6.2832); ctx.fill();
+      }
+      if (opts.web) {
+        var wr = Math.min(W, H) * 0.42;
+        drawWeb(ctx, 0, 0, wr, 0, opts.theme.web, dpr);
+        drawWeb(ctx, W, H, wr, Math.PI, opts.theme.web, dpr);
+      }
+      ctx.fillStyle = c[3]; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      var fs = opts.label.length < 3 ? Math.min(W, H) * 0.42 : Math.min(W * 0.1, H * 0.2, 34 * dpr);
+      ctx.font = '800 ' + Math.round(fs) + 'px Fraunces, Georgia, serif';
+      ctx.fillText(opts.label, W / 2, H / 2);
+    }
+    function pos(e) {
+      var r = canvas.getBoundingClientRect();
+      return { x: (e.clientX - r.left) * (W / r.width), y: (e.clientY - r.top) * (H / r.height) };
+    }
+    function line(a, b) {
+      var radius = Math.max(14, (Math.min(W, H) / dpr) * 0.11) * dpr;
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineWidth = radius * 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x + 0.01, b.y); ctx.stroke();
+    }
+    function ratio() {
+      if (!W || !H) return 0;
+      var d = ctx.getImageData(0, 0, W, H).data;
+      var step = 4 * Math.max(1, Math.floor((W * H) / 20000));
+      var clear = 0, tot = 0;
+      for (var i = 3; i < d.length; i += step) { tot++; if (d[i] < 128) clear++; }
+      return tot ? clear / tot : 0;
+    }
+    function finish() {
+      if (done) return;
+      done = true; drawing = false;
+      canvas.classList.add('gone');
+      if (opts.onDone) opts.onDone();
+    }
+    canvas.addEventListener('pointerdown', function (e) {
+      if (done) return;
+      e.preventDefault();
+      drawing = true; started = true;
+      try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+      last = pos(e); line(last, last);
+    });
+    canvas.addEventListener('pointermove', function (e) {
+      if (!drawing || done) return;
+      var p = pos(e); line(last, p); last = p;
+      if (++moves % 10 === 0 && ratio() > opts.threshold) finish();
+    });
+    function up() { if (!drawing) return; drawing = false; if (ratio() > opts.threshold) finish(); }
+    canvas.addEventListener('pointerup', up);
+    canvas.addEventListener('pointercancel', up);
+    window.addEventListener('resize', function () { if (canvas.isConnected && !started && !done) paint(); });
+    paint();
+    return {
+      reset: function () { done = false; started = false; moves = 0; canvas.classList.remove('gone'); paint(); },
+      reveal: finish,
+      isDone: function () { return done; }
+    };
+  }
+
+  function fitSize(span, box) {
+    var maxW = box.clientWidth * 0.8, maxH = box.clientHeight * 0.62;
+    var size = Math.max(14, box.clientWidth * 0.24);
+    span.style.fontSize = size + 'px';
+    while ((span.scrollWidth > maxW + 1 || span.offsetHeight > maxH) && size > 12) { size -= 1; span.style.fontSize = size + 'px'; }
+    return size;
+  }
+
+  function confetti(colors) {
+    if (REDUCED) return;
+    var c = h('canvas', { class: 'confetti', 'aria-hidden': 'true' });
+    document.body.append(c);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), vw = window.innerWidth, vh = window.innerHeight;
+    c.width = vw * dpr; c.height = vh * dpr;
+    var x = c.getContext('2d'), P = [];
+    for (var i = 0; i < 150; i++) {
+      P.push({ x: vw * (0.25 + Math.random() * 0.5), y: vh * 0.5, vx: (Math.random() - 0.5) * 16, vy: -Math.random() * 15 - 6,
+        r: Math.random() * 6 + 5, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, col: colors[i % colors.length], round: i % 4 === 0 });
+    }
+    var t0 = performance.now();
+    function frame(now) {
+      var el = now - t0;
+      x.setTransform(dpr, 0, 0, dpr, 0, 0);
+      x.clearRect(0, 0, vw, vh);
+      x.globalAlpha = Math.max(0, 1 - el / 3400);
+      P.forEach(function (p) {
+        p.vy += 0.35; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.a += p.va;
+        x.save(); x.translate(p.x, p.y); x.rotate(p.a); x.fillStyle = p.col;
+        if (p.round) { x.beginPath(); x.arc(0, 0, p.r / 2.2, 0, 6.2832); x.fill(); }
+        else x.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2);
+        x.restore();
+      });
+      if (el < 3400) requestAnimationFrame(frame); else c.remove();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function whenReady() {
+    var waits = [];
+    if (document.fonts && document.fonts.ready) waits.push(document.fonts.ready);
+    var timeout = new Promise(function (r) { setTimeout(r, 1500); });
+    return Promise.race([Promise.all(waits), timeout]).then(function () {
+      return new Promise(function (r) { requestAnimationFrame(function () { requestAnimationFrame(r); }); });
+    });
+  }
+
+  /* ---------- Carte à offrir ---------- */
+  /* d : { l, to, i, f ('z'|'c'), s, w, a, fr, th } */
+  function renderCard(container, d) {
+    var L = LANGS.indexOf(d.l) !== -1 ? d.l : lang;
+    var themeKey = THEMES[d.th] ? d.th : 'nuit';
+    var T = THEMES[themeKey];
+    var cases = d.f === 'c';
+    var scratchers = [];
+    var celebrated = false;
+
+    var revealBtn = h('button', { type: 'button', class: 'reveal-all' }, t('revealAll', null, L));
+    var againBtn = h('button', { type: 'button', class: 'btn btn-card' }, t('again', null, L));
+    var afterBox = h('div', { class: 'after', hidden: true, 'aria-live': 'polite' });
+
+    var area, zoneCanvas;
+    if (cases) {
+      area = h('div', { class: 'cases' }, (d.w || []).slice(0, 3).map(function (w) {
+        var cv = h('canvas', { class: 'scratch', 'aria-hidden': 'true' });
+        var sp = h('span', { text: typo(w, L).replace(/-/g, '\u2011') });
+        var cs = h('div', { class: 'case' }, sp, cv);
+        cs._cv = cv; cs._sp = sp;
+        return cs;
+      }));
+    } else {
+      zoneCanvas = h('canvas', { class: 'scratch', 'aria-hidden': 'true' });
+      area = h('div', { class: 'zone' }, h('div', { class: 'hidden-content' }, h('p', { class: 'secret', text: typo(d.s, L) })), zoneCanvas);
+    }
+
+    if (d.a) afterBox.append(h('p', { class: 'msg', text: typo(d.a, L) }));
+    if (d.fr) afterBox.append(h('p', { class: 'from', text: d.fr }));
+    afterBox.append(againBtn);
+
+    function check() {
+      if (celebrated) return;
+      if (!scratchers.every(function (s) { return s.isDone(); })) return;
+      celebrated = true;
+      revealBtn.hidden = true;
+      afterBox.hidden = false;
+      afterBox.classList.remove('show'); void afterBox.offsetWidth; afterBox.classList.add('show');
+      confetti(T.confetti);
+    }
+    revealBtn.addEventListener('click', function () { scratchers.forEach(function (s) { s.reveal(); }); });
+    againBtn.addEventListener('click', function () {
+      celebrated = false;
+      afterBox.hidden = true;
+      revealBtn.hidden = false;
+      scratchers.forEach(function (s) { s.reset(); });
+      area.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+    });
+
+    var host = h('div', { class: 'card-host t-' + themeKey, lang: L },
+      h('main', { class: 'card' },
+        h('div', { class: 'paper' },
+          d.to ? h('p', { class: 'to', text: t('forName', { name: d.to }, L) }) : null,
+          h('h1', { class: 'intro', text: typo(d.i || t('defaultIntro', null, L), L) }),
+          h('p', { class: 'instr', text: t(cases ? 'instrCases' : 'instrZone', null, L) }),
+          area,
+          revealBtn,
+          afterBox
+        ),
+        credit(L)
+      )
+    );
+    container.append(host);
+
+    whenReady().then(function () {
+      if (cases) {
+        var sizes = [].map.call(area.children, function (cs) { return fitSize(cs._sp, cs); });
+        var common = Math.min.apply(null, sizes);
+        [].forEach.call(area.children, function (cs) {
+          cs._sp.style.fontSize = common + 'px';
+          scratchers.push(scratchable(cs, cs._cv, { theme: T, label: '?', threshold: 0.45, web: false, onDone: check }));
+        });
+      } else {
+        scratchers.push(scratchable(area, zoneCanvas, { theme: T, label: t('coatLabel', null, L), threshold: 0.5, web: true, onDone: check }));
+      }
+    });
+  }
+
+  function credit(L) {
+    return h('a', { class: 'credit', href: ETSY_URL, target: '_blank', rel: 'noopener' }, '✨ ' + t('credit', null, L));
+  }
+
+  function renderBroken() {
+    var host = h('div', { class: 'card-host t-nuit' },
+      h('main', { class: 'card' },
+        h('div', { class: 'paper broken' },
+          h('h1', { class: 'intro', text: t('brokenTitle') }),
+          h('p', { text: t('broken') })),
+        credit(lang)));
+    document.body.append(host);
+  }
+
+  /* ---------- Éditeur ---------- */
+  var DEFAULT = { to: '', intro: '', format: 'zone', secret: '', words: ['', '', ''], after: '', from: '', theme: 'nuit' };
+  var draft = load();
+
+  function load() {
+    try {
+      var s = JSON.parse(localStorage.getItem(STORE_KEY));
+      if (s && typeof s === 'object') {
+        var d = Object.assign({}, DEFAULT, s);
+        if (!Array.isArray(d.words) || d.words.length !== 3) d.words = ['', '', ''];
+        if (!THEMES[d.theme]) d.theme = 'nuit';
+        return d;
+      }
+    } catch (e) {}
+    return Object.assign({}, DEFAULT, { words: ['', '', ''] });
+  }
+  function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(draft)); } catch (e) {} }
+
+  function cardData() {
+    var d = { l: lang, i: draft.intro.trim(), f: draft.format === 'cases' ? 'c' : 'z', th: draft.theme };
+    if (draft.to.trim()) d.to = draft.to.trim();
+    if (d.f === 'c') d.w = draft.words.map(function (w) { return w.trim(); });
+    else d.s = draft.secret.trim();
+    if (draft.after.trim()) d.a = draft.after.trim();
+    if (draft.from.trim()) d.fr = draft.from.trim();
+    return d;
+  }
+  function validate() {
+    var d = cardData();
+    if (d.f === 'c' && d.w.some(function (w) { return !w; })) return t('errWords');
+    if (d.f === 'z' && !d.s) return t('errSecret');
+    return '';
+  }
+
+  var linkBoxEl = null;
+  function invalidateLink() { if (linkBoxEl) { linkBoxEl.remove(); linkBoxEl = null; } }
+
+  function renderEditor() {
+    document.body.innerHTML = '';
+    linkBoxEl = null;
+    document.documentElement.lang = lang;
+    document.title = t('docTitle');
+
+    var errEl = h('p', { class: 'err', role: 'alert', hidden: true });
+    function showError(msg) { errEl.textContent = msg; errEl.hidden = !msg; }
+    function rerender() { renderEditor(); }
+
+    function field(labelKey, key, phKey, type, cls, max) {
+      var id = 'f-' + key;
+      var input = type === 'textarea'
+        ? h('textarea', { id: id, placeholder: t(phKey), maxlength: max })
+        : h('input', { id: id, type: 'text', placeholder: t(phKey), maxlength: max, autocomplete: 'off' });
+      input.value = draft[key] || '';
+      input.addEventListener('input', function () { draft[key] = input.value; save(); invalidateLink(); showError(''); });
+      return h('div', { class: 'field' + (cls ? ' ' + cls : '') }, h('label', { for: id, text: t(labelKey) }), input);
+    }
+
+    var langSwitch = h('div', { class: 'lang', role: 'group', 'aria-label': t('langAria') },
+      LANGS.map(function (l) {
+        return h('button', { type: 'button', lang: l, 'aria-pressed': String(lang === l), onclick: function () {
+          lang = l;
+          try { var u = new URL(location.href); u.searchParams.set('lang', l); history.replaceState(null, '', u); } catch (e) {}
+          rerender();
+        } }, l.toUpperCase());
+      }));
+
+    var formatSeg = h('div', { class: 'seg', role: 'group', 'aria-label': t('formatLabel') },
+      [['zone', 'formatZone'], ['cases', 'formatCases']].map(function (o) {
+        return h('button', { type: 'button', 'aria-pressed': String(draft.format === o[0]), onclick: function () { draft.format = o[0]; save(); rerender(); } }, t(o[1]));
+      }));
+
+    var secretBlock = draft.format === 'cases'
+      ? h('div', { class: 'field full' },
+          h('span', { class: 'flabel', id: 'words-label', text: t('labelWords') }),
+          h('div', { class: 'words', role: 'group', 'aria-labelledby': 'words-label' }, draft.words.map(function (w, i) {
+            var inp = h('input', { type: 'text', maxlength: 16, placeholder: t('phWords')[i], 'aria-label': t('caseN', { n: i + 1 }), autocomplete: 'off' });
+            inp.value = w;
+            inp.addEventListener('input', function () { draft.words[i] = inp.value; save(); invalidateLink(); showError(''); });
+            return inp;
+          })))
+      : field('labelSecret', 'secret', 'phSecret', 'text', 'full', 60);
+
+    function openPreview() {
+      var msg = validate();
+      if (msg) { showError(msg); return; }
+      showError('');
+      var holder = h('div');
+      var closeBtn = h('button', { type: 'button', class: 'btn btn-primary' }, t('previewClose'));
+      var layer = h('div', { class: 'preview-layer', role: 'dialog', 'aria-modal': 'true', 'aria-label': t('btnPreview') },
+        h('div', { class: 'preview-bar' }, h('span', { text: t('previewBar') }), closeBtn),
+        holder);
+      function close() { layer.remove(); document.body.classList.remove('no-scroll'); document.removeEventListener('keydown', onKey); }
+      function onKey(e) { if (e.key === 'Escape') close(); }
+      closeBtn.addEventListener('click', close);
+      document.addEventListener('keydown', onKey);
+      document.body.append(layer); document.body.classList.add('no-scroll');
+      renderCard(holder, cardData());
+      closeBtn.focus();
+    }
+
+    function download(d) {
+      var json = JSON.stringify(d).replace(/</g, '\\u003c');
+      var html = TEMPLATE.replace(/(<script id="card-data" type="application\/json">)[\s\S]*?(<\/script>)/, function (m, a, b) { return a + json + b; });
+      var name = t('fileName') + (slug(d.to) ? '-' + slug(d.to) : '') + '.html';
+      var url = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' }));
+      var a = h('a', { href: url, download: name });
+      document.body.append(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      toast(t('dlDone', { file: name }));
+    }
+
+    function createLink() {
+      var msg = validate();
+      if (msg) { showError(msg); return; }
+      showError('');
+      invalidateLink();
+      var d = cardData();
+      var url = baseUrl() + lang + '/#' + encode(d);
+      var wa = d.to ? t('waMessageName', { name: d.to, url: url }) : t('waMessage', { url: url });
+      var input = h('input', { type: 'text', readonly: true, value: url, 'aria-label': t('labelLink'), onfocus: function (e) { e.target.select(); } });
+      var copyBtn = h('button', { type: 'button', class: 'btn btn-ghost', onclick: function () {
+        var ok = function () { toast(t('copyDone')); };
+        var ko = function () { input.focus(); input.select(); toast(t('copyFail')); };
+        if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(ok, ko);
+        else { input.select(); try { document.execCommand('copy') ? ok() : ko(); } catch (e) { ko(); } }
+      } }, t('btnCopy'));
+      linkBoxEl = h('section', { class: 'done', role: 'status' },
+        h('h2', { text: t('linkTitle') }),
+        h('p', { text: t('linkHint') }),
+        h('div', { class: 'linkrow' }, input, copyBtn),
+        h('div', { class: 'linkbtns' },
+          h('a', { class: 'btn btn-wa', href: 'https://wa.me/?text=' + encodeURIComponent(wa), target: '_blank', rel: 'noopener' }, t('btnWhatsApp')),
+          h('button', { type: 'button', class: 'btn-link', onclick: function () { download(d); } }, t('btnDownload'))
+        )
+      );
+      head.after(linkBoxEl);
+      linkBoxEl.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+    }
+
+    var head = h('header', { class: 'ed-head' },
+      h('h1', { text: t('edTitle') }),
+      h('p', { text: t('edLead') }));
+
+    var main = h('main', { class: 'editor' },
+      h('div', { class: 'topbar' }, langSwitch),
+      head,
+      h('section', { class: 'ed-section' },
+        h('h2', { text: t('ideasTitle') }),
+        h('p', { class: 'hint', text: t('ideasHint') }),
+        h('div', { class: 'chips' }, PRESETS.map(function (p) {
+          var P = p[LANGS.indexOf(lang) + 1];
+          return h('button', { type: 'button', class: 'chip', onclick: function () {
+            draft.intro = P.intro; draft.secret = P.secret; draft.words = P.words.slice(); draft.after = P.after; draft.theme = p[0];
+            save(); rerender(); toast(t('presetApplied'));
+          } }, P.label);
+        }))
+      ),
+      h('section', { class: 'ed-section' },
+        h('h2', { text: t('sectionCard') }),
+        h('div', { class: 'fields' },
+          field('labelTo', 'to', 'phTo', 'text', null, 30),
+          field('labelFrom', 'from', 'phFrom', 'text', null, 60),
+          field('labelIntro', 'intro', 'phIntro', 'text', 'full', 80)
+        ),
+        h('p', { class: 'flabel', style: 'margin:18px 0 0', text: t('formatLabel') }),
+        formatSeg,
+        h('div', { class: 'fields' },
+          secretBlock,
+          field('labelAfter', 'after', 'phAfter', 'textarea', 'full', 280)
+        )
+      ),
+      h('section', { class: 'ed-section' },
+        h('h2', { text: t('styleTitle') }),
+        h('div', { class: 'themes' }, Object.keys(THEMES).map(function (k) {
+          var th = THEMES[k];
+          return h('button', { type: 'button', class: 'theme-opt', 'aria-pressed': String(draft.theme === k), onclick: function () { draft.theme = k; save(); rerender(); } },
+            h('span', { class: 'sw', style: 'background:' + th.swatch }),
+            h('span', null, h('b', { text: t(th.name) }), h('small', { text: t(th.desc) })));
+        }))
+      ),
+      h('div', { class: 'actions' },
+        errEl,
+        h('button', { type: 'button', class: 'btn btn-ghost', onclick: openPreview }, t('btnPreview')),
+        h('button', { type: 'button', class: 'btn btn-primary', onclick: createLink }, t('btnLink'))
+      )
+    );
+    document.body.append(main);
+  }
+
+  /* ---------- Démarrage ---------- */
+  function startCard(d) {
+    if (LANGS.indexOf(d.l) !== -1) lang = d.l;
+    document.documentElement.lang = lang;
+    document.title = t('cardTitle');
+    renderCard(document.body, d);
+  }
+
+  var hash = location.hash.slice(1);
+  if (EMBEDDED) {
+    startCard(EMBEDDED);
+  } else if (hash) {
+    var data = null;
+    try { data = decode(hash); } catch (e) { data = null; }
+    if (data && (data.s || (Array.isArray(data.w) && data.w.length === 3))) startCard(data);
+    else { document.title = t('brokenTitle'); renderBroken(); }
+  } else {
+    document.body.classList.add('mode-editor');
+    renderEditor();
+  }
+})();
+</script>
+</body>
+</html>
