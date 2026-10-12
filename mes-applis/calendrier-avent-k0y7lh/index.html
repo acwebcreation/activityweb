@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calendrier de l'Avent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Nunito Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ed-bg:#F2F4F0; --ed-ink:#22302A; --ed-muted:#5E6B63; --ed-line:#D5DCD4;
+  --ed-card:#FFFFFF; --ed-primary:#1F3D2F; --ed-red:#B23A2B;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body.no-scroll{overflow:hidden}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+button{font:inherit;cursor:pointer}
+
+/* ---------- Boutons ---------- */
+.btn{border:0;border-radius:999px;padding:.7em 1.3em;font-weight:700;font-size:.95rem;line-height:1.2}
+.btn-primary{background:var(--ed-primary);color:#fff}
+.btn-primary:hover{background:#163024}
+.btn-ghost{background:transparent;color:var(--ed-primary);box-shadow:inset 0 0 0 2px var(--ed-primary)}
+.btn-link{background:none;border:0;padding:0;color:var(--ed-primary);font-weight:700;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}
+.btn-link.danger{color:var(--ed-red)}
+.btn:focus-visible,.btn-link:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #D9A441;outline-offset:2px}
+
+/* ---------- Éditeur ---------- */
+body.mode-editor{background:var(--ed-bg);color:var(--ed-ink)}
+.editor{max-width:780px;margin:0 auto;padding:40px 18px 0}
+.ed-head h1{font-family:var(--serif);font-weight:800;font-size:clamp(2rem,6vw,2.9rem);line-height:1.05;margin:0 0 .4em;text-wrap:balance}
+.ed-head p{margin:0;color:var(--ed-muted);max-width:60ch}
+.ed-section{margin-top:40px}
+.ed-section h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;margin:0 0 .6em}
+.ed-section .hint{color:var(--ed-muted);margin:-.3em 0 1em;font-size:.95rem}
+.fields{display:grid;gap:14px}
+@media(min-width:640px){.fields{grid-template-columns:1fr 1fr}.fields .full{grid-column:1/-1}}
+.field{display:grid;gap:4px}
+.field-label{font-weight:700;font-size:.9rem}
+input[type=text],textarea{width:100%;font:inherit;font-size:16px;color:var(--ed-ink);background:var(--ed-card);border:1.5px solid var(--ed-line);border-radius:10px;padding:.6em .75em}
+textarea{resize:vertical;min-height:84px;line-height:1.45}
+.themes{display:flex;flex-wrap:wrap;gap:10px}
+.theme-opt{display:flex;align-items:center;gap:10px;background:var(--ed-card);border:1.5px solid var(--ed-line);border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:600}
+.theme-opt input{accent-color:var(--ed-primary)}
+.theme-opt:has(input:checked){border-color:var(--ed-primary);box-shadow:inset 0 0 0 1px var(--ed-primary)}
+.swatch{display:flex}
+.swatch i{width:18px;height:18px;border-radius:50%;margin-left:-5px;border:2px solid var(--ed-card)}
+.swatch i:first-child{margin-left:0}
+.theme-opt[data-theme=sapin] i:nth-child(1){background:#1F3D2F}.theme-opt[data-theme=sapin] i:nth-child(2){background:#F6EBD9}.theme-opt[data-theme=sapin] i:nth-child(3){background:#8E2A25}
+.theme-opt[data-theme=epices] i:nth-child(1){background:#EBCFA6}.theme-opt[data-theme=epices] i:nth-child(2){background:#A9602F}.theme-opt[data-theme=epices] i:nth-child(3){background:#B23A2B}
+.theme-opt[data-theme=nuit] i:nth-child(1){background:#1C2340}.theme-opt[data-theme=nuit] i:nth-child(2){background:#E9C46A}.theme-opt[data-theme=nuit] i:nth-child(3){background:#2E3866}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:.95rem}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--ed-primary);flex:none}
+.ideas-for{margin-bottom:14px}
+.idea-btn{margin-left:auto}
+.days-tools{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-bottom:16px}
+.days{display:grid;gap:12px}
+@media(min-width:640px){.days{grid-template-columns:1fr 1fr}}
+.day{background:var(--ed-card);border:1.5px solid var(--ed-line);border-radius:14px;padding:14px;display:grid;gap:10px}
+.day-head{display:flex;align-items:baseline;gap:8px}
+.day-num{font-family:var(--serif);font-weight:800;font-size:1.8rem;line-height:1;color:var(--ed-primary)}
+.day-month{color:var(--ed-muted);font-size:.9rem}
+.day textarea{min-height:76px}
+.day-photo{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px}
+.ed-foot{margin:28px 0 12px;display:flex;justify-content:flex-end}
+.bar{position:sticky;bottom:0;margin-top:24px;background:rgba(242,244,240,.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-top:1.5px solid var(--ed-line);padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));z-index:5}
+.bar-in{max-width:780px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.progress{font-weight:700;font-size:.95rem}
+.bar-actions{display:flex;gap:8px}
+@media(max-width:480px){.bar .btn{padding:.65em 1em;font-size:.88rem}.bar-in{justify-content:center}}
+
+/* ---------- Aperçu ---------- */
+.preview-layer{position:fixed;inset:0;z-index:20;overflow:auto;background:#000}
+.preview-bar{position:sticky;top:0;z-index:2;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--ed-bg);color:var(--ed-ink);padding:calc(10px + env(safe-area-inset-top,0px)) 18px 10px;font-size:.9rem;border-bottom:1.5px solid var(--ed-line)}
+.preview-bar span{max-width:52ch}
+
+/* ---------- Calendrier (ce que reçoit la personne) ---------- */
+.viewer{min-height:100vh;min-height:100dvh;padding:40px 16px 56px;background-color:var(--bg);color:var(--ink)}
+.viewer[data-theme=sapin]{--bg:#1F3D2F;--ink:#F6EBD9;--door:#F6EBD9;--door-ink:#1F3D2F;--inside:#8E2A25;--accent:#D9A441;--deco:#C2352F;--card:#FBF3E6;--card-ink:#1F3D2F}
+.viewer[data-theme=epices]{--bg:#EBCFA6;--ink:#5A2E1A;--door:#A9602F;--door-ink:#FFF6EA;--inside:#5A2E1A;--accent:#B23A2B;--deco:#6E2417;--card:#FFF6EA;--card-ink:#5A2E1A}
+.viewer[data-theme=nuit]{--bg:#1C2340;--ink:#F4F1FF;--door:#E9C46A;--door-ink:#1C2340;--inside:#2E3866;--accent:#E9C46A;--deco:#B23A48;--card:#F7F4FF;--card-ink:#1C2340}
+.viewer[data-theme=sapin],.viewer[data-theme=nuit]{
+  background-image:
+    radial-gradient(circle at 18% 22%,rgba(255,255,255,.55) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 72% 64%,rgba(255,255,255,.35) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 44% 88%,rgba(255,255,255,.45) 0 1.2px,transparent 1.8px);
+  background-size:170px 170px,230px 230px,290px 290px}
+.viewer[data-theme=epices]{background-image:radial-gradient(circle at 50% 50%,rgba(90,46,26,.12) 0 1.5px,transparent 2px);background-size:26px 26px}
+.v-inner{max-width:900px;margin:0 auto}
+.v-head{text-align:center;margin-bottom:28px}
+.v-title{font-family:var(--serif);font-weight:800;font-size:clamp(2.1rem,8vw,3.6rem);line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.v-dedi{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,3.5vw,1.3rem);margin:.6em 0 0;opacity:.9}
+.v-status{margin:1.1em auto 0;font-size:.95rem;max-width:44ch;opacity:.85}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;grid-auto-rows:calc((min(100vw - 32px,900px) - 30px)/4)}
+@media(min-width:720px){
+  .viewer{padding:56px 24px 72px}
+  .grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;grid-auto-rows:calc((min(100vw - 48px,900px) - 60px)/6)}
+}
+.door{grid-column:var(--cm)/span var(--sc);grid-row:var(--rm)/span var(--sr)}
+@media(min-width:720px){.door{grid-column:var(--cd)/span var(--sc);grid-row:var(--rd)/span var(--sr)}}
+.door{position:relative;border:0;padding:0;background:none;perspective:1000px;border-radius:10px;color:inherit}
+.door:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.door-inside{position:absolute;inset:0;border-radius:10px;background-color:var(--inside);background-size:cover;background-position:center;display:grid;place-items:center;box-shadow:inset 0 3px 10px rgba(0,0,0,.35);color:var(--accent);font-size:1.6rem}
+.door-front{position:absolute;inset:0;border-radius:10px;background:var(--door);color:var(--door-ink);transform-origin:left center;transition:transform .6s cubic-bezier(.3,.7,.2,1),box-shadow .3s;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;padding:9px 11px;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.door-front::before{content:"";position:absolute;inset:5px;border:1.5px dashed currentColor;border-radius:7px;opacity:.3;pointer-events:none}
+.pos-a .door-front{align-items:flex-end;justify-content:flex-start}
+.pos-b .door-front{align-items:flex-start;justify-content:flex-end}
+.pos-c .door-front{align-items:center;justify-content:center}
+.door-front{container-type:size}
+.deco{position:absolute;height:min(40cqh,46cqw);width:auto;aspect-ratio:1;overflow:visible}
+.deco .a{fill:var(--deco)}
+.deco .b{fill:var(--door)}
+.deco .s{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
+.deco .as{stroke:var(--deco);stroke-width:3.5}
+.deco .ad{stroke:var(--deco)}
+.pos-a .deco{top:11%;right:11%}
+.pos-b .deco{bottom:11%;left:11%}
+.pos-c .door-front{flex-direction:column;gap:5%}
+.pos-c .deco{position:static;height:min(34cqh,42cqw)}
+.big .deco{height:min(44cqh,44cqw)}
+.num{position:relative;font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,5vw,2rem);line-height:1}
+.big .num{font-size:clamp(2.4rem,11vw,4.4rem)}
+.door:not(.is-open):hover .door-front{transform:rotateY(-10deg)}
+.door.is-open .door-front{transform:rotateY(-104deg);box-shadow:none}
+.door.is-today:not(.is-open) .door-front{box-shadow:0 0 0 3px var(--accent),0 2px 0 rgba(0,0,0,.18)}
+.door.shake{animation:shake .45s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+
+.day-dialog{border:0;padding:0;border-radius:18px;max-width:min(440px,calc(100vw - 32px));width:100%;background:var(--card);color:var(--card-ink)}
+.day-dialog::backdrop{background:rgba(10,14,12,.6)}
+.dlg-inner{padding:26px 24px 22px;display:grid;gap:16px}
+.dlg-num{margin:0;font-family:var(--serif);font-size:1.05rem;display:flex;align-items:baseline;gap:8px}
+.dlg-num span{font-weight:800;font-size:3rem;line-height:.9;color:var(--accent)}
+.viewer[data-theme=nuit] .dlg-num span{color:#B0852A}
+.dlg-photo{width:100%;max-height:52vh;object-fit:cover;border-radius:12px}
+.dlg-text{margin:0;font-family:var(--serif);font-size:1.25rem;line-height:1.5;white-space:pre-wrap}
+.dlg-close{justify-self:end;background:var(--card-ink);color:var(--card)}
+
+.toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:#1b1f1d;color:#fff;padding:.7em 1.1em;border-radius:12px;font-size:.92rem;max-width:min(92vw,440px);z-index:50;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+
+@media (prefers-reduced-motion: reduce){
+  .door-front{transition:none}
+  .door.shake{animation:none}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script id="calendar-data" type="application/json">null</script>
+<script>
+(function(){
+'use strict';
+
+/* Copie du fichier d'origine, utilisée pour générer le calendrier à offrir */
+var TEMPLATE = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+var app = document.getElementById('app');
+var gift = null;
+try { gift = JSON.parse(document.getElementById('calendar-data').textContent); } catch (e) { gift = null; }
+
+var THEMES = [
+  { id: 'sapin', name: 'Sapin' },
+  { id: 'epices', name: "Pain d'épices" },
+  { id: 'nuit', name: 'Nuit étoilée' }
+];
+var ORDER = [7,18,3,24,11,1,15,9,21,5,13,20,2,16,10,23,6,14,19,4,12,22,8,17];
+var SIZES = { 24: 'big', 12: 'big', 6: 'wide', 18: 'wide', 9: 'wide', 1: 'tall', 20: 'tall', 15: 'tall' };
+/* Position de chaque case : [colonne mobile, ligne mobile, colonne ordinateur, ligne ordinateur] */
+var POS = {7:[1,1,1,1],18:[2,1,2,1],3:[4,1,4,1],24:[1,2,5,1],11:[3,2,1,2],1:[4,2,2,2],21:[3,3,4,2],5:[1,4,1,3],15:[2,4,3,2],9:[3,4,4,3],13:[1,5,6,3],2:[3,5,2,4],16:[4,5,3,4],20:[1,6,1,4],10:[2,6,4,4],6:[3,6,2,5],12:[2,7,4,5],23:[4,7,5,4],14:[1,8,6,4],22:[4,8,6,5],8:[1,9,1,6],17:[2,9,2,6],19:[3,9,3,6],4:[4,9,6,6]};
+var DECOS = [
+  '<path fill="currentColor" d="M24 7l9 11h-5l8 10h-6l7 10H11l7-10h-6l8-10h-5z"/><rect fill="currentColor" x="21" y="37" width="6" height="7"/><circle class="a" cx="24" cy="6" r="3.2"/><circle class="b" cx="20" cy="24" r="1.8"/><circle class="b" cx="28" cy="31" r="1.8"/><circle class="b" cx="21" cy="34" r="1.8"/>',
+  '<path class="a" d="M24.0 6.0 L28.7 18.5 L42.1 19.1 L31.6 27.5 L35.2 40.4 L24.0 33.0 L12.8 40.4 L16.4 27.5 L5.9 19.1 L19.3 18.5Z"/>',
+  '<path class="s" d="M5.0 24.0L43.0 24.0M14.5 7.5L33.5 40.5M33.5 7.5L14.5 40.5M36.0 24.0L40.2 19.8M36.0 24.0L40.2 28.2M30.0 34.4L35.8 35.9M30.0 34.4L28.4 40.2M18.0 34.4L19.6 40.2M18.0 34.4L12.2 35.9M12.0 24.0L7.8 28.2M12.0 24.0L7.8 19.8M18.0 13.6L12.2 12.1M18.0 13.6L19.6 7.8M30.0 13.6L28.4 7.8M30.0 13.6L35.8 12.1"/><circle class="a" cx="24" cy="24" r="3.5"/>',
+  '<rect fill="currentColor" x="9" y="21" width="30" height="21" rx="2"/><rect fill="currentColor" x="7" y="14" width="34" height="8" rx="2"/><rect class="a" x="21.5" y="14" width="5" height="28"/><path class="a" d="M24 14c-3-7-12-8-11-2 1 3 7 2 11 2zm0 0c3-7 12-8 11-2-1 3-7 2-11 2z"/>',
+  '<path class="s" d="M24 3v7"/><rect fill="currentColor" x="20" y="9" width="8" height="5" rx="1"/><circle fill="currentColor" cx="24" cy="29" r="15"/><path d="M9.8 26Q24 34 38.2 26" fill="none" class="as"/><circle class="b" cx="18" cy="34" r="1.8"/><circle class="b" cx="30" cy="34" r="1.8"/>',
+  '<path d="M29 44V17a7 7 0 0 0-14 0" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M29 44V17a7 7 0 0 0-14 0" fill="none" class="ad" stroke-width="7" stroke-dasharray="3 5"/>',
+  '<circle fill="currentColor" cx="24" cy="33" r="11"/><circle fill="currentColor" cx="24" cy="15" r="8"/><rect class="a" x="15" y="21" width="18" height="4" rx="2"/><circle class="b" cx="21" cy="13" r="1.5"/><circle class="b" cx="27" cy="13" r="1.5"/><path class="a" d="M24 16l7 2-7 1.5z"/><circle class="b" cx="24" cy="31" r="1.6"/><circle class="b" cx="24" cy="37" r="1.6"/>',
+  '<rect fill="currentColor" x="17" y="21" width="14" height="23" rx="2"/><path class="s" d="M24 21v-3"/><path class="a" d="M24 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z"/>',
+  '<path fill="currentColor" d="M24 8c-8 0-12 7-12 15v7l-4 6h32l-4-6v-7c0-8-4-15-12-15z"/><circle class="a" cx="24" cy="40" r="4"/><circle class="a" cx="24" cy="7" r="2.5"/>',
+  '<path fill="currentColor" d="M18 9h14v19l-5 10a7 7 0 0 1-12-6l3-6z"/><rect class="a" x="16" y="4" width="18" height="8" rx="2"/>',
+  '<ellipse fill="currentColor" cx="15" cy="30" rx="11" ry="5" transform="rotate(-30 15 30)"/><ellipse fill="currentColor" cx="33" cy="30" rx="11" ry="5" transform="rotate(30 33 30)"/><circle class="a" cx="24" cy="21" r="4"/><circle class="a" cx="19" cy="16" r="3.5"/><circle class="a" cx="29" cy="16" r="3.5"/>',
+  '<path fill="currentColor" d="M28 7a17 17 0 1 0 13 27A14 14 0 1 1 28 7z"/><path class="a" d="M36 8l1.6 3.4 3.4 1.6-3.4 1.6L36 18l-1.6-3.4L31 13l3.4-1.6z"/>'
+];
+var DEFAULT_MSG = "Une petite pause douceur aujourd'hui : prends soin de toi.";
+var IDEA_PACKS = {
+  enfant: [
+    "C'est parti ! Aujourd'hui, c'est toi qui choisis le dessert.",
+    "Défi du jour : dessine le plus beau sapin de toute la maison.",
+    "Devinette : je suis blanc, je tombe du ciel et je fonds dans ta main. Qui suis-je ? La neige !",
+    "Ce soir, on lit une histoire de Noël tous ensemble.",
+    "Prépare tes chaussures : cette nuit, Saint-Nicolas passe peut-être par ici !",
+    "Saint-Nicolas est passé ! Va vite voir ce qu'il a laissé…",
+    "Défi du jour : fais rire quelqu'un de la famille.",
+    "Aujourd'hui, on fabrique une décoration pour le sapin.",
+    "Blague du jour : quel est le comble pour un bonhomme de neige ? Avoir un coup de chaud !",
+    "Aujourd'hui, c'est toi qui choisis la musique dans la voiture.",
+    "Défi du jour : range ta chambre en moins de 10 minutes, chrono en main !",
+    "Ce soir, pyjama party dans le salon avec un dessin animé de Noël.",
+    "Écris ou dessine ta lettre au père Noël.",
+    "Défi du jour : dis merci à trois personnes aujourd'hui.",
+    "On fait des biscuits de Noël ensemble ! Tu choisis les formes.",
+    "Chasse au trésor : une petite surprise est cachée dans la maison…",
+    "Défi du jour : invente une chanson sur ton animal préféré.",
+    "Ce soir, promenade pour regarder les maisons illuminées.",
+    "Bonus : 15 minutes de plus avant d'aller au lit ce soir.",
+    "Défi du jour : aide à mettre la table sans qu'on te le demande.",
+    "Construis une cabane avec des coussins et des couvertures.",
+    "Défi du jour : danse comme un pingouin pendant toute une chanson.",
+    "Plus qu'une nuit à dormir… Qu'est-ce que tu espères le plus pour demain ?",
+    "Joyeux Noël ! Tu es le plus beau cadeau de la famille."
+  ],
+  papa: [
+    "Premier jour ! Aujourd'hui, c'est toi le roi de la maison, Papa.",
+    "Bon pour un café servi au lit, avec le sourire en prime.",
+    "Souvenir : tu te rappelles la première fois que tu m'as porté sur tes épaules ?",
+    "Défi du jour : raconte-nous une bêtise que tu faisais quand tu étais petit.",
+    "Ce soir, tu choisis le film. Personne n'a le droit de râler.",
+    "Joyeuse Saint-Nicolas ! Même les papas ont droit à leurs spéculoos.",
+    "Merci pour toutes les fois où tu as tout réparé, même ce qui n'était pas cassé.",
+    "Bon pour un coup de main au jardin, au garage ou au bricolage.",
+    "Défi du jour : apprends-moi ton tour secret (cuisine, bricolage ou blague).",
+    "Tu es mon héros, et ça ne changera jamais.",
+    "Ce soir, partie de jeu de société. On verra qui gagne…",
+    "Bon pour une soirée tranquille : je m'occupe de tout, tu te reposes.",
+    "Raconte-moi ton plus beau souvenir de Noël quand tu étais enfant.",
+    "Défi du jour : mets ta musique préférée à fond et chante avec nous.",
+    "Merci de toujours trouver du temps pour moi, même quand tu es fatigué.",
+    "Bon pour un petit-déjeuner préparé rien que pour toi.",
+    "Ce que je préfère chez toi ? Tes blagues… même les plus nulles.",
+    "Bon pour une balade, rien que tous les deux.",
+    "Défi du jour : envoie un message à un vieil ami que tu n'as pas vu depuis longtemps.",
+    "Ce soir, c'est toi qui choisis le dessert.",
+    "Nuit la plus longue de l'année : plaid, chocolat chaud et pas de corvées.",
+    "Bon pour une grasse matinée sans réveil.",
+    "Plus qu'un jour… Merci d'être un papa aussi génial.",
+    "Joyeux Noël, Papa ! Tu es le meilleur cadeau de ma vie."
+  ],
+  maman: [
+    "Premier jour ! Aujourd'hui, c'est toi la reine de la maison, Maman.",
+    "Bon pour un thé ou un café servi avec un gros câlin.",
+    "Souvenir : tu te rappelles nos fous rires dans la cuisine ?",
+    "Défi du jour : raconte-moi un souvenir de toi quand tu avais mon âge.",
+    "Aujourd'hui, pas de vaisselle pour toi. On s'en occupe !",
+    "Joyeuse Saint-Nicolas ! Un petit chocolat t'attend quelque part…",
+    "Merci pour tout ce que tu fais, même ce que personne ne voit.",
+    "Bon pour un massage des épaules de 10 minutes.",
+    "Défi du jour : prends 20 minutes rien que pour toi. Ordre officiel !",
+    "Tu es la personne la plus forte que je connaisse.",
+    "Ce soir, c'est toi qui choisis le film, sous un plaid bien chaud.",
+    "Bon pour un repas que l'on prépare pour toi.",
+    "Ce que je préfère chez toi ? Ta façon de rendre tout plus doux.",
+    "Défi du jour : danse sur ta chanson préférée. On danse avec toi !",
+    "Merci d'avoir toujours cru en moi.",
+    "Bon pour un petit-déjeuner au lit.",
+    "Ce soir, bain chaud, bougies et calme absolu. Tu l'as bien mérité.",
+    "Bon pour une balade ensemble, rien que nous deux.",
+    "Défi du jour : appelle une amie qui te fait toujours rire.",
+    "Aujourd'hui, on range la maison sans que tu le demandes. Promis !",
+    "Nuit la plus longue de l'année : plaid, chocolat chaud et bonne histoire.",
+    "Bon pour une grasse matinée. On ne fera pas de bruit (on essaiera).",
+    "Plus qu'un jour… Merci de rendre chaque Noël si magique.",
+    "Joyeux Noël, Maman ! Tu es le plus beau cadeau de ma vie."
+  ],
+  grandpere: [
+    "Premier jour ! Un grand bisou pour bien commencer décembre, Papy.",
+    "Raconte-moi comment tu fêtais Noël quand tu étais petit.",
+    "Bon pour une après-midi jeux de cartes. À toi de distribuer !",
+    "Souvenir : tu te rappelles quand tu m'as appris à faire du vélo ?",
+    "Défi du jour : sors la plus vieille photo de famille que tu as.",
+    "Joyeuse Saint-Nicolas ! Un spéculoos, c'est meilleur avec ses petits-enfants.",
+    "Merci pour toutes les histoires que tu m'as racontées.",
+    "Bon pour une visite surprise, avec un bon gâteau.",
+    "Défi du jour : apprends-moi un mot ou une chanson de ta jeunesse.",
+    "Tu es mon papy préféré, et ce n'est pas près de changer.",
+    "Bon pour un coup de main : courses, bricolage ou rangement.",
+    "Ce soir, appelle-moi : j'ai envie d'entendre ta voix.",
+    "Raconte-moi ta plus grande aventure.",
+    "Bon pour une promenade ensemble, à ton rythme.",
+    "Merci de m'avoir appris la patience (et quelques bonnes blagues).",
+    "Défi du jour : écoute la chanson qui te rappelle tes 20 ans.",
+    "Bon pour un après-midi à regarder un vieux film ensemble.",
+    "Ce que je préfère chez toi ? Tes histoires du « bon vieux temps ».",
+    "Défi du jour : partage ton meilleur conseil de vie.",
+    "Bon pour un dessin fait spécialement pour toi.",
+    "Nuit la plus longue de l'année : une bonne soupe et une couverture bien chaude.",
+    "Bon pour un appel vidéo avec toute la famille.",
+    "Plus qu'un jour… J'ai hâte de fêter Noël avec toi.",
+    "Joyeux Noël, Papy ! Merci d'être là, toujours."
+  ],
+  grandmere: [
+    "Premier jour ! Un grand bisou pour bien commencer décembre, Mamie.",
+    "Raconte-moi comment tu fêtais Noël quand tu étais petite.",
+    "Bon pour une après-midi pâtisserie ensemble. Tu me montres ta recette ?",
+    "Souvenir : tu te rappelles nos goûters chez toi ?",
+    "Défi du jour : sors la plus vieille photo de famille que tu as.",
+    "Joyeuse Saint-Nicolas ! Un spéculoos, c'est meilleur avec ses petits-enfants.",
+    "Merci pour tous tes câlins et tes petits plats.",
+    "Bon pour une visite surprise, avec des fleurs.",
+    "Défi du jour : apprends-moi une chanson ou une comptine de ton enfance.",
+    "Tu es ma mamie préférée, et ce n'est pas près de changer.",
+    "Bon pour un coup de main : courses, ménage ou jardin.",
+    "Ce soir, appelle-moi : j'ai envie d'entendre ta voix.",
+    "Raconte-moi ton plus beau souvenir de jeunesse.",
+    "Bon pour une promenade ensemble, à ton rythme.",
+    "Merci de m'avoir appris tant de choses avec douceur.",
+    "Défi du jour : écoute la chanson qui te rappelle tes 20 ans.",
+    "Bon pour un après-midi jeux de société ou mots croisés ensemble.",
+    "Ce que je préfère chez toi ? Ta gentillesse, et ton rire.",
+    "Défi du jour : partage ton meilleur conseil de vie.",
+    "Bon pour un dessin fait spécialement pour toi.",
+    "Nuit la plus longue de l'année : une tisane et une couverture bien chaude.",
+    "Bon pour un appel vidéo avec toute la famille.",
+    "Plus qu'un jour… J'ai hâte de fêter Noël avec toi.",
+    "Joyeux Noël, Mamie ! Merci d'être là, toujours."
+  ]
+};
+var IDEA_EXTRA = {
+  enfant: [
+    "Défi du jour : fais un bonhomme de neige… ou en papier s'il n'y a pas de neige !",
+    "Ce soir, c'est toi qui choisis l'histoire.",
+    "Aujourd'hui, tu as le droit de mettre ton pull le plus rigolo.",
+    "Colorie un dessin et offre-le à quelqu'un que tu aimes.",
+    "Défi du jour : parle comme un lutin pendant tout le repas.",
+    "Blague du jour : que fait un sapin quand il a froid ? Il met ses guirlandes !"
+  ],
+  papa: [
+    "Bon pour un câlin, à utiliser sans modération.",
+    "Défi du jour : raconte ta meilleure blague au repas.",
+    "Bon pour une soirée match ou film, sans interruption.",
+    "Aujourd'hui, la télécommande est à toi.",
+    "Défi du jour : note trois choses qui t'ont rendu fier cette année.",
+    "Bon pour une sieste du dimanche, sans culpabilité."
+  ],
+  maman: [
+    "Bon pour un câlin, à utiliser sans modération.",
+    "Défi du jour : note trois choses qui t'ont rendue heureuse cette année.",
+    "Bon pour une soirée où tu ne fais rien du tout.",
+    "Aujourd'hui, c'est toi qui choisis la musique.",
+    "Bon pour une sortie à deux : café, ciné ou marché de Noël.",
+    "Défi du jour : offre-toi une petite douceur, juste pour toi."
+  ],
+  grandpere: [
+    "Bon pour un gros câlin à la prochaine visite.",
+    "Défi du jour : raconte ton premier métier.",
+    "Bon pour une partie de pétanque ou de cartes, quand tu veux.",
+    "Raconte-moi comment tu as rencontré Mamie.",
+    "Bon pour une lettre écrite à la main, rien que pour toi.",
+    "Défi du jour : apprends-moi un jeu de ton enfance."
+  ],
+  grandmere: [
+    "Bon pour un gros câlin à la prochaine visite.",
+    "Défi du jour : raconte ton premier métier.",
+    "Bon pour une après-midi tricot, couture ou jardinage ensemble.",
+    "Raconte-moi comment tu as rencontré Papy.",
+    "Bon pour une lettre écrite à la main, rien que pour toi.",
+    "Défi du jour : apprends-moi un jeu de ton enfance."
+  ]
+};
+var IDEA_LABELS = [['enfant', 'Un enfant'], ['papa', 'Papa'], ['maman', 'Maman'], ['grandpere', 'Grand-père'], ['grandmere', 'Grand-mère']];
+/* Jours liés à une date précise (1er, veille et jour de Saint-Nicolas, 21, 23, 24) */
+var FIXED_DAYS = [0, 4, 5, 20, 22, 23];
+var DRAFT_KEY = 'avent-editeur-brouillon';
+
+/* ---------- Petits utilitaires ---------- */
+function h(tag, attrs) {
+  var e = document.createElement(tag);
+  if (attrs) Object.keys(attrs).forEach(function (k) {
+    var v = attrs[k];
+    if (v === null || v === undefined || v === false) return;
+    if (k === 'class') e.className = v;
+    else if (k === 'text') e.textContent = v;
+    else if (k.indexOf('on') === 0) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v === true ? '' : v);
+  });
+  for (var i = 2; i < arguments.length; i++) append(e, arguments[i]);
+  return e;
+}
+function append(parent, kid) {
+  if (kid === null || kid === undefined || kid === false) return;
+  if (Array.isArray(kid)) { kid.forEach(function (k) { append(parent, k); }); return; }
+  parent.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+}
+var store = {
+  get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set: function (k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+};
+var toastTimer = null;
+function toast(msg) {
+  var old = document.querySelector('.toast');
+  if (old) old.remove();
+  var t = h('div', { class: 'toast', role: 'status', text: msg });
+  document.body.append(t);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { t.remove(); }, 3600);
+}
+function rid() { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36); }
+function reducedMotion() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+function slug(s) {
+  return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+/* ---------- Règle d'ouverture des cases ---------- */
+function isUnlocked(n) {
+  var d = new Date();
+  if (d.getMonth() === 11) return d.getDate() >= n;
+  if (d.getMonth() === 0) return true;
+  return false;
+}
+function statusText(data, preview) {
+  if (preview) return "Dans le vrai calendrier, chaque case ne s'ouvrira qu'à partir de son jour de décembre.";
+  if (data.free) return "Toutes les cases peuvent être ouvertes. Clique sur une case pour découvrir sa surprise.";
+  var d = new Date();
+  if (d.getMonth() === 11 && d.getDate() <= 24) return 'Nous sommes le ' + d.getDate() + ' décembre. La case du jour t\u2019attend.';
+  if (d.getMonth() === 11 || d.getMonth() === 0) return 'Toutes les cases peuvent maintenant être ouvertes. Joyeuses fêtes !';
+  return "Les cases s'ouvrent une par une, à partir du 1er décembre.";
+}
+
+/* ---------- Le calendrier ---------- */
+function renderViewer(root, data, opts) {
+  opts = opts || {};
+  root.innerHTML = '';
+  var openKey = 'avent-ouvert-' + (data.id || 'x');
+  var opened = [];
+  if (!opts.preview) { try { opened = JSON.parse(store.get(openKey) || '[]'); } catch (e) { opened = []; } }
+  var today = new Date();
+  var todayNum = today.getMonth() === 11 ? today.getDate() : 0;
+
+  var title = (data.title || '').trim() || 'Ton calendrier de l\u2019Avent';
+  var to = (data.to || '').trim(), from = (data.from || '').trim();
+  var dedi = '';
+  if (to && from) dedi = 'Pour ' + to + ', de la part de ' + from;
+  else if (to) dedi = 'Pour ' + to;
+  else if (from) dedi = 'De la part de ' + from;
+
+  var dlg = h('dialog', { class: 'day-dialog' });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+
+  function showDay(n) {
+    var d = data.days[n - 1] || {};
+    dlg.innerHTML = '';
+    var closeBtn = h('button', { type: 'button', class: 'btn dlg-close', onclick: function () { dlg.close(); } }, 'Fermer');
+    append(dlg, h('div', { class: 'dlg-inner' },
+      h('p', { class: 'dlg-num' }, h('span', { text: String(n) }), 'décembre'),
+      d.photo ? h('img', { class: 'dlg-photo', src: d.photo, alt: '' }) : null,
+      h('p', { class: 'dlg-text', text: (d.text || '').trim() || DEFAULT_MSG }),
+      closeBtn
+    ));
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    closeBtn.focus();
+  }
+
+  var grid = h('div', { class: 'grid' });
+  ORDER.forEach(function (n, i) {
+    var d = data.days[n - 1] || {};
+    var inside = h('span', { class: 'door-inside', 'aria-hidden': 'true' });
+    if (d.photo) inside.style.backgroundImage = 'url("' + d.photo + '")';
+    else inside.textContent = '\u2726';
+    var cls = ['door', 'pos-' + 'abc'[i % 3]];
+    if (SIZES[n]) cls.push(SIZES[n]);
+    if (opened.indexOf(n) !== -1) cls.push('is-open');
+    if (n === todayNum && !opts.preview) cls.push('is-today');
+    var btn = h('button', { type: 'button', class: cls.join(' '), 'aria-label': 'Case du ' + n + ' décembre' },
+      inside,
+      h('span', { class: 'door-front', 'aria-hidden': 'true' }, h('span', { class: 'num', text: String(n) }))
+    );
+    var front = btn.querySelector('.door-front');
+    front.insertAdjacentHTML('afterbegin', '<svg class="deco" viewBox="0 0 48 48" aria-hidden="true" focusable="false">' + DECOS[(i * 5) % DECOS.length] + '</svg>');
+    btn.addEventListener('click', function () {
+      var ok = opts.preview || data.free || isUnlocked(n);
+      if (!ok) {
+        btn.classList.remove('shake'); void btn.offsetWidth; btn.classList.add('shake');
+        toast('Patience : cette case s\u2019ouvre le ' + n + ' décembre.');
+        return;
+      }
+      if (!btn.classList.contains('is-open')) {
+        btn.classList.add('is-open');
+        if (!opts.preview && opened.indexOf(n) === -1) { opened.push(n); store.set(openKey, JSON.stringify(opened)); }
+        setTimeout(function () { showDay(n); }, reducedMotion() ? 0 : 520);
+      } else {
+        showDay(n);
+      }
+    });
+    var p = POS[n], sz = SIZES[n];
+    btn.style.setProperty('--cm', p[0]); btn.style.setProperty('--rm', p[1]);
+    btn.style.setProperty('--cd', p[2]); btn.style.setProperty('--rd', p[3]);
+    btn.style.setProperty('--sc', (sz === 'big' || sz === 'wide') ? 2 : 1);
+    btn.style.setProperty('--sr', (sz === 'big' || sz === 'tall') ? 2 : 1);
+    grid.append(btn);
+  });
+
+  var viewer = h('div', { class: 'viewer', 'data-theme': data.theme || 'sapin' },
+    h('div', { class: 'v-inner' },
+      h('header', { class: 'v-head' },
+        h('h1', { class: 'v-title', text: title }),
+        dedi ? h('p', { class: 'v-dedi', text: dedi }) : null,
+        h('p', { class: 'v-status', text: statusText(data, opts.preview) })
+      ),
+      grid
+    ),
+    dlg
+  );
+  root.append(viewer);
+}
+
+/* ---------- L'éditeur ---------- */
+function ideaPool(pack) {
+  var base = IDEA_PACKS[pack] || IDEA_PACKS.enfant;
+  return base.filter(function (_, i) { return FIXED_DAYS.indexOf(i) === -1; })
+    .concat(IDEA_EXTRA[pack] || []);
+}
+function pickIdea(i) {
+  var pack = IDEA_PACKS[draft.ideas] ? draft.ideas : 'enfant';
+  var base = IDEA_PACKS[pack];
+  var cur = (draft.days[i].text || '').trim();
+  if (FIXED_DAYS.indexOf(i) !== -1 && cur !== base[i]) return base[i];
+  var used = draft.days.map(function (d) { return (d.text || '').trim(); });
+  var pool = ideaPool(pack).filter(function (t) { return used.indexOf(t) === -1; });
+  if (!pool.length) pool = ideaPool(pack).filter(function (t) { return t !== cur; });
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+function newDraft() {
+  var days = [];
+  for (var i = 0; i < 24; i++) days.push({ text: '', photo: '' });
+  return { v: 1, id: rid(), to: '', from: '', title: '', theme: 'sapin', free: false, ideas: 'enfant', days: days };
+}
+function loadDraft() {
+  try {
+    var d = JSON.parse(store.get(DRAFT_KEY));
+    if (d && Array.isArray(d.days) && d.days.length === 24) return d;
+  } catch (e) {}
+  return null;
+}
+var draft = loadDraft() || newDraft();
+var saveTimer = null, warnedSize = false;
+function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(function () {
+    var ok = store.set(DRAFT_KEY, JSON.stringify(draft));
+    if (!ok && !warnedSize) {
+      warnedSize = true;
+      toast('Les photos sont trop lourdes pour la sauvegarde automatique. Télécharge ton calendrier avant de fermer la page.');
+    }
+  }, 400);
+}
+function filledCount() {
+  return draft.days.filter(function (d) { return (d.text || '').trim() || d.photo; }).length;
+}
+function processPhoto(file) {
+  return new Promise(function (resolve, reject) {
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      var max = 900, w = img.naturalWidth, hgt = img.naturalHeight;
+      var s = Math.min(1, max / Math.max(w, hgt));
+      w = Math.round(w * s); hgt = Math.round(hgt * s);
+      var c = document.createElement('canvas');
+      c.width = w; c.height = hgt;
+      c.getContext('2d').drawImage(img, 0, 0, w, hgt);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL('image/jpeg', 0.82));
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('image')); };
+    img.src = url;
+  });
+}
+
+function renderEditor() {
+  document.body.className = 'mode-editor';
+  app.innerHTML = '';
+  var textareas = [];
+  var progressEl = h('span', { class: 'progress', 'aria-live': 'polite' });
+  function updateProgress() { progressEl.textContent = filledCount() + ' / 24 cases remplies'; }
+
+  function field(label, key, ph, max, extra) {
+    var input = h('input', { type: 'text', placeholder: ph, maxlength: max, oninput: function (e) { draft[key] = e.target.value; save(); } });
+    input.value = draft[key] || '';
+    return h('label', { class: 'field' + (extra ? ' ' + extra : '') }, h('span', { class: 'field-label', text: label }), input);
+  }
+
+  var themeGroup = h('div', { class: 'themes', role: 'radiogroup', 'aria-label': 'Style du calendrier' },
+    THEMES.map(function (t) {
+      var input = h('input', { type: 'radio', name: 'theme', value: t.id, onchange: function () { draft.theme = t.id; save(); } });
+      input.checked = draft.theme === t.id;
+      return h('label', { class: 'theme-opt', 'data-theme': t.id }, input, h('span', { class: 'swatch', 'aria-hidden': 'true' }, h('i'), h('i'), h('i')), h('span', { text: t.name }));
+    })
+  );
+
+  var freeBox = h('input', { type: 'checkbox', onchange: function (e) { draft.free = e.target.checked; save(); } });
+  freeBox.checked = !!draft.free;
+
+  var list = h('div', { class: 'days' });
+  draft.days.forEach(function (d, i) {
+    var n = i + 1;
+    var ta = h('textarea', { rows: 3, maxlength: 400, 'aria-label': 'Message du ' + n + ' décembre', placeholder: 'Message du ' + n + ' décembre', oninput: function (e) { d.text = e.target.value; save(); updateProgress(); } });
+    ta.value = d.text || '';
+    textareas.push(ta);
+    var img = h('img', { class: 'thumb', alt: 'Photo du ' + n + ' décembre' });
+    var fileIn = h('input', { type: 'file', accept: 'image/*', class: 'sr-only', tabindex: '-1', 'aria-hidden': 'true' });
+    var addBtn = h('button', { type: 'button', class: 'btn-link', onclick: function () { fileIn.click(); } });
+    var rmBtn = h('button', { type: 'button', class: 'btn-link danger', onclick: function () { d.photo = ''; refresh(); save(); updateProgress(); } }, 'Retirer');
+    function refresh() {
+      if (d.photo) { img.src = d.photo; img.hidden = false; rmBtn.hidden = false; addBtn.textContent = 'Changer la photo'; }
+      else { img.removeAttribute('src'); img.hidden = true; rmBtn.hidden = true; addBtn.textContent = 'Ajouter une photo'; }
+    }
+    fileIn.addEventListener('change', function () {
+      var f = fileIn.files && fileIn.files[0];
+      if (!f) return;
+      processPhoto(f).then(function (data) {
+        d.photo = data; refresh(); save(); updateProgress();
+      }).catch(function () {
+        toast('Cette photo n\u2019a pas pu être lue. Essaie avec une photo au format JPG ou PNG.');
+      });
+      fileIn.value = '';
+    });
+    refresh();
+    list.append(h('div', { class: 'day' },
+      h('div', { class: 'day-head' }, h('span', { class: 'day-num', text: String(n) }), h('span', { class: 'day-month', text: 'décembre' }),
+        h('button', { type: 'button', class: 'btn-link idea-btn', 'aria-label': 'Proposer une idée pour le ' + n + ' décembre', onclick: function () {
+          var t = pickIdea(i); d.text = t; ta.value = t; save(); updateProgress();
+        } }, 'Une idée')),
+      ta,
+      h('div', { class: 'day-photo' }, img, fileIn, addBtn, rmBtn)
+    ));
+  });
+
+  function fillIdeas() {
+    var count = 0;
+    var base = IDEA_PACKS[draft.ideas] || IDEA_PACKS.enfant;
+    draft.days.forEach(function (d, i) {
+      if (!(d.text || '').trim()) { d.text = base[i]; textareas[i].value = base[i]; count++; }
+    });
+    save(); updateProgress();
+    toast(count ? count + ' case' + (count > 1 ? 's complétées' : ' complétée') + ' avec des idées. Modifie-les librement.' : 'Toutes les cases ont déjà un message.');
+  }
+
+  function download() {
+    var empty = 24 - filledCount();
+    if (empty > 0) {
+      var msg = empty === 1
+        ? '1 case est vide. Elle affichera un petit message par défaut. Télécharger quand même ?'
+        : empty + ' cases sont vides. Elles afficheront un petit message par défaut. Télécharger quand même ?';
+      if (!confirm(msg)) return;
+    }
+    var payload = JSON.parse(JSON.stringify(draft));
+    payload.id = rid();
+    var json = JSON.stringify(payload).replace(/</g, '\\u003c');
+    var html = TEMPLATE.replace(/(<script id="calendar-data" type="application\/json">)[\s\S]*?(<\/script>)/, function (m, a, b) { return a + json + b; });
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'calendrier-avent' + (slug(draft.to) ? '-' + slug(draft.to) : '') + '.html';
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    toast('Calendrier téléchargé. Il ne reste plus qu\u2019à envoyer ce fichier' + (draft.to.trim() ? ' à ' + draft.to.trim() : '') + '.');
+  }
+
+  function openPreview() {
+    var holder = h('div');
+    var closeBtn = h('button', { type: 'button', class: 'btn btn-primary' }, 'Revenir à l\u2019édition');
+    var layer = h('div', { class: 'preview-layer', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Aperçu du calendrier' },
+      h('div', { class: 'preview-bar' }, h('span', { text: 'Aperçu : voici ce que verra la personne. Ici, toutes les cases s\u2019ouvrent pour que tu puisses tout vérifier.' }), closeBtn),
+      holder
+    );
+    function close() { layer.remove(); document.body.classList.remove('no-scroll'); document.removeEventListener('keydown', onKey); }
+    function onKey(e) { if (e.key === 'Escape' && !layer.querySelector('dialog[open]')) close(); }
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', onKey);
+    document.body.append(layer);
+    document.body.classList.add('no-scroll');
+    renderViewer(holder, draft, { preview: true });
+    closeBtn.focus();
+  }
+
+  var editor = h('main', { class: 'editor' },
+    h('header', { class: 'ed-head' },
+      h('h1', { text: 'Crée ton calendrier de l\u2019Avent' }),
+      h('p', { text: 'Écris une petite surprise pour chaque jour, ajoute des photos si tu veux, puis télécharge ton calendrier. Tu obtiens un fichier à offrir : chaque case s\u2019ouvrira le bon jour de décembre.' })
+    ),
+    h('section', { class: 'ed-section' },
+      h('h2', { text: 'Pour qui ?' }),
+      h('div', { class: 'fields' },
+        field('Prénom de la personne', 'to', 'Par exemple : Léa', 40),
+        field('De la part de', 'from', 'Par exemple : Tom', 40),
+        field('Titre du calendrier', 'title', 'Ton calendrier de l\u2019Avent', 60, 'full')
+      )
+    ),
+    h('section', { class: 'ed-section' },
+      h('h2', { text: 'Style' }),
+      themeGroup,
+      h('label', { class: 'check' }, freeBox, h('span', { text: 'Permettre d\u2019ouvrir toutes les cases tout de suite (pratique pour un cadeau offert en retard).' }))
+    ),
+    h('section', { class: 'ed-section' },
+      h('h2', { text: 'Les 24 surprises' }),
+      h('p', { class: 'hint', text: 'Un mot doux, un défi, un bon pour un câlin, un souvenir… Pas d\u2019inspiration ? Choisis pour qui est le calendrier, puis complète les cases vides ou demande une idée case par case.' }),
+      h('div', { class: 'themes ideas-for', role: 'radiogroup', 'aria-label': 'Idées adaptées pour' },
+        IDEA_LABELS.map(function (p) {
+          var input = h('input', { type: 'radio', name: 'ideas', value: p[0], onchange: function () { draft.ideas = p[0]; save(); } });
+          input.checked = (IDEA_PACKS[draft.ideas] ? draft.ideas : 'enfant') === p[0];
+          return h('label', { class: 'theme-opt' }, input, h('span', { text: p[1] }));
+        })
+      ),
+      h('div', { class: 'days-tools' }, h('button', { type: 'button', class: 'btn btn-ghost', onclick: fillIdeas }, 'Compléter les cases vides')),
+      list
+    ),
+    h('div', { class: 'ed-foot' },
+      h('button', { type: 'button', class: 'btn-link danger', onclick: function () {
+        if (confirm('Effacer tous les messages et toutes les photos pour recommencer ?')) { draft = newDraft(); save(); renderEditor(); window.scrollTo(0, 0); }
+      } }, 'Tout effacer et recommencer')
+    )
+  );
+  var bar = h('div', { class: 'bar' }, h('div', { class: 'bar-in' },
+    progressEl,
+    h('div', { class: 'bar-actions' },
+      h('button', { type: 'button', class: 'btn btn-ghost', onclick: openPreview }, 'Aperçu'),
+      h('button', { type: 'button', class: 'btn btn-primary', onclick: download }, 'Télécharger le calendrier')
+    )
+  ));
+  app.append(editor, bar);
+  updateProgress();
+}
+
+/* ---------- Démarrage ---------- */
+if (gift && Array.isArray(gift.days)) {
+  document.body.className = 'mode-gift';
+  document.title = (gift.title || '').trim() || 'Ton calendrier de l\u2019Avent';
+  renderViewer(app, gift, {});
+} else {
+  renderEditor();
+}
+})();
+</script>
+</body>
+</html>

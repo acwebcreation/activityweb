@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merci pour ton achat – Calendrier de l'Avent</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF9F5; --card:#FFFFFF; --text:#3E3340; --muted:#76687A;
+    --mauve:#A77BCA; --mauve-dark:#6E4F8B; --rose:#F29CB7; --rose-light:#FFE3EC;
+    --pink:#FFD6E0; --lilac:#E4D7FF; --mint:#C9F2E1; --sky:#CFE8FF; --butter:#FFF1B8;
+    --radius:22px; --shadow:0 8px 28px rgba(167,123,202,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',sans-serif;color:var(--text);line-height:1.6;min-height:100vh;
+    background:radial-gradient(circle at 10% 10%,var(--pink),transparent 40%),radial-gradient(circle at 90% 15%,var(--sky),transparent 40%),radial-gradient(circle at 85% 90%,var(--mint),transparent 40%),radial-gradient(circle at 10% 90%,var(--butter),transparent 40%),var(--bg);
+    padding:48px 18px}
+  h1,h2{font-family:'Cormorant Garamond',serif;color:var(--mauve-dark);line-height:1.15}
+  .wrap{max-width:680px;margin:0 auto}
+  .head{text-align:center;margin-bottom:28px}
+  .badge{width:72px;height:72px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;font-size:34px;background:#fff;box-shadow:var(--shadow)}
+  .kicker{text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;color:var(--rose);font-weight:700}
+  h1{font-size:clamp(2.1rem,6vw,2.9rem);margin:8px 0 10px}
+  .head p{color:var(--muted);font-size:1.08rem;max-width:520px;margin:0 auto}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 28px;margin-bottom:20px}
+  .card h2{font-size:1.7rem;margin-bottom:6px}
+  .card > p{color:var(--muted);margin-bottom:18px}
+  .btn{display:inline-block;background:linear-gradient(135deg,#F29CB7,#A77BCA);box-shadow:0 6px 18px rgba(242,156,183,.45);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:999px;font-size:1rem;transition:.2s}
+  .btn:hover{filter:brightness(1.05);transform:translateY(-2px)}
+  .btn.ghost{background:#fff;color:var(--mauve-dark);border:2px solid var(--mauve);box-shadow:none}
+  .btn.ghost:hover{background:var(--rose-light)}
+  .btns{display:flex;flex-wrap:wrap;gap:12px}
+  .tip{background:var(--rose-light);border-radius:14px;padding:12px 16px;font-size:.93rem;margin-top:18px}
+  ol{list-style:none;display:grid;gap:14px;counter-reset:s}
+  ol li{counter-increment:s;display:flex;gap:14px;align-items:flex-start}
+  ol li::before{content:counter(s);flex:0 0 34px;height:34px;border-radius:50%;color:#fff;display:grid;place-items:center;font-weight:700;background:#F29CB7}
+  ol li:nth-child(2)::before{background:#7FC8F8}ol li:nth-child(3)::before{background:#7DD3B0}
+  .foot{text-align:center;color:var(--muted);font-size:.9rem;margin-top:26px}
+  .foot a{color:var(--mauve-dark);font-weight:700}
+  @media(max-width:520px){.card{padding:24px 20px}.btns .btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="head">
+    <div class="badge" aria-hidden="true">🎄</div>
+    <span class="kicker">Paiement confirmé</span>
+    <h1>Merci pour ton achat !</h1>
+    <p>Ton calendrier de l'Avent numérique est prêt. Crée-le dès maintenant en ligne, ou télécharge-le pour l'utiliser sur ton ordinateur.</p>
+  </div>
+
+  <section class="card">
+    <h2>Créer ton calendrier</h2>
+    <p>Le plus simple : tout se fait dans ton navigateur, sans rien installer.</p>
+    <div class="btns">
+      <a class="btn" href="index.html">Créer mon calendrier →</a>
+      <a class="btn ghost" href="Guide-calendrier-avent.pdf" target="_blank" rel="noopener">Lire le guide (PDF)</a>
+    </div>
+    <div class="tip"><strong>Garde cette page dans tes favoris</strong> pour revenir à ton calendrier plus tard. Ton brouillon est sauvegardé automatiquement dans ce navigateur.</div>
+  </section>
+
+  <section class="card">
+    <h2>Comment ça marche</h2>
+    <ol>
+      <li><div><strong>Écris tes 24 surprises</strong><br>Messages, défis et photos. Pas d'inspiration ? Des idées toutes prêtes pour un enfant, Papa, Maman, Grand-père ou Grand-mère.</div></li>
+      <li><div><strong>Télécharge ton calendrier</strong><br>Tu obtiens un fichier personnalisé, par exemple <em>calendrier-avent-lea.html</em>.</div></li>
+      <li><div><strong>Envoie-le à la personne</strong><br>Par e-mail ou message. Chaque case s'ouvre le bon jour de décembre.</div></li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Tu préfères garder les fichiers ?</h2>
+    <p>Télécharge l'outil et le guide dans un seul fichier ZIP, pour les utiliser sans connexion.</p>
+    <a class="btn ghost" href="Calendrier-Avent-ActivityWebStudio.zip" download>Télécharger le ZIP</a>
+  </section>
+
+  <p class="foot">Une question ? Écris-moi à <a href="mailto:contact@activityweb.be">contact@activityweb.be</a>.<br>Usage personnel uniquement. Merci de ne pas partager ce lien.</p>
+</main>
+</body>
+</html>
