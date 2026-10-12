@@ -67,6 +67,11 @@
   .shop-head{text-align:center;margin-bottom:30px}
   .shop-head h2{font-size:2.4rem;margin:8px 0}
   .shop-head p{color:var(--muted)}
+  .formats{display:flex;gap:6px;justify-content:center;margin:0 auto 16px;background:#fff;border-radius:999px;padding:5px;width:max-content;max-width:100%;box-shadow:var(--shadow)}
+  .formats button{background:none;border:0;padding:9px 18px;border-radius:999px;font-family:inherit;font-weight:700;color:var(--mauve-dark);cursor:pointer;font-size:.95rem}
+  .formats button.active{background:linear-gradient(135deg,#F29CB7,#A77BCA);color:#fff}
+  @media(max-width:480px){.formats button{padding:8px 12px;font-size:.88rem}}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:30px 0}
   .filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
   .filters button{background:var(--card);border:1.5px solid var(--rose);color:var(--mauve-dark);padding:9px 18px;border-radius:999px;font-family:inherit;font-weight:600;cursor:pointer}
   .filters button:nth-child(6n+1){background:var(--lilac)}.filters button:nth-child(6n+2){background:var(--mint)}.filters button:nth-child(6n+3){background:var(--peach)}.filters button:nth-child(6n+4){background:var(--pink)}.filters button:nth-child(6n+5){background:var(--sky)}.filters button:nth-child(6n+6){background:var(--butter)}
@@ -80,6 +85,9 @@
   .card .img img{width:100%;height:100%;object-fit:cover}
   .card .body{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
   .card .tag{align-self:flex-start;background:var(--rose-light);padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700;color:#C2577A;text-transform:uppercase;letter-spacing:.08em}
+  .card .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .card .tag.type-int{background:var(--lilac);color:var(--mauve-dark)}
+  .card .tag.type-pdf{background:var(--mint);color:#2F7A5C}
   .card h3{font-size:1.35rem}
   .card p{font-size:.92rem;color:var(--muted);flex:1}
   .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
@@ -125,7 +133,8 @@
     <a href="#" class="logo">ActivityWeb Studio</a>
     <ul>
       <li><a href="#chanson">Chanson personnalisée</a></li>
-      <li><a href="#boutique">Boutique</a></li>
+      <li><a href="#boutique" data-type="Interactif">Cadeaux interactifs</a></li>
+      <li><a href="#boutique" data-type="Imprimable">Imprimables</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
   </div>
@@ -139,10 +148,11 @@
   <div class="wrap">
     <span class="kicker">Cadeaux & imprimables pour la famille</span>
     <h1>Des cadeaux personnalisés qui créent des souvenirs en famille</h1>
-    <p>Chansons écrites rien que pour vous, cartes-poèmes, calendriers et jeux à imprimer pour Noël, les anniversaires, la fête des mères et tous les grands moments.</p>
+    <p>Chansons écrites rien que pour vous, cadeaux interactifs à envoyer par e-mail et imprimables pour Noël, les anniversaires, la fête des mères et tous les grands moments.</p>
     <div class="ctas">
       <a href="#commande" class="btn">Commander une chanson</a>
-      <a href="#boutique" class="btn ghost">Voir les imprimables</a>
+      <a href="#boutique" class="btn ghost" data-type="Interactif">Cadeaux interactifs</a>
+      <a href="#boutique" class="btn ghost" data-type="Imprimable">Voir les imprimables</a>
     </div>
     <div class="trust">
       <span>Téléchargement immédiat</span>
@@ -182,9 +192,10 @@
   <div class="wrap">
     <div class="shop-head">
       <span class="kicker">Boutique</span>
-      <h2>Imprimables par occasion</h2>
-      <p>Achetez, téléchargez, imprimez à la maison.</p>
+      <h2>Cadeaux numériques par occasion</h2>
+      <p>Des imprimables à faire chez soi et des cadeaux interactifs à envoyer par e-mail.</p>
     </div>
+    <div class="formats" id="formats"></div>
     <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
   </div>
@@ -281,6 +292,7 @@
 <section id="faq">
   <div class="faq wrap">
     <h2>Questions fréquentes</h2>
+    <details><summary>Imprimable ou interactif, quelle différence ?</summary><p>Les imprimables sont des PDF à imprimer chez vous. Les cadeaux interactifs (comme le calendrier de l'Avent) se personnalisent en ligne, puis s'envoient par e-mail : la personne les ouvre sur son ordinateur ou sa tablette, rien à imprimer.</p></details>
     <details><summary>Comment je reçois mes PDF ?</summary><p>Juste après le paiement, vous recevez un lien de téléchargement par e-mail. Vous pouvez imprimer autant de fois que vous voulez pour un usage personnel.</p></details>
     <details><summary>Avec quoi imprimer ?</summary><p>Une imprimante maison suffit (A4 ou US Letter). Un guide d'impression est inclus. Selon l'imprimante, une fine marge blanche peut apparaître.</p></details>
     <details><summary>Combien de temps pour la chanson ?</summary><p>Environ 7 jours après le paiement. Pour une date urgente, indiquez-la dans le formulaire.</p></details>
@@ -309,25 +321,27 @@ const CONFIG = {
   songDelay: "7 jours"
 };
 
-// Tes PDF : ajoute / supprime des blocs { … }
-// cat = une des catégories ci-dessous ; payhip = lien du produit Payhip
+// Tes produits : ajoute / supprime des blocs { … }
+// cat = une des catégories ci-dessous
+// type = "Imprimable" (PDF à imprimer) ou "Interactif" (cadeau à envoyer par e-mail)
+// lien = lien de paiement (Stripe ou Payhip)
 // img = nom de l'image (ex. "calendrier.jpg") ou laisse "" pour un emoji
 const CATEGORIES = ["Tout", "Noël", "Anniversaire", "Fête des mères", "Naissance & mariage", "Hommage"];
 const PRODUCTS = [
-  { title:"Calendrier de l'Avent numérique", cat:"Noël", price:"4,99 €", emoji:"🎄", img:"",
-    desc:"24 surprises à personnaliser avec vos messages, à ouvrir chaque jour.", https://buy.stripe.com/00w00k0q73753lHcSt83C0d" },
+  { title:"Calendrier de l'Avent interactif", cat:"Noël", type:"Interactif", price:"4,99 €", emoji:"🎄", img:"",
+    desc:"24 surprises à personnaliser avec vos messages et photos. Le calendrier s'envoie par e-mail et chaque case s'ouvre le bon jour.", lien:"https://buy.stripe.com/00w00k0q73753lHcSt83C0d" },
   { title:"Planificateur & budget de Noël", cat:"Noël", price:"3,99 €", emoji:"📝", img:"",
-    desc:"Cadeaux, menus, budget : tout Noël organisé sur papier (A4).", payhip:"https://payhip.com/b/REMPLACER" },
+    desc:"Cadeaux, menus, budget : tout Noël organisé sur papier (A4).", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
   { title:"50 jeux de Noël pour seniors", cat:"Noël", price:"4,99 €", emoji:"🧩", img:"",
-    desc:"Jeux de mémoire et de réflexion pour partager un moment avec les grands-parents.", payhip:"https://payhip.com/b/REMPLACER" },
+    desc:"Jeux de mémoire et de réflexion pour partager un moment avec les grands-parents.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
   { title:"Coloriages d'anniversaire", cat:"Anniversaire", price:"2,99 €", emoji:"🎈", img:"",
-    desc:"Des pages à colorier pour occuper les petits pendant la fête.", payhip:"https://payhip.com/b/REMPLACER" },
+    desc:"Des pages à colorier pour occuper les petits pendant la fête.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
   { title:"Carte-poème « Maman »", cat:"Fête des mères", price:"2,99 €", emoji:"💐", img:"",
-    desc:"Aquarelle + poème original, carte pliée A5 à imprimer.", payhip:"https://payhip.com/b/REMPLACER" },
+    desc:"Aquarelle + poème original, carte pliée A5 à imprimer.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
   { title:"Affiche-poème naissance", cat:"Naissance & mariage", price:"3,99 €", emoji:"🍼", img:"",
-    desc:"Une affiche douce pour la chambre de bébé, plusieurs formats.", payhip:"https://payhip.com/b/REMPLACER" },
+    desc:"Une affiche douce pour la chambre de bébé, plusieurs formats.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
   { title:"Carte-poème hommage", cat:"Hommage", price:"2,99 €", emoji:"🕊️", img:"",
-    desc:"Des mots tendres pour accompagner un deuil ou un souvenir.", payhip:"https://payhip.com/b/REMPLACER" }
+    desc:"Des mots tendres pour accompagner un deuil ou un souvenir.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" }
 ];
 /* ========================================================= */
 
@@ -335,32 +349,49 @@ document.getElementById('year').textContent = new Date().getFullYear();
 document.getElementById('songPriceTag').textContent = CONFIG.songPrice;
 document.getElementById('songDelay').textContent = CONFIG.songDelay;
 
-// Filtres + cartes produits
+// Filtres (format + occasion) + cartes produits
+const FORMATS = [["Tout","Tous les cadeaux"],["Interactif","Interactifs"],["Imprimable","Imprimables"]];
+const state = { cat:"Tout", type:"Tout" };
 const grid = document.getElementById('grid');
 const filters = document.getElementById('filters');
-function render(cat){
-  grid.innerHTML = PRODUCTS.filter(p => cat === "Tout" || p.cat === cat).map(p => `
+const formats = document.getElementById('formats');
+function render(){
+  const list = PRODUCTS.filter(p => (state.cat === "Tout" || p.cat === state.cat) && (state.type === "Tout" || p.type === state.type));
+  grid.innerHTML = list.length ? list.map(p => `
     <article class="card">
       <div class="img">${p.img ? `<img src="${p.img}" alt="${p.title}" loading="lazy">` : p.emoji}</div>
       <div class="body">
-        <span class="tag">${p.cat}</span>
+        <div class="tags"><span class="tag">${p.cat}</span><span class="tag ${p.type === 'Interactif' ? 'type-int' : 'type-pdf'}">${p.type}</span></div>
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
         <div class="foot">
           <span class="price">${p.price}</span>
-          <a class="btn" href="${p.payhip}" target="_blank" rel="noopener">Acheter</a>
+          <a class="btn" href="${p.lien}" target="_blank" rel="noopener">Acheter</a>
         </div>
       </div>
-    </article>`).join('');
+    </article>`).join('') : '<p class="empty">Pas encore de produit dans cette sélection. Revenez bientôt !</p>';
 }
+function setType(t){
+  state.type = t;
+  formats.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.type === t));
+  render();
+}
+FORMATS.forEach(([t,label]) => {
+  const b = document.createElement('button');
+  b.textContent = label; b.dataset.type = t;
+  b.onclick = () => setType(t);
+  formats.appendChild(b);
+});
 CATEGORIES.forEach((c,i) => {
   const b = document.createElement('button');
   b.textContent = c;
   if(i===0) b.classList.add('active');
-  b.onclick = () => { document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(c); };
+  b.onclick = () => { filters.querySelectorAll('button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); state.cat = c; render(); };
   filters.appendChild(b);
 });
-render("Tout");
+// Les boutons du haut et du menu ouvrent la boutique sur le bon format
+document.querySelectorAll('a[data-type]').forEach(a => a.addEventListener('click', () => setType(a.dataset.type)));
+setType("Tout");
 
 // Formulaire : envoi à Formspree puis redirection vers Stripe
 document.getElementById('songForm').addEventListener('submit', async e => {
