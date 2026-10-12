@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadeaux personnalisés & imprimables pour la famille – ActivityWeb Studio</title>
+<meta name="description" content="Chansons personnalisées, cartes-poèmes, calendriers et imprimables pour les familles : Noël, anniversaires, fête des mères, naissance, mariage. Téléchargement immédiat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF9F5; --card:#FFFFFF; --text:#3E3340; --muted:#76687A;
+    --mauve:#A77BCA; --mauve-dark:#6E4F8B; --rose:#F29CB7; --rose-light:#FFE3EC; --gold:#F6C177;
+    --pink:#FFD6E0; --lilac:#E4D7FF; --mint:#C9F2E1; --peach:#FFDCC4; --sky:#CFE8FF; --butter:#FFF1B8;
+    --radius:22px; --shadow:0 8px 28px rgba(167,123,202,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;color:var(--mauve-dark);line-height:1.2}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  .btn{display:inline-block;background:linear-gradient(135deg,#F29CB7,#A77BCA);box-shadow:0 6px 18px rgba(242,156,183,.45);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:999px;border:none;cursor:pointer;font-size:1rem;transition:.2s}
+  .btn:hover{filter:brightness(1.05);transform:translateY(-2px)}
+  .btn.ghost{background:#fff;color:var(--mauve-dark);border:2px solid var(--mauve);box-shadow:none}
+  .btn.ghost:hover{background:var(--rose-light)}
+  section{padding:70px 0}
+  .kicker{text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;color:var(--rose);font-weight:700}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:10;background:rgba(251,246,244,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rose-light)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--mauve-dark);text-decoration:none}
+  nav ul{display:flex;gap:22px;list-style:none}
+  nav ul a{text-decoration:none;font-weight:600;font-size:.95rem}
+  nav ul a:hover{color:var(--mauve)}
+  @media(max-width:700px){nav ul{display:none}}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:90px 0 70px;text-align:center;background:radial-gradient(circle at 10% 15%,var(--pink),transparent 40%),radial-gradient(circle at 90% 20%,var(--sky),transparent 40%),radial-gradient(circle at 80% 90%,var(--mint),transparent 40%),radial-gradient(circle at 15% 90%,var(--butter),transparent 40%),radial-gradient(circle at 50% 50%,var(--lilac),transparent 60%)}
+  .hero .deco{position:absolute;font-size:2rem;opacity:.75;animation:float 6s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-12px) rotate(6deg)}}
+  @media(max-width:700px){.hero .deco{display:none}}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.6rem);max-width:800px;margin:12px auto 18px}
+  .hero p{max-width:620px;margin:0 auto 30px;color:var(--muted);font-size:1.1rem}
+  .hero .ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .trust{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:34px;font-size:.92rem;color:var(--muted)}
+  .trust span{background:#fff;padding:6px 14px;border-radius:999px;box-shadow:0 3px 10px rgba(0,0,0,.05)}
+  .trust span::before{content:"✓ ";color:var(--mauve);font-weight:700}
+
+  /* CHANSON */
+  .song{background:linear-gradient(180deg,var(--mint),#EFFBF6)}
+  .song-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+  @media(max-width:820px){.song-grid{grid-template-columns:1fr}}
+  .song h2{font-size:2.4rem;margin:8px 0 16px}
+  .price-tag{display:inline-block;background:var(--butter);color:var(--mauve-dark);font-weight:700;padding:6px 16px;border-radius:999px;margin-bottom:18px}
+  .steps{list-style:none;margin:22px 0 28px;display:grid;gap:14px}
+  .steps li{display:flex;gap:14px;align-items:flex-start}
+  .steps li:nth-child(1) b{background:#F29CB7}.steps li:nth-child(2) b{background:#7FC8F8}.steps li:nth-child(3) b{background:#7DD3B0}
+  .steps b{flex:0 0 34px;height:34px;border-radius:50%;color:#fff;display:grid;place-items:center;font-size:.95rem}
+  .listen{background:#fff;border:3px dashed var(--rose);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+  .listen h3{font-size:1.5rem;margin-bottom:6px}
+  .listen p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+  .listen audio{width:100%;margin-bottom:12px}
+
+  /* BOUTIQUE */
+  .shop-head{text-align:center;margin-bottom:30px}
+  .shop-head h2{font-size:2.4rem;margin:8px 0}
+  .shop-head p{color:var(--muted)}
+  .filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
+  .filters button{background:var(--card);border:1.5px solid var(--rose);color:var(--mauve-dark);padding:9px 18px;border-radius:999px;font-family:inherit;font-weight:600;cursor:pointer}
+  .filters button:nth-child(6n+1){background:var(--lilac)}.filters button:nth-child(6n+2){background:var(--mint)}.filters button:nth-child(6n+3){background:var(--peach)}.filters button:nth-child(6n+4){background:var(--pink)}.filters button:nth-child(6n+5){background:var(--sky)}.filters button:nth-child(6n+6){background:var(--butter)}
+  .filters button{border-color:transparent}
+  .filters button.active{background:var(--mauve-dark)!important;color:#fff;transform:scale(1.05)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+  .card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.2s}
+  .card:hover{transform:translateY(-4px)}
+  .card:nth-child(6n+1) .img{background:linear-gradient(135deg,var(--pink),var(--peach))}.card:nth-child(6n+2) .img{background:linear-gradient(135deg,var(--sky),var(--lilac))}.card:nth-child(6n+3) .img{background:linear-gradient(135deg,var(--mint),var(--butter))}.card:nth-child(6n+4) .img{background:linear-gradient(135deg,var(--lilac),var(--pink))}.card:nth-child(6n+5) .img{background:linear-gradient(135deg,var(--peach),var(--butter))}.card:nth-child(6n+6) .img{background:linear-gradient(135deg,var(--mint),var(--sky))}
+  .card .img{aspect-ratio:4/3;display:grid;place-items:center;font-size:3rem}
+  .card .img img{width:100%;height:100%;object-fit:cover}
+  .card .body{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .card .tag{align-self:flex-start;background:var(--rose-light);padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700;color:#C2577A;text-transform:uppercase;letter-spacing:.08em}
+  .card h3{font-size:1.35rem}
+  .card p{font-size:.92rem;color:var(--muted);flex:1}
+  .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  .card .price{font-weight:700;font-size:1.15rem;color:var(--mauve-dark)}
+  .card .btn{padding:10px 18px;font-size:.9rem}
+
+  /* FORMULAIRE */
+  .order{background:linear-gradient(135deg,var(--lilac),var(--pink) 50%,var(--peach))}
+  .form-box{max-width:720px;margin:0 auto;background:var(--card);border-radius:var(--radius);padding:38px;box-shadow:var(--shadow)}
+  .form-box h2{font-size:2.2rem;text-align:center;margin-bottom:6px}
+  .form-box > p{text-align:center;color:var(--muted);margin-bottom:28px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:600px){.row{grid-template-columns:1fr}.form-box{padding:26px 20px}}
+  label{display:block;font-weight:600;font-size:.92rem;margin-bottom:6px}
+  label small{font-weight:400;color:var(--muted)}
+  input,select,textarea{width:100%;padding:12px 14px;border:2px solid var(--lilac);border-radius:12px;font-family:inherit;font-size:1rem;background:#FFFCFB;color:var(--text)}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--mauve)}
+  textarea{min-height:120px;resize:vertical}
+  .field{margin-bottom:18px}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--muted)}
+  .check input{width:auto;margin-top:4px}
+  .form-box .btn{width:100%;margin-top:10px;font-size:1.05rem}
+  .note{font-size:.85rem;color:var(--muted);text-align:center;margin-top:12px}
+  #formMsg{text-align:center;margin-top:14px;font-weight:600}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  .faq h2{font-size:2.3rem;text-align:center;margin-bottom:26px}
+  details:nth-of-type(5n+1){border-left:6px solid #F29CB7}details:nth-of-type(5n+2){border-left:6px solid #7FC8F8}details:nth-of-type(5n+3){border-left:6px solid #7DD3B0}details:nth-of-type(5n+4){border-left:6px solid #F6C177}details:nth-of-type(5n+5){border-left:6px solid #A77BCA}
+  details{background:var(--card);border-radius:14px;padding:18px 22px;margin-bottom:12px;box-shadow:var(--shadow)}
+  summary{font-weight:700;cursor:pointer;color:var(--mauve-dark)}
+  details p{margin-top:10px;color:var(--muted)}
+
+  footer{background:linear-gradient(135deg,#8C6BB1,#D4789B);color:#fff;padding:40px 0;font-size:.9rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer a{color:#fff}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo">ActivityWeb Studio</a>
+    <ul>
+      <li><a href="#chanson">Chanson personnalisée</a></li>
+      <li><a href="#boutique">Boutique</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="deco" style="top:18%;left:7%">🎈</span>
+  <span class="deco" style="top:22%;right:8%;animation-delay:1s">🎵</span>
+  <span class="deco" style="bottom:18%;left:12%;animation-delay:2s">⭐</span>
+  <span class="deco" style="bottom:22%;right:12%;animation-delay:3s">🎁</span>
+  <div class="wrap">
+    <span class="kicker">Cadeaux & imprimables pour la famille</span>
+    <h1>Des cadeaux personnalisés qui créent des souvenirs en famille</h1>
+    <p>Chansons écrites rien que pour vous, cartes-poèmes, calendriers et jeux à imprimer pour Noël, les anniversaires, la fête des mères et tous les grands moments.</p>
+    <div class="ctas">
+      <a href="#commande" class="btn">Commander une chanson</a>
+      <a href="#boutique" class="btn ghost">Voir les imprimables</a>
+    </div>
+    <div class="trust">
+      <span>Téléchargement immédiat</span>
+      <span>Paiement sécurisé</span>
+      <span>Créé en Belgique</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== CHANSON PERSONNALISÉE ===== -->
+<section class="song" id="chanson">
+  <div class="wrap song-grid">
+    <div>
+      <span class="kicker">Notre produit phare</span>
+      <h2>Une chanson unique, avec son prénom dedans</h2>
+      <span class="price-tag" id="songPriceTag">À partir de 29 €</span>
+      <p>Pour un anniversaire, une naissance, la fête des mères ou juste pour dire « je t'aime » : j'écris et je compose une chanson originale à partir de vos anecdotes.</p>
+      <ul class="steps">
+        <li><b>1</b><div><strong>Vous remplissez le formulaire</strong><br>Prénom, occasion, petits souvenirs, style de musique.</div></li>
+        <li><b>2</b><div><strong>Vous réglez en ligne</strong><br>Paiement sécurisé par carte ou Bancontact.</div></li>
+        <li><b>3</b><div><strong>Vous recevez la chanson par e-mail</strong><br>Fichier MP3 + paroles en PDF, prêts à offrir.</div></li>
+      </ul>
+      <a href="#commande" class="btn">Je commande ma chanson</a>
+    </div>
+    <div class="listen">
+      <h3>🎵 Écoutez un exemple</h3>
+      <p>Une chanson rythmée pour faire chanter et danser les petits.</p>
+      <!-- Remplace extrait.mp3 par ton fichier (mets-le dans le même dossier) -->
+      <audio controls preload="none" src="extrait.mp3"></audio>
+      <p><em>Délai habituel : <span id="songDelay">7 jours</span>.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOUTIQUE PDF ===== -->
+<section id="boutique">
+  <div class="wrap">
+    <div class="shop-head">
+      <span class="kicker">Boutique</span>
+      <h2>Imprimables par occasion</h2>
+      <p>Achetez, téléchargez, imprimez à la maison.</p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- ===== FORMULAIRE ===== -->
+<section class="order" id="commande">
+  <div class="wrap">
+    <form class="form-box" id="songForm">
+      <h2>Commander une chanson personnalisée</h2>
+      <p>Plus vous me donnez de détails, plus la chanson sera unique.</p>
+
+      <div class="row">
+        <div class="field">
+          <label for="prenom">Prénom(s) à chanter *</label>
+          <input id="prenom" name="prenom" required placeholder="Ex. Léa">
+        </div>
+        <div class="field">
+          <label for="prononciation">Prononciation <small>(si particulière)</small></label>
+          <input id="prononciation" name="prononciation" placeholder="Ex. « Lé-a »">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="occasion">Occasion *</label>
+          <select id="occasion" name="occasion" required>
+            <option value="">Choisir…</option>
+            <option>Anniversaire</option>
+            <option>Naissance / baptême</option>
+            <option>Fête des mères</option>
+            <option>Fête des pères</option>
+            <option>Noël</option>
+            <option>Mariage</option>
+            <option>Hommage / souvenir</option>
+            <option>Juste pour faire plaisir</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="pour">Pour qui ? *</label>
+          <input id="pour" name="pour_qui" required placeholder="Ex. ma fille de 4 ans, ma maman…">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="details">Anecdotes et détails *  <small>(3 à 5 éléments : passions, doudou, surnoms, souvenirs…)</small></label>
+        <textarea id="details" name="details" required placeholder="Elle adore les dinosaures, son doudou s'appelle Pompon, elle rit quand on…"></textarea>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="style">Style *</label>
+          <select id="style" name="style" required>
+            <option>Joyeux et rythmé (pour danser)</option>
+            <option>Doux et tendre</option>
+            <option>Émouvant</option>
+            <option>Drôle</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="langue">Langue</label>
+          <select id="langue" name="langue">
+            <option>Français</option>
+            <option>Néerlandais</option>
+            <option>Français + néerlandais</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="date">Pour quand ? <small>(date de l'événement)</small></label>
+          <input type="date" id="date" name="date_souhaitee">
+        </div>
+        <div class="field">
+          <label for="email">Votre e-mail *</label>
+          <input type="email" id="email" name="email" required placeholder="vous@exemple.be">
+        </div>
+      </div>
+
+      <div class="field check">
+        <input type="checkbox" id="ok" required>
+        <label for="ok" style="font-weight:400">J'accepte que la création commence après le paiement et que, s'agissant d'une création personnalisée, elle ne soit pas remboursable une fois livrée.</label>
+      </div>
+
+      <button type="submit" class="btn" id="submitBtn">Valider et passer au paiement →</button>
+      <p class="note">Après validation, vous êtes redirigé vers le paiement sécurisé Stripe.</p>
+      <p id="formMsg"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="faq wrap">
+    <h2>Questions fréquentes</h2>
+    <details><summary>Comment je reçois mes PDF ?</summary><p>Juste après le paiement, vous recevez un lien de téléchargement par e-mail. Vous pouvez imprimer autant de fois que vous voulez pour un usage personnel.</p></details>
+    <details><summary>Avec quoi imprimer ?</summary><p>Une imprimante maison suffit (A4 ou US Letter). Un guide d'impression est inclus. Selon l'imprimante, une fine marge blanche peut apparaître.</p></details>
+    <details><summary>Combien de temps pour la chanson ?</summary><p>Environ 7 jours après le paiement. Pour une date urgente, indiquez-la dans le formulaire.</p></details>
+    <details><summary>Je peux demander une modification ?</summary><p>Oui, une petite retouche des paroles est incluse si un détail ne correspond pas.</p></details>
+    <details><summary>Je préfère acheter sur Etsy</summary><p>Pas de souci, la boutique est aussi sur <a href="https://www.etsy.com/shop/ActivityWebstudio" target="_blank" rel="noopener">Etsy</a>. Les prix sont un peu plus doux ici.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="year"></span> ActivityWeb Studio – Belgique</div>
+    <div><a href="mentions-legales.html">Mentions légales</a> · <a href="mailto:contact@activityweb.be">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   ⚙️  RÉGLAGES — c'est la SEULE partie à modifier
+   ========================================================= */
+const CONFIG = {
+  // Lien de paiement Stripe pour la chanson (Stripe > Payment Links)
+  stripeSongLink: "https://buy.stripe.com/REMPLACER",
+  // ID Formspree (formspree.io > New form > copie le code après /f/)
+  formspreeId: "REMPLACER",
+  songPrice: "À partir de 29 €",
+  songDelay: "7 jours"
+};
+
+// Tes PDF : ajoute / supprime des blocs { … }
+// cat = une des catégories ci-dessous ; payhip = lien du produit Payhip
+// img = nom de l'image (ex. "calendrier.jpg") ou laisse "" pour un emoji
+const CATEGORIES = ["Tout", "Noël", "Anniversaire", "Fête des mères", "Naissance & mariage", "Hommage"];
+const PRODUCTS = [
+  { title:"Calendrier de l'Avent numérique", cat:"Noël", price:"4,99 €", emoji:"🎄", img:"",
+    desc:"24 surprises à personnaliser avec vos messages, à ouvrir chaque jour.", payhip:"https://payhip.com/b/REMPLACER" },
+  { title:"Planificateur & budget de Noël", cat:"Noël", price:"3,99 €", emoji:"📝", img:"",
+    desc:"Cadeaux, menus, budget : tout Noël organisé sur papier (A4).", payhip:"https://payhip.com/b/REMPLACER" },
+  { title:"50 jeux de Noël pour seniors", cat:"Noël", price:"4,99 €", emoji:"🧩", img:"",
+    desc:"Jeux de mémoire et de réflexion pour partager un moment avec les grands-parents.", payhip:"https://payhip.com/b/REMPLACER" },
+  { title:"Coloriages d'anniversaire", cat:"Anniversaire", price:"2,99 €", emoji:"🎈", img:"",
+    desc:"Des pages à colorier pour occuper les petits pendant la fête.", payhip:"https://payhip.com/b/REMPLACER" },
+  { title:"Carte-poème « Maman »", cat:"Fête des mères", price:"2,99 €", emoji:"💐", img:"",
+    desc:"Aquarelle + poème original, carte pliée A5 à imprimer.", payhip:"https://payhip.com/b/REMPLACER" },
+  { title:"Affiche-poème naissance", cat:"Naissance & mariage", price:"3,99 €", emoji:"🍼", img:"",
+    desc:"Une affiche douce pour la chambre de bébé, plusieurs formats.", payhip:"https://payhip.com/b/REMPLACER" },
+  { title:"Carte-poème hommage", cat:"Hommage", price:"2,99 €", emoji:"🕊️", img:"",
+    desc:"Des mots tendres pour accompagner un deuil ou un souvenir.", payhip:"https://payhip.com/b/REMPLACER" }
+];
+/* ========================================================= */
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('songPriceTag').textContent = CONFIG.songPrice;
+document.getElementById('songDelay').textContent = CONFIG.songDelay;
+
+// Filtres + cartes produits
+const grid = document.getElementById('grid');
+const filters = document.getElementById('filters');
+function render(cat){
+  grid.innerHTML = PRODUCTS.filter(p => cat === "Tout" || p.cat === cat).map(p => `
+    <article class="card">
+      <div class="img">${p.img ? `<img src="${p.img}" alt="${p.title}" loading="lazy">` : p.emoji}</div>
+      <div class="body">
+        <span class="tag">${p.cat}</span>
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <div class="foot">
+          <span class="price">${p.price}</span>
+          <a class="btn" href="${p.payhip}" target="_blank" rel="noopener">Acheter</a>
+        </div>
+      </div>
+    </article>`).join('');
+}
+CATEGORIES.forEach((c,i) => {
+  const b = document.createElement('button');
+  b.textContent = c;
+  if(i===0) b.classList.add('active');
+  b.onclick = () => { document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(c); };
+  filters.appendChild(b);
+});
+render("Tout");
+
+// Formulaire : envoi à Formspree puis redirection vers Stripe
+document.getElementById('songForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn'), msg = document.getElementById('formMsg');
+  btn.disabled = true; btn.textContent = "Envoi en cours…";
+  try {
+    const res = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
+      method:'POST', body:new FormData(e.target), headers:{'Accept':'application/json'}
+    });
+    if(!res.ok) throw new Error();
+    msg.textContent = "Merci ! Redirection vers le paiement…";
+    const email = encodeURIComponent(document.getElementById('email').value);
+    setTimeout(() => { window.location.href = `${CONFIG.stripeSongLink}?prefilled_email=${email}`; }, 1200);
+  } catch {
+    msg.textContent = "Oups, l'envoi n'a pas fonctionné. Réessayez ou écrivez-moi par e-mail.";
+    btn.disabled = false; btn.textContent = "Valider et passer au paiement →";
+  }
+});
+</script>
+</body>
+</html>
