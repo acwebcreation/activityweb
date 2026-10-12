@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merci pour ta commande – Chanson personnalisée</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF9F5; --card:#FFFFFF; --text:#3E3340; --muted:#76687A;
+    --mauve:#A77BCA; --mauve-dark:#6E4F8B; --rose:#F29CB7; --rose-light:#FFE3EC;
+    --pink:#FFD6E0; --lilac:#E4D7FF; --mint:#C9F2E1; --sky:#CFE8FF; --butter:#FFF1B8;
+    --radius:22px; --shadow:0 8px 28px rgba(167,123,202,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',sans-serif;color:var(--text);line-height:1.6;min-height:100vh;padding:48px 18px;
+    background:radial-gradient(circle at 10% 10%,var(--pink),transparent 40%),radial-gradient(circle at 90% 15%,var(--sky),transparent 40%),radial-gradient(circle at 85% 90%,var(--mint),transparent 40%),radial-gradient(circle at 10% 90%,var(--butter),transparent 40%),var(--bg)}
+  h1,h2{font-family:'Cormorant Garamond',serif;color:var(--mauve-dark);line-height:1.15}
+  .wrap{max-width:680px;margin:0 auto}
+  .head{text-align:center;margin-bottom:28px}
+  .badge{width:76px;height:76px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;font-size:36px;background:#fff;box-shadow:var(--shadow)}
+  .kicker{text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;color:var(--rose);font-weight:700}
+  h1{font-size:clamp(2.1rem,6vw,2.9rem);margin:8px 0 10px}
+  .head p{color:var(--muted);font-size:1.08rem;max-width:520px;margin:0 auto}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 28px;margin-bottom:20px}
+  .card h2{font-size:1.7rem;margin-bottom:14px}
+  ol{list-style:none;display:grid;gap:16px}
+  ol li{display:flex;gap:14px;align-items:flex-start}
+  ol li b.n{flex:0 0 34px;height:34px;border-radius:50%;color:#fff;display:grid;place-items:center}
+  ol li:nth-child(1) b.n{background:#F29CB7}ol li:nth-child(2) b.n{background:#7FC8F8}ol li:nth-child(3) b.n{background:#7DD3B0}
+  .tip{background:var(--rose-light);border-radius:14px;padding:14px 16px;font-size:.95rem}
+  .tip + .tip{margin-top:12px;background:var(--lilac)}
+  .btn{display:inline-block;background:linear-gradient(135deg,#F29CB7,#A77BCA);box-shadow:0 6px 18px rgba(242,156,183,.45);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:999px;transition:.2s}
+  .btn:hover{filter:brightness(1.05);transform:translateY(-2px)}
+  .center{text-align:center}
+  .foot{text-align:center;color:var(--muted);font-size:.9rem;margin-top:26px}
+  .foot a{color:var(--mauve-dark);font-weight:700}
+  @media(max-width:520px){.card{padding:24px 20px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="head">
+    <div class="badge" aria-hidden="true">🎵</div>
+    <span class="kicker">Paiement confirmé</span>
+    <h1>Merci, ta chanson est en route !</h1>
+    <p>J'ai bien reçu ta commande et tes réponses. Je m'occupe maintenant d'écrire et de composer une chanson unique, rien que pour elle ou lui.</p>
+  </div>
+
+  <section class="card">
+    <h2>La suite</h2>
+    <ol>
+      <li><b class="n">1</b><div><strong>Tu reçois une confirmation de paiement</strong><br>Stripe t'envoie un reçu par e-mail dans quelques minutes.</div></li>
+      <li><b class="n">2</b><div><strong>J'écris et je compose ta chanson</strong><br>À partir du prénom et des anecdotes que tu m'as confiés. Si un détail me manque, je t'écris.</div></li>
+      <li><b class="n">3</b><div><strong>Tu reçois la chanson par e-mail</strong><br>Le fichier MP3 et les paroles en PDF, prêts à offrir, en <strong>7 jours environ</strong>.</div></li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <div class="tip"><strong>Pense à vérifier tes courriers indésirables</strong> (spams) dans les prochains jours, et ajoute contact@activityweb.be à tes contacts pour être sûr(e) de recevoir la chanson.</div>
+    <div class="tip"><strong>Une date importante ?</strong> Si la chanson doit être prête pour un jour précis et que tu ne l'as pas indiqué dans le formulaire, écris-moi vite à contact@activityweb.be en indiquant la date.</div>
+  </section>
+
+  <p class="center"><a class="btn" href="famille.html#boutique">Découvrir les autres cadeaux</a></p>
+
+  <p class="foot">Une question ? Écris-moi à <a href="mailto:contact@activityweb.be">contact@activityweb.be</a>.<br>© ActivityWeb Studio – Belgique</p>
+</main>
+</body>
+</html>
