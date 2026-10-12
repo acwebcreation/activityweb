@@ -280,6 +280,8 @@
         <input type="checkbox" id="ok" required>
         <label for="ok" style="font-weight:400">J'accepte que la création commence après le paiement et que, s'agissant d'une création personnalisée, elle ne soit pas remboursable une fois livrée.</label>
       </div>
+      <p class="note" style="text-align:left;margin:-4px 0 14px">🔒 Vos réponses servent uniquement à créer la chanson et sont supprimées après la livraison. Pour un enfant, indiquez seulement son prénom (pas de nom de famille ni d'école). <a href="../politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></p>
+      <input type="hidden" name="_subject" value="Nouvelle commande de chanson personnalisée">
 
       <button type="submit" class="btn" id="submitBtn">Valider et passer au paiement →</button>
       <p class="note">Après validation, vous êtes redirigé vers le paiement sécurisé Stripe.</p>
@@ -304,7 +306,7 @@
 <footer>
   <div class="wrap">
     <div>© <span id="year"></span> ActivityWeb Studio – Belgique</div>
-    <div><a href="mentions-legales.html">Mentions légales</a> · <a href="mailto:contact@activityweb.be">Contact</a></div>
+    <div><a href="../mentions-legales.html">Mentions légales</a> · <a href="mailto:contact@activityweb.be">Contact</a></div>
   </div>
 </footer>
 
@@ -314,9 +316,9 @@
    ========================================================= */
 const CONFIG = {
   // Lien de paiement Stripe pour la chanson (Stripe > Payment Links)
-  stripeSongLink: "https://buy.stripe.com/REMPLACER",
+  stripeSongLink: "https://buy.stripe.com/eVqcN6fl1dLJ6xTcSt83C0e",
   // ID Formspree (formspree.io > New form > copie le code après /f/)
-  formspreeId: "REMPLACER",
+  formspreeId: "xkjovykw",
   songPrice: "À partir de 29 €",
   songDelay: "7 jours"
 };
