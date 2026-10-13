@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="noel.css">
+<link rel="stylesheet" href="../bab.css">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -79,6 +79,12 @@
   {
    "@type": "ListItem",
    "position": 2,
+   "name": "Occasions",
+   "item": "https://www.activityweb.be/boite-a-bonheur/occasions.html"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
    "name": "Noël",
    "item": "https://www.activityweb.be/boite-a-bonheur/noel/"
   }
@@ -131,8 +137,9 @@
   <div class="wrap">
     <a href="../famille.html" class="logo">La Boîte à Bonheurs</a>
     <ul>
-      <li><a href="./" aria-current="page">Noël</a></li>
-      <li class="hide-m"><a href="../famille.html#commande">Chanson personnalisée</a></li>
+      <li data-saison class="hide-m"></li>
+      <li><a href="../occasions.html">Occasions</a></li>
+      <li><a href="../famille.html#commande">Chansons</a></li>
       <li><a href="../famille.html#boutique">Boutique</a></li>
     </ul>
   </div>
@@ -146,6 +153,7 @@
   <div class="wrap">
     <div class="crumbs" aria-label="Fil d'Ariane" style="display:flex;justify-content:center"><ol>
       <li><a href="../famille.html">Accueil</a></li>
+      <li><a href="../occasions.html">Occasions</a></li>
       <li aria-current="page">Noël</li>
     </ol></div>
     <span class="kicker" style="display:block;margin-top:20px">La Boîte à Bonheurs</span>
@@ -304,5 +312,6 @@
     <div><a href="../../mentions-legales.html">Mentions légales</a> · <a href="../../politique-confidentialite.html">Confidentialité</a> · <a href="mailto:contact@activityweb.be">Contact</a></div>
   </div>
 </footer>
+<script src="../saison.js" data-racine="../" defer></script>
 </body>
 </html>

@@ -132,10 +132,10 @@
   <div class="wrap">
     <a href="#" class="logo">ActivityWeb Studio</a>
     <ul>
-      <li><a href="noel/">Noël</a></li>
-      <li><a href="#chanson">Chanson personnalisée</a></li>
-      <li><a href="#boutique" data-type="Interactif">Cadeaux interactifs</a></li>
-      <li><a href="#boutique" data-type="Imprimable">Imprimables</a></li>
+      <li data-saison></li>
+      <li><a href="occasions.html">Occasions</a></li>
+      <li><a href="#chanson">Chansons</a></li>
+      <li><a href="#boutique" data-type="Tout">Boutique</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
   </div>
@@ -147,6 +147,7 @@
   <span class="deco" style="bottom:18%;left:12%;animation-delay:2s">⭐</span>
   <span class="deco" style="bottom:22%;right:12%;animation-delay:3s">🎁</span>
   <div class="wrap">
+    <div data-saison-bandeau></div>
     <span class="kicker">Cadeaux & imprimables pour la famille</span>
     <h1>Des cadeaux personnalisés qui créent des souvenirs en famille</h1>
     <p>Chansons écrites rien que pour vous, cadeaux interactifs à envoyer par e-mail et imprimables pour Noël, les anniversaires, la fête des mères et tous les grands moments.</p>
@@ -413,5 +414,6 @@ document.getElementById('songForm').addEventListener('submit', async e => {
   }
 });
 </script>
+<script src="saison.js" data-racine="./"></script>
 </body>
 </html>
