@@ -230,7 +230,6 @@
             <option>Fête des pères</option>
             <option>Noël</option>
             <option>Mariage</option>
-            <option>Hommage / souvenir</option>
             <option>Juste pour faire plaisir</option>
           </select>
         </div>
@@ -328,7 +327,7 @@ const CONFIG = {
 // type = "Imprimable" (PDF à imprimer) ou "Interactif" (cadeau à envoyer par e-mail)
 // lien = lien de paiement (Stripe ou Payhip)
 // img = nom de l'image (ex. "calendrier.jpg") ou laisse "" pour un emoji
-const CATEGORIES = ["Tout", "Noël", "Anniversaire", "Fête des mères", "Naissance & mariage", "Hommage"];
+const CATEGORIES = ["Tout", "Noël", "Anniversaire", "Fête des mères", "Naissance & mariage"];
 const PRODUCTS = [
   { title:"Calendrier de l'Avent interactif", cat:"Noël", type:"Interactif", price:"4,99 €", emoji:"🎄", img:"",
     desc:"24 surprises à personnaliser avec vos messages et photos. Le calendrier s'envoie par e-mail et chaque case s'ouvre le bon jour.", lien:"https://buy.stripe.com/00w00k0q73753lHcSt83C0d" },
@@ -341,9 +340,8 @@ const PRODUCTS = [
   { title:"Carte-poème « Maman »", cat:"Fête des mères", price:"2,99 €", emoji:"💐", img:"",
     desc:"Aquarelle + poème original, carte pliée A5 à imprimer.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
   { title:"Affiche-poème naissance", cat:"Naissance & mariage", price:"3,99 €", emoji:"🍼", img:"",
-    desc:"Une affiche douce pour la chambre de bébé, plusieurs formats.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
-  { title:"Carte-poème hommage", cat:"Hommage", price:"2,99 €", emoji:"🕊️", img:"",
-    desc:"Des mots tendres pour accompagner un deuil ou un souvenir.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" }
+    desc:"Une affiche douce pour la chambre de bébé, plusieurs formats.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" }
+ 
 ];
 /* ========================================================= */
 
