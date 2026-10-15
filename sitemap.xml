@@ -9,24 +9,13 @@
   <url>
     <loc>https://www.activityweb.be/bien-etre.html</loc>
   </url>
-  <url>
-    <loc>https://www.activityweb.be/services-mensuels.html</loc>
-  </url>
-  <url>
-    <loc>https://www.activityweb.be/diagnostic.html</loc>
-  </url>
-  <url>
-    <loc>https://www.activityweb.be/formulaire.html</loc>
-  </url>
-  <url>
+    <url>
     <loc>https://www.activityweb.be/guides.html</loc>
   </url>
   <url>
     <loc>https://www.activityweb.be/pack-debutant.html</loc>
   </url>
-  <url>
-    <loc>https://www.activityweb.be/page-vente.html</loc>
-  </url>
+  
   <url>
     <loc>https://www.activityweb.be/page-capture-checklist-debutant.html</loc>
   </url>
@@ -86,5 +75,17 @@
   <url>
     <loc>https://www.activityweb.be/boite-a-bonheur/noel/bons-cadeaux-noel-a-imprimer.html</loc>
     <lastmod>2026-10-13</lastmod>
+  </url>
+  <url>
+    <loc>https://www.activityweb.be/solutions/</loc>
+    <lastmod>2026-10-15</lastmod>
+  </url>
+  <url>
+    <loc>https://www.activityweb.be/solutions/vpn.html</loc>
+    <lastmod>2026-10-15</lastmod>
+  </url>
+  <url>
+    <loc>https://www.activityweb.be/solutions/mots-de-passe.html</loc>
+    <lastmod>2026-10-15</lastmod>
   </url>
 </urlset>
