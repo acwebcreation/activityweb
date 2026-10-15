@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mots de passe oubliés ? Le gestionnaire qui s'en souvient pour toi (guide 2026)</title>
+<meta name="description" content="Marre de cliquer sur « mot de passe oublié » ? Les astuces gratuites, puis le gestionnaire de mots de passe que je recommande et deux alternatives, expliqués simplement.">
+<link rel="canonical" href="https://www.activityweb.be/solutions/mots-de-passe.html">
+<meta property="og:title" content="Mots de passe oubliés : la solution simple">
+<meta property="og:description" content="Un seul mot de passe à retenir, tous les autres sont gérés pour toi.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Données FAQ pour Google (à garder identiques à la FAQ visible plus bas) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Est-ce risqué de mettre tous ses mots de passe au même endroit ?",
+     "acceptedAnswer":{"@type":"Answer","text":"Un bon gestionnaire chiffre tout sur ton appareil avant l'envoi : même l'entreprise ne peut pas lire tes mots de passe. C'est beaucoup plus sûr que réutiliser le même mot de passe partout ou les noter dans un carnet."}},
+    {"@type":"Question","name":"Et si j'oublie mon mot de passe principal ?",
+     "acceptedAnswer":{"@type":"Answer","text":"C'est le seul à retenir, alors choisis une phrase facile à mémoriser. La plupart des gestionnaires proposent un code ou un kit de récupération : imprime-le et range-le en lieu sûr dès l'installation."}},
+    {"@type":"Question","name":"Le gestionnaire de mon téléphone ou de mon navigateur suffit-il ?",
+     "acceptedAnswer":{"@type":"Answer","text":"C'est un bon début et c'est gratuit. Un gestionnaire dédié devient utile si tu utilises des appareils de marques différentes, si tu veux partager des accès en famille, ou être alerté quand un de tes comptes apparaît dans une fuite de données."}},
+    {"@type":"Question","name":"Comment récupérer mes mots de passe déjà enregistrés ?",
+     "acceptedAnswer":{"@type":"Answer","text":"Les gestionnaires permettent d'importer en quelques clics les mots de passe enregistrés dans Chrome, Safari, Firefox ou un autre gestionnaire. Tu ne repars pas de zéro."}}
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --bg:#F7F5F0; --card:#FFFFFF; --ink:#1F2A37; --muted:#5B6573;
+    --brand:#0F766E; --brand-soft:#E3F2EF; --cta:#F59E0B; --cta-ink:#1F2A37;
+    --line:#E6E1D8; --radius:16px; --warn:#FDF3E1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+  a{color:var(--brand)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  .wide{max-width:1080px}
+
+  header{background:var(--card);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:800;font-size:1.2rem;text-decoration:none;color:var(--ink)}
+  .logo span{color:var(--brand)}
+  .nav a.link{text-decoration:none;font-weight:600;color:var(--muted)}
+
+  .crumb{font-size:.88rem;color:var(--muted);margin:24px 0 8px}
+  .crumb a{color:var(--muted)}
+  h1{font-size:clamp(1.8rem,4.5vw,2.5rem);line-height:1.2;margin-bottom:14px}
+  .lead{font-size:1.15rem;color:var(--muted)}
+  .updated{font-size:.85rem;color:var(--muted);margin-top:10px}
+
+  h2{font-size:1.45rem;margin:48px 0 14px;line-height:1.3}
+  h3{font-size:1.1rem;margin-bottom:6px}
+  p{margin-bottom:14px}
+  ul.check{list-style:none;margin-bottom:14px}
+  ul.check li{padding-left:28px;position:relative;margin-bottom:8px}
+  ul.check li::before{content:"✓";position:absolute;left:0;color:var(--brand);font-weight:800}
+  ul.cross li::before{content:"✗";color:#B45309}
+
+  .quick{background:var(--brand-soft);border-radius:var(--radius);padding:22px 24px;margin:28px 0}
+  .quick strong{display:block;margin-bottom:4px}
+  .quick p{margin:0}
+
+  .note{background:var(--warn);border-radius:12px;padding:16px 20px;font-size:.95rem;margin:18px 0}
+
+  .pick{background:var(--card);border:2px solid var(--brand);border-radius:var(--radius);padding:28px;margin:22px 0;position:relative}
+  .pick.alt{border:1px solid var(--line)}
+  .pick .tag{position:absolute;top:-13px;left:24px;background:var(--brand);color:#fff;font-weight:800;font-size:.8rem;padding:4px 12px;border-radius:99px}
+  .pick.alt .tag{background:var(--ink)}
+  .pick h3{font-size:1.35rem;margin:6px 0 4px}
+  .pick .for{color:var(--muted);margin-bottom:14px}
+  .btn{display:inline-block;background:var(--cta);color:var(--cta-ink);font-weight:800;text-decoration:none;
+       padding:14px 26px;border-radius:12px;transition:.2s;margin-top:6px}
+  .btn:hover{filter:brightness(1.05);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;border:2px solid var(--ink)}
+
+  .tablewrap{overflow-x:auto;margin:18px 0}
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;font-size:.95rem;min-width:520px}
+  th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left}
+  th{background:var(--ink);color:#fff}
+  tr:last-child td{border-bottom:none}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}
+  summary{font-weight:700;cursor:pointer}
+  details p{margin:10px 0 0;color:var(--muted)}
+
+  .back{display:inline-block;margin:48px 0 24px;font-weight:700;text-decoration:none}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.88rem;text-align:center;margin-top:24px}
+  footer p+p{margin-top:8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap wide nav">
+    <a class="logo" href="/solutions/">Solutions <span>du quotidien</span></a>
+    <a class="link" href="/solutions/#categories">Tous les tracas</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="crumb"><a href="/solutions/">Solutions</a> › Sécurité en ligne › Mots de passe</p>
+
+  <h1>Mots de passe oubliés : ne plus jamais cliquer sur « mot de passe oublié »</h1>
+  <p class="lead">Banque, mutuelle, Itsme, boutiques, réseaux sociaux… On a tous des dizaines de comptes. Résultat : on réutilise le même mot de passe partout, ou on passe sa vie à le réinitialiser.</p>
+  <p class="updated">Mis à jour en octobre 2026</p>
+
+  <div class="quick">
+    <strong>⚡ La réponse rapide</strong>
+    <p>Un gestionnaire de mots de passe retient et remplit tout à ta place : tu n'as plus qu'un seul mot de passe à retenir. Mon choix : <a href="#choix">NordPass</a>. Pour commencer gratuitement : <a href="#proton">Proton Pass</a>.</p>
+  </div>
+
+  <!-- ========== LE PROBLÈME ========== -->
+  <h2>Pourquoi c'est un vrai problème</h2>
+  <p>Notre mémoire n'est pas faite pour retenir 80 mots de passe différents. Alors on triche : le prénom d'un enfant, une date de naissance, le même mot de passe avec un chiffre en plus.</p>
+  <p>Le danger, c'est la réutilisation. Quand un site se fait pirater (ça arrive tout le temps), les pirates essaient le même e-mail et le même mot de passe sur tes autres comptes. Un seul site piraté peut ouvrir la porte à ta boîte mail, puis à tout le reste.</p>
+
+  <!-- ========== GRATUIT D'ABORD ========== -->
+  <h2>D'abord, les astuces gratuites</h2>
+  <ul class="check">
+    <li><strong>Utilise le gestionnaire intégré</strong> de ton téléphone ou de ton navigateur (Google, Apple, Firefox) : c'est déjà mieux que rien.</li>
+    <li><strong>Active la double authentification</strong> sur ta boîte mail en priorité : c'est la clé de tous tes autres comptes.</li>
+    <li><strong>Vérifie si tes comptes ont fuité</strong> sur <a href="https://haveibeenpwned.com" target="_blank" rel="noopener">haveibeenpwned.com</a> (gratuit) et change les mots de passe concernés.</li>
+    <li><strong>Utilise des phrases plutôt que des mots</strong> : « Mon-chat-mange-des-frites-le-lundi » est plus solide et plus facile à retenir que « Ch@t2019 ».</li>
+  </ul>
+
+  <h2>Ce qu'un gestionnaire fait… et ne fait pas</h2>
+  <ul class="check">
+    <li>Crée un mot de passe unique et solide pour chaque site</li>
+    <li>Le remplit automatiquement sur ton téléphone et ton ordinateur</li>
+    <li>T'alerte si un de tes comptes apparaît dans une fuite de données (selon la formule)</li>
+    <li>Permet de partager des accès en famille (Netflix, Wi-Fi, mutuelle…)</li>
+  </ul>
+  <ul class="check cross">
+    <li>Ne te protège pas si tu donnes toi-même ton mot de passe à un faux site (phishing)</li>
+    <li>Ne remplace pas la double authentification sur tes comptes importants</li>
+  </ul>
+
+  <!-- ========== MON CHOIX ==========
+       REMPLACE chaque href="https://REMPLACER-..." par ton lien affilié.
+       Astuce : NordPass fait partie du même programme d'affiliation que NordVPN.
+       Garde rel="sponsored nofollow noopener" sur tous les liens affiliés. -->
+  <h2 id="choix">Mon choix : le gestionnaire que je recommande</h2>
+
+  <div class="pick">
+    <span class="tag">⭐ Mon choix</span>
+    <h3>NordPass</h3>
+    <p class="for">Pour la plupart des gens : très simple, même si tu n'es pas à l'aise avec la technique.</p>
+    <ul class="check">
+      <li>Chiffrement « zéro connaissance » : personne d'autre que toi ne peut lire tes données</li>
+      <li>Import en quelques clics depuis Chrome, Safari ou un autre gestionnaire</li>
+      <li>Alerte en cas de fuite de données et analyse des mots de passe faibles</li>
+      <li>Version gratuite pour tester, formule Famille pour toute la maison</li>
+    </ul>
+    <a class="btn" href="https://REMPLACER-PAR-TON-LIEN-NORDPASS" target="_blank" rel="sponsored nofollow noopener">Voir l'offre NordPass →</a>
+  </div>
+
+  <h2>Les alternatives</h2>
+
+  <div class="pick alt">
+    <span class="tag">👨‍👩‍👧 Idéal en famille</span>
+    <h3>1Password</h3>
+    <p class="for">Si tu veux gérer les comptes de toute la famille au même endroit.</p>
+    <ul class="check">
+      <li>Formule Famille avec coffres partagés et coffres personnels</li>
+      <li>Très réputé pour sa sécurité et la qualité de ses applications</li>
+      <li>Mode Voyage pour masquer certains coffres en déplacement</li>
+    </ul>
+    <a class="btn ghost" href="https://REMPLACER-PAR-TON-LIEN-1PASSWORD" target="_blank" rel="sponsored nofollow noopener">Voir l'offre 1Password →</a>
+  </div>
+
+  <div class="pick alt" id="proton">
+    <span class="tag">🆓 Version gratuite / vie privée</span>
+    <h3>Proton Pass</h3>
+    <p class="for">Pour commencer sans payer, ou si la vie privée est ta priorité.</p>
+    <ul class="check">
+      <li>Version gratuite généreuse : mots de passe illimités sur tous tes appareils</li>
+      <li>Crée des adresses e-mail « masques » pour ne plus donner ta vraie adresse</li>
+      <li>Entreprise basée en Suisse, applications open source</li>
+    </ul>
+    <a class="btn ghost" href="https://REMPLACER-PAR-TON-LIEN-PROTON-PASS" target="_blank" rel="sponsored nofollow noopener">Voir Proton Pass →</a>
+  </div>
+
+  <div class="note">💡 Dès l'installation, note ton mot de passe principal et ton code de récupération sur papier, et range-les en lieu sûr. C'est le seul oubli qui ne se rattrape pas.</div>
+
+  <!-- ========== COMPARATIF ========== -->
+  <h2>Le comparatif en un coup d'œil</h2>
+  <div class="tablewrap">
+    <table>
+      <tr><th></th><th>NordPass</th><th>1Password</th><th>Proton Pass</th></tr>
+      <tr><td><strong>Idéal pour</strong></td><td>La plupart des gens</td><td>Les familles</td><td>Gratuit, vie privée</td></tr>
+      <tr><td><strong>Version gratuite</strong></td><td>Oui (limitée)</td><td>Non (essai)</td><td>Oui</td></tr>
+      <tr><td><strong>Formule Famille</strong></td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+      <tr><td><strong>Alerte fuites de données</strong></td><td>Oui</td><td>Oui</td><td>Oui (payant)</td></tr>
+      <tr><td><strong>Bonus</strong></td><td>Très simple à prendre en main</td><td>Coffres partagés</td><td>Adresses e-mail masquées</td></tr>
+    </table>
+  </div>
+
+  <!-- ========== FAQ ========== -->
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Est-ce risqué de mettre tous ses mots de passe au même endroit ?</summary>
+    <p>Un bon gestionnaire chiffre tout sur ton appareil avant l'envoi : même l'entreprise ne peut pas lire tes mots de passe. C'est beaucoup plus sûr que réutiliser le même mot de passe partout ou les noter dans un carnet.</p>
+  </details>
+  <details>
+    <summary>Et si j'oublie mon mot de passe principal ?</summary>
+    <p>C'est le seul à retenir, alors choisis une phrase facile à mémoriser. La plupart des gestionnaires proposent un code ou un kit de récupération : imprime-le et range-le en lieu sûr dès l'installation.</p>
+  </details>
+  <details>
+    <summary>Le gestionnaire de mon téléphone ou de mon navigateur suffit-il ?</summary>
+    <p>C'est un bon début et c'est gratuit. Un gestionnaire dédié devient utile si tu utilises des appareils de marques différentes, si tu veux partager des accès en famille, ou être alerté quand un de tes comptes apparaît dans une fuite de données.</p>
+  </details>
+  <details>
+    <summary>Comment récupérer mes mots de passe déjà enregistrés ?</summary>
+    <p>Les gestionnaires permettent d'importer en quelques clics les mots de passe enregistrés dans Chrome, Safari, Firefox ou un autre gestionnaire. Tu ne repars pas de zéro.</p>
+  </details>
+
+  <a class="back" href="/solutions/">← Voir tous les tracas et leurs solutions</a>
+
+</main>
+
+<footer>
+  <div class="wrap wide">
+    <p>Certains liens de cette page sont des liens affiliés : si tu achètes via ces liens, je touche une petite commission, sans aucun surcoût pour toi. Mes recommandations restent indépendantes.</p>
+    <p>© 2026 Solutions du quotidien · activityweb.be</p>
+  </div>
+</footer>
+
+</body>
+</html>
