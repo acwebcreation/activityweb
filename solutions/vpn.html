@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi public dangereux ? Le VPN qui te protège (guide simple 2026)</title>
+<meta name="description" content="Gare, hôtel, café : le Wi-Fi public expose tes données. Les astuces gratuites, puis le VPN que je recommande et deux alternatives, expliqués simplement.">
+<link rel="canonical" href="https://www.activityweb.be/solutions/vpn.html">
+<meta property="og:title" content="Wi-Fi public : comment te protéger simplement">
+<meta property="og:description" content="Les astuces gratuites et le VPN que je recommande, sans jargon.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Données FAQ pour Google (à garder identiques à la FAQ visible plus bas) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Un VPN est-il légal en Belgique ?",
+     "acceptedAnswer":{"@type":"Answer","text":"Oui. Utiliser un VPN est tout à fait légal en Belgique. Ce qui reste interdit hors ligne reste interdit avec un VPN."}},
+    {"@type":"Question","name":"Un VPN gratuit suffit-il ?",
+     "acceptedAnswer":{"@type":"Answer","text":"Pour un usage occasionnel, un VPN gratuit sérieux comme Proton VPN peut suffire. Évite les VPN gratuits inconnus : certains se financent en revendant tes données."}},
+    {"@type":"Question","name":"Un VPN ralentit-il ma connexion ?",
+     "acceptedAnswer":{"@type":"Answer","text":"Un peu, mais avec un bon VPN et un serveur proche (en Belgique ou aux Pays-Bas), la différence est en général à peine perceptible au quotidien."}},
+    {"@type":"Question","name":"Sur combien d'appareils puis-je l'installer ?",
+     "acceptedAnswer":{"@type":"Answer","text":"Cela dépend du service : NordVPN permet plusieurs appareils en même temps, Surfshark un nombre illimité. Un seul abonnement peut donc couvrir toute la famille."}}
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --bg:#F7F5F0; --card:#FFFFFF; --ink:#1F2A37; --muted:#5B6573;
+    --brand:#0F766E; --brand-soft:#E3F2EF; --cta:#F59E0B; --cta-ink:#1F2A37;
+    --line:#E6E1D8; --radius:16px; --warn:#FDF3E1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+  a{color:var(--brand)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  .wide{max-width:1080px}
+
+  header{background:var(--card);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:800;font-size:1.2rem;text-decoration:none;color:var(--ink)}
+  .logo span{color:var(--brand)}
+  .nav a.link{text-decoration:none;font-weight:600;color:var(--muted)}
+
+  .crumb{font-size:.88rem;color:var(--muted);margin:24px 0 8px}
+  .crumb a{color:var(--muted)}
+  h1{font-size:clamp(1.8rem,4.5vw,2.5rem);line-height:1.2;margin-bottom:14px}
+  .lead{font-size:1.15rem;color:var(--muted)}
+  .updated{font-size:.85rem;color:var(--muted);margin-top:10px}
+
+  h2{font-size:1.45rem;margin:48px 0 14px;line-height:1.3}
+  h3{font-size:1.1rem;margin-bottom:6px}
+  p{margin-bottom:14px}
+  ul.check{list-style:none;margin-bottom:14px}
+  ul.check li{padding-left:28px;position:relative;margin-bottom:8px}
+  ul.check li::before{content:"✓";position:absolute;left:0;color:var(--brand);font-weight:800}
+  ul.cross li::before{content:"✗";color:#B45309}
+
+  /* Encadré réponse rapide */
+  .quick{background:var(--brand-soft);border-radius:var(--radius);padding:22px 24px;margin:28px 0}
+  .quick strong{display:block;margin-bottom:4px}
+  .quick p{margin:0}
+
+  .note{background:var(--warn);border-radius:12px;padding:16px 20px;font-size:.95rem;margin:18px 0}
+
+  /* Carte produit */
+  .pick{background:var(--card);border:2px solid var(--brand);border-radius:var(--radius);padding:28px;margin:22px 0;position:relative}
+  .pick.alt{border:1px solid var(--line)}
+  .pick .tag{position:absolute;top:-13px;left:24px;background:var(--brand);color:#fff;font-weight:800;font-size:.8rem;padding:4px 12px;border-radius:99px}
+  .pick.alt .tag{background:var(--ink)}
+  .pick h3{font-size:1.35rem;margin:6px 0 4px}
+  .pick .for{color:var(--muted);margin-bottom:14px}
+  .btn{display:inline-block;background:var(--cta);color:var(--cta-ink);font-weight:800;text-decoration:none;
+       padding:14px 26px;border-radius:12px;transition:.2s;margin-top:6px}
+  .btn:hover{filter:brightness(1.05);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;border:2px solid var(--ink)}
+
+  /* Tableau */
+  .tablewrap{overflow-x:auto;margin:18px 0}
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;font-size:.95rem;min-width:520px}
+  th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left}
+  th{background:var(--ink);color:#fff}
+  tr:last-child td{border-bottom:none}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}
+  summary{font-weight:700;cursor:pointer}
+  details p{margin:10px 0 0;color:var(--muted)}
+
+  .back{display:inline-block;margin:48px 0 24px;font-weight:700;text-decoration:none}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.88rem;text-align:center;margin-top:24px}
+  footer p+p{margin-top:8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap wide nav">
+    <a class="logo" href="/solutions/">Solutions <span>du quotidien</span></a>
+    <a class="link" href="/solutions/#categories">Tous les tracas</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="crumb"><a href="/solutions/">Solutions</a> › Sécurité en ligne › Wi-Fi public</p>
+
+  <h1>Wi-Fi public : comment naviguer sans être espionné</h1>
+  <p class="lead">Gare, hôtel, café, aéroport… Ces réseaux sont pratiques, mais n'importe qui connecté au même Wi-Fi peut tenter d'observer ce que tu fais.</p>
+  <p class="updated">Mis à jour en octobre 2026</p>
+
+  <div class="quick">
+    <strong>⚡ La réponse rapide</strong>
+    <p>Si tu utilises souvent le Wi-Fi public, installe un VPN : il chiffre tout ce qui sort de ton appareil. Mon choix : <a href="#choix">NordVPN</a>. Pour un usage rare, la version gratuite de <a href="#proton">Proton VPN</a> suffit.</p>
+  </div>
+
+  <!-- ========== LE PROBLÈME ========== -->
+  <h2>Pourquoi le Wi-Fi public pose problème</h2>
+  <p>Sur un réseau ouvert, tu partages la même connexion que des inconnus. Une personne mal intentionnée peut créer un faux réseau au nom rassurant (« Gare_WiFi_Gratuit ») ou essayer d'intercepter ce qui circule.</p>
+  <p>Même chez toi, ton fournisseur internet voit quels sites tu visites. Un VPN crée un tunnel chiffré entre ton appareil et internet : ce qui passe dedans devient illisible pour les autres.</p>
+
+  <!-- ========== GRATUIT D'ABORD ========== -->
+  <h2>D'abord, les astuces gratuites</h2>
+  <ul class="check">
+    <li><strong>Partage de connexion 4G/5G</strong> : utiliser ton téléphone comme point d'accès est plus sûr qu'un Wi-Fi public.</li>
+    <li><strong>Vérifie le cadenas</strong> 🔒 dans la barre d'adresse avant de taper un mot de passe.</li>
+    <li><strong>Demande le nom exact du réseau</strong> au personnel, pour éviter les faux réseaux.</li>
+    <li><strong>Désactive la connexion automatique</strong> aux réseaux ouverts dans les réglages de ton téléphone.</li>
+    <li><strong>Évite les opérations sensibles</strong> (banque, achats) sur un Wi-Fi public sans protection.</li>
+  </ul>
+
+  <h2>Ce qu'un VPN fait… et ne fait pas</h2>
+  <ul class="check">
+    <li>Chiffre ta connexion sur n'importe quel Wi-Fi</li>
+    <li>Cache tes sites visités à ton fournisseur internet</li>
+    <li>Te permet, en voyage, de te connecter via un serveur belge pour retrouver tes services habituels</li>
+  </ul>
+  <ul class="check cross">
+    <li>Ne te protège pas si tu cliques sur un lien d'arnaque (phishing)</li>
+    <li>Ne remplace pas un antivirus ni des mots de passe solides</li>
+    <li>Ne te rend pas totalement anonyme</li>
+  </ul>
+
+  <!-- ========== MON CHOIX ==========
+       REMPLACE chaque href="https://REMPLACER-..." par ton lien affilié.
+       Garde rel="sponsored nofollow noopener" sur tous les liens affiliés. -->
+  <h2 id="choix">Mon choix : le VPN que je recommande</h2>
+
+  <div class="pick">
+    <span class="tag">⭐ Mon choix</span>
+    <h3>NordVPN</h3>
+    <p class="for">Pour la plupart des gens : simple, rapide et complet.</p>
+    <ul class="check">
+      <li>Politique « aucune donnée conservée » vérifiée par des audits indépendants</li>
+      <li>Serveurs en Belgique et partout en Europe</li>
+      <li>Bloque aussi publicités et sites malveillants (Threat Protection)</li>
+      <li>Plusieurs appareils avec un seul abonnement</li>
+      <li>Applications claires sur téléphone, ordinateur et tablette</li>
+    </ul>
+    <a class="btn" href="https://REMPLACER-PAR-TON-LIEN-NORDVPN" target="_blank" rel="sponsored nofollow noopener">Voir l'offre NordVPN →</a>
+  </div>
+
+  <h2>Les alternatives</h2>
+
+  <div class="pick alt">
+    <span class="tag">💶 Petit budget / grande famille</span>
+    <h3>Surfshark</h3>
+    <p class="for">Si tu veux protéger tous les appareils de la maison sans compter.</p>
+    <ul class="check">
+      <li>Nombre d'appareils illimité avec un seul abonnement</li>
+      <li>Souvent parmi les VPN les moins chers sur la durée</li>
+      <li>Interface très simple</li>
+    </ul>
+    <a class="btn ghost" href="https://REMPLACER-PAR-TON-LIEN-SURFSHARK" target="_blank" rel="sponsored nofollow noopener">Voir l'offre Surfshark →</a>
+  </div>
+
+  <div class="pick alt" id="proton">
+    <span class="tag">🆓 Version gratuite / vie privée</span>
+    <h3>Proton VPN</h3>
+    <p class="for">Si tu l'utilises rarement, ou si la vie privée est ta priorité.</p>
+    <ul class="check">
+      <li>Version gratuite sérieuse, sans limite de données</li>
+      <li>Entreprise basée en Suisse, applications open source</li>
+      <li>Formule payante pour plus de vitesse et de serveurs</li>
+    </ul>
+    <a class="btn ghost" href="https://REMPLACER-PAR-TON-LIEN-PROTON" target="_blank" rel="sponsored nofollow noopener">Voir Proton VPN →</a>
+  </div>
+
+  <div class="note">⚠️ Évite les VPN gratuits inconnus des magasins d'applications : certains se financent en revendant justement les données que tu voulais protéger.</div>
+
+  <!-- ========== COMPARATIF ========== -->
+  <h2>Le comparatif en un coup d'œil</h2>
+  <div class="tablewrap">
+    <table>
+      <tr><th></th><th>NordVPN</th><th>Surfshark</th><th>Proton VPN</th></tr>
+      <tr><td><strong>Idéal pour</strong></td><td>La plupart des gens</td><td>Familles, petit budget</td><td>Usage rare, vie privée</td></tr>
+      <tr><td><strong>Version gratuite</strong></td><td>Non</td><td>Non</td><td>Oui</td></tr>
+      <tr><td><strong>Appareils</strong></td><td>Plusieurs</td><td>Illimités</td><td>Selon la formule</td></tr>
+      <tr><td><strong>Serveurs en Belgique</strong></td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+      <tr><td><strong>Bonus</strong></td><td>Bloqueur de pubs et menaces</td><td>Très simple</td><td>Basé en Suisse</td></tr>
+    </table>
+  </div>
+
+  <!-- ========== FAQ ========== -->
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Un VPN est-il légal en Belgique ?</summary>
+    <p>Oui. Utiliser un VPN est tout à fait légal en Belgique. Ce qui reste interdit hors ligne reste interdit avec un VPN.</p>
+  </details>
+  <details>
+    <summary>Un VPN gratuit suffit-il ?</summary>
+    <p>Pour un usage occasionnel, un VPN gratuit sérieux comme Proton VPN peut suffire. Évite les VPN gratuits inconnus : certains se financent en revendant tes données.</p>
+  </details>
+  <details>
+    <summary>Un VPN ralentit-il ma connexion ?</summary>
+    <p>Un peu, mais avec un bon VPN et un serveur proche (en Belgique ou aux Pays-Bas), la différence est en général à peine perceptible au quotidien.</p>
+  </details>
+  <details>
+    <summary>Sur combien d'appareils puis-je l'installer ?</summary>
+    <p>Cela dépend du service : NordVPN permet plusieurs appareils en même temps, Surfshark un nombre illimité. Un seul abonnement peut donc couvrir toute la famille.</p>
+  </details>
+
+  <a class="back" href="/solutions/">← Voir tous les tracas et leurs solutions</a>
+
+</main>
+
+<footer>
+  <div class="wrap wide">
+    <p>Certains liens de cette page sont des liens affiliés : si tu achètes via ces liens, je touche une petite commission, sans aucun surcoût pour toi. Mes recommandations restent indépendantes.</p>
+    <p>© 2026 Solutions du quotidien · activityweb.be</p>
+  </div>
+</footer>
+
+</body>
+</html>

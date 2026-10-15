@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solutions du quotidien : les bons outils contre les petits tracas</title>
+<meta name="description" content="Wi-Fi lent, démarchage téléphonique, mots de passe oubliés, humidité… Des solutions simples et testées pour les tracas de tous les jours, avec le bon outil pour chacun.">
+<link rel="canonical" href="https://www.activityweb.be/solutions/">
+<meta property="og:title" content="Solutions du quotidien">
+<meta property="og:description" content="Un tracas ? Une solution claire et le bon outil, sans blabla.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F5F0; --card:#FFFFFF; --ink:#1F2A37; --muted:#5B6573;
+    --brand:#0F766E; --brand-soft:#E3F2EF; --cta:#F59E0B; --cta-ink:#1F2A37;
+    --line:#E6E1D8; --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--brand)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* En-tête */
+  header{background:var(--card);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:800;font-size:1.2rem;text-decoration:none;color:var(--ink)}
+  .logo span{color:var(--brand)}
+  .nav a.link{text-decoration:none;font-weight:600;color:var(--muted)}
+
+  /* Accroche */
+  .hero{padding:64px 0 40px;text-align:center}
+  .hero h1{font-size:clamp(1.9rem,4.5vw,2.9rem);line-height:1.2;margin-bottom:16px}
+  .hero h1 em{font-style:normal;color:var(--brand)}
+  .hero p{color:var(--muted);font-size:1.15rem;max-width:620px;margin:0 auto}
+
+  /* Catégories */
+  .cat{margin:48px 0 0}
+  .cat h2{font-size:1.35rem;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+        text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px;transition:.2s;position:relative}
+  a.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(31,42,55,.08);border-color:var(--brand)}
+  .card .emo{font-size:1.8rem}
+  .card h3{font-size:1.08rem;line-height:1.3}
+  .card p{color:var(--muted);font-size:.95rem}
+  .card .go{margin-top:auto;padding-top:8px;font-weight:700;color:var(--brand)}
+  .card.soon{opacity:.6}
+  .badge{position:absolute;top:14px;right:14px;font-size:.72rem;font-weight:700;background:var(--line);
+         color:var(--muted);padding:3px 9px;border-radius:99px}
+
+  /* Comment ça marche */
+  .how{background:var(--brand-soft);border-radius:var(--radius);padding:36px;margin:64px 0;
+       display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+  .how h3{font-size:1.05rem;margin-bottom:4px}
+  .how p{color:var(--muted);font-size:.95rem}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.88rem;text-align:center}
+  footer p+p{margin-top:8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/solutions/">Solutions <span>du quotidien</span></a>
+    <a class="link" href="#categories">Tous les tracas</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Un petit tracas ?<br><em>Voici la solution qui marche.</em></h1>
+    <p>Des réponses claires aux agacements de tous les jours : d'abord les astuces gratuites, puis le bon outil quand il en faut un.</p>
+  </section>
+
+  <div id="categories">
+
+    <!-- ========== SÉCURITÉ EN LIGNE ========== -->
+    <section class="cat">
+      <h2>🔒 Sécurité en ligne</h2>
+      <div class="grid">
+        <a class="card" href="vpn.html">
+          <span class="emo">📶</span>
+          <h3>Wi-Fi public et vie privée</h3>
+          <p>Gare, hôtel, café : naviguer sans être espionné.</p>
+          <span class="go">Voir la solution →</span>
+        </a>
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">🔑</span>
+          <h3>Mots de passe oubliés</h3>
+          <p>Ne plus jamais cliquer sur « mot de passe oublié ».</p>
+        </div>
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">📵</span>
+          <h3>Démarchage téléphonique</h3>
+          <p>Faire taire les appels et SMS non sollicités.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MAISON ========== -->
+    <section class="cat">
+      <h2>🏠 Maison</h2>
+      <div class="grid">
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">🐢</span>
+          <h3>Wi-Fi lent à l'étage</h3>
+          <p>Du réseau dans toutes les pièces, enfin.</p>
+        </div>
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">💧</span>
+          <h3>Humidité et moisissures</h3>
+          <p>Assainir l'air et protéger les murs.</p>
+        </div>
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">⚡</span>
+          <h3>Facture d'énergie trop haute</h3>
+          <p>Chauffer mieux en dépensant moins.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BIEN-ÊTRE ========== -->
+    <section class="cat">
+      <h2>😌 Bien-être</h2>
+      <div class="grid">
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">🌙</span>
+          <h3>Mal dormir</h3>
+          <p>Mieux s'endormir et se réveiller en douceur.</p>
+        </div>
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">💻</span>
+          <h3>Mal de dos au bureau</h3>
+          <p>Un poste de travail qui ne fait plus mal.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== QUOTIDIEN ========== -->
+    <section class="cat">
+      <h2>🧭 Quotidien</h2>
+      <div class="grid">
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">🔋</span>
+          <h3>Batterie vide en journée</h3>
+          <p>Ne plus jamais tomber à 1 %.</p>
+        </div>
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">🗝️</span>
+          <h3>Clés toujours perdues</h3>
+          <p>Retrouver ses affaires en quelques secondes.</p>
+        </div>
+        <div class="card soon">
+          <span class="badge">Bientôt</span>
+          <span class="emo">📒</span>
+          <h3>Désorganisation</h3>
+          <p>Reprendre le contrôle de ses journées.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="how">
+    <div>
+      <h3>1. Le problème</h3>
+      <p>On explique simplement pourquoi ça arrive.</p>
+    </div>
+    <div>
+      <h3>2. Les astuces gratuites</h3>
+      <p>Souvent, ça suffit. On commence toujours par là.</p>
+    </div>
+    <div>
+      <h3>3. Le bon outil</h3>
+      <p>Un choix principal clair, plus une alternative si besoin.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Certains liens de ce site sont des liens affiliés : si tu achètes via ces liens, je touche une petite commission, sans aucun surcoût pour toi. Ça m'aide à garder ces guides gratuits.</p>
+    <p>© 2026 Solutions du quotidien · activityweb.be</p>
+  </div>
+</footer>
+
+</body>
+</html>
