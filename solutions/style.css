@@ -1,0 +1,127 @@
+/* =========================================================
+   Solutions du quotidien — feuille de style commune
+   Toutes les pages /solutions/ chargent ce fichier.
+   ========================================================= */
+:root{
+  --bg:#F7F5F0; --card:#FFFFFF; --ink:#1F2A37; --muted:#5B6573;
+  --brand:#0F766E; --brand-soft:#E3F2EF; --cta:#F59E0B; --cta-ink:#1F2A37;
+  --line:#E6E1D8; --radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:var(--brand)}
+img{max-width:100%;height:auto}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.narrow{max-width:760px}
+
+/* ---------- En-tête & navigation ---------- */
+header{background:var(--card);border-bottom:1px solid var(--line);position:relative;z-index:10}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.logo{font-weight:800;font-size:1.2rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+.logo span{color:var(--brand)}
+.menu{display:flex;align-items:center;gap:22px;list-style:none}
+.menu > li > a,.menu summary{text-decoration:none;font-weight:700;color:var(--muted);cursor:pointer}
+.menu > li > a:hover,.menu summary:hover{color:var(--brand)}
+.menu details{position:relative}
+.menu summary{list-style:none}
+.menu summary::-webkit-details-marker{display:none}
+.menu summary::after{content:" ▾";font-size:.8em}
+.dropdown{position:absolute;top:calc(100% + 12px);right:0;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;box-shadow:0 12px 28px rgba(31,42,55,.12);padding:8px;min-width:270px;list-style:none}
+.dropdown a{display:flex;gap:10px;padding:9px 12px;border-radius:8px;text-decoration:none;color:var(--ink);font-weight:600}
+.dropdown a:hover{background:var(--brand-soft)}
+@media (max-width:640px){
+  .menu .hide-sm{display:none}
+  .dropdown{right:-8px;min-width:240px}
+}
+
+/* ---------- Fil d'Ariane ---------- */
+.crumbs{font-size:.9rem;color:var(--muted);padding:20px 0 0}
+.crumbs a{color:var(--muted);text-decoration:none}
+.crumbs a:hover{color:var(--brand);text-decoration:underline}
+.crumbs span{margin:0 6px}
+
+/* ---------- Accroche ---------- */
+.hero{padding:56px 0 36px;text-align:center}
+.hero h1{font-size:clamp(1.9rem,4.5vw,2.9rem);line-height:1.2;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.hero p{color:var(--muted);font-size:1.15rem;max-width:620px;margin:0 auto}
+
+/* ---------- Tableau des catégories (accueil) ---------- */
+.board{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px}
+.banner{background:var(--ink);color:#fff;border-radius:12px;padding:26px 20px;text-align:center;margin-bottom:16px}
+.banner strong{display:block;font-size:clamp(1.3rem,3vw,1.6rem);font-weight:800;letter-spacing:.02em}
+.banner span{color:#D7DCE2}
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.cats .wide{grid-column:1/-1}
+@media (max-width:640px){.cats{grid-template-columns:1fr}}
+.catcard{border:1px solid var(--line);border-radius:12px;padding:20px;text-decoration:none;color:var(--ink);
+  display:flex;flex-direction:column;gap:4px;transition:.2s;background:var(--card)}
+.catcard:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(31,42,55,.08);border-color:var(--brand)}
+.catcard .emo{font-size:1.7rem;line-height:1}
+.catcard h3{font-size:1.12rem;margin-top:8px}
+.catcard p{color:var(--muted)}
+.catcard .count{margin-top:6px;font-weight:700;color:var(--brand);font-size:.92rem}
+
+/* ---------- Sections ---------- */
+.sec{margin:64px 0 0}
+.sec > h2{font-size:1.45rem;margin-bottom:6px}
+.sec > .lead{color:var(--muted);margin-bottom:18px}
+.sub{font-size:1.1rem;margin:32px 0 12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+
+/* ---------- Cartes solutions ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+      text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px;transition:.2s;position:relative}
+a.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(31,42,55,.08);border-color:var(--brand)}
+.card .emo{font-size:1.8rem}
+.card h3{font-size:1.08rem;line-height:1.3}
+.card p{color:var(--muted);font-size:.95rem}
+.card .go{margin-top:auto;padding-top:8px;font-weight:700;color:var(--brand)}
+.tag{position:absolute;top:14px;right:14px;font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:99px;
+     background:var(--brand-soft);color:var(--brand)}
+.tag.guide{background:#FEF3C7;color:#92400E}
+.tag.comparatif{background:#EDE9FE;color:#5B21B6}
+.tag.service{background:#E0E7FF;color:#3730A3}
+
+/* ---------- Comment nous choisissons ---------- */
+.choose{background:var(--brand-soft);border-radius:var(--radius);padding:36px}
+.choose h2{font-size:1.45rem;margin-bottom:6px}
+.choose .lead{color:var(--muted);margin-bottom:22px}
+.crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.crit div{background:var(--card);border-radius:12px;padding:18px}
+.crit .emo{font-size:1.5rem}
+.crit h3{font-size:1rem;margin:6px 0 2px}
+.crit p{color:var(--muted);font-size:.93rem}
+.choose .more{display:inline-block;margin-top:20px;font-weight:800}
+
+/* ---------- Pages de contenu (méthode, à propos…) ---------- */
+.page{padding:28px 0 0}
+.page h1{font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.2;margin:8px 0 12px}
+.page .intro{font-size:1.12rem;color:var(--muted);margin-bottom:28px}
+.page h2{font-size:1.3rem;margin:36px 0 10px}
+.page p,.page li{margin-bottom:10px}
+.page ul,.page ol{padding-left:22px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:20px 0}
+.box.soft{background:var(--brand-soft);border-color:transparent}
+.todo{background:#FEF3C7;color:#92400E;font-weight:700;padding:0 6px;border-radius:4px}
+.btn{display:inline-block;background:var(--cta);color:var(--cta-ink);font-weight:800;text-decoration:none;
+     padding:13px 22px;border-radius:12px;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(245,158,11,.35)}
+
+/* ---------- Autres catégories (pastilles) ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips a{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 16px;
+         text-decoration:none;color:var(--ink);font-weight:700;font-size:.95rem}
+.chips a:hover{border-color:var(--brand);color:var(--brand)}
+
+/* ---------- Bandeau affiliation ---------- */
+.disclose{font-size:.88rem;color:var(--muted);background:var(--card);border:1px dashed var(--line);
+          border-radius:12px;padding:10px 14px;margin-top:20px}
+
+/* ---------- Pied de page ---------- */
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.88rem;text-align:center;margin-top:72px}
+footer p+p{margin-top:8px}
+.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-bottom:14px}
+.foot-links a{color:var(--ink);font-weight:700;text-decoration:none}
+.foot-links a:hover{color:var(--brand)}
