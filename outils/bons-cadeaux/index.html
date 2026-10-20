@@ -154,7 +154,7 @@
 <!-- ═════════════ CRÉER ═════════════ -->
 <section class="view on" id="v-creer">
   <h2>Créer un bon cadeau</h2>
-  <p class="sub">Remplissez le bon, vérifiez l'aperçu, téléchargez le PDF à imprimer ou à envoyer par email.</p>
+  <p class="sub">Remplissez le bon, vérifiez l'aperçu, téléchargez le PDF à imprimer ou à envoyer par email. Votre nom, logo, couleurs et coordonnées se règlent une fois pour toutes dans <a href="#" data-goto="reglages">Réglages</a>.</p>
   <div class="create">
     <form class="card" id="f-bon" autocomplete="off">
       <div class="field">
@@ -185,7 +185,7 @@
         </div>
       </div>
       <div class="field">
-        <label for="b-message">Petit message <span class="hint">(facultatif, 160 caractères)</span></label>
+        <label for="b-message">Message personnel imprimé sur le bon <span class="hint">(facultatif, 160 caractères)</span></label>
         <textarea id="b-message" maxlength="160" placeholder="Joyeux anniversaire ! Profite bien de ce moment."></textarea>
       </div>
       <div class="row">
@@ -266,13 +266,13 @@
 <!-- ═════════════ RÉGLAGES ═════════════ -->
 <section class="view" id="v-reglages">
   <h2>Réglages</h2>
-  <p class="sub">Ces informations apparaissent sur tous vos bons. Elles sont enregistrées automatiquement sur cet appareil.</p>
+  <p class="sub">À remplir une seule fois : ces informations s'impriment sur tous vos bons (en haut : nom, logo et petite ligne ; en bas : coordonnées et conditions). Elles sont enregistrées automatiquement sur cet appareil.</p>
   <div class="settings">
     <div>
       <div class="card">
         <h3>Votre activité</h3>
-        <div class="field"><label for="r-nom">Nom affiché</label><input type="text" id="r-nom" maxlength="40" placeholder="Ex. Studio Zen"></div>
-        <div class="field"><label for="r-activite">Activité <span class="hint">(sous le nom)</span></label><input type="text" id="r-activite" maxlength="50" placeholder="Ex. Massages & soins du corps"></div>
+        <div class="field"><label for="r-nom">Nom de votre commerce ou cabinet <span class="hint">(en grand, en haut du bon)</span></label><input type="text" id="r-nom" maxlength="40" placeholder="Ex. Studio Zen"></div>
+        <div class="field"><label for="r-activite">Petite ligne sous le nom <span class="hint">(facultatif : votre métier, slogan ou ville)</span></label><input type="text" id="r-activite" maxlength="50" placeholder="Ex. Massages & soins du corps · Dilbeek"></div>
         <div class="row">
           <div class="field"><label for="r-tel">Téléphone</label><input type="text" id="r-tel" maxlength="25"></div>
           <div class="field"><label for="r-email">Email</label><input type="email" id="r-email" maxlength="60"></div>
@@ -600,8 +600,10 @@ function centerBlock(g, s, b, logo, cx, top, bottom, width, dark, accent, muted,
     y = lines(g, wl, cx, y + 2, 4.6, { font: 'sans', size: 10, color: dark, align: 'center' });
   }
   if (b.message) {
-    var ml = wrap(g, '« ' + b.message + ' »', width - 30, { font: 'serif', style: 'italic', size: 9.5 }, 2);
-    y = lines(g, ml, cx, y + 3, 4.3, { font: 'serif', style: 'italic', size: 9.5, color: muted, align: 'center' });
+    var mo = { font: 'serif', style: 'italic', size: 13 }, mlh = 5.6, my = y + 6.5;
+    var maxL = Math.max(1, Math.min(3, Math.floor((bottom - my) / mlh) + 1));
+    var ml = wrap(g, '« ' + b.message + ' »', width - 24, mo, maxL);
+    y = lines(g, ml, cx, my, mlh, { font: 'serif', style: 'italic', size: 13, color: opts && opts.msg || dark, align: 'center' });
   }
   return y;
 }
@@ -624,7 +626,7 @@ function drawElegant(g, s, b, logo) {
   g.strokeRect(5, 5, W - 10, H - 10, c1, 0.8);
   g.strokeRect(7, 7, W - 14, H - 14, c1, 0.25);
   [[7, 7], [W - 7, 7], [7, H - 7], [W - 7, H - 7]].forEach(function (p) { g.circle(p[0], p[1], 1.1, c2); });
-  centerBlock(g, s, b, logo, W / 2, 13, 110, 170, c1, c2, muted, { titre: c1 });
+  centerBlock(g, s, b, logo, W / 2, 13, 109, 170, c1, c2, muted, { titre: c1, msg: '#2b3140' });
   g.line(18, 113, W - 18, 113, '#ddd5c6', 0.25);
   footer(g, s, b, 18, W - 18, 117, dark, muted, c1);
 }
@@ -658,7 +660,11 @@ function drawModerne(g, s, b, logo) {
   }
   if (b.pour) { g.text('Offert à', x, y, { font: 'sans', size: 8, color: muted }); g.text(b.pour, x, y + 6, { font: 'sans', style: 'bold', size: 13, color: dark }); y += 13; }
   if (b.de) { g.text('De la part de', x, y, { font: 'sans', size: 8, color: muted }); g.text(b.de, x, y + 5.5, { font: 'sans', size: 11, color: dark }); y += 11; }
-  if (b.message) { var ml = wrap(g, b.message, rw, { font: 'serif', style: 'italic', size: 10 }, 3); lines(g, ml, x, y + 2, 4.4, { font: 'serif', style: 'italic', size: 10, color: muted }); }
+  if (b.message) {
+    var mmax = Math.max(1, Math.min(3, Math.floor((106 - (y + 4)) / 5.6) + 1));
+    var ml = wrap(g, '« ' + b.message + ' »', rw, { font: 'serif', style: 'italic', size: 13 }, mmax);
+    lines(g, ml, x, y + 4, 5.6, { font: 'serif', style: 'italic', size: 13, color: '#2b3140' });
+  }
   footer(g, s, b, x, W - 10, 113, dark, muted, '#1d2433');
 }
 
@@ -674,7 +680,7 @@ function drawFetes(g, s, b, logo) {
     g.circle(x, y, 0.4 + rnd() * 1.1, rnd() > 0.5 ? c2 : '#ffffff');
   }
   g.roundRect(10, 10, W - 20, H - 20, 4, '#fffdf8', c2, 0.6);
-  centerBlock(g, s, b, logo, W / 2, 15, 108, 170, c1, c2, muted, { sur: 'Joyeuses fêtes', titre: c1 });
+  centerBlock(g, s, b, logo, W / 2, 15, 108, 170, c1, c2, muted, { sur: 'Joyeuses fêtes', titre: c1, msg: '#2b3140' });
   g.line(22, 112, W - 22, 112, '#e6dccb', 0.25);
   footer(g, s, b, 22, W - 22, 115, '#1d2433', muted, '#1d2433');
 }
@@ -721,7 +727,7 @@ function renderPreview() {
       ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
       ctx.setTransform(sc, 0, 0, sc, 0, 0);
       var b = brouillon(nextNum(), 'ABC234');
-      var sp = Object.assign({}, state.settings); if (!sp.nom) sp.nom = 'Votre activité';
+      var sp = Object.assign({}, state.settings); if (!sp.nom) sp.nom = 'Nom de votre commerce';
       draw(canvasG(ctx, sc), sp, b, logo, !isPro());
     });
   });
