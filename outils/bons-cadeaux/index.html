@@ -441,6 +441,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="cles-desactivees.js"></script>
 <script>
 (function () {
 'use strict';
@@ -530,8 +531,13 @@ function cleValide(k, nom) {
   var m = cleFormat(k), n = normNom(nom);
   return !!m && !!n && checksum(m[1] + m[2] + '|' + n) === m[3];
 }
-function isPro() { return cleValide(state.settings.cle, state.settings.nom); }
-function licenceDecalee() { return !!state.settings.cle && !!state.settings.licNom && !isPro(); }
+function cleDesactivee(k) {
+  var l = window.AW_CLES_DESACTIVEES; if (!Array.isArray(l) || !k) return false;
+  k = String(k).toUpperCase().replace(/\s/g, '');
+  return l.some(function (x) { return String(x).toUpperCase().replace(/\s/g, '') === k; });
+}
+function isPro() { return !cleDesactivee(state.settings.cle) && cleValide(state.settings.cle, state.settings.nom); }
+function licenceDecalee() { return !!state.settings.cle && !!state.settings.licNom && !cleDesactivee(state.settings.cle) && !isPro(); }
 
 /* ───────────── Statuts ───────────── */
 function statut(b) {
@@ -1022,7 +1028,7 @@ function renderBiz() {
   biz.classList.toggle('missing', !s.nom);
 }
 function renderLicence() {
-  var pro = isPro(), dec = licenceDecalee(), chip = $('licence-chip'), s = state.settings;
+  var pro = isPro(), dec = licenceDecalee(), off = cleDesactivee(state.settings.cle), chip = $('licence-chip'), s = state.settings;
   $('buy-box').hidden = pro;
   $('buy-acts').hidden = dec; $('restore-acts').hidden = !dec;
   $('buy-t').textContent = dec ? 'Le nom du commerce a changé' : 'Retirez la mention « EXEMPLE »';
@@ -1030,9 +1036,15 @@ function renderLicence() {
     ? 'Votre licence est liée au nom « ' + s.licNom + ' ». Remettez ce nom pour retrouver vos bons sans mention « EXEMPLE ». Vous avez changé de nom ? Écrivez à contact@activityweb.be : une nouvelle clé vous est envoyée gratuitement.'
     : 'Licence en paiement unique, liée au nom de votre commerce : bons illimités, sans abonnement. Votre clé arrive par email.';
   $('btn-restore').textContent = 'Revenir à « ' + (s.licNom || '') + ' »';
-  chip.textContent = pro ? 'Licence activée ✓' : dec ? 'Licence : nom modifié' : 'Version d\'essai';
+  chip.textContent = pro ? 'Licence activée ✓' : dec ? 'Licence : nom modifié' : off ? 'Licence désactivée' : 'Version d\'essai';
+  if (off) {
+    $('buy-t').textContent = 'Licence désactivée';
+    $('buy-p').textContent = 'Cette clé de licence a été désactivée. Pour toute question, écrivez à contact@activityweb.be.';
+  }
   chip.classList.toggle('essai', !pro);
-  $('licence-txt').textContent = pro
+  $('licence-txt').textContent = off
+    ? 'Cette clé de licence (' + s.cle + ') a été désactivée. Les PDF portent à nouveau la mention « EXEMPLE ». Pour toute question, écrivez à contact@activityweb.be.'
+    : pro
     ? 'Licence activée pour « ' + s.nom + ' » : bons illimités, sans mention « EXEMPLE ». La licence est liée à ce nom de commerce. La clé est incluse dans vos sauvegardes.'
     : dec
       ? 'Votre licence est liée au nom « ' + s.licNom + ' », mais le nom actuel est « ' + (s.nom || '—') + ' ». Remettez le nom de la licence, ou écrivez à contact@activityweb.be si vous avez changé de nom.'
@@ -1129,6 +1141,7 @@ document.querySelectorAll('.logo-del').forEach(function (bt) { bt.addEventListen
 $('btn-cle').addEventListener('click', function () {
   var k = $('r-cle').value.trim().toUpperCase().replace(/\s/g, '');
   if (!cleFormat(k)) { toast('Cette clé n\'est pas valide. Vérifiez-la dans l\'email reçu.'); return; }
+  if (cleDesactivee(k)) { toast('Cette clé a été désactivée. Écrivez à contact@activityweb.be.'); return; }
   if (!state.settings.nom) { toast('Indiquez d\'abord le nom de votre commerce (onglet Créer, étape 1).'); return; }
   if (!cleValide(k, state.settings.nom)) {
     var sujet = encodeURIComponent('Clé Bons cadeaux non reconnue');
