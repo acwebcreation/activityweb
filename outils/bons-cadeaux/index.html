@@ -200,7 +200,7 @@
     <li><span class="hs-n">3</span><div><b>Le jour où la personne vient avec son bon</b><p>Ouvrez le <b>Registre</b>, tapez le code ou le nom, cliquez sur <b>Utiliser</b>. Le bon est marqué comme utilisé : impossible de s'en servir deux fois. S'il n'est utilisé qu'en partie, le solde restant est noté.</p></div></li>
     <li><span class="hs-n">4</span><div><b>Vos données restent chez vous</b><p>Tout est enregistré sur cet appareil, dans ce navigateur : personne d'autre n'y a accès, pas même ActivityWeb. Exportez une <b>sauvegarde</b> de temps en temps (onglet Réglages) pour ne rien perdre et pour passer sur un autre appareil.</p></div></li>
   </ol>
-  <p class="help-tip">💡 Ajoutez cette page à vos favoris (ou à l'écran d'accueil de votre téléphone) pour la retrouver en un clic. Version d'essai : tout fonctionne, les PDF portent simplement la mention « EXEMPLE ». Avec la licence (paiement unique, sans abonnement), vous créez autant de bons que vous voulez, aussi souvent que vous voulez. <a href="https://buy.stripe.com/3cI14oa0H0YXaO98Cd83C0f" style="font-weight:600;">Acheter la licence – 39 €</a></p>
+  <p class="help-tip">💡 Ajoutez cette page à vos favoris (ou à l'écran d'accueil de votre téléphone) pour la retrouver en un clic. Version d'essai : tout fonctionne, les PDF portent simplement la mention « EXEMPLE ». Avec la licence (paiement unique, sans abonnement, liée au nom de votre commerce), vous créez autant de bons que vous voulez, aussi souvent que vous voulez. <a href="https://buy.stripe.com/3cI14oa0H0YXaO98Cd83C0f" style="font-weight:600;">Acheter la licence – 39 €</a></p>
 </section>
 
 <section class="view on" id="v-creer">
@@ -313,12 +313,15 @@
       </div>
       <div class="buy-box" id="buy-box">
         <div>
-          <b>Retirez la mention « EXEMPLE »</b>
-          <p>Licence en paiement unique : bons illimités, sans abonnement. Votre clé arrive par email.</p>
+          <b id="buy-t">Retirez la mention « EXEMPLE »</b>
+          <p id="buy-p">Licence en paiement unique, liée au nom de votre commerce : bons illimités, sans abonnement. Votre clé arrive par email.</p>
         </div>
-        <div class="buy-acts">
+        <div class="buy-acts" id="buy-acts">
           <a class="btn btn-main" href="https://buy.stripe.com/3cI14oa0H0YXaO98Cd83C0f">Acheter la licence – 39 €</a>
           <button type="button" class="buy-key" data-goto="reglages" id="buy-key">J'ai déjà une clé</button>
+        </div>
+        <div class="buy-acts" id="restore-acts" hidden>
+          <button type="button" class="btn btn-dark" id="btn-restore">Revenir au nom de la licence</button>
         </div>
       </div>
     </div>
@@ -519,12 +522,15 @@ function checksum(body) {
   for (var i = 0; i < 4; i++) { out += LA[h % 32]; h = Math.floor(h / 32) ^ fnv(out + body); h >>>= 0; }
   return out;
 }
-function cleValide(k) {
-  k = String(k || '').toUpperCase().replace(/\s/g, '');
-  var m = /^BC-([A-Z2-9]{4})-([A-Z2-9]{4})-([A-Z2-9]{4})$/.exec(k);
-  return !!m && checksum(m[1] + m[2]) === m[3];
+// La clé est liée au nom du commerce : majuscules, accents, espaces et ponctuation ne comptent pas.
+function normNom(n) { return String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+function cleFormat(k) { return /^BC-([A-Z2-9]{4})-([A-Z2-9]{4})-([A-Z2-9]{4})$/.exec(String(k || '').toUpperCase().replace(/\s/g, '')); }
+function cleValide(k, nom) {
+  var m = cleFormat(k), n = normNom(nom);
+  return !!m && !!n && checksum(m[1] + m[2] + '|' + n) === m[3];
 }
-function isPro() { return cleValide(state.settings.cle); }
+function isPro() { return cleValide(state.settings.cle, state.settings.nom); }
+function licenceDecalee() { return !!state.settings.cle && !!state.settings.licNom && !isPro(); }
 
 /* ───────────── Statuts ───────────── */
 function statut(b) {
@@ -1015,13 +1021,21 @@ function renderBiz() {
   biz.classList.toggle('missing', !s.nom);
 }
 function renderLicence() {
-  var pro = isPro(), chip = $('licence-chip');
+  var pro = isPro(), dec = licenceDecalee(), chip = $('licence-chip'), s = state.settings;
   $('buy-box').hidden = pro;
-  chip.textContent = pro ? 'Licence activée ✓' : 'Version d\'essai';
+  $('buy-acts').hidden = dec; $('restore-acts').hidden = !dec;
+  $('buy-t').textContent = dec ? 'Le nom du commerce a changé' : 'Retirez la mention « EXEMPLE »';
+  $('buy-p').textContent = dec
+    ? 'Votre licence est liée au nom « ' + s.licNom + ' ». Remettez ce nom pour retrouver vos bons sans mention « EXEMPLE ». Vous avez changé de nom ? Écrivez à contact@activityweb.be pour recevoir une nouvelle clé.'
+    : 'Licence en paiement unique, liée au nom de votre commerce : bons illimités, sans abonnement. Votre clé arrive par email.';
+  $('btn-restore').textContent = 'Revenir à « ' + (s.licNom || '') + ' »';
+  chip.textContent = pro ? 'Licence activée ✓' : dec ? 'Licence : nom modifié' : 'Version d\'essai';
   chip.classList.toggle('essai', !pro);
   $('licence-txt').textContent = pro
-    ? 'Licence activée sur cet appareil : bons illimités, sans mention « EXEMPLE ». La clé est incluse dans vos sauvegardes.'
-    : 'Vous utilisez la version d\'essai : tout fonctionne, mais les PDF portent la mention « EXEMPLE ». Saisissez la clé reçue après l\'achat pour la retirer. Licence en paiement unique : bons illimités, sans abonnement.';
+    ? 'Licence activée pour « ' + s.nom + ' » : bons illimités, sans mention « EXEMPLE ». La licence est liée à ce nom de commerce. La clé est incluse dans vos sauvegardes.'
+    : dec
+      ? 'Votre licence est liée au nom « ' + s.licNom + ' », mais le nom actuel est « ' + (s.nom || '—') + ' ». Remettez le nom de la licence, ou écrivez à contact@activityweb.be si vous avez changé de nom.'
+      : 'Vous utilisez la version d\'essai : tout fonctionne, mais les PDF portent la mention « EXEMPLE ». Saisissez la clé reçue après l\'achat pour la retirer. La licence est liée au nom de votre commerce, tel que vous l\'avez indiqué lors du paiement. Paiement unique : bons illimités, sans abonnement.';
 }
 function onLogo(file) {
   if (!file) return;
@@ -1098,7 +1112,7 @@ document.querySelectorAll('[data-k]').forEach(function (el) {
     e.stopPropagation();
     state.settings[el.dataset.k] = el.value;
     document.querySelectorAll('[data-k="' + el.dataset.k + '"]').forEach(function (o) { if (o !== el) o.value = el.value; });
-    save(); renderBiz(); renderPreview();
+    save(); renderBiz(); renderPreview(); if (el.dataset.k === 'nom') renderLicence();
   });
 });
 ['c1', 'c2', 'prefixe', 'validite', 'conditions'].forEach(function (k) {
@@ -1112,9 +1126,20 @@ document.querySelectorAll('[data-k]').forEach(function (el) {
 document.querySelectorAll('.logo-in').forEach(function (inp) { inp.addEventListener('change', function (e) { onLogo(e.target.files[0]); e.target.value = ''; }); });
 document.querySelectorAll('.logo-del').forEach(function (bt) { bt.addEventListener('click', function () { state.settings.logo = null; state.settings.logoRatio = 1; save(); fillSettings(); renderPreview(); }); });
 $('btn-cle').addEventListener('click', function () {
-  var k = $('r-cle').value.trim().toUpperCase();
-  if (!cleValide(k)) { toast('Cette clé n\'est pas valide. Vérifiez-la dans l\'email reçu.'); return; }
-  state.settings.cle = k; save(); renderLicence(); renderPreview(); toast('Licence activée, merci !');
+  var k = $('r-cle').value.trim().toUpperCase().replace(/\s/g, '');
+  if (!cleFormat(k)) { toast('Cette clé n\'est pas valide. Vérifiez-la dans l\'email reçu.'); return; }
+  if (!state.settings.nom) { toast('Indiquez d\'abord le nom de votre commerce (onglet Créer, étape 1).'); return; }
+  if (!cleValide(k, state.settings.nom)) {
+    ask('Clé non reconnue', 'Cette clé ne correspond pas au nom « ' + state.settings.nom + ' ». Votre licence est liée au nom de commerce indiqué lors du paiement : vérifiez qu\'il est écrit de la même façon (les majuscules, accents et espaces ne comptent pas), et vérifiez la clé dans l\'email reçu.', '', 'Compris');
+    return;
+  }
+  state.settings.cle = k; state.settings.licNom = state.settings.nom; save(); renderLicence(); renderPreview(); toast('Licence activée pour « ' + state.settings.nom + ' », merci !');
+});
+$('btn-restore').addEventListener('click', function () {
+  var n = state.settings.licNom; if (!n) return;
+  state.settings.nom = n;
+  document.querySelectorAll('[data-k="nom"]').forEach(function (o) { o.value = n; });
+  save(); renderBiz(); renderLicence(); renderPreview(); toast('Nom rétabli : licence active.');
 });
 $('models').addEventListener('click', function (e) { var bt = e.target.closest('button[data-m]'); if (bt) { state.settings.modele = bt.dataset.m; save(); } });
 
