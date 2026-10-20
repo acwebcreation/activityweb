@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bons cadeaux pro – Créez, vendez et suivez vos bons | ActivityWeb</title>
+<meta name="description" content="Créez des bons cadeaux à votre image en PDF, numérotés avec QR code, et suivez ceux qui sont vendus, utilisés ou expirés. Pour les indépendants, commerces et praticiens.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0f1f38; --navy-mid:#1a3254; --orange:#e8682a; --orange-lt:#f08050;
+    --cream:#f7f4ef; --white:#ffffff; --text:#1d2433; --muted:#6b7385; --border:#e3ded5;
+    --ok:#2d8a4e; --warn:#b7791f; --bad:#c0392b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'DM Sans', system-ui, sans-serif; background:var(--cream); color:var(--text); font-size:15px; line-height:1.5; }
+  button, input, select, textarea { font:inherit; color:inherit; }
+  a { color:var(--orange); }
+
+  /* Barre */
+  .top { background:var(--navy); color:white; padding:12px 16px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; position:sticky; top:0; z-index:20; }
+  .brand { display:flex; align-items:center; gap:10px; color:white; text-decoration:none; }
+  .brand-mark { width:32px; height:32px; border-radius:6px; background:var(--orange); display:grid; place-items:center; font-family:'DM Serif Display',serif; font-size:0.95rem; }
+  .brand-name { font-family:'DM Serif Display',serif; font-size:1.15rem; }
+  .brand-name small { font-family:'DM Sans',sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.55); margin-left:6px; }
+  .tabs { display:flex; gap:4px; margin-left:auto; }
+  .tab { background:transparent; border:0; color:rgba(255,255,255,0.65); padding:8px 14px; border-radius:6px; cursor:pointer; font-weight:500; }
+  .tab:hover { color:white; }
+  .tab.on { background:rgba(255,255,255,0.12); color:white; }
+  .licence-chip { font-size:0.78rem; padding:5px 11px; border-radius:20px; border:1px solid rgba(255,255,255,0.3); color:white; background:transparent; cursor:pointer; }
+  .licence-chip.essai { background:var(--orange); border-color:var(--orange); }
+
+  .banner { background:#fff6e5; border-bottom:1px solid #f1d9a8; padding:10px 16px; font-size:0.88rem; color:#7a5a12; text-align:center; }
+  .banner button { background:none; border:0; color:var(--orange); font-weight:600; cursor:pointer; text-decoration:underline; }
+
+  main { max-width:1200px; margin:0 auto; padding:24px 16px 60px; }
+  .view { display:none; }
+  .view.on { display:block; }
+  h2 { font-family:'DM Serif Display',serif; font-weight:400; font-size:1.6rem; color:var(--navy); margin-bottom:4px; }
+  .sub { color:var(--muted); font-size:0.92rem; margin-bottom:20px; }
+
+  .card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:20px; }
+  .card + .card { margin-top:16px; }
+  .card h3 { font-size:1rem; color:var(--navy); margin-bottom:12px; }
+
+  label { display:block; font-size:0.82rem; font-weight:600; color:var(--navy); margin-bottom:5px; }
+  .hint { font-weight:400; color:var(--muted); }
+  input[type=text], input[type=number], input[type=date], input[type=email], select, textarea {
+    width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:6px; background:var(--white); font-size:0.92rem;
+  }
+  input:focus, select:focus, textarea:focus { outline:2px solid rgba(232,104,42,0.35); border-color:var(--orange); }
+  textarea { resize:vertical; min-height:64px; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .field { margin-bottom:14px; }
+  .seg { display:flex; border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+  .seg button { flex:1; border:0; background:var(--white); padding:9px; cursor:pointer; font-size:0.88rem; }
+  .seg button.on { background:var(--navy); color:white; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; border:0; border-radius:6px; padding:11px 18px; font-weight:600; cursor:pointer; text-decoration:none; font-size:0.92rem; }
+  .btn-main { background:var(--orange); color:white; }
+  .btn-main:hover { background:var(--orange-lt); }
+  .btn-dark { background:var(--navy); color:white; }
+  .btn-dark:hover { background:var(--navy-mid); }
+  .btn-ghost { background:var(--white); color:var(--navy); border:1px solid var(--border); }
+  .btn-ghost:hover { border-color:var(--navy); }
+  .btn-sm { padding:6px 11px; font-size:0.8rem; }
+  .btn:disabled { opacity:0.5; cursor:not-allowed; }
+
+  /* Créer */
+  .create { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:20px; align-items:start; }
+  .preview-wrap { position:sticky; top:76px; }
+  .preview { background:#d9d4cb; border-radius:10px; padding:16px; }
+  .preview canvas { width:100%; height:auto; display:block; border-radius:3px; box-shadow:0 10px 30px rgba(0,0,0,0.18); background:white; }
+  .preview-actions { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+  .num-next { font-size:0.82rem; color:var(--muted); margin-top:10px; }
+  .models { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .models button { border:1.5px solid var(--border); background:var(--white); border-radius:6px; padding:8px 6px; cursor:pointer; font-size:0.82rem; }
+  .models button.on { border-color:var(--orange); color:var(--orange); font-weight:600; }
+
+  /* Registre */
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:18px; }
+  .stat { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
+  .stat b { display:block; font-family:'DM Serif Display',serif; font-weight:400; font-size:1.6rem; color:var(--navy); line-height:1.1; }
+  .stat span { font-size:0.8rem; color:var(--muted); }
+  .tools { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .tools input { flex:1; min-width:200px; }
+  .tools select { width:auto; }
+  .list { display:flex; flex-direction:column; gap:8px; }
+  .item { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:12px 14px; display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto auto; gap:12px; align-items:center; }
+  .item .t { font-weight:600; color:var(--navy); }
+  .item .m { font-size:0.8rem; color:var(--muted); }
+  .item .v { font-weight:600; }
+  .acts { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+  .badge { font-size:0.72rem; font-weight:700; padding:3px 9px; border-radius:20px; white-space:nowrap; text-transform:uppercase; letter-spacing:0.03em; }
+  .b-actif { background:rgba(45,138,78,0.12); color:var(--ok); }
+  .b-partiel { background:rgba(183,121,31,0.14); color:var(--warn); }
+  .b-utilise { background:#eceae6; color:var(--muted); }
+  .b-expire { background:rgba(192,57,43,0.1); color:var(--bad); }
+  .b-annule { background:#eceae6; color:var(--muted); text-decoration:line-through; }
+  .empty { text-align:center; padding:40px 16px; color:var(--muted); background:var(--white); border:1px dashed var(--border); border-radius:10px; }
+
+  /* Réglages */
+  .settings { display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
+  .logo-box { display:flex; align-items:center; gap:12px; }
+  .logo-box img { max-width:110px; max-height:60px; border:1px solid var(--border); border-radius:6px; padding:4px; background:white; }
+  .colors { display:flex; gap:16px; }
+  .colors input[type=color] { width:52px; height:38px; border:1px solid var(--border); border-radius:6px; padding:2px; background:white; cursor:pointer; }
+
+  dialog { border:0; border-radius:12px; padding:0; max-width:420px; width:calc(100% - 32px); box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+  dialog::backdrop { background:rgba(15,31,56,0.5); }
+  .dlg { padding:22px; }
+  .dlg h3 { font-family:'DM Serif Display',serif; font-weight:400; font-size:1.3rem; color:var(--navy); margin-bottom:8px; }
+  .dlg p { font-size:0.9rem; color:var(--muted); margin-bottom:14px; }
+  .dlg-acts { display:flex; gap:10px; justify-content:flex-end; margin-top:16px; flex-wrap:wrap; }
+
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(120px); background:var(--navy); color:white; padding:11px 18px; border-radius:8px; font-size:0.9rem; transition:transform 0.25s; z-index:50; max-width:calc(100% - 32px); }
+  .toast.on { transform:translateX(-50%) translateY(0); }
+
+  @media (max-width:900px) {
+    .create, .settings { grid-template-columns:1fr; }
+    .preview-wrap { position:static; order:-1; }
+    .stats { grid-template-columns:repeat(2,1fr); }
+    .item { grid-template-columns:1fr auto; }
+    .item .acts { grid-column:1 / -1; justify-content:flex-start; }
+  }
+  @media (max-width:560px) {
+    .top { position:static; }
+    .tabs { margin-left:0; width:100%; }
+    .tab { flex:1; padding:8px 6px; }
+    .row { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="../../guides.html" title="Retour à la boutique ActivityWeb">
+    <div class="brand-mark">AW</div>
+    <div class="brand-name">Bons cadeaux<small>par ActivityWeb</small></div>
+  </a>
+  <nav class="tabs" role="tablist">
+    <button class="tab on" data-view="creer" role="tab">Créer un bon</button>
+    <button class="tab" data-view="registre" role="tab">Registre</button>
+    <button class="tab" data-view="reglages" role="tab">Réglages</button>
+  </nav>
+  <button class="licence-chip essai" id="licence-chip" type="button">Version d'essai</button>
+</header>
+<div class="banner" id="banner-store" hidden>Votre navigateur bloque l'enregistrement local : vos bons seront perdus en fermant la page. Pensez à <button type="button" data-goto="reglages">exporter une sauvegarde</button>.</div>
+<div class="banner" id="banner-backup" hidden></div>
+
+<main>
+
+<!-- ═════════════ CRÉER ═════════════ -->
+<section class="view on" id="v-creer">
+  <h2>Créer un bon cadeau</h2>
+  <p class="sub">Remplissez le bon, vérifiez l'aperçu, téléchargez le PDF à imprimer ou à envoyer par email.</p>
+  <div class="create">
+    <form class="card" id="f-bon" autocomplete="off">
+      <div class="field">
+        <label>Le bon offre</label>
+        <div class="seg" id="seg-type">
+          <button type="button" data-type="montant" class="on">Un montant</button>
+          <button type="button" data-type="prestation">Une prestation</button>
+        </div>
+      </div>
+      <div class="field" id="fld-montant">
+        <label for="b-montant">Montant (€)</label>
+        <input type="number" id="b-montant" min="1" step="1" value="50" inputmode="decimal">
+      </div>
+      <div class="field" id="fld-prestation" hidden>
+        <label for="b-prestation">Prestation offerte</label>
+        <input type="text" id="b-prestation" maxlength="80" placeholder="Ex. Massage relaxant 60 min">
+        <label for="b-valprest" style="margin-top:10px;">Prix de la prestation (€) <span class="hint">(pour votre registre, pas imprimé)</span></label>
+        <input type="number" id="b-valprest" min="0" step="0.01" inputmode="decimal" placeholder="Ex. 65">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="b-pour">Offert à</label>
+          <input type="text" id="b-pour" maxlength="50" placeholder="Prénom Nom">
+        </div>
+        <div class="field">
+          <label for="b-de">De la part de</label>
+          <input type="text" id="b-de" maxlength="50" placeholder="Prénom Nom">
+        </div>
+      </div>
+      <div class="field">
+        <label for="b-message">Petit message <span class="hint">(facultatif, 160 caractères)</span></label>
+        <textarea id="b-message" maxlength="160" placeholder="Joyeux anniversaire ! Profite bien de ce moment."></textarea>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="b-emis">Date d'émission</label>
+          <input type="date" id="b-emis">
+        </div>
+        <div class="field">
+          <label for="b-expire">Valable jusqu'au</label>
+          <input type="date" id="b-expire">
+        </div>
+      </div>
+      <div class="field">
+        <label>Modèle</label>
+        <div class="models" id="models">
+          <button type="button" data-m="elegant">Élégant</button>
+          <button type="button" data-m="moderne">Moderne</button>
+          <button type="button" data-m="fetes">Fêtes</button>
+        </div>
+      </div>
+      <details class="field">
+        <summary style="cursor:pointer;font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:10px;">Infos de vente (n'apparaissent pas sur le bon)</summary>
+        <div class="row">
+          <div class="field">
+            <label for="b-prix">Prix encaissé (€)</label>
+            <input type="number" id="b-prix" min="0" step="0.01" inputmode="decimal" placeholder="Identique au montant">
+          </div>
+          <div class="field">
+            <label for="b-paiement">Paiement</label>
+            <select id="b-paiement">
+              <option>Bancontact</option><option>Espèces</option><option>Virement</option><option>Carte</option><option>Payconiq</option><option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label for="b-note">Note interne</label>
+          <input type="text" id="b-note" maxlength="120" placeholder="Ex. acheté par téléphone, à envoyer par email">
+        </div>
+      </details>
+      <button type="submit" class="btn btn-main" style="width:100%;margin-top:4px;">Créer le bon et télécharger le PDF</button>
+      <p class="num-next" id="num-next"></p>
+    </form>
+
+    <div class="preview-wrap">
+      <div class="preview"><canvas id="cv" width="1260" height="888" aria-label="Aperçu du bon cadeau"></canvas></div>
+      <div class="preview-actions">
+        <span style="font-size:0.82rem;color:var(--muted);">Aperçu en direct · format A5 paysage, s'imprime aussi sur A4</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ REGISTRE ═════════════ -->
+<section class="view" id="v-registre">
+  <h2>Registre des bons</h2>
+  <p class="sub">Retrouvez un bon par son code ou le nom du bénéficiaire, et notez-le comme utilisé quand le client se présente.</p>
+  <div class="stats">
+    <div class="stat"><b id="s-nb">0</b><span>bons émis</span></div>
+    <div class="stat"><b id="s-ca">0 €</b><span>encaissés</span></div>
+    <div class="stat"><b id="s-circ">0 €</b><span>encore à honorer</span></div>
+    <div class="stat"><b id="s-exp">0</b><span>expirent dans 30 jours</span></div>
+  </div>
+  <div class="tools">
+    <input type="text" id="q" placeholder="Rechercher : code, numéro, nom…" aria-label="Rechercher un bon">
+    <select id="filtre" aria-label="Filtrer par statut">
+      <option value="">Tous les statuts</option>
+      <option value="actif">Actifs</option>
+      <option value="partiel">Partiellement utilisés</option>
+      <option value="utilise">Utilisés</option>
+      <option value="expire">Expirés</option>
+      <option value="annule">Annulés</option>
+    </select>
+    <button type="button" class="btn btn-ghost" id="btn-csv">Exporter (Excel/CSV)</button>
+  </div>
+  <div class="list" id="list"></div>
+</section>
+
+<!-- ═════════════ RÉGLAGES ═════════════ -->
+<section class="view" id="v-reglages">
+  <h2>Réglages</h2>
+  <p class="sub">Ces informations apparaissent sur tous vos bons. Elles sont enregistrées automatiquement sur cet appareil.</p>
+  <div class="settings">
+    <div>
+      <div class="card">
+        <h3>Votre activité</h3>
+        <div class="field"><label for="r-nom">Nom affiché</label><input type="text" id="r-nom" maxlength="40" placeholder="Ex. Studio Zen"></div>
+        <div class="field"><label for="r-activite">Activité <span class="hint">(sous le nom)</span></label><input type="text" id="r-activite" maxlength="50" placeholder="Ex. Massages & soins du corps"></div>
+        <div class="row">
+          <div class="field"><label for="r-tel">Téléphone</label><input type="text" id="r-tel" maxlength="25"></div>
+          <div class="field"><label for="r-email">Email</label><input type="email" id="r-email" maxlength="60"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="r-adresse">Adresse</label><input type="text" id="r-adresse" maxlength="70"></div>
+          <div class="field"><label for="r-site">Site web</label><input type="text" id="r-site" maxlength="50"></div>
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label>Logo <span class="hint">(PNG ou JPG)</span></label>
+          <div class="logo-box">
+            <img id="r-logo-img" alt="Votre logo" hidden>
+            <input type="file" id="r-logo" accept="image/png,image/jpeg,image/webp" style="font-size:0.82rem;">
+            <button type="button" class="btn btn-ghost btn-sm" id="r-logo-del" hidden>Retirer</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Apparence et règles</h3>
+        <div class="field">
+          <label>Couleurs</label>
+          <div class="colors">
+            <div><input type="color" id="r-c1" aria-label="Couleur principale"><div class="hint" style="font-size:0.75rem;">Principale</div></div>
+            <div><input type="color" id="r-c2" aria-label="Couleur d'accent"><div class="hint" style="font-size:0.75rem;">Accent</div></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="r-prefixe">Préfixe des numéros</label><input type="text" id="r-prefixe" maxlength="6" placeholder="BC"></div>
+          <div class="field"><label for="r-validite">Validité par défaut</label>
+            <select id="r-validite"><option value="6">6 mois</option><option value="12">1 an</option><option value="18">18 mois</option><option value="24">2 ans</option></select>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label for="r-conditions">Conditions imprimées sur le bon</label>
+          <textarea id="r-conditions" maxlength="260" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Sauvegarde</h3>
+        <p class="sub" style="margin-bottom:12px;">Vos bons sont enregistrés dans ce navigateur, sur cet appareil uniquement. Exportez une sauvegarde régulièrement (par exemple chaque semaine) et gardez-la dans un endroit sûr : elle sert aussi à passer sur un autre ordinateur.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-dark" id="btn-export">Exporter une sauvegarde</button>
+          <label class="btn btn-ghost" style="margin:0;">Importer une sauvegarde<input type="file" id="btn-import" accept="application/json,.json" hidden></label>
+        </div>
+        <p class="hint" id="last-backup" style="font-size:0.8rem;margin-top:10px;"></p>
+      </div>
+      <div class="card" id="card-licence">
+        <h3>Licence</h3>
+        <p class="sub" style="margin-bottom:12px;" id="licence-txt">Vous utilisez la version d'essai : tout fonctionne, mais les PDF portent la mention « EXEMPLE ». Saisissez votre clé reçue après l'achat pour la retirer.</p>
+        <div class="field"><label for="r-cle">Clé de licence</label><input type="text" id="r-cle" placeholder="BC-XXXX-XXXX-XXXX" style="text-transform:uppercase;" maxlength="17"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-main" id="btn-cle">Activer</button>
+          <a class="btn btn-ghost" href="mailto:contact@activityweb.be?subject=Licence%20Bons%20cadeaux%20pro&body=Bonjour%2C%0A%0AJe%20souhaite%20acheter%20la%20licence%20Bons%20cadeaux%20pro%20(39%E2%82%AC).%0A%0ANom%20de%20mon%20activit%C3%A9%20%3A%20">Acheter une licence (39 €)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<dialog id="dlg">
+  <form class="dlg" method="dialog" id="dlg-form">
+    <h3 id="dlg-t"></h3>
+    <p id="dlg-p"></p>
+    <div id="dlg-extra"></div>
+    <div class="dlg-acts">
+      <button value="non" class="btn btn-ghost" formnovalidate>Annuler</button>
+      <button value="oui" class="btn btn-main" id="dlg-ok">Confirmer</button>
+    </div>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+(function () {
+'use strict';
+
+/* ───────────── Stockage ───────────── */
+var KEY = 'aw-bons-cadeaux-v1';
+var storeOK = true;
+var DEFAULTS = {
+  nom: '', activite: '', tel: '', email: '', adresse: '', site: '',
+  logo: null, logoRatio: 1,
+  c1: '#1f3a5f', c2: '#c8963e', modele: 'elegant',
+  prefixe: 'BC', validite: 12,
+  conditions: "Valable une seule fois, ou jusqu'à épuisement du montant. Non remboursable et non échangeable contre des espèces. Sur présentation de ce bon.",
+  cle: ''
+};
+var state = { settings: Object.assign({}, DEFAULTS), bons: [], seq: {}, lastBackup: null, sinceBackup: 0 };
+
+function load() {
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) {
+      var d = JSON.parse(raw);
+      state.settings = Object.assign({}, DEFAULTS, d.settings || {});
+      state.bons = Array.isArray(d.bons) ? d.bons : [];
+      state.seq = d.seq || {};
+      state.lastBackup = d.lastBackup || null;
+      state.sinceBackup = d.sinceBackup || 0;
+    }
+  } catch (e) { storeOK = false; }
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); storeOK = true; }
+  catch (e) { storeOK = false; }
+  document.getElementById('banner-store').hidden = storeOK;
+}
+
+/* ───────────── Utilitaires ───────────── */
+function $(id) { return document.getElementById(id); }
+function today() { var d = new Date(); return iso(d); }
+function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+function pad(n) { return String(n).padStart(2, '0'); }
+function addMonths(isoDate, m) {
+  var p = isoDate.split('-').map(Number);
+  var d = new Date(p[0], p[1] - 1 + Number(m), p[2]);
+  if (d.getDate() !== p[2]) d.setDate(0);
+  return iso(d);
+}
+function fr(isoDate) { if (!isoDate) return ''; var p = isoDate.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+function eur(n) {
+  n = Number(n) || 0;
+  var s = (Math.round(n * 100) / 100).toFixed(n % 1 === 0 ? 0 : 2).replace('.', ',');
+  return s.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €';
+}
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function code6() {
+  var A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', out = '', r = new Uint32Array(6);
+  crypto.getRandomValues(r);
+  for (var i = 0; i < 6; i++) out += A[r[i] % A.length];
+  return out;
+}
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+function toast(msg) {
+  var t = $('toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('on'); }, 2600);
+}
+function slug(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase(); }
+function lum(hex) {
+  var c = hex.replace('#', ''); var r = parseInt(c.substr(0, 2), 16) / 255, g = parseInt(c.substr(2, 2), 16) / 255, b = parseInt(c.substr(4, 2), 16) / 255;
+  function f(x) { return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }
+  return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+}
+function onColor(hex) { return lum(hex) > 0.45 ? '#1d2433' : '#ffffff'; }
+
+/* ───────────── Licence ───────────── */
+var LA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+function fnv(s) { var h = 0x811c9dc5; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return h >>> 0; }
+function checksum(body) {
+  var h = fnv('awbc|' + body + '|2026'), out = '';
+  for (var i = 0; i < 4; i++) { out += LA[h % 32]; h = Math.floor(h / 32) ^ fnv(out + body); h >>>= 0; }
+  return out;
+}
+function cleValide(k) {
+  k = String(k || '').toUpperCase().replace(/\s/g, '');
+  var m = /^BC-([A-Z2-9]{4})-([A-Z2-9]{4})-([A-Z2-9]{4})$/.exec(k);
+  return !!m && checksum(m[1] + m[2]) === m[3];
+}
+function isPro() { return cleValide(state.settings.cle); }
+
+/* ───────────── Statuts ───────────── */
+function statut(b) {
+  if (b.annule) return 'annule';
+  if (b.type === 'montant') {
+    if (b.solde <= 0.004) return 'utilise';
+  } else if (b.utiliseLe) return 'utilise';
+  if (b.expire && b.expire < today()) return 'expire';
+  if (b.type === 'montant' && b.solde < b.montant) return 'partiel';
+  return 'actif';
+}
+var LABELS = { actif: 'Actif', partiel: 'Partiel', utilise: 'Utilisé', expire: 'Expiré', annule: 'Annulé' };
+
+/* ───────────── Rendu graphique (canvas + PDF) ───────────── */
+var PT = 0.3528; // 1 pt en mm
+var FONTS = {
+  sans: { normal: '400 SIZE Helvetica, Arial, sans-serif', bold: '700 SIZE Helvetica, Arial, sans-serif', italic: 'italic 400 SIZE Helvetica, Arial, sans-serif' },
+  serif: { normal: '400 SIZE "Times New Roman", Times, serif', bold: '700 SIZE "Times New Roman", Times, serif', italic: 'italic 400 SIZE "Times New Roman", Times, serif' }
+};
+var imgCache = {};
+function getImg(src) {
+  return new Promise(function (res) {
+    if (!src) return res(null);
+    if (imgCache[src] && imgCache[src].complete) return res(imgCache[src]);
+    var im = new Image(); im.onload = function () { imgCache[src] = im; res(im); }; im.onerror = function () { res(null); }; im.src = src;
+  });
+}
+
+function canvasG(ctx, scale) {
+  function setFont(o) { ctx.font = FONTS[o.font || 'sans'][o.style || 'normal'].replace('SIZE', (o.size * PT) + 'px'); }
+  return {
+    fillRect: function (x, y, w, h, c) { ctx.fillStyle = c; ctx.fillRect(x, y, w, h); },
+    strokeRect: function (x, y, w, h, c, lw) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(x, y, w, h); },
+    roundRect: function (x, y, w, h, r, fill, stroke, lw) {
+      ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+      if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+      if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 0.3; ctx.stroke(); }
+    },
+    circle: function (x, y, r, c) { ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fillStyle = c; ctx.fill(); },
+    line: function (x1, y1, x2, y2, c, lw) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.stroke(); },
+    width: function (s, o) { setFont(o); return ctx.measureText(s).width; },
+    text: function (s, x, y, o) {
+      ctx.save(); setFont(o); ctx.fillStyle = o.color || '#000'; ctx.textBaseline = 'alphabetic';
+      ctx.textAlign = o.align === 'center' ? 'center' : o.align === 'right' ? 'right' : 'left';
+      if (o.opacity != null) ctx.globalAlpha = o.opacity;
+      if (o.angle) { ctx.translate(x, y); ctx.rotate(-o.angle * Math.PI / 180); ctx.fillText(s, 0, 0); }
+      else ctx.fillText(s, x, y);
+      ctx.restore();
+    },
+    image: function (im, x, y, w, h) { if (im && im.el) ctx.drawImage(im.el, x, y, w, h); }
+  };
+}
+
+function pdfG(doc) {
+  function setFont(o) {
+    var fam = o.font === 'serif' ? 'times' : 'helvetica';
+    var st = o.style === 'bold' ? 'bold' : o.style === 'italic' ? 'italic' : 'normal';
+    doc.setFont(fam, st); doc.setFontSize(o.size);
+  }
+  return {
+    fillRect: function (x, y, w, h, c) { doc.setFillColor(c); doc.rect(x, y, w, h, 'F'); },
+    strokeRect: function (x, y, w, h, c, lw) { doc.setDrawColor(c); doc.setLineWidth(lw); doc.rect(x, y, w, h, 'S'); },
+    roundRect: function (x, y, w, h, r, fill, stroke, lw) {
+      var st = fill && stroke ? 'FD' : fill ? 'F' : 'S';
+      if (fill) doc.setFillColor(fill);
+      if (stroke) { doc.setDrawColor(stroke); doc.setLineWidth(lw || 0.3); }
+      doc.roundedRect(x, y, w, h, r, r, st);
+    },
+    circle: function (x, y, r, c) { doc.setFillColor(c); doc.circle(x, y, r, 'F'); },
+    line: function (x1, y1, x2, y2, c, lw) { doc.setDrawColor(c); doc.setLineWidth(lw); doc.line(x1, y1, x2, y2); },
+    width: function (s, o) { setFont(o); return doc.getTextWidth(s); },
+    text: function (s, x, y, o) {
+      setFont(o); doc.setTextColor(o.color || '#000000');
+      var opt = {};
+      if (o.align === 'center' || o.align === 'right') opt.align = o.align;
+      if (o.angle) opt.angle = o.angle;
+      if (o.opacity != null) { doc.saveGraphicsState(); doc.setGState(new doc.GState({ opacity: o.opacity })); }
+      doc.text(s, x, y, opt);
+      if (o.opacity != null) doc.restoreGraphicsState();
+    },
+    image: function (im, x, y, w, h) { if (im && im.src) doc.addImage(im.src, 'PNG', x, y, w, h, undefined, 'FAST'); }
+  };
+}
+
+function wrap(g, s, maxW, o, maxLines) {
+  var words = String(s || '').replace(/\s+/g, ' ').trim().split(' '), lines = [], cur = '';
+  if (!words[0]) return [];
+  for (var i = 0; i < words.length; i++) {
+    var test = cur ? cur + ' ' + words[i] : words[i];
+    if (g.width(test, o) <= maxW || !cur) cur = test;
+    else { lines.push(cur); cur = words[i]; }
+  }
+  if (cur) lines.push(cur);
+  if (maxLines && lines.length > maxLines) {
+    lines = lines.slice(0, maxLines);
+    var last = lines[maxLines - 1];
+    while (last.length > 1 && g.width(last + '…', o) > maxW) last = last.slice(0, -1);
+    lines[maxLines - 1] = last.replace(/[\s,;.]+$/, '') + '…';
+  }
+  return lines;
+}
+function lines(g, arr, x, y, lh, o) { arr.forEach(function (l, i) { g.text(l, x, y + i * lh, o); }); return y + arr.length * lh; }
+
+function drawQR(g, text, x, y, size, color) {
+  if (typeof qrcode !== 'function') return;
+  var qr = qrcode(0, 'M'); qr.addData(unescape(encodeURIComponent(text))); qr.make();
+  var n = qr.getModuleCount(), m = size / n;
+  g.fillRect(x - 1, y - 1, size + 2, size + 2, '#ffffff');
+  for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (qr.isDark(r, c)) g.fillRect(x + c * m, y + r * m, m + 0.02, m + 0.02, color);
+}
+
+function qrText(s, b) {
+  return 'BON CADEAU ' + (s.nom || '') + '\nN° ' + b.num + '\nCode ' + b.code +
+    (b.type === 'montant' ? '\nValeur ' + eur(b.montant) : '\n' + b.prestation) + '\nValable jusqu\'au ' + fr(b.expire);
+}
+
+function valeurTxt(b) { return b.type === 'montant' ? eur(b.montant) : (b.prestation || 'Votre prestation'); }
+
+function contactLine(s) { return [s.adresse, s.tel, s.email, s.site].filter(Boolean).join('  ·  '); }
+
+function logoBox(s, logo, maxW, maxH) {
+  if (!logo) return null;
+  var r = s.logoRatio || 1, w = maxW, h = w / r;
+  if (h > maxH) { h = maxH; w = h * r; }
+  return { w: w, h: h };
+}
+
+var W = 210, H = 148;
+function draw(g, s, b, logo, demo) {
+  var m = b.modele || s.modele || 'elegant';
+  if (m === 'moderne') drawModerne(g, s, b, logo);
+  else if (m === 'fetes') drawFetes(g, s, b, logo);
+  else drawElegant(g, s, b, logo);
+  if (demo) g.text('EXEMPLE · VERSION D\'ESSAI', W / 2, H / 2 + 12, { font: 'sans', style: 'bold', size: 30, color: '#808080', align: 'center', angle: 20, opacity: 0.22 });
+}
+
+function centerBlock(g, s, b, logo, cx, top, bottom, width, dark, accent, muted, opts) {
+  // contenu centré commun aux modèles Élégant et Fêtes
+  var y = top;
+  var lb = logoBox(s, logo, 34, 13);
+  if (lb) { g.image(logo, cx - lb.w / 2, y, lb.w, lb.h); y += lb.h + 5; }
+  if (s.nom) { g.text(s.nom, cx, y + 4, { font: 'serif', style: 'bold', size: 13, color: dark, align: 'center' }); y += 5; }
+  if (s.activite) { g.text(s.activite, cx, y + 4, { font: 'sans', size: 8, color: muted, align: 'center' }); y += 4; }
+  if (opts && opts.sur) { y += 6; g.text(opts.sur, cx, y + 2, { font: 'serif', style: 'italic', size: 11, color: accent, align: 'center' }); }
+  y += 12;
+  g.text('BON CADEAU', cx, y, { font: 'serif', size: 26, color: opts && opts.titre || dark, align: 'center' });
+  y += 4;
+  g.line(cx - 14, y, cx + 14, y, accent, 0.5);
+  y += 12;
+  if (b.type === 'montant') {
+    g.text(valeurTxt(b), cx, y + 2, { font: 'serif', style: 'bold', size: 30, color: accent, align: 'center' }); y += 9;
+  } else {
+    var pl = wrap(g, valeurTxt(b), width - 20, { font: 'serif', style: 'bold', size: 17 }, 2);
+    y = lines(g, pl, cx, y - 2, 7, { font: 'serif', style: 'bold', size: 17, color: accent, align: 'center' }) + 1;
+  }
+  var who = [];
+  if (b.pour) who.push('Offert à ' + b.pour);
+  if (b.de) who.push('de la part de ' + b.de);
+  if (who.length) {
+    var wl = wrap(g, who.join(', '), width - 16, { font: 'sans', size: 10 }, 2);
+    y = lines(g, wl, cx, y + 2, 4.6, { font: 'sans', size: 10, color: dark, align: 'center' });
+  }
+  if (b.message) {
+    var ml = wrap(g, '« ' + b.message + ' »', width - 30, { font: 'serif', style: 'italic', size: 9.5 }, 2);
+    y = lines(g, ml, cx, y + 3, 4.3, { font: 'serif', style: 'italic', size: 9.5, color: muted, align: 'center' });
+  }
+  return y;
+}
+
+function footer(g, s, b, x1, x2, yTop, dark, muted, qrColor) {
+  var qs = 21, qx = x2 - qs, qy = yTop;
+  drawQR(g, qrText(s, b), qx, qy, qs, qrColor);
+  var tw = qx - x1 - 6;
+  g.text('N° ' + b.num + '   ·   Code ' + b.code, x1, qy + 3, { font: 'sans', style: 'bold', size: 8, color: dark });
+  g.text('Valable jusqu\'au ' + fr(b.expire), x1, qy + 7.2, { font: 'sans', size: 8, color: dark });
+  var cl = wrap(g, s.conditions, tw, { font: 'sans', size: 6.5 }, 3);
+  var y = lines(g, cl, x1, qy + 11.6, 2.9, { font: 'sans', size: 6.5, color: muted });
+  var ct = contactLine(s);
+  if (ct) { var cc = wrap(g, ct, tw, { font: 'sans', size: 6.5 }, 2); lines(g, cc, x1, Math.max(y + 0.6, qy + qs), 2.9, { font: 'sans', style: 'bold', size: 6.5, color: dark }); }
+}
+
+function drawElegant(g, s, b, logo) {
+  var c1 = s.c1, c2 = s.c2, dark = '#1d2433', muted = '#6b6b6b';
+  g.fillRect(0, 0, W, H, '#fbf8f2');
+  g.strokeRect(5, 5, W - 10, H - 10, c1, 0.8);
+  g.strokeRect(7, 7, W - 14, H - 14, c1, 0.25);
+  [[7, 7], [W - 7, 7], [7, H - 7], [W - 7, H - 7]].forEach(function (p) { g.circle(p[0], p[1], 1.1, c2); });
+  centerBlock(g, s, b, logo, W / 2, 13, 110, 170, c1, c2, muted, { titre: c1 });
+  g.line(18, 113, W - 18, 113, '#ddd5c6', 0.25);
+  footer(g, s, b, 18, W - 18, 117, dark, muted, c1);
+}
+
+function drawModerne(g, s, b, logo) {
+  var c1 = s.c1, c2 = s.c2, on = onColor(c1), dark = '#1d2433', muted = '#6b7385';
+  var P = 78;
+  g.fillRect(0, 0, W, H, '#ffffff');
+  g.fillRect(0, 0, P, H, c1);
+  g.fillRect(P, 0, 2, H, c2);
+  var y = 14;
+  var lb = logoBox(s, logo, 46, 16);
+  if (lb) { g.roundRect(12, y - 3, lb.w + 6, lb.h + 6, 2, '#ffffff'); g.image(logo, 15, y, lb.w, lb.h); y += lb.h + 10; }
+  if (s.nom) { var nl = wrap(g, s.nom, P - 24, { font: 'sans', style: 'bold', size: 13 }, 2); y = lines(g, nl, 12, y + 4, 5.5, { font: 'sans', style: 'bold', size: 13, color: on }); }
+  if (s.activite) { var al = wrap(g, s.activite, P - 24, { font: 'sans', size: 8 }, 2); y = lines(g, al, 12, y + 1, 3.6, { font: 'sans', size: 8, color: on, opacity: 0.8 }); }
+  g.text('BON', 12, 86, { font: 'sans', style: 'bold', size: 30, color: on });
+  g.text('CADEAU', 12, 98, { font: 'sans', style: 'bold', size: 30, color: on });
+  g.fillRect(12, 103, 16, 1.2, c2);
+  g.text('Valable jusqu\'au', 12, 128, { font: 'sans', size: 7.5, color: on, opacity: 0.8 });
+  g.text(fr(b.expire), 12, 133, { font: 'sans', style: 'bold', size: 10, color: on });
+
+  var x = P + 12, rw = W - x - 12;
+  y = 22;
+  if (b.type === 'montant') {
+    g.text('Valeur', x, y, { font: 'sans', size: 8, color: muted });
+    g.text(valeurTxt(b), x, y + 14, { font: 'sans', style: 'bold', size: 34, color: c1 }); y += 24;
+  } else {
+    g.text('Prestation offerte', x, y, { font: 'sans', size: 8, color: muted });
+    var pl = wrap(g, valeurTxt(b), rw, { font: 'sans', style: 'bold', size: 17 }, 2);
+    y = lines(g, pl, x, y + 8, 7, { font: 'sans', style: 'bold', size: 17, color: c1 }) + 3;
+  }
+  if (b.pour) { g.text('Offert à', x, y, { font: 'sans', size: 8, color: muted }); g.text(b.pour, x, y + 6, { font: 'sans', style: 'bold', size: 13, color: dark }); y += 13; }
+  if (b.de) { g.text('De la part de', x, y, { font: 'sans', size: 8, color: muted }); g.text(b.de, x, y + 5.5, { font: 'sans', size: 11, color: dark }); y += 11; }
+  if (b.message) { var ml = wrap(g, b.message, rw, { font: 'serif', style: 'italic', size: 10 }, 3); lines(g, ml, x, y + 2, 4.4, { font: 'serif', style: 'italic', size: 10, color: muted }); }
+  footer(g, s, b, x, W - 10, 113, dark, muted, '#1d2433');
+}
+
+function drawFetes(g, s, b, logo) {
+  var c1 = s.c1, c2 = s.c2, muted = '#6b6b6b';
+  g.fillRect(0, 0, W, H, c1);
+  // décor : petits points réguliers (déterministes)
+  var seed = 7;
+  function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  for (var i = 0; i < 260; i++) {
+    var x = rnd() * W, y = rnd() * H;
+    if (x > 9 && x < W - 9 && y > 9 && y < H - 9) continue;
+    g.circle(x, y, 0.4 + rnd() * 1.1, rnd() > 0.5 ? c2 : '#ffffff');
+  }
+  g.roundRect(10, 10, W - 20, H - 20, 4, '#fffdf8', c2, 0.6);
+  centerBlock(g, s, b, logo, W / 2, 15, 108, 170, c1, c2, muted, { sur: 'Joyeuses fêtes', titre: c1 });
+  g.line(22, 112, W - 22, 112, '#e6dccb', 0.25);
+  footer(g, s, b, 22, W - 22, 115, '#1d2433', muted, '#1d2433');
+}
+
+/* ───────────── Logo prêt pour le dessin ───────────── */
+function logoObj() {
+  var src = state.settings.logo;
+  if (!src) return Promise.resolve(null);
+  return getImg(src).then(function (el) { return el ? { el: el, src: src } : null; });
+}
+
+/* ───────────── Formulaire « Créer » ───────────── */
+var form = { type: 'montant', modele: null };
+function brouillon(num, code) {
+  var s = state.settings;
+  var montant = parseFloat(String($('b-montant').value).replace(',', '.')) || 0;
+  var prix = $('b-prix').value === '' ? montant : parseFloat(String($('b-prix').value).replace(',', '.')) || 0;
+  return {
+    id: uid(), num: num, code: code, type: form.type,
+    montant: form.type === 'montant' ? montant : 0,
+    solde: form.type === 'montant' ? montant : 0,
+    prestation: $('b-prestation').value.trim(),
+    pour: $('b-pour').value.trim(), de: $('b-de').value.trim(), message: $('b-message').value.trim(),
+    emis: $('b-emis').value || today(), expire: $('b-expire').value,
+    modele: form.modele || s.modele,
+    prix: form.type === 'montant' ? prix : ($('b-prix').value !== '' ? (parseFloat(String($('b-prix').value).replace(',', '.')) || 0) : (parseFloat(String($('b-valprest').value).replace(',', '.')) || 0)),
+    paiement: $('b-paiement').value, note: $('b-note').value.trim(),
+    usages: [], cree: new Date().toISOString()
+  };
+}
+function nextNum() {
+  var y = String(new Date().getFullYear()), n = (state.seq[y] || 0) + 1;
+  return (state.settings.prefixe || 'BC').toUpperCase() + '-' + y + '-' + String(n).padStart(4, '0');
+}
+
+var cv = $('cv'), ctx = cv.getContext('2d');
+var pending = null;
+function renderPreview() {
+  if (pending) cancelAnimationFrame(pending);
+  pending = requestAnimationFrame(function () {
+    pending = null;
+    logoObj().then(function (logo) {
+      var sc = cv.width / W;
+      ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.setTransform(sc, 0, 0, sc, 0, 0);
+      var b = brouillon(nextNum(), 'ABC234');
+      var sp = Object.assign({}, state.settings); if (!sp.nom) sp.nom = 'Votre activité';
+      draw(canvasG(ctx, sc), sp, b, logo, !isPro());
+    });
+  });
+  $('num-next').textContent = 'Prochain numéro : ' + nextNum() + (isPro() ? '' : ' · version d\'essai : le PDF portera la mention « EXEMPLE »');
+}
+
+function makePdf(b) {
+  return logoObj().then(function (logo) {
+    var doc = new window.jspdf.jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a5' });
+    doc.setProperties({ title: 'Bon cadeau ' + b.num, creator: 'ActivityWeb – Bons cadeaux' });
+    draw(pdfG(doc), state.settings, b, logo, !isPro());
+    var name = 'bon-cadeau-' + b.num.toLowerCase() + (b.pour ? '-' + slug(b.pour) : '') + '.pdf';
+    doc.save(name);
+  });
+}
+
+function setType(t) {
+  form.type = t;
+  document.querySelectorAll('#seg-type button').forEach(function (x) { x.classList.toggle('on', x.dataset.type === t); });
+  $('fld-montant').hidden = t !== 'montant';
+  $('fld-prestation').hidden = t !== 'prestation';
+  $('b-prix').placeholder = t === 'montant' ? 'Identique au montant' : 'Identique au prix de la prestation';
+  renderPreview();
+}
+function setModele(m) {
+  form.modele = m;
+  document.querySelectorAll('#models button').forEach(function (x) { x.classList.toggle('on', x.dataset.m === m); });
+  renderPreview();
+}
+function resetForm() {
+  ['b-pour', 'b-de', 'b-message', 'b-prix', 'b-note', 'b-valprest'].forEach(function (id) { $(id).value = ''; });
+  $('b-emis').value = today();
+  $('b-expire').value = addMonths(today(), state.settings.validite);
+}
+
+/* ───────────── Registre ───────────── */
+function renderList() {
+  var q = $('q').value.trim().toLowerCase(), f = $('filtre').value;
+  var bons = state.bons.slice().sort(function (a, b) { return b.cree < a.cree ? -1 : 1; });
+  var nb = 0, ca = 0, circ = 0, soon = 0, lim = addMonths(today(), 1);
+  state.bons.forEach(function (b) {
+    var st = statut(b);
+    if (st !== 'annule') { nb++; ca += Number(b.prix) || 0; }
+    if (st === 'actif' || st === 'partiel') {
+      circ += b.type === 'montant' ? b.solde : (Number(b.prix) || 0);
+      if (b.expire && b.expire <= lim) soon++;
+    }
+  });
+  $('s-nb').textContent = nb; $('s-ca').textContent = eur(ca); $('s-circ').textContent = eur(circ); $('s-exp').textContent = soon;
+
+  var out = bons.filter(function (b) {
+    if (f && statut(b) !== f) return false;
+    if (!q) return true;
+    return [b.num, b.code, b.pour, b.de, b.prestation, b.note].join(' ').toLowerCase().indexOf(q) !== -1;
+  });
+  var L = $('list');
+  if (!state.bons.length) { L.innerHTML = '<div class="empty">Aucun bon pour l\'instant. <a href="#" data-goto="creer">Créez votre premier bon →</a></div>'; return; }
+  if (!out.length) { L.innerHTML = '<div class="empty">Aucun bon ne correspond à cette recherche.</div>'; return; }
+  L.innerHTML = out.map(function (b) {
+    var st = statut(b);
+    var val = b.type === 'montant'
+      ? (st === 'partiel' ? eur(b.solde) + ' <span class="m">sur ' + eur(b.montant) + '</span>' : eur(b.montant))
+      : esc(b.prestation);
+    var who = [b.pour && 'pour ' + esc(b.pour), b.de && 'de ' + esc(b.de)].filter(Boolean).join(' · ');
+    var canUse = st === 'actif' || st === 'partiel' || st === 'expire';
+    return '<div class="item" data-id="' + b.id + '">' +
+      '<div><div class="t">' + esc(b.num) + ' · <span style="font-family:monospace;letter-spacing:0.05em;">' + esc(b.code) + '</span></div>' +
+      '<div class="m">' + (who || 'Sans nom') + ' · émis le ' + fr(b.emis) + ' · valable jusqu\'au ' + fr(b.expire) + '</div></div>' +
+      '<div class="v">' + val + '</div>' +
+      '<div><span class="badge b-' + st + '">' + LABELS[st] + '</span></div>' +
+      '<div class="acts">' +
+        '<button class="btn btn-ghost btn-sm" data-act="pdf">PDF</button>' +
+        (canUse ? '<button class="btn btn-dark btn-sm" data-act="use">Utiliser</button>' : '') +
+        (st !== 'annule' && st !== 'utilise' ? '<button class="btn btn-ghost btn-sm" data-act="annuler">Annuler</button>' : '') +
+        '<button class="btn btn-ghost btn-sm" data-act="suppr" title="Supprimer définitivement" aria-label="Supprimer">✕</button>' +
+      '</div></div>';
+  }).join('');
+}
+
+function ask(title, text, extraHTML, okLabel) {
+  return new Promise(function (res) {
+    $('dlg-t').textContent = title; $('dlg-p').textContent = text;
+    $('dlg-extra').innerHTML = extraHTML || ''; $('dlg-ok').textContent = okLabel || 'Confirmer';
+    var d = $('dlg');
+    d.onclose = function () { res(d.returnValue === 'oui'); };
+    d.returnValue = ''; d.showModal();
+    var first = d.querySelector('#dlg-extra input'); if (first) setTimeout(function () { first.focus(); first.select(); }, 30);
+  });
+}
+
+function onListClick(e) {
+  var btn = e.target.closest('button[data-act]'); if (!btn) return;
+  var id = btn.closest('.item').dataset.id, b = state.bons.find(function (x) { return x.id === id; });
+  if (!b) return;
+  var act = btn.dataset.act;
+  if (act === 'pdf') { makePdf(b); return; }
+  if (act === 'use') {
+    var expWarn = statut(b) === 'expire' ? ' Attention : ce bon est expiré depuis le ' + fr(b.expire) + '.' : '';
+    if (b.type === 'montant') {
+      ask('Utiliser le bon ' + b.num, 'Solde disponible : ' + eur(b.solde) + '.' + expWarn,
+        '<label for="dlg-amt">Montant utilisé aujourd\'hui (€)</label><input type="number" id="dlg-amt" min="0.01" step="0.01" value="' + b.solde + '">', 'Enregistrer').then(function (ok) {
+        if (!ok) return;
+        var v = Math.min(b.solde, parseFloat(String($('dlg-amt').value).replace(',', '.')) || 0);
+        if (v <= 0) return;
+        b.solde = Math.round((b.solde - v) * 100) / 100;
+        b.usages.push({ date: today(), montant: v });
+        save(); renderList();
+        toast(b.solde > 0 ? 'Enregistré. Reste ' + eur(b.solde) + ' sur ce bon.' : 'Bon entièrement utilisé.');
+      });
+    } else {
+      ask('Utiliser le bon ' + b.num, (b.prestation || 'Prestation') + ' : noter ce bon comme utilisé aujourd\'hui ?' + expWarn, '', 'Marquer utilisé').then(function (ok) {
+        if (!ok) return;
+        b.utiliseLe = today(); b.usages.push({ date: today() });
+        save(); renderList(); toast('Bon marqué comme utilisé.');
+      });
+    }
+    return;
+  }
+  if (act === 'annuler') {
+    ask('Annuler le bon ' + b.num + ' ?', 'Le bon restera dans le registre, marqué « annulé » (par exemple après un remboursement).', '', 'Annuler le bon').then(function (ok) {
+      if (!ok) return; b.annule = today(); save(); renderList(); toast('Bon annulé.');
+    });
+    return;
+  }
+  if (act === 'suppr') {
+    ask('Supprimer le bon ' + b.num + ' ?', 'Il disparaîtra définitivement du registre. Pour garder une trace, préférez « Annuler ».', '', 'Supprimer').then(function (ok) {
+      if (!ok) return; state.bons = state.bons.filter(function (x) { return x.id !== id; }); save(); renderList(); toast('Bon supprimé.');
+    });
+  }
+}
+
+/* ───────────── Export / import ───────────── */
+function download(name, content, type) {
+  var blob = new Blob([content], { type: type });
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+}
+function exportJSON() {
+  state.lastBackup = new Date().toISOString(); state.sinceBackup = 0; save();
+  download('sauvegarde-bons-cadeaux-' + today() + '.json', JSON.stringify({ app: 'aw-bons-cadeaux', version: 1, data: state }, null, 1), 'application/json');
+  renderBackupInfo(); toast('Sauvegarde téléchargée.');
+}
+function importJSON(file) {
+  var r = new FileReader();
+  r.onload = function () {
+    try {
+      var d = JSON.parse(r.result); d = d.data || d;
+      if (!d.settings || !Array.isArray(d.bons)) throw new Error('format');
+      ask('Importer cette sauvegarde ?', d.bons.length + ' bon(s) trouvé(s). Les données actuelles de cet appareil seront remplacées.', '', 'Importer').then(function (ok) {
+        if (!ok) return;
+        state.settings = Object.assign({}, DEFAULTS, d.settings); state.bons = d.bons; state.seq = d.seq || {};
+        state.lastBackup = d.lastBackup || null; state.sinceBackup = 0;
+        save(); fillSettings(); resetForm(); renderAll(); toast('Sauvegarde importée.');
+      });
+    } catch (e) { toast('Ce fichier n\'est pas une sauvegarde valide.'); }
+  };
+  r.readAsText(file);
+}
+function exportCSV() {
+  var head = ['Numéro', 'Code', 'Type', 'Valeur', 'Solde', 'Prestation', 'Offert à', 'De la part de', 'Émis le', 'Valable jusqu\'au', 'Statut', 'Prix encaissé', 'Paiement', 'Utilisations', 'Note'];
+  var rows = state.bons.map(function (b) {
+    return [b.num, b.code, b.type, b.type === 'montant' ? b.montant : '', b.type === 'montant' ? b.solde : '', b.prestation, b.pour, b.de, fr(b.emis), fr(b.expire),
+      LABELS[statut(b)], b.prix, b.paiement, (b.usages || []).map(function (u) { return fr(u.date) + (u.montant != null ? ' (' + u.montant + ' €)' : ''); }).join(' | '), b.note];
+  });
+  var csv = [head].concat(rows).map(function (r) {
+    return r.map(function (v) { v = v == null ? '' : String(v); if (typeof v === 'string' && /^\d+(\.\d+)?$/.test(v)) v = v.replace('.', ','); return '"' + v.replace(/"/g, '""') + '"'; }).join(';');
+  }).join('\r\n');
+  download('registre-bons-cadeaux-' + today() + '.csv', '﻿' + csv, 'text/csv;charset=utf-8');
+}
+function renderBackupInfo() {
+  $('last-backup').textContent = state.lastBackup ? 'Dernière sauvegarde : ' + fr(state.lastBackup.slice(0, 10)) : 'Aucune sauvegarde exportée pour l\'instant.';
+  var ban = $('banner-backup');
+  if (state.sinceBackup >= 5) {
+    ban.hidden = false;
+    ban.innerHTML = state.sinceBackup + ' nouveaux bons depuis votre dernière sauvegarde. <button type="button" data-backup="1">Exporter une sauvegarde maintenant</button>';
+  } else ban.hidden = true;
+}
+
+/* ───────────── Réglages ───────────── */
+var SFIELDS = ['nom', 'activite', 'tel', 'email', 'adresse', 'site', 'c1', 'c2', 'prefixe', 'validite', 'conditions'];
+function fillSettings() {
+  var s = state.settings;
+  SFIELDS.forEach(function (k) { $('r-' + k).value = s[k]; });
+  $('r-logo-img').hidden = !s.logo; $('r-logo-del').hidden = !s.logo;
+  if (s.logo) $('r-logo-img').src = s.logo;
+  $('r-cle').value = s.cle || '';
+  setModele(form.modele || s.modele);
+  renderLicence();
+}
+function renderLicence() {
+  var pro = isPro(), chip = $('licence-chip');
+  chip.textContent = pro ? 'Licence activée ✓' : 'Version d\'essai';
+  chip.classList.toggle('essai', !pro);
+  $('licence-txt').textContent = pro
+    ? 'Licence activée sur cet appareil. Vos PDF sont sans mention « EXEMPLE ». La clé est incluse dans vos sauvegardes.'
+    : 'Vous utilisez la version d\'essai : tout fonctionne, mais les PDF portent la mention « EXEMPLE ». Saisissez la clé reçue après l\'achat pour la retirer.';
+}
+function onLogo(file) {
+  if (!file) return;
+  var r = new FileReader();
+  r.onload = function () {
+    getImg(r.result).then(function (im) {
+      if (!im) { toast('Image illisible.'); return; }
+      var max = 600, sc = Math.min(1, max / Math.max(im.width, im.height));
+      var c = document.createElement('canvas'); c.width = Math.round(im.width * sc); c.height = Math.round(im.height * sc);
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+      state.settings.logo = c.toDataURL('image/png'); state.settings.logoRatio = c.width / c.height;
+      save(); fillSettings(); renderPreview();
+    });
+  };
+  r.readAsDataURL(file);
+}
+
+/* ───────────── Navigation ───────────── */
+function goto(v) {
+  document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('on', t.dataset.view === v); });
+  document.querySelectorAll('.view').forEach(function (s) { s.classList.toggle('on', s.id === 'v-' + v); });
+  if (v === 'registre') renderList();
+  if (v === 'creer') renderPreview();
+  window.scrollTo(0, 0);
+}
+function renderAll() { renderPreview(); renderList(); renderBackupInfo(); }
+
+/* ───────────── Démarrage ───────────── */
+load();
+document.getElementById('banner-store').hidden = storeOK;
+resetForm();
+fillSettings();
+renderAll();
+
+document.querySelectorAll('.tab').forEach(function (t) { t.addEventListener('click', function () { goto(t.dataset.view); }); });
+document.addEventListener('click', function (e) {
+  var g = e.target.closest('[data-goto]'); if (g) { e.preventDefault(); goto(g.dataset.goto); }
+  if (e.target.closest('[data-backup]')) exportJSON();
+});
+$('licence-chip').addEventListener('click', function () { goto('reglages'); $('card-licence').scrollIntoView({ behavior: 'smooth' }); });
+document.querySelectorAll('#seg-type button').forEach(function (x) { x.addEventListener('click', function () { setType(x.dataset.type); }); });
+document.querySelectorAll('#models button').forEach(function (x) { x.addEventListener('click', function () { setModele(x.dataset.m); }); });
+$('f-bon').addEventListener('input', renderPreview);
+$('b-emis').addEventListener('change', function () { $('b-expire').value = addMonths($('b-emis').value || today(), state.settings.validite); renderPreview(); });
+
+$('f-bon').addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (typeof window.jspdf === 'undefined') { toast('Connexion nécessaire pour générer le PDF. Réessayez.'); return; }
+  if (form.type === 'montant' && !(parseFloat($('b-montant').value) > 0)) { toast('Indiquez le montant du bon.'); $('b-montant').focus(); return; }
+  if (form.type === 'prestation' && !$('b-prestation').value.trim()) { toast('Indiquez la prestation offerte.'); $('b-prestation').focus(); return; }
+  if (!$('b-expire').value) { toast('Indiquez la date de validité.'); return; }
+  var num = nextNum(), y = String(new Date().getFullYear());
+  var b = brouillon(num, code6());
+  state.seq[y] = (state.seq[y] || 0) + 1;
+  state.bons.push(b); state.sinceBackup = (state.sinceBackup || 0) + 1;
+  save();
+  makePdf(b).then(function () {
+    toast('Bon ' + num + ' créé et enregistré dans le registre.');
+    resetForm(); renderAll();
+  });
+});
+
+$('q').addEventListener('input', renderList);
+$('filtre').addEventListener('change', renderList);
+$('list').addEventListener('click', onListClick);
+$('btn-csv').addEventListener('click', exportCSV);
+$('btn-export').addEventListener('click', exportJSON);
+$('btn-import').addEventListener('change', function (e) { if (e.target.files[0]) importJSON(e.target.files[0]); e.target.value = ''; });
+
+SFIELDS.forEach(function (k) {
+  $('r-' + k).addEventListener('input', function () {
+    var v = $('r-' + k).value;
+    state.settings[k] = k === 'validite' ? Number(v) : (k === 'prefixe' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : v);
+    if (k === 'validite') $('b-expire').value = addMonths($('b-emis').value || today(), state.settings.validite);
+    save(); renderPreview();
+  });
+});
+$('r-logo').addEventListener('change', function (e) { onLogo(e.target.files[0]); e.target.value = ''; });
+$('r-logo-del').addEventListener('click', function () { state.settings.logo = null; state.settings.logoRatio = 1; save(); fillSettings(); renderPreview(); });
+$('btn-cle').addEventListener('click', function () {
+  var k = $('r-cle').value.trim().toUpperCase();
+  if (!cleValide(k)) { toast('Cette clé n\'est pas valide. Vérifiez-la dans l\'email reçu.'); return; }
+  state.settings.cle = k; save(); renderLicence(); renderPreview(); toast('Licence activée, merci !');
+});
+$('models').addEventListener('click', function (e) { var bt = e.target.closest('button[data-m]'); if (bt) { state.settings.modele = bt.dataset.m; save(); } });
+
+// Si on arrive sans nom, on ouvre d'abord les réglages
+if (!state.settings.nom && !state.bons.length) {
+  setTimeout(function () { toast('Commencez par indiquer le nom de votre activité dans Réglages.'); }, 600);
+}
+})();
+</script>
+</body>
+</html>
