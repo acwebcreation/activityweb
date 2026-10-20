@@ -415,6 +415,7 @@
         <h3>Licence</h3>
         <p class="sub" style="margin-bottom:12px;" id="licence-txt">Vous utilisez la version d'essai : tout fonctionne, mais les PDF portent la mention « EXEMPLE ». Saisissez votre clé reçue après l'achat pour la retirer. Licence en paiement unique : bons illimités, sans abonnement.</p>
         <div class="field"><label for="r-cle">Clé de licence</label><input type="text" id="r-cle" placeholder="BC-XXXX-XXXX-XXXX" style="text-transform:uppercase;" maxlength="17"></div>
+        <p class="hint" style="font-size:0.8rem;margin:-4px 0 14px;">La clé est liée au nom de votre commerce (étape 1). Nom mal écrit lors du paiement, ou changement de nom ? Écrivez à <a href="mailto:contact@activityweb.be?subject=Licence%20Bons%20cadeaux%20%E2%80%93%20changement%20de%20nom">contact@activityweb.be</a> : une nouvelle clé vous est envoyée gratuitement.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <button type="button" class="btn btn-main" id="btn-cle">Activer</button>
           <a class="btn btn-dark" href="https://buy.stripe.com/3cI14oa0H0YXaO98Cd83C0f">Acheter la licence – 39 €</a>
@@ -1026,7 +1027,7 @@ function renderLicence() {
   $('buy-acts').hidden = dec; $('restore-acts').hidden = !dec;
   $('buy-t').textContent = dec ? 'Le nom du commerce a changé' : 'Retirez la mention « EXEMPLE »';
   $('buy-p').textContent = dec
-    ? 'Votre licence est liée au nom « ' + s.licNom + ' ». Remettez ce nom pour retrouver vos bons sans mention « EXEMPLE ». Vous avez changé de nom ? Écrivez à contact@activityweb.be pour recevoir une nouvelle clé.'
+    ? 'Votre licence est liée au nom « ' + s.licNom + ' ». Remettez ce nom pour retrouver vos bons sans mention « EXEMPLE ». Vous avez changé de nom ? Écrivez à contact@activityweb.be : une nouvelle clé vous est envoyée gratuitement.'
     : 'Licence en paiement unique, liée au nom de votre commerce : bons illimités, sans abonnement. Votre clé arrive par email.';
   $('btn-restore').textContent = 'Revenir à « ' + (s.licNom || '') + ' »';
   chip.textContent = pro ? 'Licence activée ✓' : dec ? 'Licence : nom modifié' : 'Version d\'essai';
@@ -1130,7 +1131,10 @@ $('btn-cle').addEventListener('click', function () {
   if (!cleFormat(k)) { toast('Cette clé n\'est pas valide. Vérifiez-la dans l\'email reçu.'); return; }
   if (!state.settings.nom) { toast('Indiquez d\'abord le nom de votre commerce (onglet Créer, étape 1).'); return; }
   if (!cleValide(k, state.settings.nom)) {
-    ask('Clé non reconnue', 'Cette clé ne correspond pas au nom « ' + state.settings.nom + ' ». Votre licence est liée au nom de commerce indiqué lors du paiement : vérifiez qu\'il est écrit de la même façon (les majuscules, accents et espaces ne comptent pas), et vérifiez la clé dans l\'email reçu.', '', 'Compris');
+    var sujet = encodeURIComponent('Clé Bons cadeaux non reconnue');
+    var corps = encodeURIComponent('Bonjour,\n\nMa clé ' + k + ' n\'est pas reconnue avec le nom de commerce « ' + state.settings.nom + ' ».\n\nLe bon nom de mon commerce : \n\nMerci !');
+    ask('Clé non reconnue', 'Cette clé ne correspond pas au nom « ' + state.settings.nom + ' ». Votre licence est liée au nom de commerce indiqué lors du paiement : vérifiez qu\'il est écrit de la même façon (les majuscules, accents et espaces ne comptent pas), et vérifiez la clé dans l\'email reçu.',
+      '<p style="font-size:0.88rem;color:var(--text);background:var(--cream);border-radius:8px;padding:10px 12px;margin:0;">Le nom était mal écrit lors du paiement, ou vous voulez un autre nom ? <a href="mailto:contact@activityweb.be?subject=' + sujet + '&body=' + corps + '" style="font-weight:600;">Écrivez-moi</a> : je vous envoie gratuitement une nouvelle clé au bon nom.</p>', 'Compris');
     return;
   }
   state.settings.cle = k; state.settings.licNom = state.settings.nom; save(); renderLicence(); renderPreview(); toast('Licence activée pour « ' + state.settings.nom + ' », merci !');
