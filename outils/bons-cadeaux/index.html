@@ -92,6 +92,20 @@
   .biz-step-title { display:flex; align-items:center; gap:10px; margin-bottom:14px; color:var(--navy); font-size:0.92rem; }
   .biz.missing { border-color:var(--orange); }
 
+  .help-btn { background:transparent; border:1px solid rgba(255,255,255,0.3); color:white; font-size:0.78rem; padding:5px 11px; border-radius:20px; cursor:pointer; }
+  .help-btn:hover { background:rgba(255,255,255,0.12); }
+  .help { background:var(--white); border:2px solid var(--orange); border-radius:12px; padding:20px 22px; margin-bottom:26px; }
+  .help-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+  .help-steps { list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .help-steps li { display:flex; gap:10px; align-items:flex-start; }
+  .help-steps div > b { color:var(--navy); font-size:0.92rem; display:block; margin-bottom:4px; }
+  .help-steps p b { color:var(--text); font-weight:600; }
+  .help-steps p { font-size:0.84rem; color:var(--muted); line-height:1.55; }
+  .hs-n { width:28px; height:28px; border-radius:50%; background:var(--orange); color:white; display:grid; place-items:center; font-weight:700; font-size:0.85rem; flex-shrink:0; }
+  .help-tip { margin-top:16px; font-size:0.84rem; color:var(--text); background:var(--cream); border-radius:8px; padding:10px 14px; }
+  @media (max-width:1000px) { .help-steps { grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px) { .help-steps { grid-template-columns:1fr; } }
+
   /* Registre */
   .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:18px; }
   .stat { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
@@ -158,6 +172,7 @@
     <button class="tab" data-view="registre" role="tab">Registre</button>
     <button class="tab" data-view="reglages" role="tab">Réglages</button>
   </nav>
+  <button class="help-btn" id="help-btn" type="button">Comment ça marche ?</button>
   <button class="licence-chip essai" id="licence-chip" type="button">Version d'essai</button>
 </header>
 <div class="banner" id="banner-store" hidden>Votre navigateur bloque l'enregistrement local : vos bons seront perdus en fermant la page. Pensez à <button type="button" data-goto="reglages">exporter une sauvegarde</button>.</div>
@@ -166,6 +181,20 @@
 <main>
 
 <!-- ═════════════ CRÉER ═════════════ -->
+<section class="help" id="help" hidden>
+  <div class="help-head">
+    <h2 style="font-size:1.35rem;margin:0;">Comment ça marche ?</h2>
+    <button type="button" class="btn btn-ghost btn-sm" id="help-close">J'ai compris ✕</button>
+  </div>
+  <ol class="help-steps">
+    <li><span class="hs-n">1</span><div><b>Un client vous achète un bon cadeau</b><p>En caisse, par téléphone ou par message. Vous encaissez comme d'habitude (espèces, Bancontact, virement). Votre client ne passe jamais par ce site.</p></div></li>
+    <li><span class="hs-n">2</span><div><b>Vous créez le bon ici, en 1 minute</b><p>Montant ou prestation, pour qui, de la part de qui, un petit message. Vous obtenez un PDF à votre nom, numéroté, avec un code unique : imprimez-le ou envoyez-le par email ou WhatsApp.</p></div></li>
+    <li><span class="hs-n">3</span><div><b>Le jour où la personne vient avec son bon</b><p>Ouvrez le <b>Registre</b>, tapez le code ou le nom, cliquez sur <b>Utiliser</b>. Le bon est marqué comme utilisé : impossible de s'en servir deux fois. S'il n'est utilisé qu'en partie, le solde restant est noté.</p></div></li>
+    <li><span class="hs-n">4</span><div><b>Vos données restent chez vous</b><p>Tout est enregistré sur cet appareil, dans ce navigateur : personne d'autre n'y a accès, pas même ActivityWeb. Exportez une <b>sauvegarde</b> de temps en temps (onglet Réglages) pour ne rien perdre et pour passer sur un autre appareil.</p></div></li>
+  </ol>
+  <p class="help-tip">💡 Ajoutez cette page à vos favoris (ou à l'écran d'accueil de votre téléphone) pour la retrouver en un clic. Version d'essai : tout fonctionne, les PDF portent simplement la mention « EXEMPLE » jusqu'à l'activation de votre licence.</p>
+</section>
+
 <section class="view on" id="v-creer">
   <h2>Créer un bon cadeau</h2>
   <p class="sub">Remplissez le bon, vérifiez l'aperçu, téléchargez le PDF à imprimer ou à envoyer par email. </p>
@@ -417,6 +446,7 @@ function load() {
       state.seq = d.seq || {};
       state.lastBackup = d.lastBackup || null;
       state.sinceBackup = d.sinceBackup || 0;
+      state.helpSeen = !!d.helpSeen;
     }
   } catch (e) { storeOK = false; }
 }
@@ -1070,6 +1100,10 @@ $('models').addEventListener('click', function (e) { var bt = e.target.closest('
 
 // Si on arrive sans nom, on ouvre d'abord les réglages
 if (!state.settings.nom) $('biz').open = true;
+function showHelp(on) { $('help').hidden = !on; if (on) { goto('creer'); } }
+showHelp(!state.helpSeen);
+$('help-btn').addEventListener('click', function () { showHelp($('help').hidden); });
+$('help-close').addEventListener('click', function () { state.helpSeen = true; save(); showHelp(false); });
 })();
 </script>
 </body>
