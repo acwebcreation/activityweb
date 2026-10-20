@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merci pour votre achat – Bons cadeaux pro | ActivityWeb</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#0f1f38; --orange:#e8682a; --orange-lt:#f08050; --cream:#f7f4ef; --text:#1d2433; --muted:#6b7385; --border:#e3ded5; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'DM Sans', system-ui, sans-serif; background:var(--cream); color:var(--text); line-height:1.6; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:40px 16px; }
+  .wrap { max-width:580px; width:100%; }
+  .check { width:64px; height:64px; border-radius:50%; background:var(--orange); color:white; display:grid; place-items:center; font-size:30px; margin:0 auto 20px; }
+  .eyebrow { text-align:center; color:var(--orange); font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:10px; }
+  h1 { font-family:'DM Serif Display', serif; font-weight:400; font-size:2rem; color:var(--navy); text-align:center; line-height:1.2; margin-bottom:12px; }
+  .lead { text-align:center; color:var(--muted); margin-bottom:26px; }
+  .card { background:white; border:1px solid var(--border); border-radius:12px; padding:22px 24px; margin-bottom:16px; }
+  .card h2 { font-size:1rem; color:var(--navy); margin-bottom:12px; }
+  ol { padding-left:20px; }
+  li { margin-bottom:8px; font-size:0.95rem; }
+  li b { color:var(--navy); }
+  .good { background:var(--navy); color:white; border:0; }
+  .good h2 { color:white; }
+  .good ul { list-style:none; }
+  .good li { padding-left:24px; position:relative; color:rgba(255,255,255,0.85); }
+  .good li::before { content:'✓'; position:absolute; left:0; color:var(--orange); font-weight:700; }
+  .btn { display:block; text-align:center; background:var(--orange); color:white; text-decoration:none; font-weight:600; padding:14px 18px; border-radius:8px; margin:22px 0 10px; }
+  .btn:hover { background:var(--orange-lt); }
+  .fine { text-align:center; font-size:0.82rem; color:var(--muted); }
+  .fine a { color:var(--orange); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="check">✓</div>
+    <div class="eyebrow">Bons cadeaux pro</div>
+    <h1>Merci pour votre achat !</h1>
+    <p class="lead">Votre paiement a bien été reçu. Votre clé de licence vous est envoyée par email dans les 24 heures.</p>
+
+    <div class="card">
+      <h2>Et maintenant ?</h2>
+      <ol>
+        <li><b>Vous pouvez déjà commencer</b> : ouvrez l'outil et créez vos bons. Tout fonctionne en attendant la clé.</li>
+        <li><b>Quand vous recevez la clé</b> : dans l'outil, onglet « Réglages », rubrique « Licence », collez-la puis cliquez sur « Activer ».</li>
+        <li><b>La mention « EXEMPLE » disparaît.</b> Les bons créés avant l'activation se retéléchargent sans la mention depuis le Registre (bouton « PDF »).</li>
+      </ol>
+    </div>
+
+    <div class="card good">
+      <h2>Ce que comprend votre licence</h2>
+      <ul>
+        <li>Nombre de bons cadeaux illimité</li>
+        <li>Utilisation aussi souvent que vous le souhaitez, sans abonnement</li>
+        <li>Les 3 modèles, votre logo et vos couleurs</li>
+        <li>Le registre pour suivre les bons vendus, utilisés et expirés</li>
+      </ul>
+    </div>
+
+    <a class="btn" href="./">Ouvrir l'outil Bons cadeaux →</a>
+    <p class="fine">Astuce : ajoutez l'outil à vos favoris pour le retrouver en un clic.<br>
+    Pas de clé après 24 heures ? Vérifiez vos courriers indésirables, puis écrivez à <a href="mailto:contact@activityweb.be">contact@activityweb.be</a> avec votre reçu de paiement.</p>
+  </div>
+</body>
+</html>
