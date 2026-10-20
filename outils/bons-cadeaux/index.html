@@ -14,6 +14,7 @@
     --ok:#2d8a4e; --warn:#b7791f; --bad:#c0392b;
   }
   * { box-sizing:border-box; margin:0; padding:0; }
+  [hidden] { display:none !important; }
   body { font-family:'DM Sans', system-ui, sans-serif; background:var(--cream); color:var(--text); font-size:15px; line-height:1.5; }
   button, input, select, textarea { font:inherit; color:inherit; }
   a { color:var(--orange); }
@@ -105,6 +106,13 @@
   .help-tip { margin-top:16px; font-size:0.84rem; color:var(--text); background:var(--cream); border-radius:8px; padding:10px 14px; }
   @media (max-width:1000px) { .help-steps { grid-template-columns:1fr 1fr; } }
   @media (max-width:600px) { .help-steps { grid-template-columns:1fr; } }
+
+  .buy-box { margin-top:16px; background:var(--white); border:2px solid var(--orange); border-radius:10px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+  .buy-box b { color:var(--navy); font-size:0.98rem; }
+  .buy-box p { font-size:0.84rem; color:var(--muted); margin-top:2px; }
+  .buy-acts { display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .buy-box[hidden] { display:none; }
+  .buy-key { background:none; border:0; color:var(--navy); font-size:0.8rem; text-decoration:underline; cursor:pointer; }
 
   /* Registre */
   .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:18px; }
@@ -302,6 +310,16 @@
       <div class="preview"><canvas id="cv" width="1260" height="888" aria-label="Aperçu du bon cadeau"></canvas></div>
       <div class="preview-actions">
         <span style="font-size:0.82rem;color:var(--muted);">Aperçu en direct · format A5 paysage, s'imprime aussi sur A4</span>
+      </div>
+      <div class="buy-box" id="buy-box">
+        <div>
+          <b>Retirez la mention « EXEMPLE »</b>
+          <p>Licence en paiement unique : bons illimités, sans abonnement. Votre clé arrive par email.</p>
+        </div>
+        <div class="buy-acts">
+          <a class="btn btn-main" href="https://buy.stripe.com/3cI14oa0H0YXaO98Cd83C0f">Acheter la licence – 39 €</a>
+          <button type="button" class="buy-key" data-goto="reglages" id="buy-key">J'ai déjà une clé</button>
+        </div>
       </div>
     </div>
   </div>
@@ -998,6 +1016,7 @@ function renderBiz() {
 }
 function renderLicence() {
   var pro = isPro(), chip = $('licence-chip');
+  $('buy-box').hidden = pro;
   chip.textContent = pro ? 'Licence activée ✓' : 'Version d\'essai';
   chip.classList.toggle('essai', !pro);
   $('licence-txt').textContent = pro
@@ -1043,6 +1062,7 @@ document.addEventListener('click', function (e) {
   if (e.target.closest('[data-backup]')) exportJSON();
 });
 $('licence-chip').addEventListener('click', function () { goto('reglages'); $('card-licence').scrollIntoView({ behavior: 'smooth' }); });
+$('buy-key').addEventListener('click', function () { setTimeout(function () { $('card-licence').scrollIntoView({ behavior: 'smooth' }); $('r-cle').focus(); }, 50); });
 document.querySelectorAll('#seg-type button').forEach(function (x) { x.addEventListener('click', function () { setType(x.dataset.type); }); });
 document.querySelectorAll('#models button').forEach(function (x) { x.addEventListener('click', function () { setModele(x.dataset.m); }); });
 $('f-bon').addEventListener('input', renderPreview);
