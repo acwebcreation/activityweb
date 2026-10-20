@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guides IA – Prompts prêts à l'emploi pour votre activité | ActivityWeb</title>
+<title>Boutique – Outils, guides IA et pack pour indépendants | ActivityWeb</title>
 <meta name="description" content="Guides PDF de prompts IA prêts à l'emploi : un guide généraliste pour tout indépendant, et des guides par spécialité pour artisans et praticiens du bien-être.">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -803,6 +803,12 @@
   .upsell-band strong { color:white; display:block; font-size:1.05rem; margin-bottom:4px; font-family:'DM Serif Display',serif; font-weight:400; }
   .upsell-band p { font-size:0.88rem; color:rgba(255,255,255,0.6); max-width:480px; }
   .upsell-band .btn-primary { white-space:nowrap; }
+
+  .shop-chips { display:flex; gap:10px; flex-wrap:wrap; margin-top:26px; }
+  .shop-chips a { color:white; text-decoration:none; font-size:0.88rem; font-weight:500; padding:8px 16px; border-radius:20px; border:1px solid rgba(255,255,255,0.3); transition:background 0.2s; }
+  .shop-chips a:hover { background:rgba(255,255,255,0.12); }
+  a.soon-badge { text-decoration:none; background:rgba(232,104,42,0.12); color:var(--orange); }
+  a.soon-badge:hover { background:var(--orange); color:white; }
 </style>
 </head>
 
@@ -815,49 +821,118 @@
 <div class="logo-text">Activity<span>Web</span></div>
 </a>
 <ul class="nav-links">
-<li><a href="index.html">Accueil</a></li>
-<li><a href="artisans.html">Artisans</a></li>
-<li><a href="bien-etre.html">Bien-être</a></li>
-<li><a href="#generaliste">Guides IA</a></li>
-<li><a href="pack-debutant.html">Pack SaaS</a></li>
-<li><a href="formulaire.html" class="nav-cta">Créer mon site →</a></li>
-</ul>
+    <li><a href="sites.html">Site one page</a></li>
+    <li><a href="guides.html" style="color:white;">Boutique</a></li>
+    <li><a href="index.html#process">Comment ça marche</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="formulaire.html" class="nav-cta">Créer mon site →</a></li>
+  </ul>
 </nav>
 
 <!-- HERO -->
 <section class="guides-hero" id="hero">
-<div class="hero-badge">Ressources IA</div>
-<h1>Des <em>guides IA</em><br>prêts à l'emploi pour votre activité</h1>
-<p>Des prompts testés et rédigés, à copier-coller dans ChatGPT ou toute autre IA — pour rédiger vos devis, vos posts, vos réponses clients, sans bloquer sur la page blanche.</p>
+<div class="hero-badge">Boutique ActivityWeb</div>
+<h1>Des <em>solutions</em> concrètes<br>pour les indépendants</h1>
+<p>Des outils qui font gagner du temps et de l'argent, des guides IA prêts à l'emploi et un pack complet pour démarrer. Paiement unique, accès immédiat.</p>
+<div class="shop-chips">
+<a href="#applis">🧰 Outils &amp; applis</a>
+<a href="#generaliste">✨ Guides IA</a>
+<a href="#pack-saas">📦 Pack démarrage</a>
+</div>
 </section>
 
-<!-- PACK SAAS DÉBUTANT -->
-<section class="catalog-section" id="pack-saas">
+
+<!-- OUTILS & APPLIS -->
+<section class="catalog-section" id="applis">
 <div class="catalog-label">
 <span class="dot"></span>
-<h2>Le pack complet — pour démarrer sans tout créer</h2>
-<span class="cnt">Offre de lancement</span>
+<h2>Outils &amp; applis — gagnez du temps, encaissez plus</h2>
+<span class="cnt">En préparation</span>
 </div>
 
-<div class="featured-guide" style="border:2px solid var(--orange);">
+<div class="guides-grid" style="max-width:1100px;">
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-naturo">
+<div class="guide-cover-badge">Outil en ligne</div>
+<div class="guide-cover-title">Bons cadeaux<br>pro</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">Bien-être · coiffure · commerces · artisans</div>
+<p class="guide-desc">Créez et vendez des bons cadeaux numérotés à votre image, en PDF. Suivez ceux qui sont utilisés ou expirés.</p>
+<div class="guide-footer">
+<div class="guide-price">39€</div>
+<a href="#prevenu" class="soon-badge app-interet" data-app="Bons cadeaux pro">Être prévenu →</a>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-sophro">
+<div class="guide-cover-badge">Outil en ligne</div>
+<div class="guide-cover-title">Devis pro<br>en 5 minutes</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">Artisans · services</div>
+<p class="guide-desc">Votre catalogue de prestations, un devis PDF propre en quelques clics, fini les soirées sur Word.</p>
+<div class="guide-footer">
+<div class="guide-price">39€</div>
+<a href="#prevenu" class="soon-badge app-interet" data-app="Devis pro">Être prévenu →</a>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-coach">
+<div class="guide-cover-badge">Outil en ligne</div>
+<div class="guide-cover-title">Bon d'intervention<br>signé</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">Artisans · dépannage</div>
+<p class="guide-desc">Photos avant/après, heures, signature du client sur le smartphone et PDF envoyé sur place. Moins de litiges.</p>
+<div class="guide-footer">
+<div class="guide-price">39€</div>
+<a href="#prevenu" class="soon-badge app-interet" data-app="Bon d'intervention signé">Être prévenu →</a>
+</div>
+</div>
+</div>
+
+<div class="guide-card">
+<div class="guide-cover guide-cover-naturo">
+<div class="guide-cover-badge">Outil en ligne</div>
+<div class="guide-cover-title">Relances<br>impayés &amp; devis</div>
+</div>
+<div class="guide-body">
+<div class="guide-meta">Tous les indépendants</div>
+<p class="guide-desc">Suivez les devis sans réponse et les factures en retard, avec des relances prêtes à envoyer, de la plus douce à la mise en demeure.</p>
+<div class="guide-footer">
+<div class="guide-price">29€</div>
+<a href="#prevenu" class="soon-badge app-interet" data-app="Relances impayés et devis">Être prévenu →</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="lead-band" id="prevenu" style="max-width:1100px;margin-left:0;">
 <div>
-<div class="fg-badge">🔥 Tarif limité aux 100 premiers</div>
-<h3>Pack SaaS Débutant</h3>
-<p>CGV &amp; politique de confidentialité (Belgique/France), base de 97 annuaires vérifiés, 39 emails de prospection, scripts d'appel et bibliothèque d'objections, kit design 6 templates Canva, 6 prompts IA business plan et un fichier de suivi de prospection. En PDF et en Word modifiable, pour démarrer sans repartir de zéro.</p>
-<div class="fg-tags">
-<span class="fg-tag">CGV &amp; RGPD</span>
-<span class="fg-tag">97 annuaires</span>
-<span class="fg-tag">39 emails</span>
-<span class="fg-tag">Scripts d'appel</span>
-<span class="fg-tag">Kit design</span>
-<span class="fg-tag">Prompts IA</span>
+<span class="lead-band-badge">🔔 Liste d'attente</span>
+<strong>Un de ces outils vous serait utile ?</strong>
+<p>Laissez votre email : vous serez prévenu au lancement, avec un tarif réduit pour les premiers inscrits.</p>
 </div>
-</div>
-<div class="fg-buy">
-<div class="fg-price">67€</div>
-<div class="fg-note">Paiement unique · PDF + Word modifiables</div>
-<a href="pack-debutant.html" class="fg-btn">Découvrir le pack →</a>
-</div>
+<form id="app-form" onsubmit="inscrireApp(event)" style="display:flex;flex-direction:column;gap:10px;min-width:260px;">
+<select id="app-choix" required style="padding:10px 12px;border-radius:6px;border:1px solid var(--border);font:inherit;font-size:0.88rem;">
+<option value="">Quel outil vous intéresse ?</option>
+<option>Bons cadeaux pro</option>
+<option>Devis pro</option>
+<option>Bon d'intervention signé</option>
+<option>Relances impayés et devis</option>
+<option>Plusieurs / tous</option>
+</select>
+<input type="email" id="app-email" required placeholder="Votre email" style="padding:10px 12px;border-radius:6px;border:1px solid var(--border);font:inherit;font-size:0.88rem;">
+<button type="submit" id="app-btn" class="btn-primary" style="border:none;cursor:pointer;">Me prévenir →</button>
+<div id="app-ok" style="display:none;font-size:0.85rem;color:#2d8a4e;">✓ C'est noté, vous serez prévenu au lancement.</div>
+</form>
 </div>
 </section>
 
@@ -1074,6 +1149,36 @@
 </div>
 </section>
 
+<!-- PACK SAAS DÉBUTANT -->
+<section class="catalog-section" id="pack-saas">
+<div class="catalog-label">
+<span class="dot"></span>
+<h2>Pack démarrage — tout pour lancer votre activité</h2>
+<span class="cnt">Offre de lancement</span>
+</div>
+
+<div class="featured-guide" style="border:2px solid var(--orange);">
+<div>
+<div class="fg-badge">🔥 Tarif limité aux 100 premiers</div>
+<h3>Pack SaaS Débutant</h3>
+<p>CGV &amp; politique de confidentialité (Belgique/France), base de 97 annuaires vérifiés, 39 emails de prospection, scripts d'appel et bibliothèque d'objections, kit design 6 templates Canva, 6 prompts IA business plan et un fichier de suivi de prospection. En PDF et en Word modifiable, pour démarrer sans repartir de zéro.</p>
+<div class="fg-tags">
+<span class="fg-tag">CGV &amp; RGPD</span>
+<span class="fg-tag">97 annuaires</span>
+<span class="fg-tag">39 emails</span>
+<span class="fg-tag">Scripts d'appel</span>
+<span class="fg-tag">Kit design</span>
+<span class="fg-tag">Prompts IA</span>
+</div>
+</div>
+<div class="fg-buy">
+<div class="fg-price">67€</div>
+<div class="fg-note">Paiement unique · PDF + Word modifiables</div>
+<a href="pack-debutant.html" class="fg-btn">Découvrir le pack →</a>
+</div>
+</div>
+</section>
+
 <!-- CONTACT TEASER -->
 <section class="catalog-section">
 <div class="guides-teaser-band">
@@ -1118,5 +1223,24 @@ Etsy
 </div>
 </footer>
 
+<script>
+document.querySelectorAll('.app-interet').forEach(function(a){
+  a.addEventListener('click', function(){ var s=document.getElementById('app-choix'); if(s) s.value=a.dataset.app; });
+});
+async function inscrireApp(e){
+  e.preventDefault();
+  var btn=document.getElementById('app-btn'); btn.disabled=true; btn.textContent='Envoi…';
+  var app=document.getElementById('app-choix').value, email=document.getElementById('app-email').value;
+  try {
+    await fetch('https://api.web3forms.com/submit', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ access_key:'17ea29d2-00fe-413d-b1a6-cc8c3af9ca66',
+        subject:'🔔 Liste d\'attente outil — ' + app, from_name:'ActivityWeb Boutique',
+        Outil: app, email: email, Source: 'guides.html (boutique)' })
+    });
+    document.getElementById('app-ok').style.display='block'; btn.textContent='Inscrit ✓';
+  } catch(err){ btn.disabled=false; btn.textContent='Réessayer →'; }
+}
+</script>
 </body>
 </html>
