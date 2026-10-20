@@ -78,6 +78,20 @@
   .models button { border:1.5px solid var(--border); background:var(--white); border-radius:6px; padding:8px 6px; cursor:pointer; font-size:0.82rem; }
   .models button.on { border-color:var(--orange); color:var(--orange); font-weight:600; }
 
+  .biz { border:1.5px solid var(--border); border-radius:8px; margin-bottom:18px; background:var(--cream); }
+  .biz[open] { border-color:var(--orange); background:var(--white); }
+  .biz summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:10px; padding:12px 14px; }
+  .biz summary::-webkit-details-marker { display:none; }
+  .biz summary > span:nth-child(2) { flex:1; display:flex; flex-direction:column; }
+  .biz summary b { color:var(--navy); font-size:0.92rem; }
+  .biz-sum { font-size:0.8rem; color:var(--muted); }
+  .biz-edit { font-size:0.8rem; font-weight:600; color:var(--orange); }
+  .biz[open] .biz-edit { display:none; }
+  .biz-body { padding:0 14px 6px; }
+  .biz-step { width:24px; height:24px; border-radius:50%; background:var(--navy); color:white; display:inline-grid; place-items:center; font-size:0.78rem; font-weight:700; flex-shrink:0; }
+  .biz-step-title { display:flex; align-items:center; gap:10px; margin-bottom:14px; color:var(--navy); font-size:0.92rem; }
+  .biz.missing { border-color:var(--orange); }
+
   /* Registre */
   .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:18px; }
   .stat { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
@@ -154,9 +168,35 @@
 <!-- ═════════════ CRÉER ═════════════ -->
 <section class="view on" id="v-creer">
   <h2>Créer un bon cadeau</h2>
-  <p class="sub">Remplissez le bon, vérifiez l'aperçu, téléchargez le PDF à imprimer ou à envoyer par email. Votre nom, logo, couleurs et coordonnées se règlent une fois pour toutes dans <a href="#" data-goto="reglages">Réglages</a>.</p>
+  <p class="sub">Remplissez le bon, vérifiez l'aperçu, téléchargez le PDF à imprimer ou à envoyer par email. </p>
   <div class="create">
     <form class="card" id="f-bon" autocomplete="off">
+      <details class="biz" id="biz">
+        <summary><span class="biz-step">1</span><span><b>Votre commerce</b><span class="biz-sum" id="biz-sum">Nom, logo et coordonnées imprimés sur le bon</span></span><span class="biz-edit">Modifier</span></summary>
+        <div class="biz-body">
+          <p class="hint" style="font-size:0.8rem;margin-bottom:12px;">À remplir une seule fois : c'est mémorisé pour tous vos prochains bons.</p>
+          <div class="field"><label for="k-nom">Nom de votre commerce ou cabinet</label><input type="text" id="k-nom" data-k="nom" maxlength="40" placeholder="Ex. Studio Zen"></div>
+          <div class="field"><label for="k-activite">Petite ligne sous le nom <span class="hint">(facultatif)</span></label><input type="text" id="k-activite" data-k="activite" maxlength="50" placeholder="Ex. Massages & soins du corps · Dilbeek"></div>
+          <div class="row">
+            <div class="field"><label for="k-tel">Téléphone</label><input type="text" id="k-tel" data-k="tel" maxlength="25"></div>
+            <div class="field"><label for="k-email">Email</label><input type="email" id="k-email" data-k="email" maxlength="60"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="k-adresse">Adresse</label><input type="text" id="k-adresse" data-k="adresse" maxlength="70"></div>
+            <div class="field"><label for="k-site">Site web</label><input type="text" id="k-site" data-k="site" maxlength="50"></div>
+          </div>
+          <div class="field" style="margin-bottom:6px;">
+            <label>Logo <span class="hint">(facultatif, PNG ou JPG)</span></label>
+            <div class="logo-box">
+              <img class="logo-prev" alt="Votre logo" hidden>
+              <input type="file" class="logo-in" accept="image/png,image/jpeg,image/webp" style="font-size:0.82rem;">
+              <button type="button" class="btn btn-ghost btn-sm logo-del" hidden>Retirer</button>
+            </div>
+          </div>
+          <p class="hint" style="font-size:0.8rem;">Couleurs, conditions et durée de validité : dans <a href="#" data-goto="reglages">Réglages</a>.</p>
+        </div>
+      </details>
+      <div class="biz-step-title"><span class="biz-step">2</span><b>Le bon cadeau</b></div>
       <div class="field">
         <label>Le bon offre</label>
         <div class="seg" id="seg-type">
@@ -271,22 +311,22 @@
     <div>
       <div class="card">
         <h3>Votre activité</h3>
-        <div class="field"><label for="r-nom">Nom de votre commerce ou cabinet <span class="hint">(en grand, en haut du bon)</span></label><input type="text" id="r-nom" maxlength="40" placeholder="Ex. Studio Zen"></div>
-        <div class="field"><label for="r-activite">Petite ligne sous le nom <span class="hint">(facultatif : votre métier, slogan ou ville)</span></label><input type="text" id="r-activite" maxlength="50" placeholder="Ex. Massages & soins du corps · Dilbeek"></div>
+        <div class="field"><label for="r-nom">Nom de votre commerce ou cabinet <span class="hint">(en grand, en haut du bon)</span></label><input type="text" id="r-nom" data-k="nom" maxlength="40" placeholder="Ex. Studio Zen"></div>
+        <div class="field"><label for="r-activite">Petite ligne sous le nom <span class="hint">(facultatif : votre métier, slogan ou ville)</span></label><input type="text" id="r-activite" data-k="activite" maxlength="50" placeholder="Ex. Massages & soins du corps · Dilbeek"></div>
         <div class="row">
-          <div class="field"><label for="r-tel">Téléphone</label><input type="text" id="r-tel" maxlength="25"></div>
-          <div class="field"><label for="r-email">Email</label><input type="email" id="r-email" maxlength="60"></div>
+          <div class="field"><label for="r-tel">Téléphone</label><input type="text" id="r-tel" data-k="tel" maxlength="25"></div>
+          <div class="field"><label for="r-email">Email</label><input type="email" id="r-email" data-k="email" maxlength="60"></div>
         </div>
         <div class="row">
-          <div class="field"><label for="r-adresse">Adresse</label><input type="text" id="r-adresse" maxlength="70"></div>
-          <div class="field"><label for="r-site">Site web</label><input type="text" id="r-site" maxlength="50"></div>
+          <div class="field"><label for="r-adresse">Adresse</label><input type="text" id="r-adresse" data-k="adresse" maxlength="70"></div>
+          <div class="field"><label for="r-site">Site web</label><input type="text" id="r-site" data-k="site" maxlength="50"></div>
         </div>
         <div class="field" style="margin-bottom:0;">
           <label>Logo <span class="hint">(PNG ou JPG)</span></label>
           <div class="logo-box">
-            <img id="r-logo-img" alt="Votre logo" hidden>
-            <input type="file" id="r-logo" accept="image/png,image/jpeg,image/webp" style="font-size:0.82rem;">
-            <button type="button" class="btn btn-ghost btn-sm" id="r-logo-del" hidden>Retirer</button>
+            <img class="logo-prev" alt="Votre logo" hidden>
+            <input type="file" class="logo-in" accept="image/png,image/jpeg,image/webp" style="font-size:0.82rem;">
+            <button type="button" class="btn btn-ghost btn-sm logo-del" hidden>Retirer</button>
           </div>
         </div>
       </div>
@@ -912,11 +952,19 @@ var SFIELDS = ['nom', 'activite', 'tel', 'email', 'adresse', 'site', 'c1', 'c2',
 function fillSettings() {
   var s = state.settings;
   SFIELDS.forEach(function (k) { $('r-' + k).value = s[k]; });
-  $('r-logo-img').hidden = !s.logo; $('r-logo-del').hidden = !s.logo;
-  if (s.logo) $('r-logo-img').src = s.logo;
+  document.querySelectorAll('[data-k]').forEach(function (el) { if (document.activeElement !== el) el.value = s[el.dataset.k] || ''; });
+  document.querySelectorAll('.logo-prev').forEach(function (im) { im.hidden = !s.logo; if (s.logo) im.src = s.logo; });
+  document.querySelectorAll('.logo-del').forEach(function (bt) { bt.hidden = !s.logo; });
+  renderBiz();
   $('r-cle').value = s.cle || '';
   setModele(form.modele || s.modele);
   renderLicence();
+}
+function renderBiz() {
+  var s = state.settings, biz = $('biz');
+  var parts = [s.nom, s.tel || s.email].filter(Boolean);
+  $('biz-sum').textContent = s.nom ? parts.join(' · ') + (s.logo ? ' · logo ✓' : '') : 'À remplir : le nom de votre commerce n\'est pas encore indiqué';
+  biz.classList.toggle('missing', !s.nom);
 }
 function renderLicence() {
   var pro = isPro(), chip = $('licence-chip');
@@ -976,6 +1024,7 @@ $('f-bon').addEventListener('submit', function (e) {
   if (form.type === 'montant' && !(parseFloat($('b-montant').value) > 0)) { toast('Indiquez le montant du bon.'); $('b-montant').focus(); return; }
   if (form.type === 'prestation' && !$('b-prestation').value.trim()) { toast('Indiquez la prestation offerte.'); $('b-prestation').focus(); return; }
   if (!$('b-expire').value) { toast('Indiquez la date de validité.'); return; }
+  if (!state.settings.nom) { $('biz').open = true; $('k-nom').focus(); toast('Indiquez d\'abord le nom de votre commerce (étape 1).'); return; }
   var num = nextNum(), y = String(new Date().getFullYear());
   var b = brouillon(num, code6());
   state.seq[y] = (state.seq[y] || 0) + 1;
@@ -994,7 +1043,15 @@ $('btn-csv').addEventListener('click', exportCSV);
 $('btn-export').addEventListener('click', exportJSON);
 $('btn-import').addEventListener('change', function (e) { if (e.target.files[0]) importJSON(e.target.files[0]); e.target.value = ''; });
 
-SFIELDS.forEach(function (k) {
+document.querySelectorAll('[data-k]').forEach(function (el) {
+  el.addEventListener('input', function (e) {
+    e.stopPropagation();
+    state.settings[el.dataset.k] = el.value;
+    document.querySelectorAll('[data-k="' + el.dataset.k + '"]').forEach(function (o) { if (o !== el) o.value = el.value; });
+    save(); renderBiz(); renderPreview();
+  });
+});
+['c1', 'c2', 'prefixe', 'validite', 'conditions'].forEach(function (k) {
   $('r-' + k).addEventListener('input', function () {
     var v = $('r-' + k).value;
     state.settings[k] = k === 'validite' ? Number(v) : (k === 'prefixe' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : v);
@@ -1002,8 +1059,8 @@ SFIELDS.forEach(function (k) {
     save(); renderPreview();
   });
 });
-$('r-logo').addEventListener('change', function (e) { onLogo(e.target.files[0]); e.target.value = ''; });
-$('r-logo-del').addEventListener('click', function () { state.settings.logo = null; state.settings.logoRatio = 1; save(); fillSettings(); renderPreview(); });
+document.querySelectorAll('.logo-in').forEach(function (inp) { inp.addEventListener('change', function (e) { onLogo(e.target.files[0]); e.target.value = ''; }); });
+document.querySelectorAll('.logo-del').forEach(function (bt) { bt.addEventListener('click', function () { state.settings.logo = null; state.settings.logoRatio = 1; save(); fillSettings(); renderPreview(); }); });
 $('btn-cle').addEventListener('click', function () {
   var k = $('r-cle').value.trim().toUpperCase();
   if (!cleValide(k)) { toast('Cette clé n\'est pas valide. Vérifiez-la dans l\'email reçu.'); return; }
@@ -1012,9 +1069,7 @@ $('btn-cle').addEventListener('click', function () {
 $('models').addEventListener('click', function (e) { var bt = e.target.closest('button[data-m]'); if (bt) { state.settings.modele = bt.dataset.m; save(); } });
 
 // Si on arrive sans nom, on ouvre d'abord les réglages
-if (!state.settings.nom && !state.bons.length) {
-  setTimeout(function () { toast('Commencez par indiquer le nom de votre activité dans Réglages.'); }, 600);
-}
+if (!state.settings.nom) $('biz').open = true;
 })();
 </script>
 </body>
