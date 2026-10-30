@@ -334,15 +334,15 @@ const PRODUCTS = [
   { title:"Calendrier de l'Avent interactif", cat:"Noël", type:"Interactif", price:"4,99 €", emoji:"🎄", img:"",
     desc:"24 surprises à personnaliser avec vos messages et photos. Le calendrier s'envoie par e-mail et chaque case s'ouvre le bon jour.", lien:"https://buy.stripe.com/00w00k0q73753lHcSt83C0d" },
   { title:"Planificateur & budget de Noël", cat:"Noël", price:"3,99 €", emoji:"📝", img:"",
-    desc:"Cadeaux, menus, budget : tout Noël organisé sur papier (A4).", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
+    desc:"Cadeaux, menus, budget : tout Noël organisé sur papier (A4).", type:"Imprimable", lien:"https://www.etsy.com/shop/ActivityWebStudio?search_query=planificateur+noel" },
   { title:"50 jeux de Noël pour seniors", cat:"Noël", price:"4,99 €", emoji:"🧩", img:"",
-    desc:"Jeux de mémoire et de réflexion pour partager un moment avec les grands-parents.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
+    desc:"Jeux de mémoire et de réflexion pour partager un moment avec les grands-parents.", type:"Imprimable", lien:"https://www.etsy.com/shop/ActivityWebStudio?search_query=jeux+noel+seniors" },
   { title:"Coloriages d'anniversaire", cat:"Anniversaire", price:"2,99 €", emoji:"🎈", img:"",
-    desc:"Des pages à colorier pour occuper les petits pendant la fête.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
+    desc:"Des pages à colorier pour occuper les petits pendant la fête.", type:"Imprimable", lien:"https://www.etsy.com/shop/ActivityWebStudio?search_query=coloriage+anniversaire" },
   { title:"Carte-poème « Maman »", cat:"Fête des mères", price:"2,99 €", emoji:"💐", img:"",
-    desc:"Aquarelle + poème original, carte pliée A5 à imprimer.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" },
+    desc:"Aquarelle + poème original, carte pliée A5 à imprimer.", type:"Imprimable", lien:"https://www.etsy.com/shop/ActivityWebStudio?search_query=carte+poeme+maman" },
   { title:"Affiche-poème naissance", cat:"Naissance & mariage", price:"3,99 €", emoji:"🍼", img:"",
-    desc:"Une affiche douce pour la chambre de bébé, plusieurs formats.", type:"Imprimable", lien:"https://payhip.com/b/REMPLACER" }
+    desc:"Une affiche douce pour la chambre de bébé, plusieurs formats.", type:"Imprimable", lien:"https://www.etsy.com/shop/ActivityWebStudio?search_query=affiche+poeme+naissance" }
  
 ];
 /* ========================================================= */
@@ -368,7 +368,7 @@ function render(){
         <p>${p.desc}</p>
         <div class="foot">
           <span class="price">${p.price}</span>
-          <a class="btn" href="${p.lien}" target="_blank" rel="noopener">Acheter</a>
+          <a class="btn" href="${p.lien}" target="_blank" rel="noopener">${p.lien.includes('etsy.com') ? 'Acheter sur Etsy' : 'Acheter'}</a>
         </div>
       </div>
     </article>`).join('') : '<p class="empty">Pas encore de produit dans cette sélection. Revenez bientôt !</p>';
