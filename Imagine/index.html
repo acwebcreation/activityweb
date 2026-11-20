@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imagine & Offre – Des cadeaux uniques, créés par vous</title>
+<meta name="description" content="Idées cadeaux originales, cadeaux à créer soi-même et chansons personnalisées.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* Couleurs : change-les ici si tu veux */
+  :root { --bg:#FFF8F1; --card:#FFFFFF; --text:#2B2233; --muted:#7A6E7F; --accent:#FF5A5F; --gold:#F4B942; --line:#F1E4D8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'Poppins',system-ui,sans-serif; min-height:100vh;
+         background-image:radial-gradient(circle at 12% 8%, #FFE3D6 0, transparent 35%), radial-gradient(circle at 90% 92%, #FFF0C9 0, transparent 35%); }
+  main { max-width:520px; margin:0 auto; padding:48px 18px; }
+  header { text-align:center; margin-bottom:28px; }
+  .gift { font-size:76px; display:inline-block; animation:wiggle 3s ease-in-out infinite; }
+  @keyframes wiggle { 0%,80%,100% { transform:rotate(0); } 85% { transform:rotate(-10deg); } 90% { transform:rotate(10deg); } 95% { transform:rotate(-6deg); } }
+  h1 { font-family:'Fraunces',serif; font-weight:800; font-size:42px; line-height:1.05; margin-top:4px; }
+  h1 span { color:var(--accent); }
+  .tag { color:var(--muted); margin-top:8px; font-size:15px; }
+  .big { display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--text);
+         background:var(--card); border:2px solid var(--line); border-radius:18px; padding:16px 18px; margin-bottom:12px;
+         box-shadow:0 6px 18px rgba(255,90,95,.08); transition:transform .12s, border-color .12s; }
+  .big:hover, .big:focus-visible { transform:translateY(-2px); border-color:var(--accent); outline:none; }
+  .big.main { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .big .ico { font-size:28px; width:40px; text-align:center; flex-shrink:0; }
+  .big b { display:block; font-size:17px; }
+  .big small { display:block; font-size:13px; opacity:.85; margin-top:2px; }
+  .socials { display:flex; gap:10px; justify-content:center; margin-top:22px; }
+  .socials a { text-decoration:none; color:var(--text); background:var(--card); border:2px solid var(--line); border-radius:999px; padding:8px 16px; font-weight:700; font-size:14px; }
+  .socials a:hover { border-color:var(--gold); }
+  footer { text-align:center; color:var(--muted); font-size:13px; margin-top:30px; }
+  footer b { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="gift" aria-hidden="true">🎁</div>
+    <h1>Imagine <span>&</span> Offre</h1>
+    <p class="tag">Des cadeaux uniques, créés par vous.</p>
+  </header>
+
+  <a class="big main" data-link="tutos" href="#" target="_blank" rel="noopener">
+    <span class="ico">🎬</span><span><b>Crée tes cadeaux toi-même</b><small>Mes tutos pas à pas : chansons, poèmes, jeux…</small></span>
+  </a>
+  <a class="big" data-link="guide" href="#" target="_blank" rel="noopener">
+    <span class="ico">📘</span><span><b>Le guide gratuit</b><small>Mes meilleures idées de cadeaux à faire soi-même</small></span>
+  </a>
+  <a class="big" data-link="gadgets" href="#" target="_blank" rel="noopener">
+    <span class="ico">🤪</span><span><b>Idées cadeaux insolites</b><small>Des gadgets absurdes qui font toujours rire</small></span>
+  </a>
+  <a class="big" data-link="etsy" href="#" target="_blank" rel="noopener">
+    <span class="ico">🖨️</span><span><b>Cadeaux à imprimer</b><small>Jeux, bons cadeaux et surprises en PDF, prêts en 5 minutes</small></span>
+  </a>
+  <a class="big" data-link="amazon" href="#" target="_blank" rel="noopener">
+    <span class="ico">📚</span><span><b>Livres à offrir</b><small>Livres de jeux et d'humour, livrés chez vous</small></span>
+  </a>
+  <a class="big" data-link="chanson" href="#" target="_blank" rel="noopener">
+    <span class="ico">🎵</span><span><b>Pas le temps ? Je l'écris pour toi</b><small>Une chanson de fête personnalisée, avec son prénom</small></span>
+  </a>
+
+  <div class="socials">
+    <a data-link="youtube" href="#" target="_blank" rel="noopener">▶️ YouTube</a>
+    <a data-link="instagram" href="#" target="_blank" rel="noopener">📸 Instagram</a>
+    <a data-link="pinterest" href="#" target="_blank" rel="noopener">📌 Pinterest</a>
+  </div>
+
+  <footer>Pas besoin d'être artiste pour <b>faire plaisir</b>.</footer>
+</main>
+
+<script>
+/* =====================================================================
+   TES LIENS : remplace chaque "" par ton adresse (entre les guillemets).
+   Un lien laissé vide masque automatiquement son bouton.
+   ===================================================================== */
+const LIENS = {
+  tutos:     "https://www.youtube.com/@imagineetoffre",   // ou ta playlist de tutos
+  guide:     "",                                          // ta page de capture du guide gratuit (quand elle existe)
+  gadgets:   "https://mauvaiseshabitudes.com",
+  etsy:      "https://www.etsy.com/shop/ActivityWebstudio",
+  amazon:    "",                                          // ta page auteur Amazon « Les Zygos »
+  chanson:   "https://www.activityweb.be/zygos/chansons.html",
+  youtube:   "https://www.youtube.com/@imagineetoffre",
+  instagram: "https://www.instagram.com/imagineetoffre/",
+  pinterest: "https://www.pinterest.com/imagineetoffre/"
+};
+
+document.querySelectorAll('[data-link]').forEach(a => {
+  const url = LIENS[a.dataset.link];
+  if (url) a.href = url; else a.style.display = 'none';
+});
+</script>
+</body>
+</html>
