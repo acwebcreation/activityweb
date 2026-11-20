@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les Zygos – Jeux, défis et fous rires</title>
+<meta name="description" content="Tous les jeux, livres d'activités et chansons de fête des Zygos, au même endroit.">
+<link rel="icon" href="mascotte.png">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#111111; --card:#1b1b1b; --line:#2a2a2a; --orange:#FF7A1A; --blue:#2D9CFF; --text:#ffffff; --muted:#b8b8b8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'Poppins',system-ui,sans-serif; min-height:100vh; }
+  main { max-width:520px; margin:0 auto; padding:48px 18px 48px; }
+  header { text-align:center; margin-bottom:26px; }
+  header img { width:128px; height:auto; animation:bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 50% { transform:translateY(-6px) rotate(-3deg); } }
+  h1 { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:44px; line-height:1; margin-top:6px; }
+  h1 span { color:var(--orange); }
+  .tag { color:var(--muted); margin-top:8px; font-size:15px; }
+  .big { display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--text);
+         background:var(--card); border:2px solid var(--line); border-radius:18px; padding:16px 18px; margin-bottom:12px;
+         transition:transform .12s, border-color .12s; }
+  .big:hover, .big:focus-visible { transform:translateY(-2px); border-color:var(--orange); outline:none; }
+  .big.main { background:var(--orange); border-color:var(--orange); color:#111; }
+  .big .ico { font-size:28px; width:40px; text-align:center; flex-shrink:0; }
+  .big b { display:block; font-size:17px; }
+  .big small { display:block; font-size:13px; opacity:.8; margin-top:2px; }
+  h2 { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:26px; margin:30px 0 12px; }
+  h2 span { color:var(--orange); }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .coll { background:var(--card); border:2px solid var(--line); border-radius:16px; padding:14px; display:flex; flex-direction:column; }
+  .coll .ico { font-size:26px; }
+  .coll b { font-size:15px; margin:6px 0 2px; }
+  .coll p { font-size:12.5px; color:var(--muted); flex:1; margin-bottom:10px; }
+  .coll .btns { display:flex; gap:6px; }
+  .coll a { flex:1; text-align:center; text-decoration:none; font-weight:700; font-size:13px; padding:7px 4px; border-radius:10px; }
+  .amz { background:var(--orange); color:#111; }
+  .ets { background:transparent; color:var(--blue); border:2px solid var(--blue); }
+  .coll a:hover { filter:brightness(1.12); }
+  footer { text-align:center; color:#777; font-size:12.5px; margin-top:34px; }
+  footer b { color:var(--orange); }
+  @media (max-width:360px){ .grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="mascotte.png" alt="La mascotte des Zygos qui rit">
+    <h1>Les <span>Zygos</span></h1>
+    <p class="tag">Jeux, défis et fous rires, pour toute la famille</p>
+  </header>
+
+  <a class="big main" data-link="youtube" href="#" target="_blank" rel="noopener">
+    <span class="ico">▶️</span><span><b>La chaîne YouTube</b><small>Défis visuels, Tu préfères, POV, énigmes…</small></span>
+  </a>
+  <a class="big" data-link="amazon" href="#" target="_blank" rel="noopener">
+    <span class="ico">📚</span><span><b>Tous nos livres sur Amazon</b><small>Livres de jeux et d'humour, en version brochée</small></span>
+  </a>
+  <a class="big" data-link="etsy" href="#" target="_blank" rel="noopener">
+    <span class="ico">🖨️</span><span><b>La boutique Etsy</b><small>Les mêmes jeux en PDF, à imprimer chez soi</small></span>
+  </a>
+  <a class="big" data-link="chansons" href="#" target="_blank" rel="noopener">
+    <span class="ico">🎉</span><span><b>Ta chanson de fête personnalisée</b><small>Anniversaire, retraite, Noël… livrée en 48 h</small></span>
+  </a>
+
+
+  <footer>Abonne-toi, t'es un <b>Zygo</b> maintenant 😉</footer>
+</main>
+
+<script>
+/* =====================================================================
+   TES LIENS : remplace chaque "" par ton adresse (entre les guillemets).
+   Un lien laissé vide masque automatiquement son bouton.
+   ===================================================================== */
+const LIENS = {
+  youtube:           "https://www.youtube.com/@DefiDuSphinx",
+  amazon:            "",   // ta page auteur Amazon « Les Zygos »
+  etsy:              "https://www.etsy.com/shop/ActivityWebstudio",
+  chansons:          "chansons.html"
+};
+
+document.querySelectorAll('[data-link]').forEach(a => {
+  const url = LIENS[a.dataset.link];
+  if (url) { a.href = url; }
+  else { a.style.display = 'none'; }
+});
+</script>
+</body>
+</html>
