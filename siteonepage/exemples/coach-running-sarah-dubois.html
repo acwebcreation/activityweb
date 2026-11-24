@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarah Dubois — Running & Bien-être | Namur</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --vert-foret: #2a3d2e;
+      --vert-mousse: #3d5c40;
+      --vert-sage: #7a9c7e;
+      --creme: #f5f0e8;
+      --creme-chaud: #ede5d5;
+      --terre: #a0845c;
+      --terre-clair: #c4a882;
+      --blanc: #faf8f4;
+      --text: #2a2a2a;
+      --text-light: #6b6b6b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--blanc);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ---- HEADER ---- */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 56px;
+      background: rgba(245,240,232,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(122,156,126,0.2);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--vert-foret);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--vert-foret);
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-left: 36px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--vert-foret); }
+
+    .btn-nav {
+      background: var(--vert-foret) !important;
+      color: var(--creme) !important;
+      padding: 10px 24px !important;
+      border-radius: 100px !important;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      padding: 80px 56px 80px;
+      position: relative;
+    }
+
+    .hero-right {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: saturate(0.85);
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--blanc) 0%, transparent 20%);
+      z-index: 1;
+    }
+
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--blanc), transparent);
+      z-index: 1;
+    }
+
+    .hero-leaf {
+      position: absolute;
+      top: 120px;
+      right: -30px;
+      width: 180px;
+      opacity: 0.06;
+      font-size: 180px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--creme-chaud);
+      border: 1px solid rgba(122,156,126,0.3);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--vert-mousse);
+      margin-bottom: 32px;
+    }
+
+    .hero-badge span { font-size: 0.85rem; }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.08;
+      color: var(--vert-foret);
+      margin-bottom: 12px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--terre);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-light);
+      max-width: 420px;
+      margin-bottom: 44px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--vert-foret);
+      color: var(--creme);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      padding: 16px 36px;
+      border-radius: 100px;
+      display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--vert-mousse); transform: translateY(-2px); }
+
+    .btn-outline {
+      color: var(--vert-foret);
+      font-weight: 500;
+      font-size: 0.88rem;
+      text-decoration: none;
+      padding: 15px 32px;
+      border-radius: 100px;
+      border: 1.5px solid var(--vert-foret);
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover { background: var(--vert-foret); color: var(--creme); }
+
+    .hero-social-proof {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 52px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(42,61,46,0.1);
+    }
+
+    .avatars {
+      display: flex;
+      margin-right: 8px;
+    }
+
+    .avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--blanc);
+      overflow: hidden;
+      margin-left: -10px;
+    }
+
+    .avatar:first-child { margin-left: 0; }
+
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .social-proof-text {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    .social-proof-text strong { color: var(--vert-foret); }
+
+    /* ---- AMBIANCE STRIP ---- */
+    .ambiance-strip {
+      background: var(--vert-foret);
+      padding: 28px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .ambiance-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--creme);
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0.85;
+    }
+
+    .ambiance-item span { opacity: 0.4; }
+
+    .ambiance-dot { color: var(--terre-clair); opacity: 1 !important; }
+
+    /* ---- ABOUT ---- */
+    section { padding: 100px 56px; }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--vert-sage);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.12;
+      color: var(--vert-foret);
+      margin-bottom: 28px;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .about-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 12px;
+    }
+
+    .about-photos img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 12px;
+      filter: saturate(0.8);
+    }
+
+    .about-photos img:first-child {
+      grid-row: span 2;
+      aspect-ratio: 2/3;
+    }
+
+    .about-text p {
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 0.96rem;
+      font-weight: 300;
+    }
+
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .about-values {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .value-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .value-dot {
+      width: 10px; height: 10px;
+      background: var(--terre);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .value-item p {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin: 0;
+      font-weight: 400;
+    }
+
+    /* ---- SERVICES ---- */
+    .services { background: var(--creme); }
+
+    .services-intro {
+      max-width: 1140px;
+      margin: 0 auto 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--blanc);
+      border-radius: 16px;
+      padding: 40px 32px;
+      border: 1px solid rgba(122,156,126,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(42,61,46,0.1);
+    }
+
+    .service-emoji {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--vert-foret);
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      font-size: 0.86rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+
+    .service-tag {
+      display: inline-block;
+      background: rgba(122,156,126,0.15);
+      color: var(--vert-mousse);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    /* ---- PROCESS ---- */
+    .process { background: var(--vert-foret); }
+
+    .process .section-eyebrow { color: var(--vert-sage); }
+    .process .section-title { color: var(--creme); }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      max-width: 1140px;
+      margin: 60px auto 0;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 60px;
+      right: 60px;
+      height: 1px;
+      background: rgba(122,156,126,0.3);
+      z-index: 0;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--vert-mousse);
+      border: 2px solid var(--vert-sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--creme);
+      margin: 0 auto 20px;
+    }
+
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--creme);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 0.8rem;
+      color: var(--vert-sage);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ---- TESTIMONIALS ---- */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 24px;
+      max-width: 1140px;
+      margin: 60px auto 0;
+    }
+
+    .testi-featured {
+      background: var(--vert-foret);
+      border-radius: 16px;
+      padding: 44px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .testi-featured-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--creme);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .testi-featured-author .name { color: var(--creme); font-weight: 500; margin-bottom: 4px; }
+    .testi-featured-author .info { font-size: 0.78rem; color: var(--vert-sage); }
+
+    .testi-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .testi-item {
+      background: var(--creme);
+      border-radius: 12px;
+      padding: 24px 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      border: 1px solid rgba(122,156,126,0.12);
+    }
+
+    .testi-item-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--vert-mousse);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      color: var(--creme);
+      font-size: 1.1rem;
+    }
+
+    .testi-item-text { font-size: 0.86rem; color: var(--text-light); line-height: 1.65; font-weight: 300; }
+    .testi-item-name { font-size: 0.8rem; font-weight: 500; color: var(--text); margin-top: 8px; }
+    .testi-stars { color: var(--terre); font-size: 0.72rem; margin-bottom: 6px; }
+
+    /* ---- TARIFS ---- */
+    .tarifs { background: var(--creme-chaud); }
+
+    .tarifs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+
+    .tarif-card {
+      background: var(--blanc);
+      border-radius: 20px;
+      padding: 44px 32px;
+      border: 1.5px solid rgba(122,156,126,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tarif-card.featured {
+      background: var(--vert-foret);
+      border-color: var(--vert-foret);
+    }
+
+    .tarif-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--vert-sage), var(--terre-clair));
+    }
+
+    .tarif-tag {
+      display: inline-block;
+      background: rgba(160,132,92,0.15);
+      color: var(--terre);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .tarif-card.featured .tarif-tag {
+      background: rgba(255,255,255,0.15);
+      color: var(--creme);
+    }
+
+    .tarif-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--vert-foret);
+      margin-bottom: 8px;
+    }
+
+    .tarif-card.featured .tarif-name { color: var(--creme); }
+
+    .tarif-price {
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--vert-foret);
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+
+    .tarif-card.featured .tarif-price { color: var(--creme); }
+
+    .tarif-price strong { font-weight: 700; }
+
+    .tarif-period {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-bottom: 32px;
+    }
+
+    .tarif-card.featured .tarif-period { color: rgba(245,240,232,0.6); }
+
+    .tarif-list {
+      list-style: none;
+      margin-bottom: 36px;
+    }
+
+    .tarif-list li {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-weight: 300;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(42,61,46,0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tarif-list li::before {
+      content: '✦';
+      color: var(--vert-sage);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .tarif-card.featured .tarif-list li { color: rgba(245,240,232,0.75); border-color: rgba(255,255,255,0.08); }
+    .tarif-card.featured .tarif-list li::before { color: var(--terre-clair); }
+
+    .tarif-btn {
+      display: block;
+      text-align: center;
+      background: var(--vert-foret);
+      color: var(--creme);
+      font-weight: 500;
+      font-size: 0.85rem;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 100px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .tarif-card.featured .tarif-btn {
+      background: var(--creme);
+      color: var(--vert-foret);
+    }
+
+    .tarif-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ---- CONTACT ---- */
+    .contact { background: var(--blanc); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .contact-form-area {
+      background: var(--creme);
+      border-radius: 20px;
+      padding: 48px 40px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--vert-foret);
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--blanc);
+      border: 1.5px solid rgba(122,156,126,0.2);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--vert-sage); }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--vert-foret);
+      color: var(--creme);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      padding: 16px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover { background: var(--vert-mousse); }
+
+    .contact-info { padding-top: 20px; }
+
+    .contact-info .section-title { margin-bottom: 16px; }
+
+    .contact-info p {
+      color: var(--text-light);
+      font-size: 0.96rem;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    .info-list { display: flex; flex-direction: column; gap: 20px; }
+
+    .info-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .info-icon {
+      width: 44px; height: 44px;
+      background: var(--creme-chaud);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .info-label { font-size: 0.75rem; color: var(--text-light); font-weight: 400; margin-bottom: 3px; }
+    .info-value { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--vert-foret);
+      padding: 32px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--creme);
+    }
+
+    .footer-copy { font-size: 0.75rem; color: rgba(245,240,232,0.5); }
+
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-left > * {
+      animation: fadeIn 0.6s ease both;
+    }
+
+    .hero-badge { animation-delay: 0.1s; }
+    .hero-title { animation-delay: 0.2s; }
+    .hero-sub { animation-delay: 0.35s; }
+    .hero-cta { animation-delay: 0.5s; }
+    .hero-social-proof { animation-delay: 0.65s; }
+
+    @media (max-width: 900px) {
+      header { padding: 16px 24px; }
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 50vh; }
+      section { padding: 70px 24px; }
+      .about-layout, .services-intro, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .process-steps::before { display: none; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .tarifs-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  
+    .demo-badge { position:fixed; bottom:20px; right:20px; z-index:999; background:var(--vert-foret); color:var(--creme); padding:8px 16px; border-radius:100px; font-size:0.75rem; font-weight:500; letter-spacing:0.04em; box-shadow:0 4px 20px rgba(42,61,46,0.3); pointer-events:none; }
+    .footer-social { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
+    .footer-social a { color:rgba(245,240,232,0.5); text-decoration:none; font-size:0.78rem; transition:color 0.2s; }
+    .footer-social a:hover { color:var(--terre-clair); }
+    .hero-scene { position:absolute; inset:0; overflow:hidden; background:linear-gradient(to bottom,#f3e9d2 0%,#ebdfc4 45%,#d6e0cc 100%); }
+    .hero-scene .sun { position:absolute; top:14%; right:18%; width:130px; height:130px; border-radius:50%; background:radial-gradient(circle,#e7cfa3 0%,#c4a882 100%); opacity:0.85; }
+    .hero-scene .hill { position:absolute; left:-20%; width:140%; border-radius:50% 50% 0 0 / 100% 100% 0 0; }
+    .hero-scene .hill-back { bottom:0; height:46%; background:#7a9c7e; }
+    .hero-scene .hill-front { bottom:-6%; height:36%; left:-40%; width:150%; background:#3d5c40; }
+    .hero-scene .runner { position:absolute; bottom:24%; left:46%; font-size:5.5rem; line-height:1; filter:drop-shadow(0 6px 10px rgba(42,61,46,0.35)); }
+    .about-photos .tile { border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:24px 12px; text-align:center; color:var(--creme); }
+    .about-photos .tile:first-child { grid-row:span 2; }
+    .about-photos .tile:not(:first-child) { aspect-ratio:1/1; }
+    .about-photos .tile-a { background:linear-gradient(160deg,#2a3d2e,#3d5c40); }
+    .about-photos .tile-b { background:linear-gradient(160deg,#7a9c7e,#a9c2ab); color:#2a3d2e; }
+    .about-photos .tile-c { background:linear-gradient(160deg,#a0845c,#c4a882); }
+    .about-photos .tile-emoji { font-size:3rem; line-height:1; }
+    .about-photos .tile-label { font-family:'Playfair Display',serif; font-style:italic; font-size:1rem; }
+  </style>
+</head>
+<body>
+
+  <div class="demo-badge">Site démo · ActivityWeb Studio</div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🌿</div>
+      <span class="logo-text">Sarah Dubois</span>
+    </div>
+    <nav>
+      <a href="#about">À propos</a>
+      <a href="#services">Programmes</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact" class="btn-nav">Bilan offert</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <div class="hero-left">
+      
+      <div class="hero-badge">
+        <span>⭐</span> Coach certifiée ADEPS — Namur
+      </div>
+
+      <h1 class="hero-title">
+        Courir,<br>
+        se sentir<br>
+        <em>vivante.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Je t'accompagne pour (re)trouver le plaisir de bouger — running, renforcement et bien-être. Des programmes doux mais efficaces, qui respectent ton corps et s'adaptent à ta vie.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Bilan gratuit de 30 min</a>
+        <a href="#services" class="btn-outline">Découvrir</a>
+      </div>
+
+      <div class="hero-social-proof">
+        <div class="avatars">
+          <div class="avatar" style="background:#7a9c7e;display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:#fff;border-radius:50%;">A</div>
+          <div class="avatar" style="background:#a0845c;display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:#fff;border-radius:50%;">M</div>
+          <div class="avatar" style="background:#3d5c40;display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:#fff;border-radius:50%;">L</div>
+        </div>
+        <div class="social-proof-text">
+          <strong>+180 coureuses</strong> accompagnées depuis 2018
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-scene" role="img" aria-label="Coureuse sur un sentier de campagne"><span class="sun"></span><span class="hill hill-back"></span><span class="hill hill-front"></span><span class="runner">🏃‍♀️</span></div>
+    </div>
+  </div>
+
+  <!-- AMBIANCE STRIP -->
+  <div class="ambiance-strip">
+    <div class="ambiance-item">🏃‍♀️ <span>Running & trail</span></div>
+    <div class="ambiance-item ambiance-dot">✦</div>
+    <div class="ambiance-item">💪 <span>Renforcement musculaire</span></div>
+    <div class="ambiance-item ambiance-dot">✦</div>
+    <div class="ambiance-item">🧘‍♀️ <span>Mobilité & récupération</span></div>
+    <div class="ambiance-item ambiance-dot">✦</div>
+    <div class="ambiance-item">🥗 <span>Nutrition sportive</span></div>
+    <div class="ambiance-item ambiance-dot">✦</div>
+    <div class="ambiance-item">📱 <span>Coaching en ligne</span></div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-layout">
+      <div class="about-photos">
+        <div class="tile tile-a"><span class="tile-emoji">🏃‍♀️</span><span class="tile-label">Running</span></div>
+        <div class="tile tile-b"><span class="tile-emoji">🌲</span><span class="tile-label">Trail &amp; nature</span></div>
+        <div class="tile tile-c"><span class="tile-emoji">🧘‍♀️</span><span class="tile-label">Mobilité</span></div>
+      </div>
+
+      <div class="about-text">
+        <div class="section-eyebrow">Mon histoire</div>
+        <h2 class="section-title">Passionnée de course, formée pour te guider</h2>
+        <p>
+          J'ai couru mon premier semi-marathon en 2014, sans préparation, et je me suis blessée deux semaines après. C'est cette expérience qui m'a poussé à me former <strong>sérieusement</strong> — brevet de moniteur sportif ADEPS, spécialisation running, formation en nutrition sportive.
+        </p>
+        <p>
+          Depuis 2018, j'accompagne principalement des femmes qui veulent (re)commencer à courir, progresser sans se blesser, ou simplement <strong>retrouver du plaisir dans le mouvement</strong>. Pas de méthode brutale, pas de surcharge.
+        </p>
+
+        <div class="about-values">
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <p><strong>Bienveillance avant tout</strong> — je m'adapte à ton niveau et ton rythme de vie, pas l'inverse.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <p><strong>Progression durable</strong> — des habitudes solides qui tiennent sur le long terme.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <p><strong>Plaisir du mouvement</strong> — si tu n'aimes pas ce que tu fais, tu n'y retourneras pas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-intro">
+      <div>
+        <div class="section-eyebrow">Programmes</div>
+        <h2 class="section-title">Comment je peux t'aider</h2>
+      </div>
+      <p style="color:var(--text-light);font-size:0.95rem;line-height:1.75;font-weight:300;">Chaque programme est construit sur mesure, après un bilan initial complet. Pas de copier-coller, pas de planning générique.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-emoji">🏃‍♀️</span>
+        <div class="service-name">Running Débutante</div>
+        <p class="service-desc">Passer de 0 à 5km ou finir ton premier 10km sans douleur. Plan progressif sur 8 à 12 semaines, totalement adapté à ton niveau de départ.</p>
+        <span class="service-tag">En ligne ou présentiel</span>
+      </div>
+      <div class="service-card">
+        <span class="service-emoji">⛰️</span>
+        <div class="service-name">Préparation Course</div>
+        <p class="service-desc">10km, semi, marathon ou trail — je te prépare à atteindre ton objectif avec un plan structuré, un suivi hebdomadaire et une prépa mentale.</p>
+        <span class="service-tag">Sur mesure</span>
+      </div>
+      <div class="service-card">
+        <span class="service-emoji">🌸</span>
+        <div class="service-name">Corps & Bien-être</div>
+        <p class="service-desc">Renforcement en douceur, mobilité, étirements actifs. Programme hebdomadaire pour prendre soin de ton corps et progresser sereinement.</p>
+        <span class="service-tag">100% en ligne</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div style="max-width:1140px;margin:0 auto;">
+      <div class="section-eyebrow">Comment ça marche</div>
+      <h2 class="section-title">4 étapes pour démarrer</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Bilan gratuit</div>
+        <p class="step-desc">30 min pour parler de ton niveau, tes objectifs et tes contraintes. Sans engagement.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Programme sur mesure</div>
+        <p class="step-desc">Je construis ton plan dans les 48h. Entraînement, nutrition, récupération.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Tu t'entraînes</div>
+        <p class="step-desc">Tu reçois le programme sur l'appli, avec vidéos et explications. Simple à suivre.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Suivi & ajustements</div>
+        <p class="step-desc">Check-in hebdomadaire. J'adapte le programme en temps réel selon tes retours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="avis">
+    <div style="max-width:1140px;margin:0 auto;">
+      <div class="section-eyebrow">Témoignages</div>
+      <h2 class="section-title">Ce qu'elles en disent</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-featured">
+        <p class="testi-featured-quote">"En 6 semaines, j'ai couru mes premiers 5km sans m'arrêter. Je n'y croyais plus après ma grossesse. Sarah est patiente, disponible et vraiment à l'écoute. Ce qu'elle fait, c'est de la magie."</p>
+        <div class="testi-featured-author">
+          <div class="name">Amélie V.</div>
+          <div class="info">Programme Running Débutante — Namur</div>
+          <div class="testi-stars" style="margin-top:8px">★★★★★</div>
+        </div>
+      </div>
+      <div class="testi-list">
+        <div class="testi-item">
+          <div class="testi-item-avatar">M</div>
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-item-text">Préparation semi-marathon en 12 semaines. PB de 18 minutes, aucune blessure. Le programme était parfaitement dosé, jamais trop facile, jamais écrasant.</p>
+            <div class="testi-item-name">Maud D. — Semi-marathon Liège</div>
+          </div>
+        </div>
+        <div class="testi-item">
+          <div class="testi-item-avatar">L</div>
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-item-text">Le programme Corps & Bien-être a changé ma routine. 3 séances par semaine, facile à caser dans mon agenda. En 2 mois j'ai perdu 5kg et je dors beaucoup mieux.</p>
+            <div class="testi-item-name">Laura M. — Programme bien-être</div>
+          </div>
+        </div>
+        <div class="testi-item">
+          <div class="testi-item-avatar">C</div>
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-item-text">J'avais essayé plusieurs coachs avant Sarah. La différence ? Elle ne te pousse pas, elle t'accompagne. Et les résultats sont bien là.</p>
+            <div class="testi-item-name">Céline R. — Trail Ardennes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section class="tarifs" id="tarifs">
+    <div style="max-width:1000px;margin:0 auto;text-align:center;">
+      <div class="section-eyebrow">Tarifs</div>
+      <h2 class="section-title">Investir dans ton bien-être</h2>
+    </div>
+    <div class="tarifs-grid">
+      <div class="tarif-card">
+        <div class="tarif-tag">Essentiel</div>
+        <div class="tarif-name">Plan Solo</div>
+        <div class="tarif-price"><strong>79</strong>€</div>
+        <div class="tarif-period">par mois</div>
+        <ul class="tarif-list">
+          <li>Programme running personnalisé</li>
+          <li>Guide nutritionnel de base</li>
+          <li>Accès application mobile</li>
+          <li>1 check-in mensuel vidéo</li>
+        </ul>
+        <a href="#contact" class="tarif-btn">Commencer</a>
+      </div>
+      <div class="tarif-card featured">
+        <div class="tarif-tag">Recommandé</div>
+        <div class="tarif-name">Suivi Complet</div>
+        <div class="tarif-price"><strong>169</strong>€</div>
+        <div class="tarif-period">par mois</div>
+        <ul class="tarif-list">
+          <li>Programme 100% sur mesure</li>
+          <li>Nutrition + récupération</li>
+          <li>Suivi WhatsApp hebdomadaire</li>
+          <li>Ajustements en temps réel</li>
+          <li>2 appels vidéo/mois</li>
+        </ul>
+        <a href="#contact" class="tarif-btn">Je choisis ce plan</a>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-tag">Intensif</div>
+        <div class="tarif-name">Coaching Prestige</div>
+        <div class="tarif-price"><strong>289</strong>€</div>
+        <div class="tarif-period">par mois</div>
+        <ul class="tarif-list">
+          <li>Séances présentielles incluses</li>
+          <li>Analyse biomécanique</li>
+          <li>Suivi illimité 7j/7</li>
+          <li>Préparation mentale incluse</li>
+          <li>Analyse courses & résultats</li>
+        </ul>
+        <a href="#contact" class="tarif-btn">Prendre contact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-layout">
+      <div class="contact-info">
+        <div class="section-eyebrow">Contact</div>
+        <h2 class="section-title">Commençons par un bilan gratuit</h2>
+        <p>30 minutes d'appel offert pour faire connaissance, parler de tes objectifs et voir si je suis la bonne personne pour t'accompagner. Aucun engagement.</p>
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Zone d'intervention</div>
+              <div class="info-value">Namur & région wallonne</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📱</div>
+            <div>
+              <div class="info-label">Téléphone / WhatsApp</div>
+              <div class="info-value">+32 478 00 00 00</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div>
+              <div class="info-label">E-mail</div>
+              <div class="info-value">sarah@coach-running.be</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🕐</div>
+            <div>
+              <div class="info-label">Disponibilité</div>
+              <div class="info-value">Lun–Sam, 8h–19h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form-area" onsubmit="demoAlert(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Prénom</label>
+            <input type="text" placeholder="Julie" />
+          </div>
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" placeholder="Martin" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="julie@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Ton objectif</label>
+          <select>
+            <option value="" disabled selected>Choisir...</option>
+            <option>Commencer à courir</option>
+            <option>Préparer une course</option>
+            <option>Perte de poids & bien-être</option>
+            <option>Remise en forme générale</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ton message</label>
+          <textarea placeholder="Dis-moi où tu en es, ce que tu cherches..."></textarea>
+        </div>
+        <button class="submit-btn">Réserver mon bilan gratuit 🌿</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Sarah Dubois — Coach Running & Bien-être</div>
+    <div class="footer-copy">© 2026 Sarah Dubois · Brevet ADEPS · Namur</div>
+    <div class="footer-social">
+      <a href="https://www.pinterest.com/ActivityWebStudio/" target="_blank" rel="noopener">Pinterest</a>
+      <a href="https://www.instagram.com/activitywebstudio/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@activityweb" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.etsy.com/shop/ActivityWebStudio" target="_blank" rel="noopener">Etsy</a>
+    </div>
+  </footer>
+
+<script>
+function demoAlert(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector("button");
+  if (btn) { btn.textContent = "✓ Message reçu (démonstration)"; btn.style.background = "#2d8a4e"; btn.style.color = "#fff"; btn.disabled = true; }
+}
+</script>
+</body>
+</html>

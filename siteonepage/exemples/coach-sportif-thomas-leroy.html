@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas Leroy — Coach Sportif Personnel | Liège</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --noir: #0a0a0a;
+      --charbon: #121212;
+      --acier: #1e1e1e;
+      --orange: #ff5c00;
+      --orange-clair: #ff7a2e;
+      --blanc: #f0ede8;
+      --gris: #9a9a9a;
+      --gris-clair: #c8c5bf;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--noir);
+      color: var(--blanc);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ---- HEADER ---- */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,92,0,0.2);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      color: var(--blanc);
+    }
+
+    .logo span { color: var(--orange); }
+
+    nav a {
+      color: var(--gris-clair);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-left: 36px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--orange); }
+
+    .btn-nav {
+      background: var(--orange) !important;
+      color: var(--noir) !important;
+      padding: 10px 22px;
+      font-weight: 700 !important;
+    }
+
+    .btn-nav:hover { background: var(--orange-clair) !important; }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 80px;
+      padding-left: 48px;
+      padding-right: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(to right, rgba(10,10,10,0.95) 45%, rgba(10,10,10,0.4) 100%),
+        radial-gradient(ellipse at 78% 38%, rgba(255,92,0,0.45), transparent 60%),
+        repeating-linear-gradient(135deg, #151515 0 2px, #0a0a0a 2px 16px);
+    }
+
+    .hero-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--orange), transparent);
+    }
+
+    .hero-number {
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28vw;
+      color: rgba(255,92,0,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 680px;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 32px; height: 2px;
+      background: var(--orange);
+      display: block;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      margin-bottom: 28px;
+    }
+
+    .hero-title span { color: var(--orange); }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--gris-clair);
+      max-width: 460px;
+      margin-bottom: 48px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--noir);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 36px;
+      display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--orange-clair); transform: translateY(-2px); }
+
+    .btn-ghost {
+      color: var(--gris-clair);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost::after {
+      content: '→';
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--blanc); }
+    .btn-ghost:hover::after { transform: translateX(4px); }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 80px;
+      right: 48px;
+      display: flex;
+      gap: 48px;
+    }
+
+    .stat-item { text-align: right; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--orange);
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-top: 4px;
+    }
+
+    /* ---- ABOUT ---- */
+    section { padding: 100px 48px; }
+
+    .section-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      margin-bottom: 32px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -16px; left: -16px;
+      right: 16px; bottom: 16px;
+      border: 2px solid var(--orange);
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+      filter: grayscale(30%);
+    }
+
+    .cert-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--orange);
+      color: var(--noir);
+      padding: 20px 24px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+      line-height: 1.3;
+      z-index: 2;
+    }
+
+    .about-text p {
+      color: var(--gris-clair);
+      line-height: 1.75;
+      margin-bottom: 20px;
+      font-size: 0.98rem;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--gris-clair);
+    }
+
+    .feature-icon {
+      width: 32px; height: 32px;
+      background: rgba(255,92,0,0.12);
+      border: 1px solid rgba(255,92,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: -2px;
+    }
+
+    /* ---- SERVICES ---- */
+    .services { background: var(--charbon); }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      max-width: 1200px;
+      margin: 0 auto 60px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--acier);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover { background: #242424; }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(255,92,0,0.12);
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: color 0.3s;
+    }
+
+    .service-card:hover .service-num { color: rgba(255,92,0,0.2); }
+
+    .service-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--gris);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .service-price {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      border-top: 1px solid rgba(255,92,0,0.2);
+      padding-top: 20px;
+    }
+
+    /* ---- TESTIMONIALS ---- */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 60px auto 0;
+    }
+
+    .testi-card {
+      background: var(--charbon);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 36px;
+      position: relative;
+    }
+
+    .testi-card::before {
+      content: '"';
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--orange);
+      opacity: 0.3;
+      position: absolute;
+      top: 12px; left: 24px;
+      line-height: 1;
+    }
+
+    .testi-text {
+      font-style: italic;
+      color: var(--gris-clair);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+      padding-top: 20px;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--acier);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--orange);
+      border: 2px solid rgba(255,92,0,0.3);
+    }
+
+    .testi-name {
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .testi-info {
+      font-size: 0.75rem;
+      color: var(--gris);
+    }
+
+    .stars { color: var(--orange); font-size: 0.75rem; margin-bottom: 4px; }
+
+    /* ---- TARIFS ---- */
+    .tarifs { background: var(--charbon); }
+
+    .tarifs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+
+    .tarif-card {
+      background: var(--acier);
+      padding: 48px 36px;
+      text-align: center;
+      position: relative;
+    }
+
+    .tarif-card.featured {
+      background: var(--orange);
+    }
+
+    .tarif-card.featured .tarif-price,
+    .tarif-card.featured .tarif-name,
+    .tarif-card.featured .tarif-desc,
+    .tarif-card.featured .tarif-list li { color: var(--noir); }
+
+    .tarif-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--noir);
+      color: var(--orange);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border: 1px solid var(--orange);
+    }
+
+    .tarif-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      color: var(--blanc);
+      margin-bottom: 8px;
+    }
+
+    .tarif-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.8rem;
+      line-height: 1;
+      color: var(--blanc);
+      margin-bottom: 4px;
+    }
+
+    .tarif-price sup {
+      font-size: 1.5rem;
+      vertical-align: super;
+    }
+
+    .tarif-desc {
+      font-size: 0.75rem;
+      color: var(--gris);
+      margin-bottom: 32px;
+    }
+
+    .tarif-list {
+      list-style: none;
+      margin-bottom: 36px;
+      text-align: left;
+    }
+
+    .tarif-list li {
+      font-size: 0.85rem;
+      color: var(--gris-clair);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tarif-list li::before { content: '✓'; color: var(--orange); font-weight: 700; }
+    .tarif-card.featured .tarif-list li::before { color: var(--noir); }
+
+    .tarif-btn {
+      display: block;
+      background: var(--orange);
+      color: var(--noir);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 28px;
+      transition: opacity 0.2s;
+    }
+
+    .tarif-card.featured .tarif-btn {
+      background: var(--noir);
+      color: var(--blanc);
+    }
+
+    .tarif-btn:hover { opacity: 0.85; }
+
+    /* ---- CONTACT ---- */
+    .contact { background: var(--noir); }
+
+    .contact-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-wrap .section-title { font-size: clamp(2.8rem, 5vw, 5rem); }
+
+    .contact-sub {
+      color: var(--gris-clair);
+      font-size: 1rem;
+      line-height: 1.65;
+      margin-bottom: 52px;
+    }
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .form-full textarea {
+      background: var(--acier);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--blanc);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      padding: 16px 20px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .form-full textarea:focus { border-color: var(--orange); }
+
+    .contact-form input::placeholder,
+    .form-full textarea::placeholder { color: var(--gris); }
+
+    .form-full { grid-column: 1 / -1; }
+
+    .form-full textarea { resize: vertical; min-height: 120px; margin-bottom: 12px; }
+
+    .form-submit {
+      display: block;
+      width: 100%;
+      background: var(--orange);
+      color: var(--noir);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 18px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .form-submit:hover { background: var(--orange-clair); }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 56px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--gris-clair);
+    }
+
+    .contact-item-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,92,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--charbon);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer .logo { font-size: 1.2rem; }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--gris);
+    }
+
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label { animation: fadeInUp 0.7s ease both; animation-delay: 0.1s; }
+    .hero-title { animation: fadeInUp 0.7s ease both; animation-delay: 0.25s; }
+    .hero-sub { animation: fadeInUp 0.7s ease both; animation-delay: 0.4s; }
+    .hero-cta { animation: fadeInUp 0.7s ease both; animation-delay: 0.55s; }
+    .hero-stats { animation: fadeInUp 0.7s ease both; animation-delay: 0.65s; }
+
+    @media (max-width: 900px) {
+      header { padding: 16px 24px; }
+      nav { display: none; }
+      section { padding: 70px 24px; }
+      .hero { padding: 100px 24px 60px; }
+      .about-grid, .services-grid, .testimonials-grid, .tarifs-grid { grid-template-columns: 1fr; }
+      .hero { flex-direction: column; align-items: flex-start; justify-content: flex-end; }
+      .hero-content { max-width: 100%; }
+      .hero-cta { flex-wrap: wrap; }
+      .hero-stats { position: static; margin-top: 48px; justify-content: flex-start; gap: 28px; flex-wrap: wrap; }
+      .stat-item { text-align: left; }
+      .contact-form { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  
+    .demo-badge { position:fixed; bottom:20px; right:20px; z-index:999; background:var(--orange); color:var(--noir); padding:8px 16px; font-size:0.75rem; font-weight:700; letter-spacing:0.04em; box-shadow:0 4px 20px rgba(0,0,0,0.35); pointer-events:none; }
+    .footer-social { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
+    .footer-social a { color:rgba(255,255,255,0.45); text-decoration:none; font-size:0.78rem; transition:color 0.2s; }
+    .footer-social a:hover { color:var(--orange); }
+    .about-portrait { position:relative; z-index:1; aspect-ratio:3/4; background:radial-gradient(ellipse at 30% 20%, rgba(255,92,0,0.28), transparent 55%), linear-gradient(160deg,#1e1e1e,#0a0a0a); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; }
+    .about-portrait span { font-family:'Bebas Neue',sans-serif; font-size:9rem; line-height:1; color:var(--orange); letter-spacing:0.04em; }
+    .about-portrait small { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gris); }
+  </style>
+</head>
+<body>
+
+  <div class="demo-badge">Site démo · ActivityWeb Studio</div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">THOMAS<span>.</span>LEROY</div>
+    <nav>
+      <a href="#about">À Propos</a>
+      <a href="#services">Programmes</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact" class="btn-nav">Séance Gratuite</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-number">T</div>
+    <div class="hero-accent"></div>
+
+    <div class="hero-content">
+      <div class="hero-label">Coach Sportif Certifié — Liège</div>
+      <h1 class="hero-title">
+        FORGE<br>
+        TON<br>
+        <span>CORPS.</span>
+      </h1>
+      <p class="hero-sub">
+        Programmes d'entraînement personnalisés, suivi nutritionnel et coaching mental. 
+        Je te donne les outils pour dépasser tes limites et construire le physique que tu mérites.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Séance d'essai offerte</a>
+        <a href="#services" class="btn-ghost">Voir les programmes</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Années d'expérience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">340</div>
+        <div class="stat-label">Clients transformés</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">97%</div>
+        <div class="stat-label">Satisfaction client</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <div class="about-portrait" role="img" aria-label="Portrait de Thomas Leroy"><span>TL</span><small>Coach sportif · Liège</small></div>
+        <div class="cert-badge">CERTIFIÉ<br>BREVET<br>ADEPS</div>
+      </div>
+
+      <div class="about-text">
+        <div class="section-tag">Qui suis-je</div>
+        <h2 class="section-title">COACH DEPUIS 8 ANS, PASSIONNÉ DEPUIS TOUJOURS</h2>
+        <p>
+          Ancien athlète de compétition, j'ai transformé ma passion pour la performance en métier. Après mon brevet de moniteur sportif ADEPS et mes formations en préparation physique, j'ai accompagné plus de 340 clients vers leurs objectifs — perte de poids, prise de masse, remise en forme ou préparation à la compétition.
+        </p>
+        <p>
+          Mon approche : aucun programme générique. Chaque suivi est construit autour de ta morphologie, ton emploi du temps et tes objectifs réels. Je travaille à domicile, en salle ou en extérieur selon tes préférences.
+        </p>
+
+        <div class="about-features">
+          <div class="feature-item">
+            <div class="feature-icon">🏋️</div>
+            <span>Force & Musculation</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔥</div>
+            <span>Perte de poids durable</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🥗</div>
+            <span>Conseils nutritionnels</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📱</div>
+            <span>Suivi application dédié</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <div>
+        <div class="section-tag">Mes programmes</div>
+        <h2 class="section-title">CE QUE JE<br>PROPOSE</h2>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-name">COACHING INDIVIDUEL</div>
+        <p class="service-desc">Séances en face à face, 100% adaptées à ton niveau et tes objectifs. En salle, à domicile ou en plein air. Suivi complet et ajustements permanents.</p>
+        <div class="service-price">À partir de 55€ / séance</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-name">PROGRAMME EN LIGNE</div>
+        <p class="service-desc">Plan d'entraînement et nutritionnel 100% personnalisé, livré via mon application. Suivi hebdomadaire, ajustements et support WhatsApp inclus.</p>
+        <div class="service-price">À partir de 89€ / mois</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-name">BOOTCAMP INTENSIF</div>
+        <p class="service-desc">Stages de 4 semaines en groupe restreint (6 max). Progression rapide, ambiance motivante, suivi nutritionnel inclus.</p>
+        <div class="service-price">299€ / stage</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="avis">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="section-tag">Témoignages</div>
+      <h2 class="section-title">ILS ONT FRANCHI<br>LE CAP</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">En 3 mois avec Thomas j'ai perdu 12kg et surtout retrouvé confiance en moi. Son suivi est vraiment personnalisé, il s'adapte à chaque semaine. Je recommande à 100%.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">J</div>
+          <div>
+            <div class="testi-name">Julie M.</div>
+            <div class="testi-info">Perte de poids — 3 mois</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">Finisher de mon premier marathon grâce à Thomas. Programme de 16 semaines parfait, jamais blessé, nouveau record personnel. Un vrai professionnel.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">Romain D.</div>
+            <div class="testi-info">Préparation marathon — 4 mois</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">J'étais sceptique sur le coaching en ligne mais Thomas m'a converti. Disponible, précis dans ses explications, les résultats sont là en 2 mois. +8kg de muscle.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">K</div>
+          <div>
+            <div class="testi-name">Kevin B.</div>
+            <div class="testi-info">Prise de masse — 2 mois</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section class="tarifs" id="tarifs">
+    <div style="max-width:1000px;margin:0 auto;text-align:center;">
+      <div class="section-tag">Investissement</div>
+      <h2 class="section-title">CHOISIS TON<br>PROGRAMME</h2>
+    </div>
+    <div class="tarifs-grid">
+      <div class="tarif-card">
+        <div class="tarif-name">STARTER</div>
+        <div class="tarif-price"><sup>€</sup>89<span style="font-size:1.2rem">/mois</span></div>
+        <div class="tarif-desc">Programme en ligne</div>
+        <ul class="tarif-list">
+          <li>Plan d'entraînement sur mesure</li>
+          <li>Guide nutritionnel personnalisé</li>
+          <li>Accès à l'application</li>
+          <li>1 check-in mensuel vidéo</li>
+        </ul>
+        <a href="#contact" class="tarif-btn">Commencer</a>
+      </div>
+      <div class="tarif-card featured">
+        <div class="tarif-badge">Le plus populaire</div>
+        <div class="tarif-name">INTENSIF</div>
+        <div class="tarif-price"><sup>€</sup>199<span style="font-size:1.2rem">/mois</span></div>
+        <div class="tarif-desc">Coaching complet</div>
+        <ul class="tarif-list">
+          <li>4 séances individuelles/mois</li>
+          <li>Programme + nutrition sur mesure</li>
+          <li>Suivi WhatsApp illimité</li>
+          <li>Ajustements hebdomadaires</li>
+          <li>Bilan mensuel complet</li>
+        </ul>
+        <a href="#contact" class="tarif-btn">Je me lance</a>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-name">ÉLITE</div>
+        <div class="tarif-price"><sup>€</sup>349<span style="font-size:1.2rem">/mois</span></div>
+        <div class="tarif-desc">Accompagnement total</div>
+        <ul class="tarif-list">
+          <li>8 séances individuelles/mois</li>
+          <li>Nutrition sur mesure avancée</li>
+          <li>Disponibilité 7j/7</li>
+          <li>Bilan complet + mensurations</li>
+          <li>Accès bootcamp inclus</li>
+        </ul>
+        <a href="#contact" class="tarif-btn">Contacter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-wrap">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title">PRÊT À<br>CHANGER ?</h2>
+      <p class="contact-sub">Première séance d'évaluation offerte — aucun engagement. Décris-moi tes objectifs et je te propose un programme adapté sous 24h.</p>
+
+      <form onsubmit="demoAlert(event)">
+      <div class="contact-form">
+        <input type="text" placeholder="Ton prénom" />
+        <input type="text" placeholder="Ton nom" />
+        <input type="email" placeholder="Ton e-mail" />
+        <input type="tel" placeholder="Ton téléphone" />
+        <select class="form-full">
+          <option value="" disabled selected>Ton objectif principal</option>
+          <option>Perte de poids</option>
+          <option>Prise de masse</option>
+          <option>Remise en forme</option>
+          <option>Préparation compétition</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="form-full">
+        <textarea placeholder="Parle-moi un peu de toi (niveau, disponibilités, contraintes...)"></textarea>
+      </div>
+      <button class="form-submit">Envoyer ma demande de séance gratuite →</button>
+      </form>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <span>Liège & environs</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📱</div>
+          <span>+32 490 00 00 00</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <span>thomas@coach-leroy.be</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo">THOMAS<span style="color:var(--orange)">.</span>LEROY</div>
+    <div class="footer-copy">© 2026 Thomas Leroy — Coach sportif · Brevet ADEPS · Liège</div>
+    <div class="footer-social">
+      <a href="https://www.pinterest.com/ActivityWebStudio/" target="_blank" rel="noopener">Pinterest</a>
+      <a href="https://www.instagram.com/activitywebstudio/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@activityweb" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.etsy.com/shop/ActivityWebStudio" target="_blank" rel="noopener">Etsy</a>
+    </div>
+  </footer>
+
+<script>
+function demoAlert(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector("button");
+  if (btn) { btn.textContent = "✓ Message reçu (démonstration)"; btn.style.background = "#2d8a4e"; btn.style.color = "#fff"; btn.disabled = true; }
+}
+</script>
+</body>
+</html>
