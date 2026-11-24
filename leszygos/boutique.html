@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La boutique des Zygos – Livres de jeux, énigmes et humour (broché et PDF)</title>
-<meta name="description" content="Les livres de jeux et d'humour des Zygos : Tu préfères, énigmes, enquêtes, mots mêlés, jeux de Noël. En livre broché sur Amazon ou en PDF à imprimer.">
+<title>La boutique des Zygos – Livres de jeux, quiz et humour</title>
+<meta name="description" content="Les livres de jeux et d'humour des Zygos : quiz, cryptogrammes, livres-gags, jeux de Noël. En livre broché sur Amazon.">
 <link rel="icon" href="/leszygos/mascotte.png">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -54,10 +54,9 @@
 <main>
   <section class="hero">
     <h1>La boutique des <span>Zygos</span></h1>
-    <p>Des livres pour jouer, rire et se creuser la tête en famille. En livre broché sur Amazon, ou en PDF à imprimer tout de suite.</p>
+    <p>Des livres pour jouer, rire et se creuser la tête en famille. En livre broché sur Amazon, livré chez toi.</p>
     <div class="stores">
       <a class="btn amz" id="lienAmazon" href="https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks" target="_blank" rel="noopener">📖 Tous les livres sur Amazon</a>
-      <a class="btn ets" id="lienEtsy" href="https://www.etsy.com/shop/ActivityWebstudio" target="_blank" rel="noopener">🖨️ Tous les PDF sur Etsy</a>
     </div>
   </section>
 
@@ -80,7 +79,7 @@
 /* =====================================================================
    TES LIVRES : un bloc { … } par livre. Laisse "" ce que tu n'as pas.
    - image : adresse d'une image de couverture (facultatif)
-   - amazon / pdf : liens vers la fiche Amazon et la fiche Etsy (ou un lien Stripe)
+   - amazon / pdf : lien de la fiche Amazon, et lien de paiement Stripe ou Payhip pour la version PDF
    Un livre sans aucun lien n'est pas affiché. Tant qu'aucun livre n'est
    rempli, la section « Nos livres » reste cachée.
    ===================================================================== */
@@ -92,9 +91,8 @@ const LIVRES = [
   { titre:"Tout ce que j'ai trouvé sans demander où c'était", desc:"Le livre-gag pour l'homme qui cherche le beurre… devant le beurre.", prix:"", image:"/leszygos/livres/homme-autonome.jpg", amazon:"https://link.amazon/B0aUj4z9L", pdf:"" },
 ];
 
-/* Thèmes : chaque bouton cherche dans tes boutiques (rien à remplir). */
+/* Thèmes : chaque bouton mène à ta page auteur Amazon (rien à remplir). */
 const AMAZON = "https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks";
-const ETSY = "https://www.etsy.com/shop/ActivityWebstudio";
 const THEMES = [
   { ico:"🤔", titre:"Tu préfères ?", desc:"Des dilemmes absurdes pour lancer les débats à table.", q:"tu préfères" },
   { ico:"🕵️", titre:"Énigmes et enquêtes", desc:"Qui est le coupable ? Des mystères à résoudre en famille.", q:"énigmes" },
@@ -124,7 +122,6 @@ document.getElementById('grilleThemes').innerHTML = THEMES.map(t => `
     <span class="ico">${t.ico}</span><b>${esc(t.titre)}</b><p>${esc(t.desc)}</p>
     <div class="btns">
       <a class="amz" href="${AMAZON}" target="_blank" rel="noopener">Amazon</a>
-      <a class="ets" href="${ETSY}?search_query=${encodeURIComponent(t.q)}" target="_blank" rel="noopener">PDF</a>
     </div>
   </div>`).join('');
 </script>
