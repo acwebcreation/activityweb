@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conditions générales de vente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3EEE4; --ink:#211D17; --taupe:#7C7062; --green:#1F4E4C; --gold:#A8834A; --line:rgba(33,29,23,0.14);
+  }
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.65;}
+  .wrap{max-width:720px;margin:0 auto;padding:70px 24px 100px;}
+  h1{font-family:'Fraunces',serif;font-weight:500;font-size:34px;margin-bottom:8px;}
+  .updated{color:var(--taupe);font-size:14px;margin-bottom:40px;}
+  h2{font-family:'Fraunces',serif;font-weight:500;font-size:20px;margin-top:44px;margin-bottom:12px;color:var(--green);}
+  p{font-size:15.5px;margin:0 0 12px;}
+  .callout{
+    border-left:2px solid var(--gold);
+    padding:14px 20px;
+    background:rgba(168,131,74,0.08);
+    font-size:14.5px;
+    color:#4A4436;
+    margin:20px 0;
+  }
+  .disclaimer{
+    border:1px solid var(--line);
+    padding:18px 22px;
+    font-size:13.5px;
+    color:var(--taupe);
+    margin-bottom:50px;
+  }
+  a{color:var(--green);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="disclaimer">
+    Ce document est un modèle de départ, pas un avis juridique définitif. Fais-le valider par un comptable ou un avocat avant publication — en particulier les mentions de TVA (régime de franchise) et le traitement du paiement en plusieurs fois, dont le cadre réglementaire évolue en Europe fin 2026.
+  </div>
+
+  <h1>Conditions générales de vente</h1>
+  <p class="updated">Dernière mise à jour : [date]</p>
+
+  <h2>Article 1 — Objet</h2>
+  <p>Les présentes conditions générales de vente régissent la vente du produit numérique « Défi Side Hustle — 30 jours » par [ton nom / raison commerciale] à tout client réalisant un achat sur ce site. Toute commande implique l'acceptation pleine et entière des présentes conditions.</p>
+
+  <h2>Article 2 — Le vendeur</h2>
+  <p>[Ton nom / raison commerciale]<br>
+  Statut : auto-entrepreneur (Belgique)<br>
+  Adresse : [adresse]<br>
+  Email : [ton email]<br>
+  TVA : [mention à valider avec ton comptable — ex. « TVA non applicable, régime de la franchise de taxe »]</p>
+
+  <h2>Article 3 — Produit et prix</h2>
+  <p>Le produit vendu est un contenu numérique livré par voie électronique (guide, fiches, templates, accès à un groupe privé). Le prix affiché au moment de la commande est le prix définitif. [Le prix de lancement à 79€ est valable jusqu'au [date] ou jusqu'à épuisement des [nombre] places à ce tarif — le prix repasse ensuite à 99€.]</p>
+
+  <h2>Article 4 — Commande et paiement</h2>
+  <p>La commande est passée directement sur le site, paiement en une fois par carte bancaire via Stripe. La commande est confirmée une fois le paiement validé.</p>
+
+  <h2>Article 5 — Livraison</h2>
+  <p>Le contenu est livré par voie électronique immédiatement après validation du paiement (lien de téléchargement et/ou accès envoyé par email). En cas de non-réception dans l'heure suivant l'achat, le client est invité à contacter [ton email].</p>
+
+  <h2>Article 6 — Droit de rétractation et renonciation expresse</h2>
+  <p>Conformément au droit applicable, le consommateur dispose en principe d'un délai de 14 jours pour se rétracter d'un achat en ligne. Toutefois, ce droit ne s'applique pas à la fourniture d'un contenu numérique non fourni sur un support matériel dont l'exécution a commencé après accord préalable exprès du consommateur et renoncement exprès à son droit de rétractation.</p>
+  <p>En cochant la case prévue à cet effet au moment du paiement, le client :</p>
+  <p>— demande l'exécution immédiate du contrat et la mise à disposition du contenu dès le paiement validé ;<br>
+  — reconnaît qu'il perd de ce fait son droit de rétractation de 14 jours une fois le contenu livré.</p>
+  <div class="callout">
+    À mettre en place côté Stripe : active l'option « Afficher le consentement aux conditions juridiques » sur ton lien de paiement, pointée vers cette page. Sans case à cocher explicite au moment du paiement, cette clause n'est pas opposable même si elle figure ici.
+  </div>
+
+  <h2>Article 7 — Politique de remboursement</h2>
+  <p>Le contenu étant un produit numérique livré immédiatement et son droit de rétractation ayant été renoncé selon l'article 6, aucun remboursement ne sera accordé après la mise à disposition du contenu, sauf dans les cas suivants : le contenu n'a pas pu être livré techniquement, ou le contenu livré est manifestement non conforme à sa description. Dans ces cas, contacte [ton email] pour une résolution.</p>
+
+  <h2>Article 8 — Usage autorisé</h2>
+  <p>Le contenu est destiné à un usage strictement personnel par l'acheteur. Toute reproduction, revente ou diffusion à des tiers, en tout ou partie, est interdite sans accord écrit préalable.</p>
+
+  <h2>Article 9 — Absence de garantie de résultat</h2>
+  <p>Ce programme fournit une méthode et un accompagnement. Il ne constitue en aucun cas une garantie de revenu ou de résultat financier, celui-ci dépendant de facteurs propres à chaque participant (temps investi, exécution, marché choisi).</p>
+
+  <h2>Article 10 — Données personnelles</h2>
+  <p>Les données collectées (email, informations de paiement traitées par Stripe) sont utilisées uniquement pour la gestion de la commande et, si le client y consent, pour l'envoi de communications ultérieures. Aucune donnée n'est vendue à des tiers. Le client dispose d'un droit d'accès, de rectification et de suppression de ses données en écrivant à [ton email].</p>
+
+  <h2>Article 11 — Droit applicable</h2>
+  <p>Les présentes conditions sont soumises au droit belge. En cas de litige, une solution amiable sera recherchée en priorité via [ton email] avant toute autre démarche.</p>
+
+  <h2>Article 12 — Contact</h2>
+  <p>Pour toute question : [ton email]</p>
+
+</div>
+</body>
+</html>

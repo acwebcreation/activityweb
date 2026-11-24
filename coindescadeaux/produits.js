@@ -20,10 +20,6 @@ const BUDGETS_LONG = {1:"Moins de 20 €", 2:"20 à 50 €", 3:"50 à 150 €", 
 
 /* ============ CATÉGORIES (r = rayon) ============ */
 const CATS = {
-  cafe:     {r:"malin", label:"☕ Café & repas"},
-  energie:  {r:"malin", label:"💡 Énergie & maison"},
-  sdb:      {r:"malin", label:"🚿 Salle de bain"},
-  quotidien:{r:"malin", label:"🧰 Quotidien"},
   confort:  {r:"fun",   label:"😴 Confort & flemme"},
   cuisine:  {r:"fun",   label:"🍳 Cuisine absurde"},
   fete:     {r:"fun",   label:"🎉 Fêtes & soirées"},
@@ -36,7 +32,7 @@ const CATS = {
 };
 
 /* ============ PRODUITS ============
-   n = nom, d = description, eco = phrase « économie » (achats malins), e = emoji, c = catégorie
+   n = nom, d = description, e = emoji, c = catégorie
    p = pour qui, b = budget (1 à 5), q = recherche Amazon (utilisée si pas d'url)
    url = lien affilié direct, image = URL de la photo, top = coup de cœur, o = occasions en plus
    (Noël et anniversaire sont ajoutés partout ; fête des pères/mères, Saint-Valentin, Secret Santa,
@@ -44,51 +40,6 @@ const CATS = {
    Les nouveaux produits s'ajoutent À LA FIN de la liste : ils apparaissent en premier dans « Nouveautés ».
 */
 const PRODUITS = [
-  /* ---------- 💚 ACHATS MALINS ---------- */
-  {n:"Moulin à café manuel", e:"☕", c:"cafe", p:["papa","maman","collegue","cuisinier"], b:2, q:"moulin à café manuel", top:true,
-   url:"https://link.amazon/B06Ffz9U7", image:"https://m.media-amazon.com/images/I/61eKPKWnJOL._AC_SL1500_.jpg",
-   d:"Du café fraîchement moulu à la maison, meilleur que celui du comptoir.", eco:"Le café à emporter de tous les matins devient une exception."},
-  {n:"Mug isotherme de voyage", e:"🥤", c:"cafe", p:["collegue","maman","papa","voyageur"], b:1, q:"mug isotherme voyage étanche",
-   d:"Le café maison reste chaud jusqu'au bureau. Le coffee shop perd un client.", eco:"Rentabilisé en quelques cafés non achetés."},
-  {n:"Cafetière à piston", e:"🫖", c:"cafe", p:["couple","collegue"], b:1, q:"cafetière à piston",
-   d:"Simple, sans capsules, sans abonnement, sans électronique qui lâche.", eco:"Fini les capsules à prix d'or."},
-  {n:"Boîtes repas en verre", e:"🍱", c:"cafe", p:["collegue","papa","maman","cuisinier"], b:1, q:"boîtes repas verre lot",
-   d:"Le lunch maison au bureau. Le sandwich à 8 € devient un souvenir.", eco:"Un des plus gros postes de dépense du midi, divisé."},
-  {n:"Machine à pain", e:"🍞", c:"cafe", p:["maman","papa","cuisinier","grandsparents"], b:3, q:"machine à pain",
-   d:"Du pain frais le matin, programmé la veille. La boulangerie, c'est pour le dimanche.", eco:"Coût par pain bien inférieur à la boulangerie."},
-  {n:"Carafe filtrante", e:"💧", c:"cafe", p:["couple","maman"], b:1, q:"carafe filtrante",
-   d:"L'eau du robinet, en meilleur goût. Fini les packs d'eau à porter.", eco:"Adieu les bouteilles en plastique au caddie."},
-  {n:"Yaourtière", e:"🥛", c:"cafe", p:["maman","papa","cuisinier"], b:2, q:"yaourtière",
-   d:"Des yaourts maison avec un litre de lait. Étonnamment facile.", eco:"Le prix du yaourt divisé, et zéro pot à jeter."},
-  {n:"Sachets congélation réutilisables", e:"🧊", c:"cafe", p:["maman","couple","cuisinier"], b:1, q:"sac congélation réutilisable silicone",
-   d:"Pour congeler les restes au lieu de les jeter.", eco:"Moins de gaspillage, moins de sacs jetables."},
-  {n:"Multiprise avec interrupteur", e:"🔌", c:"energie", p:["papa","geek","gamer"], b:1, q:"multiprise interrupteur individuel", top:true,
-   url:"https://link.amazon/B08nr2Lvq", image:"https://m.media-amazon.com/images/I/715Zvwk8uoL._AC_SL1500_.jpg",
-   d:"Coupe d'un clic tous les appareils en veille, ces petits voleurs silencieux.", eco:"La veille pèse sur la facture d'électricité toute l'année."},
-  {n:"Prise connectée programmable", e:"⏲️", c:"energie", p:["geek","papa"], b:1, q:"prise connectée programmable consommation",
-   d:"Programme le chauffe-eau ou le radiateur d'appoint, et vois ce que chaque appareil consomme.", eco:"Repère enfin l'appareil qui gonfle ta facture."},
-  {n:"Ampoules LED", e:"💡", c:"energie", p:["papa","maman","grandsparents"], b:1, q:"ampoules led e27 lot",
-   d:"Le geste le plus bête et le plus efficace pour l'éclairage.", eco:"Bien moins gourmandes que les vieilles ampoules."},
-  {n:"Étendoir à linge", e:"👕", c:"energie", p:["maman","couple"], b:2, q:"étendoir à linge",
-   d:"L'air sèche gratuitement. Le sèche-linge, lui, envoie la facture.", eco:"Le sèche-linge est un des appareils les plus énergivores."},
-  {n:"Film isolant pour fenêtres", e:"🪟", c:"energie", p:["papa","grandsparents"], b:1, q:"film isolant fenêtre",
-   d:"Une couche de plus sur les vieilles fenêtres, posée en un après-midi.", eco:"Moins de pertes de chaleur cet hiver."},
-  {n:"Pommeau de douche économique", e:"🚿", c:"sdb", p:["papa","maman"], b:1, q:"pommeau de douche économique",
-   d:"Même sensation, beaucoup moins d'eau chaude qui part dans le siphon.", eco:"Économie sur l'eau ET sur l'énergie pour la chauffer."},
-  {n:"Tondeuse à cheveux", e:"💇", c:"sdb", p:["papa","ado"], b:2, q:"tondeuse cheveux", top:true,
-   d:"Le coiffeur à domicile. Les premières coupes seront… une aventure.", eco:"Rentabilisée dès quelques coupes."},
-  {n:"Rasoir de sûreté", e:"🪒", c:"sdb", p:["papa","ado"], b:2, q:"rasoir de sûreté",
-   d:"Un rasoir pour la vie et des lames qui coûtent quelques centimes.", eco:"Fini les recharges de lames hors de prix."},
-  {n:"Piles rechargeables + chargeur", e:"🔋", c:"quotidien", p:["papa","geek","gamer"], b:2, q:"piles rechargeables avec chargeur",
-   d:"Pour les télécommandes, manettes et jouets qui avalent des piles.", eco:"Un pack remplace des centaines de piles jetables."},
-  {n:"Gourde isotherme", e:"🧴", c:"quotidien", p:["ado","collegue","maman","voyageur","sportif"], b:1, q:"gourde isotherme inox",
-   d:"Eau fraîche toute la journée. Les petites bouteilles à 2 €, c'est fini.", eco:"Rentabilisée en quelques semaines."},
-  {n:"Kit réparation crevaison vélo", e:"🚲", c:"quotidien", p:["papa","ado","sportif"], b:1, q:"kit réparation crevaison vélo",
-   d:"Réparer soi-même au lieu de passer à l'atelier pour une rustine.", eco:"Coûte moins qu'une seule réparation en magasin."},
-  {n:"Tirelire compteur", e:"🐷", c:"quotidien", p:["ado","enfant","maman"], b:1, q:"tirelire compteur billet epargne",
-   d:"Elle affiche le total à chaque pièce. Étrangement motivant.", eco:"L'épargne devient un jeu."},
-
-  /* ---------- 🙈 INSOLITES ---------- */
   {n:"Oreiller autruche", e:"😴", c:"confort", p:["collegue","ado","voyageur"], b:1, q:"oreiller autruche sieste", top:true,
    url:"https://link.amazon/B0gsjgFnl", image:"https://m.media-amazon.com/images/I/61uskpJfVlL._AC_SX679_.jpg",
    d:"Pour faire la sieste n'importe où, n'importe quand. La dignité est vendue séparément."},
@@ -201,14 +152,6 @@ const PRODUITS = [
    d:"Parce que l'eau d'un bol, visiblement, c'est bon pour les chiens."},
 
   /* ---------- NOUVEAUTÉS (ajoutées le 3 novembre) ---------- */
-  {n:"Kit d'arrosage goutte-à-goutte", e:"🪴", c:"quotidien", p:["jardinier","grandsparents"], b:1, q:"kit arrosage goutte à goutte automatique",
-   d:"Les plantes boivent même pendant les vacances. Fini de payer le voisin en chocolats.", eco:"Moins d'eau gaspillée, moins de plantes à racheter."},
-  {n:"Bouillotte", e:"♨️", c:"energie", p:["maman","grandsparents","couple"], b:1, q:"bouillotte",
-   d:"La technologie de chauffage la plus fiable depuis des siècles.", eco:"Un degré de moins au thermostat, ça se sent sur la facture."},
-  {n:"Gourde filtrante", e:"🏞️", c:"quotidien", p:["voyageur","sportif"], b:2, q:"gourde filtrante randonnée",
-   d:"Bois l'eau du ruisseau (ou du robinet douteux de l'hôtel) sans arrière-pensée.", eco:"Plus besoin d'acheter de l'eau en voyage."},
-  {n:"Plaid chauffant électrique", e:"🧣", c:"energie", p:["maman","grandsparents","couple"], b:2, q:"plaid chauffant électrique",
-   d:"Il chauffe la personne, pas toute la pièce.", eco:"Consomme une fraction d'un radiateur."},
   {n:"Gants de jardinage à griffes", e:"🧤", c:"blague", p:["jardinier","grandsparents"], b:1, q:"gants de jardinage griffes",
    d:"Creuser la terre comme Wolverine. Les taupes n'ont qu'à bien se tenir."},
   {n:"Kit bonsaï à faire pousser", e:"🌳", c:"geek", p:["jardinier","ado","collegue"], b:1, q:"kit bonsai à faire pousser",
@@ -322,7 +265,6 @@ const GUIDES = [
   {id:"absurdes", titre:n => `${n} objets complètement absurdes`, filtre:p => p.c === "blague" || p.c === "cuisine", cover:"Coupe-banane", emoji:"🤪"},
   {id:"flemme",   titre:n => `${n} cadeaux pour la flemme assumée`, filtre:p => p.c === "confort", cover:"Oreiller autruche", emoji:"😴"},
   {id:"geek",     titre:n => `${n} trouvailles pour geeks et gamers`, filtre:p => p.c === "geek", cover:"Enceinte en lévitation", emoji:"🤓"},
-  {id:"malins",   titre:n => `${n} achats qui se remboursent tout seuls`, filtre:p => rayonDe(p) === "malin", cover:"Moulin à café manuel", emoji:"💚"},
   {id:"moins20",  titre:n => `${n} cadeaux à moins de 20 €`, filtre:p => p.b === 1, cover:"Couverture tortilla géante", emoji:"🎁"},
   {id:"folies",   titre:n => `${n} folies hors de prix`, filtre:p => p.c === "folies", cover:"", emoji:"💎"}
 ];

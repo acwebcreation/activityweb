@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ActivityWeb – Des solutions simples pour les indépendants et les familles</title>
+<meta name="description" content="Outils, applis, guides et sites web prêts à l'emploi pour les indépendants et les familles : être visible, vendre plus, s'organiser, réussir les fêtes. Créé en Belgique, paiement unique.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/aw.css">
+<style>
+  .hero { padding-bottom:96px; }
+  .badges { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+  .badges span { font-size:.82rem; color:rgba(255,255,255,.8); border:1px solid rgba(255,255,255,.2); border-radius:20px; padding:5px 12px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="logo-mark">AW</div>
+    <div class="logo-text">Activity<span>Web</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/archives/independants.html">Indépendants</a></li>
+    <li><a href="/archives/familles.html">Familles</a></li>
+    <li class="hide-sm"><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Des solutions simples pour les petits <em>casse-têtes</em> du quotidien</h1>
+    <p>Outils, applis, guides et sites prêts à l'emploi, pour les indépendants et pour les familles. Sans abonnement, sans prise de tête.</p>
+    <div class="badges">
+      <span>Paiement unique</span><span>Accès immédiat</span><span>Créé en Belgique</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="doors">
+    <a class="door" href="/archives/independants.html">
+      <span class="tag">Vous êtes indépendant</span>
+      <h2>Pour les indépendants</h2>
+      <ul>
+        <li>Être visible sur Google</li>
+        <li>Vendre plus, même hors saison</li>
+        <li>Gagner du temps sur l'administratif</li>
+      </ul>
+      <span class="go">Voir les solutions pros →</span>
+    </a>
+    <a class="door fam" href="/archives/familles.html">
+      <span class="tag" style="color:var(--green)">Vous êtes parent</span>
+      <h2>Pour les familles</h2>
+      <ul>
+        <li>Réussir les fêtes sans stress</li>
+        <li>Offrir un souvenir unique</li>
+        <li>Organiser la vie de famille</li>
+      </ul>
+      <span class="go">Voir les solutions familles →</span>
+    </a>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <span class="tag">Les plus demandés</span>
+    <h2>Trois problèmes, <em>trois solutions</em></h2>
+    <p class="lead" style="margin-bottom:28px;">Les produits que l'on choisit le plus souvent pour commencer.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="badge">Indépendants · essai gratuit</span>
+        <h3>Bons cadeaux pro</h3>
+        <p>Vos clients veulent offrir vos services ? Créez et vendez des bons cadeaux numérotés à votre image, en PDF avec QR code.</p>
+        <div class="price">39 € <small>paiement unique</small></div>
+        <a class="btn" href="/tools/bons-cadeaux/">Essayer gratuitement</a>
+      </div>
+      <div class="card">
+        <span class="badge green">Familles · cadeau</span>
+        <h3>Une chanson avec son prénom</h3>
+        <p>Vous ne savez pas quoi offrir ? J'écris et je compose une chanson originale à partir de vos souvenirs, livrée en MP3.</p>
+        <div class="price">dès 29 €</div>
+        <a class="btn green" href="/leszygos/fetes/famille.html">Commander une chanson</a>
+      </div>
+      <div class="card">
+        <span class="badge">Indépendants · visibilité</span>
+        <h3>Site one page</h3>
+        <p>Vos clients vous cherchent sur Google et tombent sur un concurrent ? Votre site professionnel, livré en 7 jours.</p>
+        <div class="price">449 € <small>paiement unique</small></div>
+        <a class="btn" href="/siteonepage/">Voir les exemples</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="about-box">
+      <div class="about-mark">A</div>
+      <div>
+        <span class="tag">Qui suis-je</span>
+        <h2>Bonjour, moi c'est Alex</h2>
+        <p class="lead">Papa et créateur en Belgique, je fabrique les outils dont j'aurais eu besoin moi-même : simples, utiles, et vendus une seule fois. Pas d'abonnement caché, pas de jargon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <span class="tag">Contact</span>
+    <h2>Une question ? <em>Écrivez-moi</em></h2>
+    <p class="lead">Je réponds personnellement, sous 24 heures.</p>
+    <div class="contact-links">
+      <a href="https://wa.me/32476841263" class="contact-link">💬<div><strong>WhatsApp</strong><span>Réponse rapide</span></div></a>
+      <a href="mailto:contact@activityweb.be" class="contact-link">✉️<div><strong>contact@activityweb.be</strong><span>Réponse sous 24 h</span></div></a>
+    </div>
+    <form class="cform" id="contact-form" onsubmit="sendContact(event)">
+      <input type="text" id="c-nom" placeholder="Votre nom" required>
+      <input type="text" id="c-contact" placeholder="Email ou téléphone" required>
+      <textarea id="c-msg" placeholder="Votre question en quelques mots"></textarea>
+      <button type="submit" class="btn" id="contact-btn">Envoyer →</button>
+      <div class="ok" id="contact-ok">✓ Message envoyé ! Je vous réponds sous 24 h.</div>
+    </form>
+    <p class="note">Vous préférez Etsy ? Une partie des créations y est aussi : <a href="https://www.etsy.com/shop/ActivityWebStudio" target="_blank" rel="noopener">voir la boutique Etsy</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <strong>ActivityWeb Studio</strong> · BCE 0558.805.548 · <a href="mailto:contact@activityweb.be">contact@activityweb.be</a> · © 2026
+  <div class="row">
+    <a href="/mentions-legales.html">Mentions légales</a><a href="/cgv.html">CGV</a><a href="/politique-confidentialite.html">Confidentialité</a>
+  </div>
+  <div class="row">
+    <a href="https://www.pinterest.com/ActivityWebStudio/" target="_blank" rel="noopener">Pinterest</a>
+    <a href="https://www.instagram.com/activitywebstudio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.youtube.com/@activityweb" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.etsy.com/shop/ActivityWebStudio" target="_blank" rel="noopener">Etsy</a>
+  </div>
+</footer>
+
+<script>
+  async function sendContact(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contact-btn');
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours…';
+    const nom = document.getElementById('c-nom').value.trim();
+    const contact = document.getElementById('c-contact').value.trim();
+    const msg = document.getElementById('c-msg').value.trim();
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '17ea29d2-00fe-413d-b1a6-cc8c3af9ca66',
+          subject: '📩 Contact ActivityWeb — ' + nom,
+          from_name: 'ActivityWeb Site',
+          Nom: nom,
+          Contact: contact,
+          Message: msg || '—'
+        })
+      });
+    } catch (err) { console.warn('Web3Forms:', err); }
+    btn.style.display = 'none';
+    document.getElementById('contact-ok').style.display = 'block';
+  }
+</script>
+</body>
+</html>

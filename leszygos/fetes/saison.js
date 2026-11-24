@@ -14,25 +14,25 @@
    ========================================================= */
 var SAISONS = [
   { nom: "Halloween",     emoji: "🎃", debut: "10-01", fin: "10-31",
-    lien: "occasions.html#halloween",
+    lien: "/leszygos/fetes/occasions.html#halloween",
     bandeau: "Halloween approche : jeux, coloriages et cartes à gratter" },
   { nom: "Saint-Nicolas", emoji: "🎅", debut: "11-01", fin: "12-06",
-    lien: "occasions.html#saint-nicolas",
+    lien: "/leszygos/fetes/occasions.html#saint-nicolas",
     bandeau: "Saint-Nicolas : chanson et lettre avec le prénom de votre enfant" },
   { nom: "Noël",          emoji: "🎄", debut: "10-20", fin: "12-25",
     lien: "noel/",
     bandeau: "C'est bientôt Noël : escape game, lettres du Père Noël, planner…" },
   { nom: "Pâques",        emoji: "🐣", debut: "PAQUES-35", fin: "PAQUES+1",
-    lien: "occasions.html#paques",
+    lien: "/leszygos/fetes/occasions.html#paques",
     bandeau: "Pâques arrive : chasse aux œufs et activités à imprimer" },
   { nom: "Fête des mères", emoji: "💐", debut: "04-15", fin: "MERES",
-    lien: "occasions.html#fete-des-meres",
+    lien: "/leszygos/fetes/occasions.html#fete-des-meres",
     bandeau: "Fête des mères : cartes-poèmes et chanson pour maman" },
   { nom: "Fête des pères", emoji: "👔", debut: "MERES+1", fin: "PERES",
-    lien: "occasions.html#fete-des-peres",
+    lien: "/leszygos/fetes/occasions.html#fete-des-peres",
     bandeau: "Fête des pères : carnet de bons cadeaux pour papa" },
   { nom: "Rentrée",       emoji: "✏️", debut: "08-10", fin: "09-15",
-    lien: "occasions.html#rentree",
+    lien: "/leszygos/fetes/occasions.html#rentree",
     bandeau: "C'est la rentrée : cahiers d'écriture et activités" }
 ];
 /* ========================================================= */

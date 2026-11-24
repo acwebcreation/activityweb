@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emma Durand – Coach Nutrition à Namur</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terra:     #8b5e3c;
+    --terra-mid: #a8705f;
+    --terra-lt:  #c8947a;
+    --warm:      #f7f0e6;
+    --warm-dk:   #ede3d4;
+    --warm-dkr:  #e0d0bb;
+    --white:     #ffffff;
+    --text:      #2e2416;
+    --muted:     #8a7560;
+    --border:    rgba(139,94,60,0.12);
+    --green:     #5c7a50;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans', sans-serif; background:var(--warm); color:var(--text); overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    height:64px;
+    background:rgba(247,240,230,0.94); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 6%;
+  }
+  .nav-brand { font-family:'Lora', serif; font-size:1.15rem; color:var(--terra); text-decoration:none; font-weight:500; }
+  .nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+  .nav-links a { font-size:0.82rem; color:var(--muted); text-decoration:none; font-weight:400; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--terra); }
+  .nav-cta { background:var(--terra); color:white !important; padding:9px 22px; border-radius:24px; font-weight:500 !important; transition:background 0.2s !important; }
+  .nav-cta:hover { background:var(--terra-mid) !important; }
+  @media(max-width:768px) { .nav-links { display:none; } }
+
+  /* HERO */
+  .hero {
+    min-height:100vh;
+    background:linear-gradient(160deg, var(--terra) 0%, var(--terra-mid) 50%, var(--terra-lt) 100%);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center; padding:100px 6% 80px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.06) 0%, transparent 60%);
+  }
+  .hero-leaf {
+    position:absolute; font-size:8rem; opacity:0.06;
+  }
+  .leaf1 { top:10%; left:5%; transform:rotate(-20deg); }
+  .leaf2 { bottom:10%; right:5%; transform:rotate(15deg); font-size:10rem; }
+
+  .hero-pill {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25);
+    color:white; padding:6px 18px; border-radius:20px;
+    font-size:0.75rem; font-weight:500; letter-spacing:0.08em;
+    margin-bottom:32px; position:relative; z-index:1;
+  }
+  h1 {
+    font-family:'Lora', serif;
+    font-size:clamp(2.8rem, 6vw, 5rem);
+    color:white; font-weight:400; line-height:1.1;
+    margin-bottom:20px; position:relative; z-index:1;
+  }
+  h1 em { font-style:italic; font-weight:400; color:rgba(255,255,255,0.75); }
+  .hero-sub {
+    font-size:1.02rem; color:rgba(255,255,255,0.7);
+    line-height:1.8; max-width:500px; margin:0 auto 48px;
+    font-weight:300; position:relative; z-index:1;
+  }
+  .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; position:relative; z-index:1; }
+  .btn-primary { background:white; color:var(--terra); padding:14px 34px; border-radius:24px; font-size:0.87rem; font-weight:600; text-decoration:none; transition:all 0.2s; }
+  .btn-primary:hover { background:var(--warm); transform:translateY(-1px); }
+  .btn-ghost { background:transparent; color:white; padding:14px 34px; border-radius:24px; font-size:0.87rem; font-weight:400; text-decoration:none; border:1.5px solid rgba(255,255,255,0.4); transition:all 0.2s; }
+  .btn-ghost:hover { border-color:rgba(255,255,255,0.7); }
+
+  .hero-promise {
+    display:flex; gap:32px; margin-top:64px; padding-top:40px;
+    border-top:1px solid rgba(255,255,255,0.12);
+    position:relative; z-index:1; flex-wrap:wrap; justify-content:center;
+  }
+  .promise-item { display:flex; align-items:center; gap:10px; font-size:0.83rem; color:rgba(255,255,255,0.65); }
+  .promise-item::before { content:'✓'; color:rgba(255,255,255,0.9); font-weight:700; }
+
+  /* SECTIONS */
+  section { padding:90px 6%; }
+  .max-w { max-width:1100px; margin:0 auto; }
+  .eyebrow { font-size:0.68rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--terra); margin-bottom:14px; }
+  h2 { font-family:'Lora', serif; font-size:clamp(1.9rem,3.5vw,2.9rem); color:var(--terra); font-weight:400; line-height:1.2; margin-bottom:16px; }
+  h2 em { font-style:italic; }
+  .lead { font-size:0.97rem; color:var(--muted); line-height:1.85; max-width:560px; }
+
+  /* PROMESSE */
+  .promesse { background:var(--white); }
+  .promesse-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:20px; margin-top:52px; }
+  .promesse-card {
+    background:var(--warm); border-radius:12px; padding:32px 28px;
+    border:1px solid var(--border); text-align:center;
+  }
+  .promesse-icon { font-size:2.4rem; margin-bottom:16px; }
+  .promesse-title { font-family:'Lora', serif; font-size:1.15rem; color:var(--terra); font-weight:500; margin-bottom:10px; }
+  .promesse-desc { font-size:0.875rem; color:var(--muted); line-height:1.7; }
+
+  /* PROGRAMMES */
+  .programmes { background:var(--warm-dk); }
+  .prog-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:24px; margin-top:52px; }
+  .prog-card {
+    background:white; border-radius:16px; overflow:hidden;
+    border:1px solid var(--border); transition:all 0.25s;
+  }
+  .prog-card:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(139,94,60,0.12); }
+  .prog-header { padding:28px 28px 20px; }
+  .prog-tag { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--terra-lt); margin-bottom:10px; }
+  .prog-name { font-family:'Lora', serif; font-size:1.3rem; color:var(--terra); font-weight:500; margin-bottom:8px; }
+  .prog-desc { font-size:0.875rem; color:var(--muted); line-height:1.7; }
+  .prog-features { padding:0 28px 24px; border-top:1px solid var(--border); margin-top:20px; padding-top:20px; }
+  .prog-feature { display:flex; align-items:flex-start; gap:10px; font-size:0.835rem; color:var(--text); line-height:1.5; margin-bottom:8px; }
+  .prog-feature::before { content:'🌿'; font-size:0.75rem; flex-shrink:0; margin-top:2px; }
+  .prog-footer { padding:20px 28px 28px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .prog-price { font-family:'Lora', serif; font-size:1.8rem; color:var(--terra); }
+  .prog-duration { font-size:0.75rem; color:var(--muted); margin-top:2px; }
+  .btn-prog { background:var(--terra); color:white; padding:10px 22px; border-radius:20px; font-size:0.82rem; font-weight:600; text-decoration:none; transition:background 0.2s; }
+  .btn-prog:hover { background:var(--terra-mid); }
+
+  /* À PROPOS */
+  .about { background:var(--white); }
+  .about-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:80px; align-items:center; }
+  @media(max-width:768px) { .about-grid { grid-template-columns:1fr; gap:48px; } }
+  .about-visual {
+    background:linear-gradient(145deg, var(--warm-dk) 0%, var(--warm-dkr) 100%);
+    aspect-ratio:1; border-radius:50% 20px 50% 20px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:6rem; position:relative;
+  }
+  .about-content p { font-size:0.95rem; color:var(--muted); line-height:1.85; margin-bottom:18px; }
+  .cert-list { display:flex; flex-direction:column; gap:10px; margin-top:28px; }
+  .cert { display:flex; align-items:center; gap:12px; font-size:0.85rem; color:var(--text); }
+  .cert-mark { width:20px; height:20px; background:var(--terra); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:0.65rem; flex-shrink:0; }
+
+  /* TÉMOIGNAGES */
+  .temoignages { background:var(--terra); }
+  .temoignages h2 { color:white; }
+  .temoignages .lead { color:rgba(255,255,255,0.6); }
+  .temo-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1px; margin-top:48px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; }
+  .temo-item { background:var(--terra); padding:36px 32px; transition:background 0.2s; }
+  .temo-item:hover { background:var(--terra-mid); }
+  .temo-stars { color:rgba(255,255,255,0.5); font-size:0.85rem; margin-bottom:14px; }
+  .temo-text { font-family:'Lora', serif; font-size:0.97rem; color:rgba(255,255,255,0.85); line-height:1.8; font-style:italic; margin-bottom:24px; }
+  .temo-result { display:inline-block; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.75); padding:4px 12px; border-radius:12px; font-size:0.72rem; font-weight:600; margin-bottom:16px; }
+  .temo-name { font-size:0.85rem; color:rgba(255,255,255,0.6); font-weight:500; }
+
+  /* CONTACT */
+  .contact { background:var(--warm-dk); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:80px; align-items:start; }
+  @media(max-width:768px) { .contact-grid { grid-template-columns:1fr; gap:48px; } }
+  .contact-info p { font-size:0.93rem; color:var(--muted); line-height:1.85; margin-bottom:32px; }
+  .info-rows { display:flex; flex-direction:column; gap:16px; }
+  .info-row { display:flex; gap:14px; align-items:flex-start; }
+  .ir-icon { width:38px; height:38px; background:var(--warm); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; border:1px solid var(--border); }
+  .ir-label { font-size:0.78rem; font-weight:600; color:var(--terra); }
+  .ir-val { font-size:0.82rem; color:var(--muted); }
+  .form-wrap { background:white; border-radius:16px; padding:40px 36px; border:1px solid var(--border); }
+  .form-wrap h3 { font-family:'Lora', serif; font-size:1.5rem; color:var(--terra); font-weight:500; margin-bottom:28px; }
+  .f-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .f-field { margin-bottom:16px; }
+  .f-field label { display:block; font-size:0.75rem; font-weight:600; color:var(--terra); margin-bottom:6px; letter-spacing:0.06em; text-transform:uppercase; }
+  .f-field input, .f-field textarea, .f-field select { width:100%; padding:11px 14px; border:1.5px solid rgba(139,94,60,0.15); border-radius:8px; font-family:'DM Sans', sans-serif; font-size:0.9rem; background:var(--warm); color:var(--text); outline:none; transition:border-color 0.2s; }
+  .f-field input:focus, .f-field textarea:focus, .f-field select:focus { border-color:var(--terra); }
+  .f-field textarea { min-height:90px; resize:vertical; }
+  .btn-submit { width:100%; padding:14px; background:var(--terra); color:white; border:none; border-radius:24px; font-family:'DM Sans', sans-serif; font-size:0.88rem; font-weight:600; cursor:pointer; transition:background 0.2s; margin-top:8px; }
+  .btn-submit:hover { background:var(--terra-mid); }
+
+  footer { background:var(--text); color:rgba(255,255,255,0.4); text-align:center; padding:40px 6%; font-size:0.82rem; }
+  footer strong { color:rgba(255,255,255,0.75); display:block; margin-bottom:6px; font-family:'Lora',serif; font-size:1.15rem; font-weight:400; }
+  footer a { color:rgba(255,255,255,0.35); text-decoration:none; }
+  footer a:hover { color:var(--terra-lt); }
+
+  .demo-badge { position:fixed; bottom:20px; right:20px; z-index:999; background:var(--terra); color:white; padding:8px 16px; border-radius:20px; font-size:0.75rem; font-weight:600; box-shadow:0 4px 20px rgba(0,0,0,0.2); pointer-events:none; }
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Site démo · ActivityWeb Studio</div>
+
+<nav>
+  <a href="#hero" class="nav-brand">Emma Durand · Coach Nutrition</a>
+  <ul class="nav-links">
+    <li><a href="#promesse">Ma promesse</a></li>
+    <li><a href="#programmes">Programmes</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact" class="nav-cta">Commencer</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-leaf leaf1">🌿</div>
+  <div class="hero-leaf leaf2">🥗</div>
+  <div class="hero-pill">🥗 Coach Nutrition certifiée · Namur</div>
+  <h1>Mangez mieux,<br>vivez <em>pleinement</em></h1>
+  <p class="hero-sub">Plus de régimes, plus de frustration. Une approche bienveillante et durable pour retrouver une relation saine avec votre assiette — et avec vous-même.</p>
+  <div class="hero-ctas">
+    <a href="#contact" class="btn-primary">Démarrer mon programme</a>
+    <a href="#programmes" class="btn-ghost">Voir les programmes</a>
+  </div>
+  <div class="hero-promise">
+    <div class="promise-item">Sans régime restrictif</div>
+    <div class="promise-item">Sans frustration</div>
+    <div class="promise-item">Résultats durables</div>
+    <div class="promise-item">100% personnalisé</div>
+  </div>
+</section>
+
+<!-- PROMESSE -->
+<section class="promesse" id="promesse">
+  <div class="max-w">
+    <div class="eyebrow">Ma philosophie</div>
+    <h2>La nutrition sans <em>culpabilité</em></h2>
+    <p class="lead">J'accompagne des femmes et des hommes qui en ont assez des régimes yo-yo et qui veulent enfin comprendre comment nourrir leur corps avec plaisir.</p>
+    <div class="promesse-grid">
+      <div class="promesse-card">
+        <div class="promesse-icon">🧬</div>
+        <div class="promesse-title">Approche individualisée</div>
+        <p class="promesse-desc">Chaque corps est différent. Votre programme alimentaire sera basé sur votre terrain, votre mode de vie et vos goûts réels.</p>
+      </div>
+      <div class="promesse-card">
+        <div class="promesse-icon">🧠</div>
+        <div class="promesse-title">Psychologie alimentaire</div>
+        <p class="promesse-desc">On travaille aussi sur votre relation émotionnelle à la nourriture. Manger, c'est aussi un acte psychologique et social.</p>
+      </div>
+      <div class="promesse-card">
+        <div class="promesse-icon">📅</div>
+        <div class="promesse-title">Suivi régulier</div>
+        <p class="promesse-desc">On avance ensemble, étape par étape. Des points réguliers pour ajuster le plan et vous garder motivé(e) sur la durée.</p>
+      </div>
+      <div class="promesse-card">
+        <div class="promesse-icon">🍽️</div>
+        <div class="promesse-title">Plaisir avant tout</div>
+        <p class="promesse-desc">On ne supprime pas vos plaisirs culinaires. On réapprend à les vivre de façon consciente et équilibrée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMMES -->
+<section class="programmes" id="programmes">
+  <div class="max-w">
+    <div class="eyebrow">Programmes</div>
+    <h2>Un accompagnement<br><em>sur mesure</em></h2>
+    <p class="lead">Trois formules pour répondre à vos besoins, votre rythme et votre budget. Chaque programme commence par un bilan nutritionnel gratuit.</p>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="prog-header">
+          <div class="prog-tag">Programme Découverte</div>
+          <div class="prog-name">Premiers pas</div>
+          <p class="prog-desc">Pour commencer à comprendre votre alimentation et poser les bases d'une hygiène nutritionnelle solide.</p>
+        </div>
+        <div class="prog-features">
+          <div class="prog-feature">Bilan nutritionnel complet (1h)</div>
+          <div class="prog-feature">Plan alimentaire personnalisé</div>
+          <div class="prog-feature">2 séances de suivi (45 min)</div>
+          <div class="prog-feature">Carnet alimentaire commenté</div>
+        </div>
+        <div class="prog-footer">
+          <div>
+            <div class="prog-price">185€</div>
+            <div class="prog-duration">Programme 4 semaines</div>
+          </div>
+          <a href="#contact" class="btn-prog">Choisir →</a>
+        </div>
+      </div>
+      <div class="prog-card" style="border-color:var(--terra);">
+        <div class="prog-header">
+          <div class="prog-tag" style="color:var(--terra);">⭐ Programme Phare</div>
+          <div class="prog-name">Transformation complète</div>
+          <p class="prog-desc">L'accompagnement complet pour transformer durablement votre alimentation et votre rapport à la nourriture.</p>
+        </div>
+        <div class="prog-features">
+          <div class="prog-feature">Bilan nutritionnel + bilan bien-être</div>
+          <div class="prog-feature">Plan alimentaire évolutif</div>
+          <div class="prog-feature">6 séances de suivi (45 min)</div>
+          <div class="prog-feature">Recettes &amp; liste de courses</div>
+          <div class="prog-feature">Support WhatsApp illimité</div>
+        </div>
+        <div class="prog-footer">
+          <div>
+            <div class="prog-price">390€</div>
+            <div class="prog-duration">Programme 12 semaines</div>
+          </div>
+          <a href="#contact" class="btn-prog">Choisir →</a>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-header">
+          <div class="prog-tag">Objectif spécifique</div>
+          <div class="prog-name">Consultation isolée</div>
+          <p class="prog-desc">Une consultation ponctuelle pour un objectif précis : énergie, digestion, sport, grossesse, ménopause, etc.</p>
+        </div>
+        <div class="prog-features">
+          <div class="prog-feature">Consultation individuelle (1h15)</div>
+          <div class="prog-feature">Recommandations personnalisées</div>
+          <div class="prog-feature">Document récapitulatif envoyé</div>
+          <div class="prog-feature">Disponible en visio</div>
+        </div>
+        <div class="prog-footer">
+          <div>
+            <div class="prog-price">75€</div>
+            <div class="prog-duration">Séance unique</div>
+          </div>
+          <a href="#contact" class="btn-prog">Choisir →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section class="about" id="about">
+  <div class="max-w">
+    <div class="about-grid">
+      <div class="about-content">
+        <div class="eyebrow">À propos</div>
+        <h2>Mon histoire,<br>c'est <em>peut-être</em> la vôtre</h2>
+        <p>Pendant des années, j'ai cherché le régime parfait — sans jamais le trouver. La prise de poids après chaque restriction, la frustration, la culpabilité. Jusqu'à ce que je comprenne que la solution n'était pas dans moins de nourriture, mais dans une meilleure relation avec elle.</p>
+        <p>Coach en nutrition certifiée depuis 2017, je travaille avec une approche holistique qui intègre alimentation, psychologie et mode de vie. Parce que manger bien, c'est aussi une question de tête.</p>
+        <div class="cert-list">
+          <div class="cert"><div class="cert-mark">✓</div>Certification Coach en Nutrition — Institut ENACO Paris</div>
+          <div class="cert"><div class="cert-mark">✓</div>Formation en psychologie de l'alimentation</div>
+          <div class="cert"><div class="cert-mark">✓</div>Spécialisation nutrition sportive et femme</div>
+          <div class="cert"><div class="cert-mark">✓</div>Membre de la FENAHMAN (Belgique)</div>
+        </div>
+      </div>
+      <div class="about-visual">🥗</div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="temoignages">
+  <div class="max-w">
+    <div class="eyebrow" style="color:rgba(255,255,255,0.5);">Témoignages</div>
+    <h2>Leurs <em>résultats</em> parlent</h2>
+    <p class="lead">Des vraies personnes, de vrais changements. Pas de promesses miracle — juste du travail, de la bienveillance et des résultats durables.</p>
+    <div class="temo-grid">
+      <div class="temo-item">
+        <div class="temo-stars">★★★★★</div>
+        <div class="temo-result">−9 kg en 14 semaines</div>
+        <p class="temo-text">Emma m'a appris à manger sans me priver. J'ai perdu du poids sans même m'en rendre compte tellement c'était naturel. Je ne suis jamais retournée aux régimes.</p>
+        <div class="temo-name">Sarah L. · 34 ans</div>
+      </div>
+      <div class="temo-item">
+        <div class="temo-stars">★★★★★</div>
+        <div class="temo-result">Digestion normalisée</div>
+        <p class="temo-text">J'avais des ballonnements quotidiens depuis 3 ans. En 6 semaines de programme, mes symptômes ont quasi disparu. Je réalise seulement maintenant à quel point ça me gâchait la vie.</p>
+        <div class="temo-name">Marc V. · 41 ans</div>
+      </div>
+      <div class="temo-item">
+        <div class="temo-stars">★★★★★</div>
+        <div class="temo-result">Énergie retrouvée</div>
+        <p class="temo-text">Sportive mais épuisée, je cherchais comment optimiser mon alimentation pour mes performances. Emma a tout changé : je récupère mieux, je performe mieux et je mange mieux.</p>
+        <div class="temo-name">Julie M. · 28 ans · Triathlète</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="max-w">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="eyebrow">Contact</div>
+        <h2>Bilan gratuit<br><em>offert</em></h2>
+        <p>Avant tout programme, je propose un bilan découverte gratuit de 20 minutes (téléphone ou visio). Pas d'engagement — juste une conversation pour voir si on est faites pour travailler ensemble.</p>
+        <div class="info-rows">
+          <div class="info-row"><div class="ir-icon">📍</div><div><div class="ir-label">Cabinet</div><div class="ir-val">Rue de Fer 8, 5000 Namur</div></div></div>
+          <div class="info-row"><div class="ir-icon">📞</div><div><div class="ir-label">Téléphone</div><div class="ir-val">+32 476 000 000</div></div></div>
+          <div class="info-row"><div class="ir-icon">✉️</div><div><div class="ir-label">Email</div><div class="ir-val">emma@coach-nutrition-durand.be</div></div></div>
+          <div class="info-row"><div class="ir-icon">💻</div><div><div class="ir-label">Consultations visio</div><div class="ir-val">Disponible partout en Belgique</div></div></div>
+        </div>
+      </div>
+      <div class="form-wrap">
+        <h3>Demander mon bilan gratuit</h3>
+        <div class="f-row">
+          <div class="f-field"><label>Prénom</label><input type="text" placeholder="Votre prénom" /></div>
+          <div class="f-field"><label>Nom</label><input type="text" placeholder="Votre nom" /></div>
+        </div>
+        <div class="f-field"><label>Email</label><input type="email" placeholder="vous@exemple.be" /></div>
+        <div class="f-field">
+          <label>Mon objectif principal</label>
+          <select>
+            <option>Perte de poids durable</option>
+            <option>Rééquilibrage alimentaire</option>
+            <option>Problèmes digestifs</option>
+            <option>Énergie et vitalité</option>
+            <option>Nutrition sportive</option>
+            <option>Grossesse / allaitement</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="f-field"><label>Message <span style="font-weight:400;text-transform:none;">(optionnel)</span></label><textarea placeholder="Décrivez brièvement votre situation actuelle…"></textarea></div>
+        <button class="btn-submit">Réserver mon bilan gratuit →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Emma Durand · Coach Nutrition</strong>
+  Rue de Fer 8, 5000 Namur · <a href="mailto:emma@coach-nutrition-durand.be">emma@coach-nutrition-durand.be</a><br>
+  <span style="margin-top:8px;display:inline-block;">BCE 0XXX.XXX.XXX · © 2025 Emma Durand · <a href="#">Mentions légales</a></span>
+  <div style="display:flex;justify-content:center;gap:20px;margin-top:18px;flex-wrap:wrap;">
+    <a href="https://www.pinterest.com/ActivityWebStudio/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.78rem;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Pinterest</a>
+    <a href="https://www.instagram.com/activitywebstudio/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.78rem;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Instagram</a>
+    <a href="https://www.youtube.com/@activityweb" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.78rem;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">YouTube</a>
+    <a href="https://www.etsy.com/shop/ActivityWebStudio" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.78rem;" onmouseover="this.style.color='#e8682a'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Etsy</a>
+  </div>
+</footer>
+
+<script>
+function demoAlert(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector("button[type=submit], .btn-submit");
+  if (btn) { btn.textContent = "✓ Message reçu (démonstration)"; btn.style.background = "#2d8a4e"; btn.disabled = true; }
+}
+</script>
+</body>
+</html>

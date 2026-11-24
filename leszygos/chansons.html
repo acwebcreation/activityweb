@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chanson de fête personnalisée – Les Zygos</title>
+<meta name="description" content="Une chanson de fête originale, avec son prénom et vos anecdotes : anniversaire, retraite, diplôme, Noël… Écrite et composée pour vous.">
+<link rel="icon" href="/leszygos/mascotte.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#111111; --card:#1b1b1b; --card2:#222; --line:#2c2c2c; --orange:#FF7A1A; --blue:#2D9CFF; --text:#fff; --muted:#b8b8b8; --r:20px; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Poppins',system-ui,sans-serif;line-height:1.6}
+  h1,h2,h3{font-family:'Baloo 2',sans-serif;font-weight:800;line-height:1.1}
+  .o{color:var(--orange)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  section{padding:56px 0}
+  .btn{display:inline-block;background:var(--orange);color:#111;font-weight:700;text-decoration:none;padding:15px 28px;border-radius:999px;border:0;font-family:inherit;font-size:1rem;cursor:pointer;transition:.15s}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.07)}
+  .btn.ghost{background:transparent;color:var(--text);border:2px solid var(--line)}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:10;background:rgba(17,17,17,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  nav .logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);font-family:'Baloo 2';font-weight:800;font-size:1.4rem}
+  nav .logo img{width:38px}
+  nav .links a{color:var(--muted);text-decoration:none;font-weight:500;margin-left:18px;font-size:.95rem}
+  nav .links a:hover{color:var(--orange)}
+  @media(max-width:560px){nav .links a:not(.cta){display:none}}
+  nav .links a.cta{color:var(--orange);font-weight:700}
+
+  /* HERO */
+  .hero{padding:56px 0 40px;text-align:center}
+  .hero img{width:150px;animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-8px) rotate(-3deg)}}
+  .hero h1{font-size:clamp(2.3rem,7vw,3.8rem);margin:8px auto 14px;max-width:760px}
+  .hero p.lead{color:var(--muted);font-size:1.12rem;max-width:620px;margin:0 auto 26px}
+  .hero .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:28px}
+  .chips span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.9rem}
+  .trust{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:22px;color:var(--muted);font-size:.9rem}
+  .trust b{color:var(--orange)}
+
+  /* EXEMPLES */
+  .center{text-align:center}
+  h2{font-size:clamp(1.9rem,5vw,2.6rem);margin-bottom:10px}
+  .sub{color:var(--muted);max-width:620px;margin:0 auto 30px}
+  .ex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .ex{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:20px}
+  .ex .tag{display:inline-block;background:rgba(255,122,26,.15);color:var(--orange);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:999px}
+  .ex h3{font-size:1.35rem;margin:10px 0 4px}
+  .ex p{color:var(--muted);font-size:.92rem;margin-bottom:12px}
+  .ex audio{width:100%}
+
+  /* ETAPES */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:10px}
+  .step{background:var(--card);border-radius:var(--r);padding:24px;border:2px solid var(--line)}
+  .step b{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--orange);color:#111;font-family:'Baloo 2';font-size:1.3rem;margin-bottom:10px}
+  .step h3{font-size:1.25rem;margin-bottom:4px}
+  .step p{color:var(--muted);font-size:.95rem}
+  .price{display:inline-block;margin-top:28px;background:var(--card2);border:2px solid var(--orange);border-radius:var(--r);padding:16px 26px}
+  .price strong{font-family:'Baloo 2';font-size:2rem;color:var(--orange);display:block;line-height:1}
+  .price span{color:var(--muted);font-size:.92rem}
+
+  /* FORM */
+  .form-box{max-width:720px;margin:0 auto;background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:36px}
+  .form-box h2{text-align:center}
+  .form-box > p{text-align:center;color:var(--muted);margin-bottom:26px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:600px){.row{grid-template-columns:1fr}.form-box{padding:24px 18px}}
+  .field{margin-bottom:14px}
+  label{display:block;font-weight:700;font-size:.92rem;margin-bottom:6px}
+  label small{font-weight:400;color:var(--muted)}
+  input,select,textarea{width:100%;background:#0d0d0d;border:2px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--text);font-family:inherit;font-size:1rem}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--orange)}
+  textarea{min-height:120px;resize:vertical}
+  .check{display:flex;gap:10px;align-items:flex-start}
+  .check input{width:auto;margin-top:5px;accent-color:var(--orange)}
+  .check label{font-weight:400;font-size:.9rem}
+  .note{color:var(--muted);font-size:.85rem;text-align:center;margin-top:8px}
+  .note a{color:var(--orange)}
+  .form-box .btn{width:100%;margin-top:8px;font-size:1.05rem}
+  #formMsg{text-align:center;margin-top:12px;font-weight:700}
+
+  /* FAQ */
+  .faq{max-width:720px;margin:0 auto}
+  details{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px}
+  summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+  summary::after{content:"+";color:var(--orange);font-size:1.3rem;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--muted);margin-top:10px;font-size:.95rem}
+  details a{color:var(--orange)}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;color:#777;font-size:.88rem}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/leszygos/"><img src="/leszygos/mascotte.png" alt="">Les <span class="o">Zygos</span></a>
+    <div class="links"><a href="#pretes" id="navPretes" hidden>Prêtes à offrir</a><a href="#exemples">Exemples</a><a href="#comment">Comment ça marche</a><a href="#faq">FAQ</a><a class="cta" href="#commande">Commander</a></div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap">
+    <img src="/leszygos/mascotte.png" alt="La mascotte des Zygos qui rit">
+    <h1>Une chanson de fête, avec <span class="o">son prénom</span> dedans</h1>
+    <p class="lead">Vous me racontez ses manies, ses surnoms, ses fous rires… J'en fais une chanson originale qui va faire chanter (et rire) toute la salle.</p>
+    <div class="ctas">
+      <a href="#exemples" class="btn ghost">🎧 Écouter des exemples</a>
+      <a href="#commande" class="btn">Je commande ma chanson</a>
+    </div>
+    <div class="chips">
+      <span>🎂 Anniversaire</span><span>🎓 Diplôme</span><span>🏖️ Retraite</span><span>🎄 Noël</span>
+      <span>🍾 Pot de départ</span><span>🥳 EVJF / EVG</span><span>👶 Naissance</span><span>😜 Juste pour rire</span>
+    </div>
+    <div class="trust"><span><b>✓</b> 100 % originale</span><span><b>✓</b> MP3 + paroles en PDF</span><span><b>✓</b> Paiement sécurisé</span><span><b>✓</b> Créée en Belgique</span></div>
+  </div>
+</header>
+
+<!-- ===== CHANSONS PRÊTES À OFFRIR ===== -->
+<section id="pretes" hidden>
+  <div class="wrap center">
+    <h2>Les chansons <span class="o">prêtes à offrir</span></h2>
+    <p class="sub">Écoutez la chanson : je la reprends avec son prénom dans le refrain. Plus rapide qu'une création sur mesure, tout aussi drôle.</p>
+    <div class="ex-grid" id="pretesGrid"></div>
+  </div>
+</section>
+
+<!-- ===== EXEMPLES ===== -->
+<section id="exemples">
+  <div class="wrap center">
+    <h2>Écoutez des <span class="o">exemples</span></h2>
+    <p class="sub">Chaque chanson est unique : voici le genre d'ambiance que vous pouvez choisir.</p>
+    <div class="ex-grid" id="exemplesGrid"></div>
+  </div>
+</section>
+
+<!-- ===== COMMENT ===== -->
+<section id="comment">
+  <div class="wrap center">
+    <h2>Comment ça <span class="o">marche</span> ?</h2>
+    <div class="steps">
+      <div class="step"><b>1</b><h3>Vous me racontez</h3><p>Prénom, occasion, 3 à 5 anecdotes et le style de musique que vous voulez.</p></div>
+      <div class="step"><b>2</b><h3>Vous réglez en ligne</h3><p>Paiement sécurisé par carte ou Bancontact.</p></div>
+      <div class="step"><b>3</b><h3>Vous recevez la chanson</h3><p>Par e-mail : le fichier MP3 et les paroles en PDF, prêts pour la fête.</p></div>
+    </div>
+    <div class="price"><strong id="songPrice"></strong><span>Livraison en <span id="songDelay"></span> · une petite retouche des paroles incluse</span></div>
+  </div>
+</section>
+
+<!-- ===== FORMULAIRE ===== -->
+<section id="commande">
+  <div class="wrap">
+    <form class="form-box" id="songForm">
+      <h2>Commander ma <span class="o">chanson</span></h2>
+      <p>Plus vous me donnez de détails, plus la chanson sera drôle et unique.</p>
+
+      <div class="row">
+        <div class="field"><label for="prenom">Prénom(s) à chanter *</label><input id="prenom" name="prenom" required placeholder="Ex. Marc"></div>
+        <div class="field"><label for="prononciation">Prononciation <small>(si particulière)</small></label><input id="prononciation" name="prononciation" placeholder="Ex. « Mark »"></div>
+      </div>
+
+      <div class="row">
+        <div class="field"><label for="occasion">Occasion *</label>
+          <select id="occasion" name="occasion" required>
+            <option value="">Choisir…</option>
+            <option>Anniversaire</option><option>Retraite</option><option>Diplôme / réussite</option><option>Noël</option>
+            <option>Pot de départ</option><option>EVJF / EVG</option><option>Naissance / baptême</option>
+            <option>Fête des mères / des pères</option><option>Juste pour rire</option>
+          </select></div>
+        <div class="field"><label for="pour">Pour qui ? *</label><input id="pour" name="pour_qui" required placeholder="Ex. mon collègue qui part à la retraite"></div>
+      </div>
+
+      <div class="field">
+        <label for="details">Anecdotes et détails * <small>(3 à 5 : manies, surnoms, passions, phrases cultes…)</small></label>
+        <textarea id="details" name="details" required placeholder="Il arrive toujours en retard, il est fan de pétanque, sa phrase culte c'est « on verra demain »…"></textarea>
+      </div>
+
+      <div class="row">
+        <div class="field"><label for="style">Ambiance *</label>
+          <select id="style" name="style" required>
+            <option>Festive et rythmée (pour danser)</option>
+            <option>Drôle et taquine</option>
+            <option>Façon chanson de karaoké</option>
+            <option>Tendre (mais pas triste)</option>
+          </select></div>
+        <div class="field"><label for="langue">Langue</label>
+          <select id="langue" name="langue"><option>Français</option><option>Néerlandais</option><option>Français + néerlandais</option></select></div>
+      </div>
+
+      <div class="row">
+        <div class="field"><label for="date">Date de la fête</label><input type="date" id="date" name="date_souhaitee"></div>
+        <div class="field"><label for="email">Votre e-mail *</label><input type="email" id="email" name="email" required placeholder="vous@exemple.be"></div>
+      </div>
+
+      <div class="field check">
+        <input type="checkbox" id="ok" required>
+        <label for="ok">J'accepte que la création commence après le paiement et que, s'agissant d'une création personnalisée, elle ne soit pas remboursable une fois livrée.</label>
+      </div>
+      <p class="note" style="text-align:left">🔒 Vos réponses servent uniquement à créer la chanson et sont supprimées après la livraison. Pour un enfant, indiquez seulement son prénom. <a href="/politique-confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></p>
+      <input type="hidden" name="_subject" value="Nouvelle commande – chanson Les Zygos">
+      <input type="hidden" name="source" value="Les Zygos">
+
+      <button type="submit" class="btn" id="submitBtn">Valider et passer au paiement →</button>
+      <p class="note">Vous êtes ensuite redirigé vers le paiement sécurisé Stripe.</p>
+      <p id="formMsg"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="faq">
+    <h2 class="center">Questions <span class="o">fréquentes</span></h2>
+    <details><summary>Combien de temps pour recevoir la chanson ?</summary><p>Comptez <span class="delayTxt"></span> après le paiement. Si la fête approche, indiquez la date dans le formulaire.</p></details>
+    <details><summary>Je peux demander une modification ?</summary><p>Oui, une petite retouche des paroles est incluse si un détail ne correspond pas.</p></details>
+    <details><summary>Quelle durée fait la chanson ?</summary><p>Environ 2 à 3 minutes, comme une vraie chanson : couplets, refrain à reprendre en chœur, et le prénom bien en avant.</p></details>
+    <details><summary>Je peux la diffuser pendant la fête ?</summary><p>Bien sûr, elle est faite pour ça ! Vous pouvez la passer, la partager avec les invités et la garder en souvenir.</p></details>
+    <details><summary>Je reçois quoi exactement ?</summary><p>Un fichier MP3 à écouter partout et les paroles en PDF, pour que tout le monde puisse chanter.</p></details>
+    <details><summary>Je préfère acheter sur Etsy</summary><p>Pas de souci, la chanson est aussi sur <a href="https://www.etsy.com/shop/ActivityWebstudio" target="_blank" rel="noopener">notre boutique Etsy</a>.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="year"></span> Les Zygos – une création ActivityWeb Studio, Belgique</div>
+    <div><a href="/mentions-legales.html">Mentions légales</a> · <a href="mailto:contact@activityweb.be">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   RÉGLAGES : c'est la SEULE partie à modifier
+   ========================================================= */
+const CONFIG = {
+  stripeSongLink: "https://buy.stripe.com/eVqcN6fl1dLJ6xTcSt83C0e", // même lien Stripe que la page famille
+  formspreeId: "xkjovykw",                                           // même formulaire Formspree
+  songPrice: "29 €",
+  songDelay: "7 jours"
+};
+
+/* Tes exemples : ajoute / retire des blocs { … }.
+   fichier = nom du MP3 (mets-le dans le même dossier que cette page).
+   Un exemple dont le fichier est vide ("") n'est pas affiché. */
+/* Chansons PRÊTES À OFFRIR (standards de fête) : la chanson existe déjà, on y ajoute le prénom.
+   fichier = extrait MP3 (même dossier ou adresse complète). Une chanson sans fichier n'est pas affichée ;
+   tant qu'aucune n'est remplie, la section reste cachée.
+   occasion = valeur présélectionnée dans le formulaire (même texte que dans la liste « Occasion »). */
+const PRETES = [
+  // { titre:"Joyeux anniversaire (version fête)", occasion:"Anniversaire", desc:"Ultra festive, refrain à crier tous ensemble.", fichier:"" },
+];
+
+const EXEMPLES = [
+  { tag:"Anniversaire",  titre:"Joyeux anniversaire Léa",   desc:"Festive et rythmée, pour faire danser les petits.", fichier:"/leszygos/fetes/extrait.mp3" },
+  { tag:"Retraite",      titre:"Exemple retraite",          desc:"Drôle et taquine, pour le pot de départ.",          fichier:"" },
+  { tag:"Noël",          titre:"Exemple Noël",              desc:"Ambiance karaoké, à chanter en famille.",           fichier:"" },
+  { tag:"Diplôme",       titre:"Exemple diplôme",           desc:"Pour fêter la réussite comme il se doit.",          fichier:"" }
+];
+
+/* ---------- ne rien modifier en dessous ---------- */
+document.getElementById('songPrice').textContent = CONFIG.songPrice;
+document.getElementById('songDelay').textContent = CONFIG.songDelay;
+document.querySelectorAll('.delayTxt').forEach(e => e.textContent = CONFIG.songDelay);
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const grid = document.getElementById('exemplesGrid');
+EXEMPLES.filter(x => x.fichier).forEach(x => {
+  const d = document.createElement('div'); d.className = 'ex';
+  d.innerHTML = `<span class="tag"></span><h3></h3><p></p><audio controls preload="none"></audio>`;
+  d.querySelector('.tag').textContent = x.tag; d.querySelector('h3').textContent = x.titre;
+  d.querySelector('p').textContent = x.desc; d.querySelector('audio').src = x.fichier;
+  grid.appendChild(d);
+});
+
+const pGrid = document.getElementById('pretesGrid');
+const pretes = PRETES.filter(x => x.fichier);
+if (pretes.length) { document.getElementById('pretes').hidden = false; document.getElementById('navPretes').hidden = false; }
+pretes.forEach(x => {
+  const d = document.createElement('div'); d.className = 'ex';
+  d.innerHTML = `<span class="tag"></span><h3></h3><p></p><audio controls preload="none"></audio><p style="margin-top:14px"><a class="btn" href="#commande">Je la veux avec son prénom →</a></p>`;
+  d.querySelector('.tag').textContent = x.occasion; d.querySelector('h3').textContent = x.titre;
+  d.querySelector('p').textContent = x.desc; d.querySelector('audio').src = x.fichier;
+  d.querySelector('a').addEventListener('click', () => {
+    const form = document.getElementById('songForm');
+    let h = form.querySelector('input[name="chanson_prete"]');
+    if (!h) { h = document.createElement('input'); h.type = 'hidden'; h.name = 'chanson_prete'; form.appendChild(h); }
+    h.value = x.titre;
+    const occ = form.querySelector('select[name="occasion"], #occasion');
+    if (occ && x.occasion) [...occ.options].forEach(o => { if (o.text === x.occasion || o.value === x.occasion) occ.value = o.value; });
+  });
+  pGrid.appendChild(d);
+});
+// une seule lecture à la fois
+document.addEventListener('play', e => {
+  document.querySelectorAll('audio').forEach(a => { if (a !== e.target) a.pause(); });
+}, true);
+
+document.getElementById('songForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn'), msg = document.getElementById('formMsg');
+  btn.disabled = true; btn.textContent = "Envoi en cours…";
+  try {
+    const res = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
+      method:'POST', body:new FormData(e.target), headers:{'Accept':'application/json'}
+    });
+    if (!res.ok) throw new Error();
+    msg.textContent = "Merci ! Redirection vers le paiement…";
+    const email = encodeURIComponent(document.getElementById('email').value);
+    setTimeout(() => { window.location.href = `${CONFIG.stripeSongLink}?prefilled_email=${email}`; }, 1200);
+  } catch {
+    msg.textContent = "Oups, l'envoi n'a pas fonctionné. Réessayez ou écrivez-moi : contact@activityweb.be";
+    btn.disabled = false; btn.textContent = "Valider et passer au paiement →";
+  }
+});
+</script>
+</body>
+</html>

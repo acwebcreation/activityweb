@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lettres animées, cartes à gratter et bons cadeaux à envoyer | ActivityWeb Studio</title>
+<meta name="description" content="Lettres animées, cartes à gratter et bons cadeaux personnalisés, à envoyer par WhatsApp, SMS ou e-mail. Rien à installer, rien à imprimer.">
+<meta property="og:title" content="Lettres animées, cartes à gratter et bons cadeaux à envoyer">
+<meta property="og:description" content="Des surprises personnalisées pour chaque fête, à envoyer par lien en quelques minutes.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF9EC; --ink:#3A2233; --muted:#6E5A66;
+    --sun:#FFC93C; --marigold:#F28C28; --berry:#D6336C; --line:#EADFC8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font:400 1.0625rem/1.6 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--berry);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+  h1,h2,h3,h4,.brand,.price{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
+
+  /* Hero */
+  .hero{background:linear-gradient(165deg,var(--sun) 0%,var(--marigold) 100%);
+    border-radius:0 0 2rem 2rem;padding-bottom:2.8rem}
+  .top{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 1.5rem}
+  .brand{font-weight:800;font-size:1.15rem;text-decoration:none}
+  .top a.etsy{font-weight:600;font-size:.95rem}
+  h1{font-weight:800;font-size:clamp(2.1rem,6.5vw,3.8rem);line-height:1.04;letter-spacing:-.02em;
+    margin:0 0 1rem;max-width:18ch}
+  .lead{max-width:38rem;font-size:1.15rem;margin:0 0 2rem}
+
+  /* Bouton du haut */
+  .cta{display:inline-flex;gap:.7rem;align-items:center;background:#fff;border:2px solid var(--ink);
+    border-radius:1rem;box-shadow:0 5px 0 var(--ink);padding:.9rem 1.3rem;text-decoration:none;
+    font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.2rem;transition:transform .15s ease}
+  .cta:hover{transform:translateY(-3px)}
+  .cta .ico{font-size:1.8rem;line-height:1}
+
+  /* Univers */
+  .universe{padding:3.5rem 0 1rem}
+  .universe > h2{font-weight:800;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 .4rem}
+  .universe > .intro{color:var(--muted);max-width:40rem;margin:0 0 1.4rem}
+
+  /* Calendrier des fêtes */
+  .cal-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.05rem;margin:0 0 .5rem}
+  .cal{display:flex;gap:1rem;overflow-x:auto;padding:.6rem .3rem 1.2rem;scroll-snap-type:x mandatory}
+  .sheet{flex:0 0 7.4rem;scroll-snap-align:start;background:#fff;border:2px solid var(--ink);
+    border-radius:.6rem;box-shadow:0 4px 0 var(--ink);text-align:center;text-decoration:none;
+    overflow:hidden;transition:transform .15s ease}
+  .sheet:hover{transform:translateY(-3px)}
+  .sheet .m{background:var(--berry);color:#fff;font-weight:600;font-size:.82rem;padding:.3rem 0}
+  .sheet .d{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:2.5rem;line-height:1;padding:.55rem 0 .15rem}
+  .sheet .d.emoji{font-size:1.9rem;padding:.75rem 0 .35rem}
+  .sheet .n{font-weight:600;font-size:.86rem;line-height:1.25;padding:0 .4rem}
+  .sheet .c{font-size:.78rem;color:var(--muted);padding:.25rem .4rem .7rem}
+  .sheet.next{flex-basis:8.6rem;transform:rotate(-2.5deg)}
+  .sheet.next:hover{transform:rotate(-2.5deg) translateY(-3px)}
+  .sheet.next .m{background:var(--ink)}
+  .sheet.next .c{color:var(--berry);font-weight:600}
+
+  /* Rubriques (une fête ou une catégorie) */
+  .rubric{padding:2.2rem 0 .5rem}
+  .rubric + .rubric{border-top:2px dashed var(--line)}
+  .rubric-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem}
+  .rubric h3{font-weight:800;font-size:clamp(1.45rem,3.6vw,1.9rem);line-height:1.1;margin:0}
+  .badge{background:var(--berry);color:#fff;font-weight:600;font-size:.82rem;padding:.2rem .7rem;border-radius:1rem}
+  .when{margin:.2rem 0 0;font-weight:600}
+  .rubric .intro{color:var(--muted);margin:.2rem 0 1.3rem;max-width:40rem}
+
+  /* Cartes outils */
+  .tools{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr))}
+  .tool{background:#fff;border:2px solid var(--ink);border-radius:1rem;box-shadow:0 5px 0 var(--ink);
+    display:flex;flex-direction:column;overflow:hidden}
+  .tool .pic{height:7.5rem;display:grid;place-items:center;font-size:3.4rem;border-bottom:2px dashed var(--ink)}
+  .tool .body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;flex:1}
+  .tool h4{font-weight:800;font-size:1.25rem;line-height:1.15;margin:0 0 .4rem}
+  .tool p{margin:0 0 1rem;font-size:.97rem;color:var(--muted)}
+  .tool .meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;margin-bottom:.9rem}
+  .price{font-weight:800;font-size:1.35rem}
+  .langs{font-size:.8rem;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:.4rem;padding:.15rem .45rem}
+  .btn{display:block;text-align:center;background:var(--ink);color:#fff;text-decoration:none;
+    font-weight:600;padding:.75rem 1rem;border-radius:.6rem}
+  .btn:hover{background:var(--berry)}
+  .btn.off{background:var(--line);color:var(--muted)}
+
+  /* Comment ça marche */
+  .how{padding:3rem 0 0}
+  .how h2{font-weight:800;font-size:clamp(1.6rem,4vw,2.2rem);margin:0 0 1.2rem}
+  .steps{list-style:none;margin:0;padding:0;display:grid;gap:1.2rem;
+    grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));counter-reset:s}
+  .steps li{counter-increment:s;display:flex;gap:.8rem;align-items:flex-start}
+  .steps li::before{content:counter(s);flex:0 0 2.2rem;height:2.2rem;border-radius:50%;
+    background:var(--sun);border:2px solid var(--ink);display:grid;place-items:center;
+    font-family:"Bricolage Grotesque",sans-serif;font-weight:800}
+  .steps strong{display:block}
+  .steps span{color:var(--muted);font-size:.97rem}
+
+  footer{margin-top:3.5rem;background:var(--ink);color:#fff;padding:2.5rem 0}
+  footer p{margin:0 0 .6rem;max-width:40rem}
+  footer a{color:var(--sun);font-weight:600}
+  footer .small{color:#CDBFC7;font-size:.9rem}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .cta,.cta:hover,.sheet,.sheet:hover,.sheet.next,.sheet.next:hover{transition:none;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="https://www.activityweb.be/">ActivityWeb Studio</a>
+      <a class="etsy" href="https://www.etsy.com/shop/ActivityWebStudio">Nos avis sur Etsy</a>
+    </header>
+    <h1>Des petites surprises à envoyer pour chaque fête.</h1>
+    <p class="lead">Lettres animées, cartes à gratter et bons cadeaux : vous les personnalisez en quelques minutes, puis vous les envoyez par WhatsApp, SMS ou e-mail. Rien à installer, rien à imprimer.</p>
+    <a class="cta" href="#fetes"><span class="ico" aria-hidden="true">🎉</span>Choisir une fête</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="universe" id="fetes">
+    <h2>Fêtes & surprises</h2>
+    <p class="intro">Les fêtes les plus proches apparaissent en premier. Touchez une date pour voir les surprises disponibles.</p>
+    <p class="cal-title">Le calendrier des fêtes</p>
+    <nav class="cal" id="calendrier" aria-label="Choisir une fête"></nav>
+    <div id="liste-fetes"></div>
+  </section>
+
+  <section class="how">
+    <h2>Comment ça marche</h2>
+    <ol class="steps">
+      <li><div><strong>Choisissez votre appli</strong><span>Payez en ligne en toute sécurité.</span></div></li>
+      <li><div><strong>Recevez votre lien</strong><span>Il s'affiche juste après le paiement.</span></div></li>
+      <li><div><strong>Utilisez-la tout de suite</strong><span>Dans votre navigateur, sur téléphone comme sur ordinateur.</span></div></li>
+    </ol>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem">ActivityWeb Studio</p>
+    <p>Des applis créées en Belgique, disponibles en français, anglais et allemand.</p>
+    <p class="small">Vous préférez commander sur Etsy ? Nos outils y sont aussi : <a href="https://www.etsy.com/shop/ActivityWebStudio">voir la boutique Etsy</a>.</p>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   À MODIFIER 1 : LES FÊTES (univers "Fêtes & surprises")
+   - jour / mois : date de la fête (sans date = toute l'année)
+   ========================================================= */
+const FETES = [
+  { id:"halloween",     nom:"Halloween",            jour:31, mois:10, emoji:"🎃", fond:"#FFE0B8",
+    intro:"Des surprises qui font frissonner (un peu) petits et grands." },
+  { id:"saint-nicolas", nom:"Saint-Nicolas",        jour:6,  mois:12, emoji:"📜", fond:"#FFD9E2",
+    intro:"La magie du grand saint, livrée directement sur le téléphone des enfants." },
+  { id:"amour",         nom:"Amour & couple",       jour:14, mois:2,  emoji:"💌", fond:"#FFE3E8",
+    intro:"Saint-Valentin, mariage, anniversaire de couple." },
+  { id:"diplome",       nom:"Diplôme & réussite",   jour:30, mois:6,  emoji:"🎓", fond:"#E4F0FF",
+    intro:"Pour féliciter un examen réussi, un diplôme, un nouveau départ." },
+  { id:"naissance",     nom:"Naissance & baptême",                    emoji:"🍼", fond:"#E6F3EC",
+    intro:"Pour accueillir un bébé avec des mots rien qu'à lui." },
+  { id:"hommage",       nom:"Hommage",                                emoji:"🕊️", fond:"#EEF0EA",
+    intro:"Des mots doux pour accompagner un moment difficile." },
+  { id:"autres",        nom:"Toutes les occasions",                   emoji:"🎁", fond:"#FFF1C7",
+    intro:"Anniversaire, merci, fête des mères ou des pères : pour tout le reste." }
+];
+
+/* =========================================================
+   À MODIFIER 2 : LES APPLIS
+   Pour en ajouter une, copie un bloc { ... } et change les textes.
+   - rubrique : l'id d'une fête (voir au-dessus)
+   - page     : l'adresse COMPLÈTE de la page de vente
+   - bientot  : true = affichée, mais pas encore en vente
+   Une fête sans appli n'apparaît pas.
+   ========================================================= */
+const OUTILS = [
+  { rubrique:"halloween", nom:"Carte à gratter d'Halloween", emoji:"🎃",
+    texte:"On gratte du bout du doigt pour découvrir la surprise ou l'annonce cachée.",
+    prix:"3,99 €", langues:"FR · EN · DE",
+    page:"https://www.activityweb.be/leszygos/applis/carte-halloween.html" },
+
+  { rubrique:"saint-nicolas", nom:"Lettre animée de Saint-Nicolas", emoji:"📜",
+    texte:"Un parchemin qui se déroule avec le prénom de l'enfant et un message du grand saint.",
+    prix:"6,99 €", langues:"FR · EN · DE",
+    page:"https://www.activityweb.be/leszygos/applis/lettre-saint-nicolas-personnalisee.html" },
+
+  { rubrique:"autres", nom:"Bon cadeau personnalisé", emoji:"🎁",
+    texte:"Un bon cadeau à votre façon, pour l'occasion de votre choix, à offrir par lien.",
+    prix:"3,99 €", langues:"FR · EN · DE",
+    page:"", bientot:true }
+];
+
+/* ---------- Rien à modifier en dessous ---------- */
+const MOIS = ["janv.","févr.","mars","avril","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+const MOIS_LONG = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+const today = new Date(); today.setHours(0,0,0,0);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const aDesOutils = r => OUTILS.some(o => o.rubrique === r.id);
+
+function joursAvant(f){
+  if(!f.jour) return null;
+  let d = new Date(today.getFullYear(), f.mois-1, f.jour);
+  if(d < today) d = new Date(today.getFullYear()+1, f.mois-1, f.jour);
+  return Math.round((d - today) / 86400000);
+}
+
+function carte(o, fond){
+  const bouton = o.bientot || !o.page
+    ? '<span class="btn off">Bientôt disponible</span>'
+    : `<a class="btn" href="${esc(o.page)}">Découvrir l'appli</a>`;
+  return `<article class="tool">
+    <div class="pic" style="background:${fond}" aria-hidden="true">${o.emoji}</div>
+    <div class="body">
+      <h4>${esc(o.nom)}</h4>
+      <p>${esc(o.texte)}</p>
+      <div class="meta"><span class="price">${esc(o.prix)}</span><span class="langs">${esc(o.langues)}</span></div>
+      ${bouton}
+    </div>
+  </article>`;
+}
+
+function rubrique(r, extraTete = "", date = ""){
+  const outils = OUTILS.filter(o => o.rubrique === r.id);
+  return `<section class="rubric" id="${r.id}">
+    <div class="rubric-head"><h3>${r.emoji} ${esc(r.nom)}</h3>${extraTete}</div>
+    ${date}
+    <p class="intro">${esc(r.intro)}</p>
+    <div class="tools">${outils.map(o => carte(o, r.fond)).join("")}</div>
+  </section>`;
+}
+
+/* Fêtes */
+const fetes = FETES.filter(aDesOutils).map(f => ({...f, dans: joursAvant(f)}));
+const ordreFetes = [
+  ...fetes.filter(f => f.dans !== null).sort((a,b) => a.dans - b.dans),
+  ...fetes.filter(f => f.dans === null)
+];
+const prochaine = ordreFetes.find(f => f.dans !== null);
+
+document.getElementById("calendrier").innerHTML = ordreFetes.map(f => {
+  const next = prochaine && f.id === prochaine.id;
+  const chiffre = f.jour ? `<div class="d">${f.jour}</div>` : `<div class="d emoji" aria-hidden="true">${f.emoji}</div>`;
+  let compte = "&nbsp;";
+  if(f.dans === 0) compte = "Aujourd'hui";
+  else if(f.dans === 1) compte = "Demain";
+  else if(f.dans !== null) compte = `Dans ${f.dans} jours`;
+  return `<a class="sheet${next ? " next" : ""}" href="#${f.id}">
+    <div class="m">${f.jour ? MOIS[f.mois-1] : "Toute l'année"}</div>${chiffre}
+    <div class="n">${esc(f.nom)}</div><div class="c">${compte}</div></a>`;
+}).join("");
+
+document.getElementById("liste-fetes").innerHTML = ordreFetes.map(f => rubrique(
+  f,
+  prochaine && f.id === prochaine.id ? '<span class="badge">C\'est la saison</span>' : "",
+  f.jour ? `<p class="when">Le ${f.jour === 1 ? "1er" : f.jour} ${MOIS_LONG[f.mois-1]}</p>` : ""
+)).join("");
+
+/* Arrivée avec une ancre (#halloween, #saint-nicolas…), par exemple depuis Pinterest */
+if(location.hash){
+  const cible = document.querySelector(location.hash);
+  if(cible) cible.scrollIntoView();
+}
+</script>
+</body>
+</html>
