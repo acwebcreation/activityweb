@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Personnalisez votre certificat — CrazyCertif</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <span class="logo">CrazyCertif</span>
+    <span class="tagline">Paiement confirmé — personnalisez vos certificats</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="personalize-progress" id="progress" aria-label="Certificat en cours"></div>
+
+  <section class="personalize-layout">
+
+    <form class="personalize-form" id="personalize-form">
+      <div class="field">
+        <label for="category">Catégorie</label>
+        <select id="category" name="category" required></select>
+      </div>
+
+      <div class="field">
+        <label for="title">Titre du certificat</label>
+        <select id="title" name="title" required></select>
+      </div>
+
+      <div class="field">
+        <label for="titleType">Type de titre</label>
+        <select id="titleType" name="titleType">
+          <option value="certificat">Certificat</option>
+          <option value="diplome">Diplôme</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="firstname">Prénom</label>
+        <input type="text" id="firstname" name="firstname" placeholder="Julien" maxlength="30" required />
+      </div>
+
+      <div class="field">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required />
+      </div>
+
+      <div class="field">
+        <label for="phrase">Phrase</label>
+        <select id="phrase" name="phrase" required></select>
+      </div>
+
+      <div class="field">
+        <label for="orientation">Orientation</label>
+        <select id="orientation" name="orientation">
+          <option value="portrait">Portrait</option>
+          <option value="landscape">Paysage</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="photo">Photo (optionnel)</label>
+        <input type="file" id="photo" name="photo" accept="image/png, image/jpeg, image/webp" />
+        <p class="field-hint">Ajoutée en médaillon rond sur le certificat. JPG/PNG, 5 Mo max.</p>
+        <button type="button" class="btn btn-link" id="remove-photo-btn" hidden>Retirer la photo</button>
+      </div>
+
+      <div class="field">
+        <label for="email">Email (optionnel — pour recevoir le PDF)</label>
+        <input type="email" id="email" name="email" placeholder="vous@exemple.com" />
+      </div>
+
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" id="prev-btn" hidden>Certificat précédent</button>
+        <button type="submit" class="btn btn-primary" id="download-btn">Télécharger le PDF</button>
+      </div>
+    </form>
+
+    <div class="preview-pane">
+      <div class="preview-frame" id="preview-frame">
+        <!-- SVG injecté par app.js -->
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Votre lien de téléchargement reste valable 24h. Pensez à indiquer votre email si vous voulez une copie de secours.</p>
+  </div>
+</footer>
+
+<script type="module" src="personalize.js"></script>
+</body>
+</html>

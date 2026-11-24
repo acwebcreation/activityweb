@@ -1,0 +1,19 @@
+{
+  "name": "crazycertif",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "stripe": "^16.0.0",
+    "puppeteer-core": "^22.0.0",
+    "@sparticuz/chromium": "^123.0.0",
+    "pdf-lib": "^1.17.1",
+    "@netlify/blobs": "^7.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}

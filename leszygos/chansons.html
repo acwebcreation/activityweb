@@ -174,7 +174,7 @@
             <option value="">Choisir…</option>
             <option>Anniversaire</option><option>Retraite</option><option>Diplôme / réussite</option><option>Noël</option>
             <option>Pot de départ</option><option>EVJF / EVG</option><option>Naissance / baptême</option>
-            <option>Fête des mères / des pères</option><option>Juste pour rire</option>
+            <option>Fête des mères / des pères</option><option>Mariage</option><option>Entre amis</option><option>Juste pour rire</option>
           </select></div>
         <div class="field"><label for="pour">Pour qui ? *</label><input id="pour" name="pour_qui" required placeholder="Ex. mon collègue qui part à la retraite"></div>
       </div>
@@ -255,14 +255,16 @@ const CONFIG = {
    tant qu'aucune n'est remplie, la section reste cachée.
    occasion = valeur présélectionnée dans le formulaire (même texte que dans la liste « Occasion »). */
 const PRETES = [
-  // { titre:"Joyeux anniversaire (version fête)", occasion:"Anniversaire", desc:"Ultra festive, refrain à crier tous ensemble.", fichier:"" },
+  { titre:"Anniversaire",      occasion:"Anniversaire",     desc:"La chanson qui lance la fête : refrain à crier tous ensemble autour du gâteau.", fichier:"/leszygos/audio/anniversaire.mp3" },
+  { titre:"Ça se fête !",      occasion:"Juste pour rire",  desc:"Pour n'importe quelle bonne nouvelle : une victoire, un diplôme, un nouveau job…", fichier:"/leszygos/audio/ca-se-fete.mp3" },
+  { titre:"La retraite",       occasion:"Retraite",         desc:"Drôle et taquine, pour le pot de départ du collègue préféré.", fichier:"/leszygos/audio/la-retraite.mp3" },
+  { titre:"Le plus beau oui",  occasion:"Mariage",          desc:"Pour le mariage : l'entrée des mariés ou le moment des discours.", fichier:"/leszygos/audio/le-plus-beau-oui.mp3" },
+  { titre:"Ma bande",          occasion:"Entre amis",       desc:"La chanson des copains : pour un anniversaire, un week-end ou une soirée entre potes.", fichier:"/leszygos/audio/ma-bande.mp3" },
 ];
 
 const EXEMPLES = [
-  { tag:"Anniversaire",  titre:"Joyeux anniversaire Léa",   desc:"Festive et rythmée, pour faire danser les petits.", fichier:"/leszygos/fetes/extrait.mp3" },
-  { tag:"Retraite",      titre:"Exemple retraite",          desc:"Drôle et taquine, pour le pot de départ.",          fichier:"" },
-  { tag:"Noël",          titre:"Exemple Noël",              desc:"Ambiance karaoké, à chanter en famille.",           fichier:"" },
-  { tag:"Diplôme",       titre:"Exemple diplôme",           desc:"Pour fêter la réussite comme il se doit.",          fichier:"" }
+  { tag:"Version personnalisée", titre:"Ça se fête, Martine !", desc:"« Ça se fête » réécrite pour Martine, avec son prénom et ses petites histoires.", fichier:"/leszygos/audio/ca-se-fete-martine.mp3" },
+  { tag:"Pour les enfants",      titre:"Joyeux anniversaire Léa", desc:"Festive et rythmée, pour faire danser les petits.", fichier:"/leszygos/fetes/extrait.mp3" },
 ];
 
 /* ---------- ne rien modifier en dessous ---------- */

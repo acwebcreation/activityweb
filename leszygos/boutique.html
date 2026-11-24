@@ -56,7 +56,7 @@
     <h1>La boutique des <span>Zygos</span></h1>
     <p>Des livres pour jouer, rire et se creuser la tête en famille. En livre broché sur Amazon, ou en PDF à imprimer tout de suite.</p>
     <div class="stores">
-      <a class="btn amz" id="lienAmazon" href="https://www.amazon.com/stores/author/B0HRYYNDZ8/allbooks" target="_blank" rel="noopener">📖 Tous les livres sur Amazon</a>
+      <a class="btn amz" id="lienAmazon" href="https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks" target="_blank" rel="noopener">📖 Tous les livres sur Amazon</a>
       <a class="btn ets" id="lienEtsy" href="https://www.etsy.com/shop/ActivityWebstudio" target="_blank" rel="noopener">🖨️ Tous les PDF sur Etsy</a>
     </div>
   </section>
@@ -85,11 +85,15 @@
    rempli, la section « Nos livres » reste cachée.
    ===================================================================== */
 const LIVRES = [
-  // { titre:"Tu préfères ? Spécial Noël", desc:"200 dilemmes pour rire en famille.", prix:"dès 6,99 €", image:"", amazon:"", pdf:"" },
+  { titre:"Quiz de Noël d'Autrefois", desc:"80 jeux pour raviver les souvenirs des Noëls des années 50, 60 et 70. Gros caractères, solutions incluses.", prix:"", image:"/leszygos/livres/quiz-noel-autrefois.jpg", amazon:"https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks", pdf:"" },
+  { titre:"Vous souvenez-vous ? Le grand quiz des années 60-70", desc:"500 questions sur la chanson, la télé, le cinéma et la vie quotidienne, avec un chapitre spécial Belgique.", prix:"", image:"/leszygos/livres/vous-souvenez-vous.jpg", amazon:"https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks", pdf:"" },
+  { titre:"Cryptogrammes : 100 proverbes et citations à décoder", desc:"Exercez votre mémoire en vous amusant. Gros caractères, difficulté progressive.", prix:"", image:"/leszygos/livres/cryptogrammes.jpg", amazon:"https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks", pdf:"" },
+  { titre:"Tout ce que j'ai fait sans qu'on me le demande deux fois", desc:"Le livre-gag que ton ado va adorer détester. Mémoires d'un ado exemplaire.", prix:"", image:"/leszygos/livres/ado-gag.jpg", amazon:"https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks", pdf:"" },
+  { titre:"Tout ce que j'ai trouvé sans demander où c'était", desc:"Le livre-gag pour l'homme qui cherche le beurre… devant le beurre.", prix:"", image:"/leszygos/livres/homme-autonome.jpg", amazon:"https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks", pdf:"" },
 ];
 
 /* Thèmes : chaque bouton cherche dans tes boutiques (rien à remplir). */
-const AMAZON = "https://www.amazon.com/stores/author/B0HRYYNDZ8/allbooks";
+const AMAZON = "https://www.amazon.fr/stores/author/B0HRYYNDZ8/allbooks";
 const ETSY = "https://www.etsy.com/shop/ActivityWebstudio";
 const THEMES = [
   { ico:"🤔", titre:"Tu préfères ?", desc:"Des dilemmes absurdes pour lancer les débats à table.", q:"tu préfères" },
@@ -110,7 +114,7 @@ if (livres.length) {
       <b>${esc(l.titre)}</b><p>${esc(l.desc || '')}</p>
       ${l.prix ? `<div class="prix">${esc(l.prix)}</div>` : ''}
       <div class="btns">
-        ${l.amazon ? `<a class="amz" href="${esc(l.amazon)}" target="_blank" rel="noopener">Broché</a>` : ''}
+        ${l.amazon ? `<a class="amz" href="${esc(l.amazon)}" target="_blank" rel="noopener">Sur Amazon</a>` : ''}
         ${l.pdf ? `<a class="ets" href="${esc(l.pdf)}" target="_blank" rel="noopener">PDF</a>` : ''}
       </div>
     </div>`).join('');

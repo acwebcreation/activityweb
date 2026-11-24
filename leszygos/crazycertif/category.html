@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Choisir un certificat — CrazyCertif</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html">CrazyCertif</a>
+    <a class="back-link" href="index.html">← Changer de catégorie</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero category-hero" id="category-hero">
+    <!-- injecté par gallery.js -->
+  </section>
+
+  <section class="pricing-box">
+    <div class="price-card" data-count="1" data-price="5">
+      <p class="price-label">1 certificat</p>
+      <p class="price-value">5€</p>
+      <button class="btn btn-select" data-select-count="1">Choisir 1</button>
+    </div>
+    <div class="price-card featured" data-count="3" data-price="12">
+      <p class="price-badge">Le plus choisi</p>
+      <p class="price-label">Pack de 3 certificats</p>
+      <p class="price-value">12€</p>
+      <button class="btn btn-select" data-select-count="3">Choisir 3</button>
+    </div>
+  </section>
+
+  <section class="templates-grid" id="templates-grid" aria-label="Certificats disponibles dans cette catégorie">
+    <!-- injecté par gallery.js -->
+  </section>
+
+  <div class="selection-bar" id="selection-bar" hidden>
+    <span id="selection-count">0 / 1 certificat sélectionné</span>
+    <button type="button" class="btn btn-primary" id="checkout-btn" disabled>Payer et personnaliser</button>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>CrazyCertif — PDF A4, prêt à imprimer. Aucune donnée bancaire stockée sur nos serveurs.</p>
+  </div>
+</footer>
+
+<script type="module" src="gallery.js"></script>
+</body>
+</html>

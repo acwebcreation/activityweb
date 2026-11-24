@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CrazyCertif — Certificats et diplômes absurdes personnalisés</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <span class="logo">CrazyCertif</span>
+    <span class="tagline">Certificats absurdes, prêts à imprimer en PDF A4</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Choisissez une occasion, on a le certificat qu'il faut</h1>
+    <p>
+      9 catégories, chacune avec ses propres titres et phrases déjà prêts.
+      Vous n'avez qu'à choisir et personnaliser en quelques secondes.
+    </p>
+  </section>
+
+  <section class="category-grid" id="category-grid" aria-label="Catégories disponibles">
+    <!-- injecté par category-select.js -->
+  </section>
+
+  <div class="test-mode-bar">
+    <a class="btn btn-test" href="personalize.html?test=1&amp;styles=parchemin,neon,comic" title="Aucun paiement — pour vérifier le rendu">
+      🧪 Tester sans payer (voir la page de personnalisation)
+    </a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>CrazyCertif — PDF A4, prêt à imprimer. Aucune donnée bancaire stockée sur nos serveurs.</p>
+  </div>
+</footer>
+
+<script type="module" src="category-select.js"></script>
+</body>
+</html>
