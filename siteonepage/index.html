@@ -105,6 +105,7 @@
   .nav-dropdown.open .nav-submenu { display:block; }
   .nav-links .nav-submenu a { display:block; padding:10px 14px; border-radius:6px; white-space:nowrap; color:rgba(255,255,255,0.8); }
   .nav-links .nav-submenu a:hover { background:rgba(255,255,255,0.08); color:white; }
+  .nav-sub-title { font-size:0.68rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); padding:6px 14px 4px; }
   @media (hover:hover) {
     .nav-dropdown:hover .nav-submenu { display:block; }
     .nav-dropdown:hover .caret { transform:rotate(180deg); }
@@ -811,10 +812,10 @@
     <div class="logo-text">Activity<span>Web</span></div>
   </a>
   <ul class="nav-links">
-    <li><a href="/siteonepage/" class="active">Site one page</a></li>
     <li class="nav-dropdown">
-      <a href="#exemples" class="nav-dd-toggle" aria-haspopup="true" aria-expanded="false">Exemples <span class="caret">▾</span></a>
+      <a href="/siteonepage/" class="nav-dd-toggle active" aria-haspopup="true" aria-expanded="false">Site one page <span class="caret">▾</span></a>
       <ul class="nav-submenu">
+        <li class="nav-sub-title">Exemples de sites</li>
         <li><a href="?filtre=tous#exemples" data-f="tous">Tous les exemples</a></li>
         <li><a href="?filtre=artisans#exemples" data-f="artisans">🛠️ Artisans &amp; services</a></li>
         <li><a href="?filtre=bien-etre#exemples" data-f="bien-etre">🌿 Bien-être</a></li>
@@ -1562,7 +1563,7 @@
     var tg = dd.querySelector('.nav-dd-toggle');
     var fermer = function(){ dd.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); };
     tg.addEventListener('click', function(e){
-      if (window.matchMedia('(hover:hover)').matches) return; // ordinateur : le clic mène aux exemples
+      if (window.matchMedia('(hover:hover)').matches) return; // ordinateur : le sous-menu s'ouvre au survol, le clic ouvre la page
       e.preventDefault();
       var ouvert = dd.classList.toggle('open');
       tg.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
